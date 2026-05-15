@@ -343,10 +343,83 @@
         }
 
         .opt-desc {
-            margin-top: 5px;
             font-size: 13px;
             line-height: 1.45;
             color: #526173;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            margin-top: 0;
+            transition: max-height 0s 1s, opacity 0s 1s, margin-top 0s 1s;
+        }
+
+        .option:hover .opt-desc {
+            max-height: 200px;
+            opacity: 1;
+            margin-top: 5px;
+        }
+
+        .info-icon {
+            width: 20px;
+            height: 20px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(125, 211, 252, 0.16);
+            color: #7dd3fc;
+            font-size: 12px;
+            font-style: italic;
+            font-weight: bold;
+            cursor: pointer;
+            margin-left: 8px;
+            flex-shrink: 0;
+        }
+
+        .info-icon:hover {
+            background: #7dd3fc;
+            color: #07111f;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: var(--bg2);
+            margin: 15% auto;
+            padding: 20px 24px;
+            border: 1px solid var(--card-border);
+            width: 80%;
+            max-width: 500px;
+            border-radius: var(--radius);
+            color: var(--text);
+            position: relative;
+            box-shadow: var(--shadow);
+            line-height: 1.5;
+        }
+
+        .close-modal {
+            color: var(--muted);
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .close-modal:hover,
+        .close-modal:focus {
+            color: white;
+            text-decoration: none;
         }
 
         .option.child {
@@ -543,6 +616,13 @@
             </div>
         </section>
     </main>
+
+    <div id="descModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <p id="modalDescText" style="margin-top: 0; font-size: 15px;"></p>
+        </div>
+    </div>
 
     <script>
         const XML_FILE = "investor-entities.xml";
@@ -780,23 +860,41 @@
                 const div = document.createElement("div");
                 div.className = "option" + (row.isParent ? " parent" : " child");
 
+                const descText = row.isParent ? highlight(row.entity.description, query) : highlight(row.subtype.description || row.entity.description, query);
+                const rawDesc = row.isParent ? row.entity.description : (row.subtype.description || row.entity.description);
+
                 if (row.isParent) {
                     div.innerHTML = `
-            <div class="path">
-              ${highlight(row.entity.group, query)}
-              <span>▸</span>
-              ${highlight(row.entity.name, query)}
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div class="path">
+                  ${highlight(row.entity.group, query)}
+                  <span>▸</span>
+                  ${highlight(row.entity.name, query)}
+                </div>
+                <div class="info-icon" title="View description">i</div>
             </div>
-            <div class="opt-desc">${highlight(row.entity.description, query)}</div>
+            <div class="opt-desc">${descText}</div>
           `;
                 } else {
                     div.innerHTML = `
-            <div class="path">
-              ${highlight(row.subtype.name, query)}
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div class="path">
+                  ${highlight(row.subtype.name, query)}
+                </div>
+                <div class="info-icon" title="View description">i</div>
             </div>
-            <div class="opt-desc">${highlight(row.subtype.description || row.entity.description, query)}</div>
+            <div class="opt-desc">${descText}</div>
           `;
                 }
+
+                const infoIcon = div.querySelector(".info-icon");
+                infoIcon.addEventListener("mousedown", e => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const modal = document.getElementById("descModal");
+                    document.getElementById("modalDescText").textContent = rawDesc || "No description available.";
+                    modal.style.display = "block";
+                });
 
                 div.addEventListener("mousedown", e => {
                     e.preventDefault();
@@ -932,6 +1030,14 @@
             if (!autocomplete.contains(e.target) && e.target !== entityInput) {
                 autocomplete.classList.remove("show");
             }
+            const modal = document.getElementById('descModal');
+            if (e.target === modal) {
+                modal.style.display = "none";
+            }
+        });
+
+        document.getElementById('closeModal').addEventListener('click', () => {
+            document.getElementById('descModal').style.display = "none";
         });
 
         subtypeSelect.addEventListener("change", () => {
