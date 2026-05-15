@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Investor Entity Classification</title>
+
+    <style>
+        :root {
+            --bg1: #07111f;
+            --bg2: #10243f;
+            --card: rgba(255, 255, 255, 0.12);
+            --card-border: rgba(255, 255, 255, 0.22);
+            --text: #f8fbff;
+            --muted: #b9c7d9;
+            --accent: #7dd3fc;
+            --accent2: #a78bfa;
+            --success: #34d399;
+            --warning: #fbbf24;
+            --danger: #fb7185;
+            --input: rgba(255, 255, 255, 0.95);
+            --input-text: #122033;
+            --shadow: 0 25px 80px rgba(0, 0, 0, 0.35);
+            --radius: 24px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at 10% 15%, rgba(125, 211, 252, 0.22), transparent 30%),
+                radial-gradient(circle at 85% 10%, rgba(167, 139, 250, 0.22), transparent 30%),
+                linear-gradient(135deg, var(--bg1), var(--bg2));
+            overflow-x: hidden;
+        }
+
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(10px);
+            opacity: 0.18;
+            z-index: 0;
+            animation: float 12s ease-in-out infinite alternate;
+        }
+
+        .orb.one {
+            width: 260px;
+            height: 260px;
+            background: #7dd3fc;
+            left: -80px;
+            bottom: 80px;
+        }
+
+        .orb.two {
+            width: 320px;
+            height: 320px;
+            background: #a78bfa;
+            right: -100px;
+            bottom: -40px;
+            animation-delay: 2s;
+        }
+
+        @keyframes float {
+            from {
+                transform: translateY(0) translateX(0);
+            }
+
+            to {
+                transform: translateY(-35px) translateX(25px);
+            }
+        }
+
+        .page {
+            position: relative;
+            z-index: 1;
+            width: min(1120px, calc(100% - 32px));
+            margin: 0 auto;
+            padding: 42px 0 70px;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .badge {
+            display: inline-flex;
+            gap: 8px;
+            align-items: center;
+            padding: 8px 14px;
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.10);
+            backdrop-filter: blur(16px);
+            color: #dbeafe;
+            font-size: 13px;
+            letter-spacing: 0.02em;
+        }
+
+        h1 {
+            margin: 18px 0 10px;
+            font-size: clamp(32px, 6vw, 62px);
+            line-height: 1;
+            letter-spacing: -0.055em;
+        }
+
+        .subtitle {
+            max-width: 780px;
+            margin: 0 auto;
+            color: var(--muted);
+            font-size: 17px;
+            line-height: 1.65;
+        }
+
+        .app-card {
+            margin-top: 34px;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.08));
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(22px);
+            overflow: hidden;
+        }
+
+        .card-top {
+            padding: 24px 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+            background: rgba(255, 255, 255, 0.06);
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 750;
+            letter-spacing: -0.02em;
+        }
+
+        .data-status {
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .form {
+            padding: 28px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .full {
+            grid-column: 1 / -1;
+        }
+
+        .field {
+            position: relative;
+        }
+
+        label {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #e5efff;
+            font-weight: 650;
+        }
+
+        .hint {
+            font-size: 12px;
+            color: var(--muted);
+            font-weight: 450;
+        }
+
+        input,
+        select {
+            width: 100%;
+            border: 0;
+            outline: none;
+            border-radius: 16px;
+            padding: 16px 16px;
+            background: var(--input);
+            color: var(--input-text);
+            font-size: 16px;
+            box-shadow:
+                inset 0 0 0 1px rgba(15, 23, 42, 0.06),
+                0 10px 28px rgba(0, 0, 0, 0.16);
+            transition: transform 0.18s ease, box-shadow 0.18s ease;
+        }
+
+        input:focus,
+        select:focus {
+            transform: translateY(-1px);
+            box-shadow:
+                inset 0 0 0 2px rgba(125, 211, 252, 0.8),
+                0 14px 36px rgba(0, 0, 0, 0.22);
+        }
+
+        #pan {
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            font-weight: 800;
+        }
+
+        .message {
+            margin-top: 12px;
+            border-radius: 16px;
+            padding: 14px 15px;
+            font-size: 14px;
+            line-height: 1.55;
+            color: #eaf6ff;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .message.good {
+            border-color: rgba(52, 211, 153, 0.45);
+            background: rgba(52, 211, 153, 0.13);
+        }
+
+        .message.warn {
+            border-color: rgba(251, 191, 36, 0.45);
+            background: rgba(251, 191, 36, 0.12);
+        }
+
+        .message.bad {
+            border-color: rgba(251, 113, 133, 0.45);
+            background: rgba(251, 113, 133, 0.12);
+        }
+
+        .toggle-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 16px;
+            border-radius: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .toggle-copy {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 62px;
+            height: 34px;
+            flex: 0 0 auto;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.22);
+            border-radius: 999px;
+            transition: 0.25s;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            top: 3px;
+            background: white;
+            border-radius: 50%;
+            transition: 0.25s;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.24);
+        }
+
+        .switch input:checked+.slider {
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+        }
+
+        .switch input:checked+.slider:before {
+            transform: translateX(27px);
+        }
+
+        .autocomplete {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: calc(100% + 8px);
+            z-index: 20;
+            max-height: 360px;
+            overflow: auto;
+            background: rgba(248, 251, 255, 0.98);
+            color: #122033;
+            border-radius: 18px;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.34);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            display: none;
+        }
+
+        .autocomplete.show {
+            display: block;
+        }
+
+        .option {
+            padding: 14px 16px;
+            cursor: pointer;
+            border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+        }
+
+        .option:hover {
+            background: #eef7ff;
+        }
+
+        .path {
+            font-weight: 800;
+            font-size: 14px;
+            color: #0f172a;
+        }
+
+        .path span {
+            color: #2563eb;
+        }
+
+        .opt-desc {
+            margin-top: 5px;
+            font-size: 13px;
+            line-height: 1.45;
+            color: #526173;
+        }
+
+        .pill-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 14px;
+        }
+
+        .pill {
+            padding: 7px 10px;
+            border-radius: 999px;
+            font-size: 12px;
+            color: #e0f2fe;
+            background: rgba(125, 211, 252, 0.16);
+            border: 1px solid rgba(125, 211, 252, 0.32);
+        }
+
+        .details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .info-box {
+            border-radius: 18px;
+            padding: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            background: rgba(255, 255, 255, 0.08);
+            min-height: 132px;
+        }
+
+        .info-box h3 {
+            margin: 0 0 9px;
+            font-size: 16px;
+            letter-spacing: -0.01em;
+        }
+
+        .info-box p {
+            margin: 0;
+            color: var(--muted);
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .registration {
+            margin-top: 12px;
+            color: #dbeafe;
+            font-size: 13px;
+        }
+
+        .registration strong {
+            color: white;
+        }
+
+        .footer-note {
+            padding: 18px 28px 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.55;
+        }
+
+        mark {
+            background: rgba(125, 211, 252, 0.35);
+            color: inherit;
+            padding: 0 3px;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 780px) {
+
+            .form,
+            .details {
+                grid-template-columns: 1fr;
+            }
+
+            .card-top {
+                padding: 20px;
+            }
+
+            .form {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="orb one"></div>
+    <div class="orb two"></div>
+
+    <main class="page">
+        <section class="hero">
+            <div class="badge">✨ XML-powered investor classification utility</div>
+            <h1>Investor Entity Classifier</h1>
+            <p class="subtitle">
+                Validate an Indian PAN format, infer the Income Tax Department category from the
+                fourth PAN character, and filter investor entity types, subtypes, registrations,
+                and descriptions from a central XML database.
+            </p>
+        </section>
+
+        <section class="app-card">
+            <div class="card-top">
+                <div>
+                    <div class="card-title">Classification Form</div>
+                    <div class="data-status" id="dataStatus">Loading XML database…</div>
+                </div>
+            </div>
+
+            <div class="form">
+                <div class="field full">
+                    <label for="pan">
+                        PAN Number
+                        <span class="hint">Format: ABCDE1234F</span>
+                    </label>
+                    <input id="pan" maxlength="10" placeholder="Enter PAN" autocomplete="off" />
+                    <div id="panMessage" class="message warn">
+                        Enter a PAN to identify the fourth-character PAN category.
+                    </div>
+                </div>
+
+                <div class="field full">
+                    <div class="toggle-row">
+                        <div>
+                            <strong>Show all categories</strong>
+                            <div class="toggle-copy">
+                                When off, entity suggestions are filtered using the fourth PAN character.
+                                When on, every XML category and subtype is searchable.
+                            </div>
+                        </div>
+                        <label class="switch" aria-label="Show all categories">
+                            <input type="checkbox" id="showAll" />
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="entityInput">
+                        Entity Type
+                        <span class="hint">Search by name, alias, or keyword</span>
+                    </label>
+                    <input id="entityInput" placeholder="Type entity type, e.g. individual, trust, FPI"
+                        autocomplete="off" />
+                    <div id="autocomplete" class="autocomplete"></div>
+                </div>
+
+                <div class="field">
+                    <label for="subtypeSelect">
+                        Additional Subcategory
+                        <span class="hint">Based on selected entity type</span>
+                    </label>
+                    <select id="subtypeSelect" disabled>
+                        <option value="">Select entity type first</option>
+                    </select>
+                </div>
+
+                <div class="full details">
+                    <div class="info-box">
+                        <h3>Entity Type Description</h3>
+                        <p id="entityDescription">Select an entity type to see its classification meaning.</p>
+                        <div id="entityPills" class="pill-row"></div>
+                    </div>
+
+                    <div class="info-box">
+                        <h3>Subtype Description</h3>
+                        <p id="subtypeDescription">Select a subcategory to see registration and details.</p>
+                        <div id="registration" class="registration"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-note">
+                Note: PAN fourth-character classification is based on the Indian PAN structure.
+                This tool is for classification assistance and should be checked against current
+                Income Tax, SEBI, RBI, MCA, IRDAI, and PFRDA regulations before operational use.
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const XML_FILE = "investor-entities.xml";
+
+        const panInput = document.getElementById("pan");
+        const panMessage = document.getElementById("panMessage");
+        const showAllToggle = document.getElementById("showAll");
+        const entityInput = document.getElementById("entityInput");
+        const autocomplete = document.getElementById("autocomplete");
+        const subtypeSelect = document.getElementById("subtypeSelect");
+        const entityDescription = document.getElementById("entityDescription");
+        const subtypeDescription = document.getElementById("subtypeDescription");
+        const registration = document.getElementById("registration");
+        const entityPills = document.getElementById("entityPills");
+        const dataStatus = document.getElementById("dataStatus");
+
+        let panCategories = {};
+        let entityTypes = [];
+        let selectedEntity = null;
+        let selectedSubtype = null;
+
+        function attr(node, name, fallback = "") {
+            return node.getAttribute(name) || fallback;
+        }
+
+        function txt(node, selector) {
+            const found = node.querySelector(selector);
+            return found ? found.textContent.trim() : "";
+        }
+
+        function parseCSV(value) {
+            return (value || "")
+                .split(",")
+                .map(v => v.trim())
+                .filter(Boolean);
+        }
+
+        function cleanPAN(value) {
+            return value.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 10);
+        }
+
+        function getCurrentPanChar() {
+            const pan = panInput.value.trim().toUpperCase();
+            return pan.length >= 4 ? pan[3] : "";
+        }
+
+        function isPANFormatValid(pan) {
+            return /^[A-Z]{5}[0-9]{4}[A-Z]$/.test(pan);
+        }
+
+        function canShowForPAN(panChars) {
+            if (showAllToggle.checked) return true;
+
+            const panChar = getCurrentPanChar();
+            if (!panChar) return true;
+
+            return panChars.includes(panChar) || panChars.includes("VARIES");
+        }
+
+        function updatePANMessage() {
+            const pan = panInput.value.trim().toUpperCase();
+            const fourth = getCurrentPanChar();
+
+            if (!pan) {
+                panMessage.className = "message warn";
+                panMessage.innerHTML = "Enter a PAN to identify the fourth-character PAN category.";
+                return;
+            }
+
+            if (pan.length < 10) {
+                panMessage.className = "message warn";
+                panMessage.innerHTML = `PAN is incomplete. Indian PAN should contain <strong>5 letters, 4 digits, and 1 final letter</strong>.`;
+            } else if (!isPANFormatValid(pan)) {
+                panMessage.className = "message bad";
+                panMessage.innerHTML = `Invalid PAN format. Expected pattern is <strong>AAAAA9999A</strong>.`;
+            } else {
+                panMessage.className = "message good";
+                panMessage.innerHTML = `PAN format is valid. `;
+            }
+
+            if (fourth) {
+                const cat = panCategories[fourth];
+                if (cat) {
+                    panMessage.innerHTML += `
+            <br>The fourth character is <strong>${fourth}</strong>. As per the PAN structure,
+            the Income Tax Department generally classifies this PAN holder as
+            <strong>${cat.label}</strong>. ${showAllToggle.checked
+                            ? "The full XML database is currently visible because “Show all categories” is on."
+                            : "The entity list is filtered to categories compatible with this PAN character."}
+          `;
+                } else {
+                    panMessage.innerHTML += `
+            <br>The fourth character is <strong>${fourth}</strong>, but this character is not mapped in the XML PAN category database.
+          `;
+                }
+            }
+        }
+
+        async function loadXML() {
+            try {
+                const res = await fetch(XML_FILE);
+                if (!res.ok) throw new Error("XML file not found");
+                const text = await res.text();
+                const xml = new DOMParser().parseFromString(text, "application/xml");
+
+                if (xml.querySelector("parsererror")) {
+                    throw new Error("Invalid XML format");
+                }
+
+                xml.querySelectorAll("panCategory").forEach(node => {
+                    panCategories[attr(node, "code")] = {
+                        label: attr(node, "label"),
+                        description: node.textContent.trim()
+                    };
+                });
+
+                entityTypes = [];
+
+                xml.querySelectorAll("group").forEach(group => {
+                    const groupName = attr(group, "name");
+
+                    group.querySelectorAll(":scope > entityType").forEach(entityNode => {
+                        const entity = {
+                            group: groupName,
+                            id: attr(entityNode, "id"),
+                            name: attr(entityNode, "name"),
+                            legalStatus: attr(entityNode, "legalStatus"),
+                            panChars: parseCSV(attr(entityNode, "panChars")),
+                            aliases: parseCSV(txt(entityNode, "aliases")),
+                            description: txt(entityNode, "description"),
+                            subtypes: []
+                        };
+
+                        entityNode.querySelectorAll(":scope > subtypes > subtype").forEach(subNode => {
+                            entity.subtypes.push({
+                                id: attr(subNode, "id"),
+                                name: attr(subNode, "name"),
+                                panChars: parseCSV(attr(subNode, "panChars")) || entity.panChars,
+                                registration: attr(subNode, "registration"),
+                                description: txt(subNode, "description"),
+                                keywords: parseCSV(txt(subNode, "keywords"))
+                            });
+                        });
+
+                        entityTypes.push(entity);
+                    });
+                });
+
+                dataStatus.textContent = `XML database loaded: ${entityTypes.length} entity types available.`;
+                dataStatus.style.color = "#bbf7d0";
+                refreshUI();
+            } catch (err) {
+                dataStatus.textContent = `Could not load ${XML_FILE}. Use a local server and keep both files together.`;
+                dataStatus.style.color = "#fecdd3";
+                console.error(err);
+            }
+        }
+
+        function getSuggestionRecords() {
+            const rows = [];
+
+            entityTypes.forEach(entity => {
+                const entityAllowed = canShowForPAN(entity.panChars);
+
+                entity.subtypes.forEach(subtype => {
+                    const subtypeAllowed = canShowForPAN(subtype.panChars);
+
+                    if (entityAllowed || subtypeAllowed) {
+                        rows.push({
+                            entity,
+                            subtype,
+                            searchable: [
+                                entity.group,
+                                entity.name,
+                                entity.legalStatus,
+                                entity.description,
+                                entity.aliases.join(" "),
+                                subtype.name,
+                                subtype.description,
+                                subtype.registration,
+                                subtype.keywords.join(" ")
+                            ].join(" ").toLowerCase()
+                        });
+                    }
+                });
+            });
+
+            return rows;
+        }
+
+        function highlight(text, query) {
+            if (!query) return text;
+            const safe = query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+            return text.replace(new RegExp(`(${safe})`, "ig"), "<mark>$1</mark>");
+        }
+
+        function renderSuggestions() {
+            const query = entityInput.value.trim().toLowerCase();
+            const records = getSuggestionRecords()
+                .filter(row => !query || row.searchable.includes(query))
+                .slice(0, 80);
+
+            autocomplete.innerHTML = "";
+
+            if (!records.length) {
+                autocomplete.innerHTML = `
+          <div class="option">
+            <div class="path">No matching category found</div>
+            <div class="opt-desc">Try enabling “Show all categories” or searching another keyword.</div>
+          </div>
+        `;
+                autocomplete.classList.add("show");
+                return;
+            }
+
+            records.forEach(row => {
+                const div = document.createElement("div");
+                div.className = "option";
+                div.innerHTML = `
+          <div class="path">
+            ${highlight(row.entity.group, query)}
+            <span>▸</span>
+            ${highlight(row.entity.name, query)}
+            <span>▸</span>
+            ${highlight(row.subtype.name, query)}
+          </div>
+          <div class="opt-desc">${highlight(row.subtype.description || row.entity.description, query)}</div>
+        `;
+                div.addEventListener("mousedown", e => {
+                    e.preventDefault();
+                    selectEntityAndSubtype(row.entity.id, row.subtype.id);
+                    autocomplete.classList.remove("show");
+                });
+                autocomplete.appendChild(div);
+            });
+
+            autocomplete.classList.add("show");
+        }
+
+        function selectEntityAndSubtype(entityId, subtypeId) {
+            selectedEntity = entityTypes.find(e => e.id === entityId) || null;
+            if (!selectedEntity) return;
+
+            selectedSubtype = selectedEntity.subtypes.find(s => s.id === subtypeId) || null;
+
+            entityInput.value = selectedEntity.name;
+            populateSubtypeSelect();
+
+            if (selectedSubtype) {
+                subtypeSelect.value = selectedSubtype.id;
+            }
+
+            updateDescriptions();
+        }
+
+        function populateSubtypeSelect() {
+            subtypeSelect.innerHTML = "";
+
+            if (!selectedEntity) {
+                subtypeSelect.disabled = true;
+                subtypeSelect.innerHTML = `<option value="">Select entity type first</option>`;
+                return;
+            }
+
+            const visibleSubtypes = selectedEntity.subtypes.filter(sub =>
+                showAllToggle.checked || canShowForPAN(sub.panChars)
+            );
+
+            subtypeSelect.disabled = false;
+
+            if (!visibleSubtypes.length) {
+                subtypeSelect.innerHTML = `<option value="">No subtype compatible with current PAN filter</option>`;
+                return;
+            }
+
+            subtypeSelect.innerHTML = `<option value="">Choose additional subcategory</option>`;
+
+            visibleSubtypes.forEach(sub => {
+                const option = document.createElement("option");
+                option.value = sub.id;
+                option.textContent = sub.name;
+                subtypeSelect.appendChild(option);
+            });
+        }
+
+        function updateDescriptions() {
+            if (!selectedEntity) {
+                entityDescription.textContent = "Select an entity type to see its classification meaning.";
+                subtypeDescription.textContent = "Select a subcategory to see registration and details.";
+                registration.innerHTML = "";
+                entityPills.innerHTML = "";
+                return;
+            }
+
+            entityDescription.textContent = selectedEntity.description;
+
+            entityPills.innerHTML = "";
+            [
+                `Group: ${selectedEntity.group}`,
+                `Legal status: ${selectedEntity.legalStatus}`,
+                `PAN: ${selectedEntity.panChars.join(" / ")}`
+            ].forEach(text => {
+                const pill = document.createElement("span");
+                pill.className = "pill";
+                pill.textContent = text;
+                entityPills.appendChild(pill);
+            });
+
+            if (!selectedSubtype) {
+                subtypeDescription.textContent = "Select a subcategory to see registration and details.";
+                registration.innerHTML = "";
+                return;
+            }
+
+            subtypeDescription.textContent = selectedSubtype.description;
+            registration.innerHTML = `
+        <strong>Usual identifier / registration:</strong> ${selectedSubtype.registration || "PAN / relevant registration"}
+        <br><strong>Subtype PAN mapping:</strong> ${selectedSubtype.panChars.join(" / ")}
+      `;
+        }
+
+        function refreshUI() {
+            updatePANMessage();
+
+            if (selectedEntity) {
+                const stillVisible = showAllToggle.checked || canShowForPAN(selectedEntity.panChars);
+                if (!stillVisible) {
+                    selectedEntity = null;
+                    selectedSubtype = null;
+                    entityInput.value = "";
+                }
+            }
+
+            populateSubtypeSelect();
+            updateDescriptions();
+        }
+
+        panInput.addEventListener("input", () => {
+            panInput.value = cleanPAN(panInput.value);
+            refreshUI();
+            if (document.activeElement === entityInput) renderSuggestions();
+        });
+
+        showAllToggle.addEventListener("change", () => {
+            refreshUI();
+            renderSuggestions();
+        });
+
+        entityInput.addEventListener("input", () => {
+            selectedEntity = null;
+            selectedSubtype = null;
+            populateSubtypeSelect();
+            updateDescriptions();
+            renderSuggestions();
+        });
+
+        entityInput.addEventListener("focus", renderSuggestions);
+
+        document.addEventListener("click", e => {
+            if (!autocomplete.contains(e.target) && e.target !== entityInput) {
+                autocomplete.classList.remove("show");
+            }
+        });
+
+        subtypeSelect.addEventListener("change", () => {
+            if (!selectedEntity) return;
+            selectedSubtype = selectedEntity.subtypes.find(s => s.id === subtypeSelect.value) || null;
+            updateDescriptions();
+        });
+
+        loadXML();
+    </script>
+</body>
+
+</html>
