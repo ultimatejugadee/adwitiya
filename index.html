@@ -813,11 +813,6 @@
                             subtype,
                             isParent: false,
                             searchable: [
-                                entity.group,
-                                entity.name,
-                                entity.legalStatus,
-                                entity.description,
-                                entity.aliases.join(" "),
                                 subtype.name,
                                 subtype.description,
                                 subtype.registration,
@@ -839,8 +834,10 @@
 
         function renderSuggestions() {
             const query = entityInput.value.trim().toLowerCase();
+            const doFilter = query.length > 2;
+            const highlightQuery = doFilter ? query : "";
             const records = getSuggestionRecords()
-                .filter(row => !query || row.searchable.includes(query))
+                .filter(row => !doFilter || row.searchable.includes(query))
                 .slice(0, 100);
 
             autocomplete.innerHTML = "";
@@ -860,30 +857,33 @@
                 const div = document.createElement("div");
                 div.className = "option" + (row.isParent ? " parent" : " child");
 
-                const descText = row.isParent ? highlight(row.entity.description, query) : highlight(row.subtype.description || row.entity.description, query);
                 const rawDesc = row.isParent ? row.entity.description : (row.subtype.description || row.entity.description);
+                const descMatches = doFilter && rawDesc.toLowerCase().includes(query);
+                
+                const descText = highlight(rawDesc, highlightQuery);
+                const descStyle = descMatches ? ' style="max-height: 200px; opacity: 1; margin-top: 5px;"' : '';
 
                 if (row.isParent) {
                     div.innerHTML = `
             <div style="display: flex; justify-content: space-between; align-items: center;">
                 <div class="path">
-                  ${highlight(row.entity.group, query)}
+                  ${highlight(row.entity.group, highlightQuery)}
                   <span>▸</span>
-                  ${highlight(row.entity.name, query)}
+                  ${highlight(row.entity.name, highlightQuery)}
                 </div>
                 <div class="info-icon" title="View description">i</div>
             </div>
-            <div class="opt-desc">${descText}</div>
+            <div class="opt-desc"${descStyle}>${descText}</div>
           `;
                 } else {
                     div.innerHTML = `
             <div style="display: flex; justify-content: space-between; align-items: center;">
                 <div class="path">
-                  ${highlight(row.subtype.name, query)}
+                  ${highlight(row.subtype.name, highlightQuery)}
                 </div>
                 <div class="info-icon" title="View description">i</div>
             </div>
-            <div class="opt-desc">${descText}</div>
+            <div class="opt-desc"${descStyle}>${descText}</div>
           `;
                 }
 
