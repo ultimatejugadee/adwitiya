@@ -126,7 +126,6 @@
             border-radius: var(--radius);
             box-shadow: var(--shadow);
             backdrop-filter: blur(22px);
-            overflow: hidden;
         }
 
         .card-top {
@@ -138,6 +137,8 @@
             background: rgba(255, 255, 255, 0.06);
             gap: 16px;
             flex-wrap: wrap;
+            border-top-left-radius: calc(var(--radius) - 1px);
+            border-top-right-radius: calc(var(--radius) - 1px);
         }
 
         .card-title {
