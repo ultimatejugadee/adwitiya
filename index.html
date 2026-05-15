@@ -584,7 +584,7 @@
             const panChar = getCurrentPanChar();
             if (!panChar) return true;
 
-            return panChars.includes(panChar) || panChars.includes("VARIES");
+            return panChars.includes(panChar);
         }
 
         function updatePANMessage() {

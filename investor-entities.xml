@@ -444,18 +444,5 @@
       </entityType>
     </group>
 
-    <group id="others" name="Residual and Case-specific Categories">
-      <entityType id="others" name="Others" legalStatus="Varies by constitution" panChars="VARIES">
-        <aliases>others,miscellaneous,not listed,varies,residual,case specific</aliases>
-        <description>Use this where the investor or applicant does not fit a predefined category. PAN classification and registration should be determined based on legal constitution and applicable regulator.</description>
-        <subtypes>
-          <subtype id="others-general" name="Others" panChars="VARIES" registration="PAN / Relevant Regulator Registration">
-            <description>Residual category requiring case-by-case legal and regulatory classification.</description>
-            <keywords>others,miscellaneous,residual,varies,case specific</keywords>
-          </subtype>
-        </subtypes>
-      </entityType>
-    </group>
-
   </groups>
 </investorClassification>
