@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Investor Entity Classification</title>
+    <title>Adwitiya - Investor Entity Classification</title>
 
     <style>
         :root {
@@ -197,15 +197,25 @@
             box-shadow:
                 inset 0 0 0 1px rgba(15, 23, 42, 0.06),
                 0 10px 28px rgba(0, 0, 0, 0.16);
-            transition: transform 0.18s ease, box-shadow 0.18s ease;
+            transition: transform 0.18s ease, box-shadow 0.18s ease, outline 0.18s ease;
+        }
+
+        #pan.state-blank {
+            outline: 3px solid var(--warning);
+            box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.2), 0 10px 28px rgba(0, 0, 0, 0.16);
+        }
+        #pan.state-invalid {
+            outline: 3px solid var(--danger);
+            box-shadow: 0 0 0 3px rgba(251, 113, 133, 0.2), 0 10px 28px rgba(0, 0, 0, 0.16);
+        }
+        #pan.state-valid {
+            outline: 3px solid var(--success);
+            box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.2), 0 10px 28px rgba(0, 0, 0, 0.16);
         }
 
         input:focus,
         select:focus {
             transform: translateY(-1px);
-            box-shadow:
-                inset 0 0 0 2px rgba(125, 211, 252, 0.8),
-                0 14px 36px rgba(0, 0, 0, 0.22);
         }
 
         #pan {
@@ -223,6 +233,10 @@
             color: #eaf6ff;
             border: 1px solid rgba(255, 255, 255, 0.16);
             background: rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
         }
 
         .message.good {
@@ -529,45 +543,20 @@
 
     <main class="page">
         <section class="hero">
-            <div class="badge">✨ XML-powered investor classification utility</div>
-            <h1>Investor Entity Classifier</h1>
-            <p class="subtitle">
-                Validate an Indian PAN format, infer the Income Tax Department category from the
-                fourth PAN character, and filter investor entity types, subtypes, registrations,
-                and descriptions from a central XML database.
-            </p>
+            <h1>अद्वितीय (Adwitiya)</h1>
         </section>
 
         <section class="app-card">
-            <div class="card-top">
-                <div>
-                    <div class="card-title">Classification Form</div>
-                    <div class="data-status" id="dataStatus">Loading XML database…</div>
-                </div>
-            </div>
-
             <div class="form">
                 <div class="field full">
                     <label for="pan">
                         PAN Number
                         <span class="hint">Format: ABCDE1234F</span>
                     </label>
-                    <input id="pan" maxlength="10" placeholder="Enter PAN" autocomplete="off" />
+                    <input id="pan" maxlength="10" placeholder="Enter PAN" autocomplete="off" class="state-blank" />
                     <div id="panMessage" class="message warn">
-                        Enter a PAN to identify the fourth-character PAN category.
-                    </div>
-                </div>
-
-                <div class="field full">
-                    <div class="toggle-row">
-                        <div>
-                            <strong>Show all categories</strong>
-                            <div class="toggle-copy">
-                                When off, entity suggestions are filtered using the fourth PAN character.
-                                When on, every XML category and subtype is searchable.
-                            </div>
-                        </div>
-                        <label class="switch" aria-label="Show all categories">
+                        <span id="panMessageText">Enter a PAN to identify the fourth-character PAN category.</span>
+                        <label class="switch" id="showAllContainer" aria-label="Show all categories" style="display: none; margin-left: auto;">
                             <input type="checkbox" id="showAll" />
                             <span class="slider"></span>
                         </label>
@@ -607,12 +596,6 @@
                         <div id="registration" class="registration"></div>
                     </div>
                 </div>
-            </div>
-
-            <div class="footer-note">
-                Note: PAN fourth-character classification is based on the Indian PAN structure.
-                This tool is for classification assistance and should be checked against current
-                Income Tax, SEBI, RBI, MCA, IRDAI, and PFRDA regulations before operational use.
             </div>
         </section>
     </main>
@@ -682,41 +665,57 @@
             return panChars.includes(panChar);
         }
 
+        function updatePANOutline() {
+            const pan = panInput.value.trim().toUpperCase();
+            panInput.classList.remove("state-blank", "state-invalid", "state-valid");
+            if (!pan) {
+                panInput.classList.add("state-blank");
+            } else if (isPANFormatValid(pan)) {
+                panInput.classList.add("state-valid");
+            } else {
+                panInput.classList.add("state-invalid");
+            }
+        }
+
         function updatePANMessage() {
             const pan = panInput.value.trim().toUpperCase();
             const fourth = getCurrentPanChar();
+            const showAllContainer = document.getElementById("showAllContainer");
+            const panMessageText = document.getElementById("panMessageText");
+
+            updatePANOutline();
 
             if (!pan) {
                 panMessage.className = "message warn";
-                panMessage.innerHTML = "Enter a PAN to identify the fourth-character PAN category.";
+                panMessageText.innerHTML = "Enter a PAN to identify the fourth-character PAN category.";
+                showAllContainer.style.display = "none";
+                showAllToggle.checked = false;
                 return;
             }
 
             if (pan.length < 10) {
                 panMessage.className = "message warn";
-                panMessage.innerHTML = `PAN is incomplete. Indian PAN should contain <strong>5 letters, 4 digits, and 1 final letter</strong>.`;
+                panMessageText.innerHTML = `PAN is incomplete. Indian PAN should contain <strong>5 letters, 4 digits, and 1 final letter</strong>.`;
+                showAllContainer.style.display = "none";
+                showAllToggle.checked = false;
             } else if (!isPANFormatValid(pan)) {
                 panMessage.className = "message bad";
-                panMessage.innerHTML = `Invalid PAN format. Expected pattern is <strong>AAAAA9999A</strong>.`;
+                panMessageText.innerHTML = `Invalid PAN format. Expected pattern is <strong>AAAAA9999A</strong>.`;
+                showAllContainer.style.display = "none";
+                showAllToggle.checked = false;
             } else {
                 panMessage.className = "message good";
-                panMessage.innerHTML = `PAN format is valid. `;
-            }
+                showAllContainer.style.display = "inline-block";
 
-            if (fourth) {
-                const cat = panCategories[fourth];
-                if (cat) {
-                    panMessage.innerHTML += `
-            <br>The fourth character is <strong>${fourth}</strong>. As per the PAN structure,
-            the Income Tax Department generally classifies this PAN holder as
-            <strong>${cat.label}</strong>. ${showAllToggle.checked
-                            ? "The full XML database is currently visible because “Show all categories” is on."
-                            : "The entity list is filtered to categories compatible with this PAN character."}
-          `;
+                if (fourth) {
+                    const cat = panCategories[fourth];
+                    if (cat) {
+                        panMessageText.innerHTML = `The PAN is generally classified as <strong>${cat.label}</strong> and entity types are filtered based on the same. Please use the toggle button to show complete list.`;
+                    } else {
+                        panMessageText.innerHTML = `The PAN is valid, but the fourth character <strong>${fourth}</strong> is not mapped in the XML PAN category database.`;
+                    }
                 } else {
-                    panMessage.innerHTML += `
-            <br>The fourth character is <strong>${fourth}</strong>, but this character is not mapped in the XML PAN category database.
-          `;
+                    panMessageText.innerHTML = `PAN format is valid.`;
                 }
             }
         }
@@ -771,12 +770,16 @@
                     });
                 });
 
-                dataStatus.textContent = `XML database loaded: ${entityTypes.length} entity types available.`;
-                dataStatus.style.color = "#bbf7d0";
+                if (dataStatus) {
+                    dataStatus.textContent = `XML database loaded: ${entityTypes.length} entity types available.`;
+                    dataStatus.style.color = "#bbf7d0";
+                }
                 refreshUI();
             } catch (err) {
-                dataStatus.textContent = `Could not load ${XML_FILE}. Use a local server and keep both files together.`;
-                dataStatus.style.color = "#fecdd3";
+                if (dataStatus) {
+                    dataStatus.textContent = `Could not load ${XML_FILE}. Use a local server and keep both files together.`;
+                    dataStatus.style.color = "#fecdd3";
+                }
                 console.error(err);
             }
         }
