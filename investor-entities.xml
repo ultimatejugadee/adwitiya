@@ -142,7 +142,7 @@
     </group>
 
     <group id="associations" name="Associations, Societies, Cooperatives and BOI">
-      <entityType id="aop-boi" name="AOP / BOI / Society" legalStatus="Association of Persons / Body of Individuals" panChars="A,B">
+      <entityType id="aop-boi" name="AOP / BOI / Society" legalStatus="Association of Persons / Body of Individuals" panChars="A">
         <aliases>AOP,association of persons,BOI,body of individuals,society,cooperative,co-op,RWA,association,club</aliases>
         <description>Associations, societies, cooperative bodies, and bodies of individuals are generally mapped to PAN categories A or B depending on legal constitution.</description>
         <subtypes>
@@ -154,7 +154,7 @@
             <description>A body consisting of individuals, generally mapped to PAN category B.</description>
             <keywords>BOI,body of individuals,individual group</keywords>
           </subtype>
-          <subtype id="society" name="Society" panChars="A,B" registration="Society Registration Number">
+          <subtype id="society" name="Society" panChars="A" registration="Society Registration Number">
             <description>A society registered under applicable societies registration law.</description>
             <keywords>society,registered society,association,NGO</keywords>
           </subtype>
@@ -179,7 +179,7 @@
     </group>
 
     <group id="government" name="Government, Statutory and Juridical Bodies">
-      <entityType id="government" name="Government / Juridical Person" legalStatus="Government / Artificial Juridical Person" panChars="G,J">
+      <entityType id="government" name="Government / Juridical Person" legalStatus="Government / Artificial Juridical Person" panChars="G">
         <aliases>government,govt,central government,state government,statutory body,juridical person,EPFO,sovereign</aliases>
         <description>Government bodies are generally mapped to PAN category G. Certain statutory or artificial juridical persons may be mapped to J.</description>
         <subtypes>
@@ -191,11 +191,11 @@
             <description>A department, ministry, or body of a State Government.</description>
             <keywords>state government,department,ministry</keywords>
           </subtype>
-          <subtype id="govt-others" name="Government - Others" panChars="G,J,L" registration="Statutory Notification / Enabling Law">
+          <subtype id="govt-others" name="Government - Others" panChars="G" registration="Statutory Notification / Enabling Law">
             <description>Other government, statutory, juridical, or local public bodies depending on constitution.</description>
             <keywords>statutory body,juridical,public authority,government authority</keywords>
           </subtype>
-          <subtype id="epfo" name="Local Pension Fund - EPFO" panChars="G,J" registration="Statutory Act Registration / EPFO Establishment Details">
+          <subtype id="epfo" name="Local Pension Fund - EPFO" panChars="G" registration="Statutory Act Registration / EPFO Establishment Details">
             <description>EPFO or similar statutory pension institution categorized as government or juridical depending on the specific holder.</description>
             <keywords>EPFO,pension,statutory fund,provident fund,juridical</keywords>
           </subtype>
@@ -219,7 +219,7 @@
     </group>
 
     <group id="regulated-finance" name="Regulated Financial Institutions and Intermediaries">
-      <entityType id="regulated-financial-entity" name="Regulated Financial Entity" legalStatus="Usually Company / Trust / LLP depending on constitution" panChars="C,T,F">
+      <entityType id="regulated-financial-entity" name="Regulated Financial Entity" legalStatus="Usually Company / Trust / LLP depending on constitution" panChars="C">
         <aliases>bank,NBFC,insurance,ARC,portfolio manager,asset manager,investment manager,financial institution,SEBI,RBI,IRDAI</aliases>
         <description>Regulated financial institutions are categorized according to their legal constitution, usually as companies, trusts, or LLPs.</description>
         <subtypes>
@@ -239,11 +239,11 @@
             <description>An asset reconstruction company registered with RBI.</description>
             <keywords>ARC,asset reconstruction,RBI,bad loans</keywords>
           </subtype>
-          <subtype id="portfolio-manager" name="Portfolio Manager" panChars="C,F" registration="SEBI Portfolio Manager Registration Number">
+          <subtype id="portfolio-manager" name="Portfolio Manager" panChars="C" registration="SEBI Portfolio Manager Registration Number">
             <description>A portfolio manager regulated by SEBI and structured as a company or LLP.</description>
             <keywords>portfolio manager,PMS,SEBI,investment manager,LLP,company</keywords>
           </subtype>
-          <subtype id="aif-company-llp" name="Alternative Investment Fund as Company / LLP" panChars="C,F" registration="SEBI AIF Registration Number">
+          <subtype id="aif-company-llp" name="Alternative Investment Fund as Company / LLP" panChars="C" registration="SEBI AIF Registration Number">
             <description>An AIF constituted as a company or LLP instead of a trust.</description>
             <keywords>AIF,alternative investment fund,company,LLP,SEBI</keywords>
           </subtype>
@@ -252,31 +252,31 @@
     </group>
 
     <group id="foreign" name="Foreign Investors, FPIs, FVCIs and Overseas Offices">
-      <entityType id="fpi" name="Foreign Portfolio Investor (FPI)" legalStatus="Foreign Investor - Legal status depends on constitution" panChars="C,T,A,F,G,J,P">
+      <entityType id="fpi" name="Foreign Portfolio Investor (FPI)" legalStatus="Foreign Investor - Legal status depends on constitution" panChars="C">
         <aliases>FPI,foreign portfolio investor,foreign fund,offshore fund,sovereign wealth fund,pension fund,endowment,foundation,SEBI FPI</aliases>
         <description>FPI is a regulatory investor category under SEBI. The PAN category depends on the legal nature of the FPI, such as company, trust, AOP, firm, government, juridical person, or individual.</description>
         <subtypes>
-          <subtype id="fpi-cat1-central-bank" name="FPI Category I - Central Bank" panChars="G,C,J" registration="SEBI FPI Registration Number plus home regulator details">
+          <subtype id="fpi-cat1-central-bank" name="FPI Category I - Central Bank" panChars="G" registration="SEBI FPI Registration Number plus home regulator details">
             <description>A central bank or similar monetary authority registered as Category I FPI.</description>
             <keywords>FPI category I,central bank,monetary authority,government,juridical</keywords>
           </subtype>
-          <subtype id="fpi-cat1-swf" name="FPI Category I - Sovereign Wealth Fund" panChars="G,C,A" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat1-swf" name="FPI Category I - Sovereign Wealth Fund" panChars="G" registration="SEBI FPI Registration Number">
             <description>A sovereign wealth fund eligible as Category I FPI.</description>
             <keywords>sovereign wealth fund,SWF,FPI category I,government fund</keywords>
           </subtype>
-          <subtype id="fpi-cat1-multilateral" name="FPI Category I - International / Multilateral Organization / Agency" panChars="G,C,J" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat1-multilateral" name="FPI Category I - International / Multilateral Organization / Agency" panChars="J" registration="SEBI FPI Registration Number">
             <description>An international or multilateral agency registered as Category I FPI.</description>
             <keywords>multilateral,international organization,agency,FPI category I</keywords>
           </subtype>
-          <subtype id="fpi-cat1-govt-owned" name="FPI Category I - Entity at least 75% Government owned or controlled" panChars="C,A" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat1-govt-owned" name="FPI Category I - Entity at least 75% Government owned or controlled" panChars="C" registration="SEBI FPI Registration Number">
             <description>An entity controlled or at least 75% owned by government and eligible as Category I FPI.</description>
             <keywords>government owned,75 percent,controlled entity,FPI category I</keywords>
           </subtype>
-          <subtype id="fpi-cat1-pension-fund" name="FPI Category I - Pension Fund" panChars="T,A,C" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat1-pension-fund" name="FPI Category I - Pension Fund" panChars="T" registration="SEBI FPI Registration Number">
             <description>A pension fund eligible for Category I FPI registration.</description>
             <keywords>pension fund,retirement fund,FPI category I</keywords>
           </subtype>
-          <subtype id="fpi-cat1-university-fund" name="FPI Category I - University Fund" panChars="T,A,C" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat1-university-fund" name="FPI Category I - University Fund" panChars="T" registration="SEBI FPI Registration Number">
             <description>A university fund eligible for Category I FPI registration.</description>
             <keywords>university fund,FPI category I,education fund</keywords>
           </subtype>
@@ -292,15 +292,15 @@
             <description>An appropriately regulated asset management company eligible as Category I FPI.</description>
             <keywords>AMC,asset management company,FPI category I</keywords>
           </subtype>
-          <subtype id="fpi-cat1-investment-manager" name="FPI Category I - Appropriately Regulated Investment Manager" panChars="C,F" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat1-investment-manager" name="FPI Category I - Appropriately Regulated Investment Manager" panChars="C" registration="SEBI FPI Registration Number">
             <description>An appropriately regulated investment manager structured as company or firm.</description>
             <keywords>investment manager,regulated manager,FPI category I</keywords>
           </subtype>
-          <subtype id="fpi-cat1-investment-advisor" name="FPI Category I - Appropriately Regulated Investment Advisor" panChars="C,F" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat1-investment-advisor" name="FPI Category I - Appropriately Regulated Investment Advisor" panChars="C" registration="SEBI FPI Registration Number">
             <description>An appropriately regulated investment adviser or advisor.</description>
             <keywords>investment advisor,investment adviser,FPI category I</keywords>
           </subtype>
-          <subtype id="fpi-cat1-portfolio-manager" name="FPI Category I - Appropriately Regulated Portfolio Manager" panChars="C,F" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat1-portfolio-manager" name="FPI Category I - Appropriately Regulated Portfolio Manager" panChars="C" registration="SEBI FPI Registration Number">
             <description>An appropriately regulated portfolio manager registered as FPI.</description>
             <keywords>portfolio manager,PMS,FPI category I</keywords>
           </subtype>
@@ -312,35 +312,35 @@
             <description>An appropriately regulated swap dealer registered as FPI.</description>
             <keywords>swap dealer,derivatives,FPI category I</keywords>
           </subtype>
-          <subtype id="fpi-cat1-regulated-fund" name="FPI Category I - Appropriately Regulated Fund" panChars="C,T,A" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat1-regulated-fund" name="FPI Category I - Appropriately Regulated Fund" panChars="C" registration="SEBI FPI Registration Number">
             <description>An appropriately regulated fund eligible for Category I FPI.</description>
             <keywords>regulated fund,FPI category I,foreign fund</keywords>
           </subtype>
-          <subtype id="fpi-cat1-unregulated-fund-cat1-manager" name="FPI Category I - Unregulated Fund whose Investment Manager is Category I FPI" panChars="C,T,A" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat1-unregulated-fund-cat1-manager" name="FPI Category I - Unregulated Fund whose Investment Manager is Category I FPI" panChars="C" registration="SEBI FPI Registration Number">
             <description>An unregulated fund eligible due to its investment manager being Category I FPI.</description>
             <keywords>unregulated fund,category I manager,FPI</keywords>
           </subtype>
-          <subtype id="fpi-cat1-university-endowment" name="FPI Category I - University Related Endowment" panChars="T,C" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat1-university-endowment" name="FPI Category I - University Related Endowment" panChars="T" registration="SEBI FPI Registration Number">
             <description>A university-related endowment eligible as Category I FPI.</description>
             <keywords>university endowment,endowment,FPI category I</keywords>
           </subtype>
-          <subtype id="fpi-cat1-fatf-manager" name="FPI Category I - Entity whose Investment Manager is Category I FPI from FATF jurisdiction" panChars="C,T,A" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat1-fatf-manager" name="FPI Category I - Entity whose Investment Manager is Category I FPI from FATF jurisdiction" panChars="C" registration="SEBI FPI Registration Number">
             <description>An entity eligible due to its investment manager being an eligible Category I FPI from a FATF member jurisdiction.</description>
             <keywords>FATF,investment manager,category I FPI,foreign entity</keywords>
           </subtype>
-          <subtype id="fpi-cat1-owned-by-pension" name="FPI Category I - Entity at least 75% owned by Pension Fund" panChars="C,T,A,F" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat1-owned-by-pension" name="FPI Category I - Entity at least 75% owned by Pension Fund" panChars="C" registration="SEBI FPI Registration Number">
             <description>An entity substantially owned by an eligible pension fund.</description>
             <keywords>75 percent,pension fund owned,FPI category I</keywords>
           </subtype>
-          <subtype id="fpi-cat1-owned-by-university" name="FPI Category I - Entity at least 75% owned by University Fund" panChars="C,T,A,F" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat1-owned-by-university" name="FPI Category I - Entity at least 75% owned by University Fund" panChars="C" registration="SEBI FPI Registration Number">
             <description>An entity substantially owned by an eligible university fund.</description>
             <keywords>75 percent,university fund owned,FPI category I</keywords>
           </subtype>
-          <subtype id="fpi-cat1-owned-by-regulated" name="FPI Category I - Entity at least 75% owned by Appropriately Regulated Entity" panChars="C,T,A" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat1-owned-by-regulated" name="FPI Category I - Entity at least 75% owned by Appropriately Regulated Entity" panChars="C" registration="SEBI FPI Registration Number">
             <description>An entity substantially owned by an appropriately regulated entity.</description>
             <keywords>regulated owner,75 percent,FPI category I</keywords>
           </subtype>
-          <subtype id="fpi-cat1-owned-by-endowment" name="FPI Category I - Entity at least 75% owned by University Related Endowment" panChars="C,T,A" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat1-owned-by-endowment" name="FPI Category I - Entity at least 75% owned by University Related Endowment" panChars="C" registration="SEBI FPI Registration Number">
             <description>An entity substantially owned by a university-related endowment.</description>
             <keywords>endowment owned,75 percent,FPI category I</keywords>
           </subtype>
@@ -356,15 +356,15 @@
             <description>An appropriately regulated central securities depository registered as FPI.</description>
             <keywords>CSD,central securities depository,FPI category I</keywords>
           </subtype>
-          <subtype id="fpi-cat2-regulated-fund" name="FPI Category II - Appropriately Regulated Fund not eligible as Category I FPI" panChars="C,T,A" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat2-regulated-fund" name="FPI Category II - Appropriately Regulated Fund not eligible as Category I FPI" panChars="C" registration="SEBI FPI Registration Number">
             <description>An appropriately regulated fund registered as Category II FPI.</description>
             <keywords>FPI category II,regulated fund,foreign fund</keywords>
           </subtype>
-          <subtype id="fpi-cat2-endowment-foundation" name="FPI Category II - Endowment / Foundation" panChars="T,A,C" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat2-endowment-foundation" name="FPI Category II - Endowment / Foundation" panChars="T" registration="SEBI FPI Registration Number">
             <description>An endowment or foundation registered as Category II FPI.</description>
             <keywords>endowment,foundation,FPI category II</keywords>
           </subtype>
-          <subtype id="fpi-cat2-charitable" name="FPI Category II - Charitable Organisation" panChars="T,A,C" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat2-charitable" name="FPI Category II - Charitable Organisation" panChars="T" registration="SEBI FPI Registration Number">
             <description>A charitable organization registered as Category II FPI.</description>
             <keywords>charitable organisation,charity,FPI category II</keywords>
           </subtype>
@@ -372,7 +372,7 @@
             <description>A foreign corporate body registered as Category II FPI.</description>
             <keywords>corporate body,company,FPI category II</keywords>
           </subtype>
-          <subtype id="fpi-cat2-family-office" name="FPI Category II - Family Office" panChars="C,T,F" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat2-family-office" name="FPI Category II - Family Office" panChars="C" registration="SEBI FPI Registration Number">
             <description>A family office registered as Category II FPI depending on its constitution.</description>
             <keywords>family office,FPI category II,trust,company,firm</keywords>
           </subtype>
@@ -380,26 +380,26 @@
             <description>An individual foreign investor registered as Category II FPI.</description>
             <keywords>individual FPI,person,foreign individual,passport</keywords>
           </subtype>
-          <subtype id="fpi-cat2-client-entity" name="FPI Category II - Regulated Entity investing on behalf of Client" panChars="C,A" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat2-client-entity" name="FPI Category II - Regulated Entity investing on behalf of Client" panChars="C" registration="SEBI FPI Registration Number">
             <description>An appropriately regulated entity investing on behalf of clients.</description>
             <keywords>client investment,regulated entity,FPI category II</keywords>
           </subtype>
-          <subtype id="fpi-cat2-unregulated-lp-trust" name="FPI Category II - Unregulated Fund - Limited Partnership / Trust" panChars="F,T" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat2-unregulated-lp-trust" name="FPI Category II - Unregulated Fund - Limited Partnership / Trust" panChars="T" registration="SEBI FPI Registration Number">
             <description>An unregulated fund structured as a limited partnership or trust.</description>
             <keywords>unregulated fund,limited partnership,LP,trust,FPI category II</keywords>
           </subtype>
-          <subtype id="fpi-cat2-others" name="FPI Category II - Others" panChars="C,A,T" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat2-others" name="FPI Category II - Others" panChars="C" registration="SEBI FPI Registration Number">
             <description>Other eligible Category II FPI applicants depending on their legal constitution.</description>
             <keywords>others,FPI category II,miscellaneous foreign investor</keywords>
           </subtype>
         </subtypes>
       </entityType>
 
-      <entityType id="fvci-office" name="Foreign Venture Capital Investor / Foreign Office" legalStatus="Foreign Entity / Foreign Company" panChars="C,T,A">
+      <entityType id="fvci-office" name="Foreign Venture Capital Investor / Foreign Office" legalStatus="Foreign Entity / Foreign Company" panChars="C">
         <aliases>FVCI,foreign venture capital investor,branch office,liaison office,liason office,project office,foreign office,RBI approval</aliases>
         <description>Foreign venture capital investors and Indian offices of foreign entities are classified according to their legal constitution. Branch, liaison, and project offices generally relate to a foreign company.</description>
         <subtypes>
-          <subtype id="fvci" name="Foreign Venture Capital Investor (FVCI)" panChars="C,T,A" registration="SEBI FVCI Registration Number">
+          <subtype id="fvci" name="Foreign Venture Capital Investor (FVCI)" panChars="C" registration="SEBI FVCI Registration Number">
             <description>A foreign venture capital investor registered with SEBI.</description>
             <keywords>FVCI,foreign venture capital,SEBI,foreign investor</keywords>
           </subtype>
