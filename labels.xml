@@ -1,0 +1,1628 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<translations version="1.0">
+  <!-- UI General Labels -->
+  <interface>
+    <label id="app_title">
+      <en>Adwitiya - Investor Entity Classification</en>
+      <hi>अद्वितीय - निवेशक इकाई वर्गीकरण</hi>
+    </label>
+    <label id="hero_title">
+      <en>अद्वितीय (Adwitiya)</en>
+      <hi>अद्वितीय (Adwitiya)</hi>
+    </label>
+    <label id="pan_label">
+      <en>PAN Number</en>
+      <hi>पैन नंबर (PAN Number)</hi>
+    </label>
+    <label id="pan_hint">
+      <en>Format: ABCDE1234F</en>
+      <hi>प्रारूप: ABCDE1234F</hi>
+    </label>
+    <label id="pan_placeholder">
+      <en>Enter PAN</en>
+      <hi>पैन दर्ज करें</hi>
+    </label>
+    <label id="show_all_aria">
+      <en>Show all categories</en>
+      <hi>सभी श्रेणियाँ दिखाएं</hi>
+    </label>
+    
+    <label id="msg_enter_pan">
+      <en>Enter a PAN to identify the fourth-character PAN category.</en>
+      <hi>चतुर्थ-वर्ण पैन श्रेणी की पहचान करने के लिए एक पैन दर्ज करें।</hi>
+    </label>
+    <label id="msg_pan_incomplete">
+      <en>PAN is incomplete. Indian PAN should contain &lt;strong&gt;5 letters, 4 digits, and 1 final letter&lt;/strong&gt;.</en>
+      <hi>पैन अधूरा है। भारतीय पैन में &lt;strong&gt;5 अक्षर, 4 अंक और 1 अंतिम अक्षर&lt;/strong&gt; होने चाहिए।</hi>
+    </label>
+    <label id="msg_pan_invalid">
+      <en>Invalid PAN format. Expected pattern is &lt;strong&gt;AAAAA9999A&lt;/strong&gt;.</en>
+      <hi>अमान्य पैन प्रारूप। अपेक्षित पैटर्न &lt;strong&gt;AAAAA9999A&lt;/strong&gt; है।</hi>
+    </label>
+    <label id="msg_pan_valid_classified">
+      <en>The PAN is generally classified as &lt;strong&gt;{category}&lt;/strong&gt; and entity types are filtered based on the same. Please use the toggle button to show complete list.</en>
+      <hi>पैन को आम तौर पर &lt;strong&gt;{category}&lt;/strong&gt; के रूप में वर्गीकृत किया गया है और इसके आधार पर संस्था प्रकारों को फ़िल्टर किया जाता है। कृपया पूरी सूची देखने के लिए टॉगल बटन का उपयोग करें।</hi>
+    </label>
+    <label id="msg_pan_valid_unmapped">
+      <en>The PAN is valid, but the fourth character &lt;strong&gt;{char}&lt;/strong&gt; is not mapped in the XML PAN category database.</en>
+      <hi>पैन मान्य है, लेकिन चौथा वर्ण &lt;strong&gt;{char}&lt;/strong&gt; XML पैन श्रेणी डेटाबेस में मैप नहीं किया गया है।</hi>
+    </label>
+    <label id="msg_pan_valid">
+      <en>PAN format is valid.</en>
+      <hi>पैन प्रारूप मान्य है।</hi>
+    </label>
+    
+    <label id="entity_label">
+      <en>Entity Type</en>
+      <hi>संस्था प्रकार (Entity Type)</hi>
+    </label>
+    <label id="entity_hint">
+      <en>Search by name, alias, or keyword</en>
+      <hi>नाम, उपनाम या कीवर्ड द्वारा खोजें</hi>
+    </label>
+    <label id="entity_placeholder">
+      <en>Type entity type, e.g. individual, trust, FPI</en>
+      <hi>संस्था का प्रकार टाइप करें, जैसे individual, trust, FPI</hi>
+    </label>
+    
+    <label id="subtype_label">
+      <en>Additional Subcategory</en>
+      <hi>अतिरिक्त उपश्रेणी (Additional Subcategory)</hi>
+    </label>
+    <label id="subtype_hint">
+      <en>Based on selected entity type</en>
+      <hi>चयनित संस्था प्रकार के आधार पर</hi>
+    </label>
+    <label id="subtype_placeholder">
+      <en>Select entity type first</en>
+      <hi>पहले संस्था का प्रकार चुनें</hi>
+    </label>
+    <label id="subtype_choose">
+      <en>Choose additional subcategory</en>
+      <hi>अतिरिक्त उपश्रेणी चुनें</hi>
+    </label>
+    <label id="subtype_no_compatible">
+      <en>No subtype compatible with current PAN filter</en>
+      <hi>वर्तमान पैन फ़िल्टर के साथ कोई उपश्रेणी संगत नहीं है</hi>
+    </label>
+    
+    <label id="desc_entity_title">
+      <en>Entity Type Description</en>
+      <hi>संस्था प्रकार विवरण</hi>
+    </label>
+    <label id="desc_entity_default">
+      <en>Select an entity type to see its classification meaning.</en>
+      <hi>वर्गीकरण का अर्थ देखने के लिए एक संस्था प्रकार चुनें।</hi>
+    </label>
+    <label id="desc_subtype_title">
+      <en>Subtype Description</en>
+      <hi>उपश्रेणी विवरण</hi>
+    </label>
+    <label id="desc_subtype_default">
+      <en>Select a subcategory to see registration and details.</en>
+      <hi>पंजीकरण और विवरण देखने के लिए एक उपश्रेणी चुनें।</hi>
+    </label>
+    
+    <label id="reg_identifier">
+      <en>Usual identifier / registration</en>
+      <hi>सामान्य पहचानकर्ता / पंजीकरण</hi>
+    </label>
+    <label id="reg_pan_mapping">
+      <en>Subtype PAN mapping</en>
+      <hi>उपश्रेणी पैन मैपिंग (Subtype PAN mapping)</hi>
+    </label>
+    
+    <label id="no_category_found">
+      <en>No matching category found</en>
+      <hi>कोई मिलान श्रेणी नहीं मिली</hi>
+    </label>
+    <label id="no_category_hint">
+      <en>Try enabling “Show all categories” or searching another keyword.</en>
+      <hi>"सभी श्रेणियां दिखाएं" को सक्षम करने या दूसरा कीवर्ड खोजने का प्रयास करें।</hi>
+    </label>
+    <label id="view_desc_tooltip">
+      <en>View description</en>
+      <hi>विवरण देखें</hi>
+    </label>
+    
+    <label id="status_loaded">
+      <en>XML database loaded: {count} entity types available.</en>
+      <hi>XML डेटाबेस लोड किया गया: {count} संस्था प्रकार उपलब्ध हैं।</hi>
+    </label>
+    <label id="status_error">
+      <en>Could not load {file}. Use a local server and keep both files together.</en>
+      <hi>{file} लोड नहीं किया जा सका। स्थानीय सर्वर का उपयोग करें और दोनों फ़ाइलों को एक साथ रखें।</hi>
+    </label>
+    
+    <label id="pill_group">
+      <en>Group: {value}</en>
+      <hi>समूह: {value}</hi>
+    </label>
+    <label id="pill_legal">
+      <en>Legal status: {value}</en>
+      <hi>कानूनी स्थिति: {value}</hi>
+    </label>
+    <label id="pill_pan">
+      <en>PAN: {value}</en>
+      <hi>पैन (PAN): {value}</hi>
+    </label>
+  </interface>
+
+  <!-- PAN Categories -->
+  <panCategories>
+    <panCategory code="P">
+      <label>
+        <en>Individual / Person</en>
+        <hi>व्यक्तिगत / व्यक्ति</hi>
+      </label>
+      <description>
+        <en>Used for natural persons, including resident individuals, non-resident individuals, OCI holders, and sole proprietors where PAN is issued in the proprietor's individual capacity.</en>
+        <hi>प्राकृतिक व्यक्तियों के लिए उपयोग किया जाता है, जिसमें निवासी व्यक्ति, गैर-निवासी व्यक्ति, ओसीआई धारक और एकल मालिक शामिल हैं जहां मालिक की व्यक्तिगत क्षमता में पैन जारी किया जाता है।</hi>
+      </description>
+    </panCategory>
+    <panCategory code="H">
+      <label>
+        <en>Hindu Undivided Family</en>
+        <hi>हिंदू अविभाजित परिवार (HUF)</hi>
+      </label>
+      <description>
+        <en>Used for Hindu Undivided Families.</en>
+        <hi>हिंदू अविभाजित परिवारों के लिए उपयोग किया जाता है।</hi>
+      </description>
+    </panCategory>
+    <panCategory code="C">
+      <label>
+        <en>Company</en>
+        <hi>कंपनी</hi>
+      </label>
+      <description>
+        <en>Used for companies, including domestic companies, foreign companies, regulated corporate bodies, and many institutional investors structured as companies.</en>
+        <hi>घरेलू कंपनियों, विदेशी कंपनियों, विनियमित कॉर्पोरेट निकायों और कंपनियों के रूप में संरचित कई संस्थागत निवेशकों सहित कंपनियों के लिए उपयोग किया जाता है।</hi>
+      </description>
+    </panCategory>
+    <panCategory code="F">
+      <label>
+        <en>Firm / LLP</en>
+        <hi>फर्म / एलएलपी (LLP)</hi>
+      </label>
+      <description>
+        <en>Used for partnership firms and limited liability partnerships.</en>
+        <hi>साझेदारी फर्मों और सीमित देयता साझेदारियों के लिए उपयोग किया जाता है।</hi>
+      </description>
+    </panCategory>
+    <panCategory code="A">
+      <label>
+        <en>Association of Persons</en>
+        <hi>व्यक्तियों का संघ (AOP)</hi>
+      </label>
+      <description>
+        <en>Used for associations of persons, societies, cooperative bodies, clubs, and similar collective bodies.</en>
+        <hi>व्यक्तियों के संघों (AOP), सोसायटियों, सहकारी निकायों, क्लबों और इसी तरह के सामूहिक निकायों के लिए उपयोग किया जाता है।</hi>
+      </description>
+    </panCategory>
+    <panCategory code="B">
+      <label>
+        <en>Body of Individuals</en>
+        <hi>व्यक्तियों का निकाय (BOI)</hi>
+      </label>
+      <description>
+        <en>Used for body of individuals.</en>
+        <hi>व्यक्तियों के निकाय (BOI) के लिए उपयोग किया जाता है।</hi>
+      </description>
+    </panCategory>
+    <panCategory code="T">
+      <label>
+        <en>Trust</en>
+        <hi>ट्रस्ट (Trust)</hi>
+      </label>
+      <description>
+        <en>Used for trusts including private, public, charitable, mutual fund, pension, and investment trust structures.</en>
+        <hi>निजी, सार्वजनिक, धर्मार्थ, म्यूचुअल फंड, पेंशन और निवेश ट्रस्ट संरचनाओं सहित ट्रस्टों के लिए उपयोग किया जाता है।</hi>
+      </description>
+    </panCategory>
+    <panCategory code="G">
+      <label>
+        <en>Government</en>
+        <hi>सरकार (Government)</hi>
+      </label>
+      <description>
+        <en>Used for government departments and government bodies.</en>
+        <hi>सरकारी विभागों और सरकारी निकायों के लिए उपयोग किया जाता है।</hi>
+      </description>
+    </panCategory>
+    <panCategory code="L">
+      <label>
+        <en>Local Authority</en>
+        <hi>स्थानीय प्राधिकरण</hi>
+      </label>
+      <description>
+        <en>Used for local authorities such as municipal corporations and panchayats.</en>
+        <hi>नगर निगमों और पंचायतों जैसे स्थानीय प्राधिकरणों के लिए उपयोग किया जाता है।</hi>
+      </description>
+    </panCategory>
+    <panCategory code="J">
+      <label>
+        <en>Artificial Juridical Person</en>
+        <hi>कृत्रिम न्यायिक व्यक्ति (AJP)</hi>
+      </label>
+      <description>
+        <en>Used for artificial juridical persons and statutory bodies not otherwise covered.</en>
+        <hi>कृत्रिम न्यायिक व्यक्तियों और वैधानिक निकायों के लिए उपयोग किया जाता है जो अन्यथा शामिल नहीं हैं।</hi>
+      </description>
+    </panCategory>
+  </panCategories>
+
+  <!-- Entity Groups -->
+  <groups>
+    <group id="individuals">
+      <name>
+        <en>Individuals and Personal Statuses</en>
+        <hi>व्यक्तिगत और निजी स्थितियां</hi>
+      </name>
+    </group>
+    <group id="huf">
+      <name>
+        <en>Family and Traditional Legal Forms</en>
+        <hi>पारिवारिक और पारंपरिक कानूनी स्वरूप</hi>
+      </name>
+    </group>
+    <group id="companies">
+      <name>
+        <en>Companies and Corporate Bodies</en>
+        <hi>कंपनियां और कॉर्पोरेट निकाय</hi>
+      </name>
+    </group>
+    <group id="firms">
+      <name>
+        <en>Partnerships, Firms and LLPs</en>
+        <hi>साझेदारी, फर्म और एलएलपी</hi>
+      </name>
+    </group>
+    <group id="trusts">
+      <name>
+        <en>Trusts, Funds and Fiduciary Structures</en>
+        <hi>ट्रस्ट, फंड और प्रत्ययी संरचनाएं</hi>
+      </name>
+    </group>
+    <group id="associations">
+      <name>
+        <en>Associations, Societies, Cooperatives and BOI</en>
+        <hi>संघ, समितियां, सहकारी समितियां और बीओआई</hi>
+      </name>
+    </group>
+    <group id="government">
+      <name>
+        <en>Government, Statutory and Juridical Bodies</en>
+        <hi>सरकारी, वैधानिक और न्यायिक निकाय</hi>
+      </name>
+    </group>
+    <group id="regulated-finance">
+      <name>
+        <en>Regulated Financial Institutions and Intermediaries</en>
+        <hi>विनियमित वित्तीय संस्थान और मध्यस्थ</hi>
+      </name>
+    </group>
+    <group id="foreign">
+      <name>
+        <en>Foreign Investors, FPIs, FVCIs and Overseas Offices</en>
+        <hi>विदेशी निवेशक, एफपीआई, एफवीसीआई और विदेशी कार्यालय</hi>
+      </name>
+    </group>
+    <group id="routes">
+      <name>
+        <en>Investment Routes, Instruments and Arrangements</en>
+        <hi>निवेश मार्ग, साधन और व्यवस्थाएं</hi>
+      </name>
+    </group>
+  </groups>
+
+  <!-- Entity Types -->
+  <entityTypes>
+    <entityType id="individual">
+      <name>
+        <en>Individual</en>
+        <hi>व्यक्तिगत (Individual)</hi>
+      </name>
+      <legalStatus>
+        <en>Natural Person</en>
+        <hi>प्राकृतिक व्यक्ति</hi>
+      </legalStatus>
+      <description>
+        <en>An individual is a natural person. Tax residence, citizenship status, and sole proprietorship status do not create a separate PAN category; the PAN category remains P.</en>
+        <hi>एक व्यक्ति एक प्राकृतिक व्यक्ति है। कर निवास, नागरिकता की स्थिति और एकल स्वामित्व की स्थिति एक अलग पैन श्रेणी नहीं बनाती है; पैन श्रेणी P बनी रहती है।</hi>
+      </description>
+    </entityType>
+    <entityType id="huf">
+      <name>
+        <en>Hindu Undivided Family</en>
+        <hi>हिंदू अविभाजित परिवार (HUF)</hi>
+      </name>
+      <legalStatus>
+        <en>HUF</en>
+        <hi>हिंदू अविभाजित परिवार (HUF)</hi>
+      </legalStatus>
+      <description>
+        <en>A Hindu Undivided Family is a separate taxable unit recognized under Indian tax law and identified by PAN category H.</en>
+        <hi>एक हिंदू अविभाजित परिवार भारतीय कर कानून के तहत मान्यता प्राप्त एक अलग कर योग्य इकाई है और इसकी पहचान पैन श्रेणी H द्वारा की जाती है।</hi>
+      </description>
+    </entityType>
+    <entityType id="company">
+      <name>
+        <en>Company</en>
+        <hi>कंपनी</hi>
+      </name>
+      <legalStatus>
+        <en>Company / Corporate Body</en>
+        <hi>कंपनी / कॉर्पोरेट निकाय</hi>
+      </legalStatus>
+      <description>
+        <en>A company is a corporate legal person. In PAN classification, companies are generally mapped to fourth character C, including many regulated corporate investors.</en>
+        <hi>कंपनी एक कॉर्पोरेट कानूनी व्यक्ति है। पैन वर्गीकरण में, कंपनियों को आम तौर पर चौथे वर्ण C से मैप किया जाता है, जिसमें कई विनियमित कॉर्पोरेट निवेशक शामिल होते हैं।</hi>
+      </description>
+    </entityType>
+    <entityType id="firm-llp">
+      <name>
+        <en>Firm / LLP</en>
+        <hi>फर्म / एलएलपी (LLP)</hi>
+      </name>
+      <legalStatus>
+        <en>Partnership Firm / Limited Liability Partnership</en>
+        <hi>साझेदारी फर्म / सीमित देयता साझेदारी</hi>
+      </legalStatus>
+      <description>
+        <en>Partnership firms and LLPs are generally mapped to PAN fourth character F. The registration differs depending on whether the structure is an ordinary partnership or LLP.</en>
+        <hi>साझेदारी फर्म और एलएलपी आम तौर पर पैन के चौथे वर्ण F से मैप किए जाते हैं। पंजीकरण इस बात पर निर्भर करता है कि संरचना एक साधारण साझेदारी है या एलएलपी।</hi>
+      </description>
+    </entityType>
+    <entityType id="trust">
+      <name>
+        <en>Trust</en>
+        <hi>ट्रस्ट (Trust)</hi>
+      </name>
+      <legalStatus>
+        <en>Trust</en>
+        <hi>ट्रस्ट</hi>
+      </legalStatus>
+      <description>
+        <en>A trust is a fiduciary structure and is generally mapped to PAN category T. Many pooled investment structures such as mutual funds, AIFs, and pension funds may use trust form.</en>
+        <hi>एक ट्रस्ट एक प्रत्ययी (fiduciary) संरचना है और आम तौर पर पैन श्रेणी T से मैप की जाती है। कई संचित निवेश संरचनाएं जैसे कि म्यूचुअल फंड, एआईएफ और पेंशन फंड ट्रस्ट प्रारूप का उपयोग कर सकते हैं।</hi>
+      </description>
+    </entityType>
+    <entityType id="aop-boi">
+      <name>
+        <en>AOP / BOI / Society</en>
+        <hi>एओपी / बीओआई / सोसायटी</hi>
+      </name>
+      <legalStatus>
+        <en>Association of Persons / Body of Individuals</en>
+        <hi>व्यक्तियों का संघ / व्यक्तियों का निकाय</hi>
+      </legalStatus>
+      <description>
+        <en>Associations, societies, cooperative bodies, and bodies of individuals are generally mapped to PAN categories A or B depending on legal constitution.</en>
+        <hi>व्यक्तियों के संघ, समितियां, सहकारी निकाय और व्यक्तियों के निकाय आम तौर पर कानूनी संविधान के आधार पर पैन श्रेणियों A या B से मैप किए जाते हैं।</hi>
+      </description>
+    </entityType>
+    <entityType id="government">
+      <name>
+        <en>Government / Juridical Person</en>
+        <hi>सरकार / न्यायिक व्यक्ति</hi>
+      </name>
+      <legalStatus>
+        <en>Government / Artificial Juridical Person</en>
+        <hi>सरकार / कृत्रिम न्यायिक व्यक्ति</hi>
+      </legalStatus>
+      <description>
+        <en>Government bodies are generally mapped to PAN category G. Certain statutory or artificial juridical persons may be mapped to J.</en>
+        <hi>सरकारी निकायों को आम तौर पर पैन श्रेणी G से मैप किया जाता है। कुछ वैधानिक या कृत्रिम न्यायिक व्यक्तियों को J से मैप किया जा सकता है।</hi>
+      </description>
+    </entityType>
+    <entityType id="local-authority">
+      <name>
+        <en>Local Authority</en>
+        <hi>स्थानीय प्राधिकरण</hi>
+      </name>
+      <legalStatus>
+        <en>Local Authority</en>
+        <hi>स्थानीय प्राधिकरण</hi>
+      </legalStatus>
+      <description>
+        <en>Local authorities such as municipal corporations and panchayats are generally mapped to PAN category L.</en>
+        <hi>नगर निगमों और पंचायतों जैसे स्थानीय अधिकारियों को आम तौर पर पैन श्रेणी L से मैप किया जाता है।</hi>
+      </description>
+    </entityType>
+    <entityType id="regulated-financial-entity">
+      <name>
+        <en>Regulated Financial Entity</en>
+        <hi>विनियमित वित्तीय इकाई</hi>
+      </name>
+      <legalStatus>
+        <en>Usually Company / Trust / LLP depending on constitution</en>
+        <hi>आमतौर पर कंपनी / ट्रस्ट / एलएलपी संविधान पर निर्भर करता है</hi>
+      </legalStatus>
+      <description>
+        <en>Regulated financial institutions are categorized according to their legal constitution, usually as companies, trusts, or LLPs.</en>
+        <hi>विनियमित वित्तीय संस्थानों को उनके कानूनी संविधान के अनुसार वर्गीकृत किया जाता है, आमतौर पर कंपनियों, ट्रस्टों या एलएलपी के रूप में.</hi>
+      </description>
+    </entityType>
+    <entityType id="fpi">
+      <name>
+        <en>Foreign Portfolio Investor (FPI)</en>
+        <hi>विदेशी पोर्टफोलियो निवेशक (FPI)</hi>
+      </name>
+      <legalStatus>
+        <en>Foreign Investor - Legal status depends on constitution</en>
+        <hi>विदेशी निवेशक - कानूनी स्थिति संविधान पर निर्भर करती है</hi>
+      </legalStatus>
+      <description>
+        <en>FPI is a regulatory investor category under SEBI. The PAN category depends on the legal nature of the FPI, such as company, trust, AOP, firm, government, juridical person, or individual.</en>
+        <hi>FPI सेबी के तहत एक नियामक निवेशक श्रेणी है। पैन श्रेणी FPI की कानूनी प्रकृति पर निर्भर करती है, जैसे कि कंपनी, ट्रस्ट, एओपी, फर्म, सरकार, न्यायिक व्यक्ति या व्यक्ति।</hi>
+      </description>
+    </entityType>
+    <entityType id="fvci-office">
+      <name>
+        <en>Foreign Venture Capital Investor / Foreign Office</en>
+        <hi>विदेशी उद्यम पूंजी निवेशक / विदेशी कार्यालय</hi>
+      </name>
+      <legalStatus>
+        <en>Foreign Entity / Foreign Company</en>
+        <hi>विदेशी इकाई / विदेशी कंपनी</hi>
+      </legalStatus>
+      <description>
+        <en>Foreign venture capital investors and Indian offices of foreign entities are classified according to their legal constitution. Branch, liaison, and project offices generally relate to a foreign company.</en>
+        <hi>विदेशी उद्यम पूंजी निवेशकों और विदेशी संस्थाओं के भारतीय कार्यालयों को उनके कानूनी संविधान के अनुसार वर्गीकृत किया जाता है। शाखा, संपर्क और परियोजना कार्यालय आम तौर पर एक विदेशी कंपनी से संबंधित होते हैं।</hi>
+      </description>
+    </entityType>
+    <entityType id="investment-route">
+      <name>
+        <en>Investment Route / Instrument</en>
+        <hi>निवेश मार्ग / साधन</hi>
+      </name>
+      <legalStatus>
+        <en>Route or Instrument, not standalone legal entity</en>
+        <hi>मार्ग या साधन, स्वतंत्र कानूनी इकाई नहीं</hi>
+      </legalStatus>
+      <description>
+        <en>FDI, FCCB, and Depository Receipts are investment routes or instruments. PAN is normally based on the underlying investor, issuer, or company rather than the instrument itself.</en>
+        <hi>एफडीआई, एफसीसीबी और डिपॉजिटरी रसीदें निवेश मार्ग या साधन हैं। पैन सामान्यतः साधन के बजाय अंतर्निहित निवेशक, जारीकर्ता या कंपनी पर आधारित होता है।</hi>
+      </description>
+    </entityType>
+  </entityTypes>
+
+  <!-- Subtypes -->
+  <subtypes>
+    <subtype id="ror">
+      <name>
+        <en>Resident and Ordinarily Resident (ROR)</en>
+        <hi>निवासी और सामान्यतः निवासी (ROR)</hi>
+      </name>
+      <registration>
+        <en>Aadhaar / PAN / Passport</en>
+        <hi>आधार / पैन / पासपोर्ट</hi>
+      </registration>
+      <description>
+        <en>Individual tax residential status for a person who is resident and ordinarily resident in India.</en>
+        <hi>भारत में निवासी और सामान्य रूप से निवासी व्यक्ति के लिए व्यक्तिगत कर आवासीय स्थिति।</hi>
+      </description>
+    </subtype>
+    <subtype id="rnor">
+      <name>
+        <en>Resident but Not Ordinarily Resident (RNOR)</en>
+        <hi>निवासी लेकिन सामान्यतः निवासी नहीं (RNOR)</hi>
+      </name>
+      <registration>
+        <en>Aadhaar / PAN / Passport</en>
+        <hi>आधार / पैन / पासपोर्ट</hi>
+      </registration>
+      <description>
+        <en>Individual tax residential status for a person who is resident but not ordinarily resident in India.</en>
+        <hi>भारत में निवासी लेकिन सामान्य रूप से निवासी नहीं होने वाले व्यक्ति के लिए व्यक्तिगत कर आवासीय स्थिति।</hi>
+      </description>
+    </subtype>
+    <subtype id="nr">
+      <name>
+        <en>Non-Resident Individual (NR)</en>
+        <hi>अनिवासी व्यक्ति (NR)</hi>
+      </name>
+      <registration>
+        <en>Passport / Tax Residency Certificate (TRC)</en>
+        <hi>पासपोर्ट / टैक्स रेजीडेंसी सर्टिफिकेट (TRC)</hi>
+      </registration>
+      <description>
+        <en>A natural person who is non-resident for Indian tax purposes.</en>
+        <hi>एक प्राकृतिक व्यक्ति जो भारतीय कर उद्देश्यों के लिए अनिवासी है।</hi>
+      </description>
+    </subtype>
+    <subtype id="sole-proprietorship">
+      <name>
+        <en>Sole Proprietorship</en>
+        <hi>एकल स्वामित्व (Sole Proprietorship)</hi>
+      </name>
+      <registration>
+        <en>GSTIN / Udyam / Shop and Establishment Registration</en>
+        <hi>GSTIN / उद्यम / दुकान और स्थापना पंजीकरण</hi>
+      </registration>
+      <description>
+        <en>A business carried on by an individual proprietor. PAN is generally the individual's PAN and therefore category P.</en>
+        <hi>एक व्यक्तिगत मालिक द्वारा चलाया जाने वाला व्यवसाय। पैन आमतौर पर व्यक्तिगत मालिक का पैन होता है और इसलिए इसकी श्रेणी P होती है।</hi>
+      </description>
+    </subtype>
+    <subtype id="oci">
+      <name>
+        <en>Overseas Citizen of India (OCI)</en>
+        <hi>भारत के प्रवासी नागरिक (OCI)</hi>
+      </name>
+      <registration>
+        <en>OCI Card Number</en>
+        <hi>ओसीआई कार्ड नंबर</hi>
+      </registration>
+      <description>
+        <en>OCI is a citizenship or immigration status of a natural person and not a separate legal entity category.</en>
+        <hi>OCI एक प्राकृतिक व्यक्ति की नागरिकता या आप्रवासन स्थिति है न कि एक अलग कानूनी इकाई श्रेणी।</hi>
+      </description>
+    </subtype>
+    <subtype id="huf-standard">
+      <name>
+        <en>Hindu Undivided Family (HUF)</en>
+        <hi>हिंदू अविभाजित परिवार (HUF)</hi>
+      </name>
+      <registration>
+        <en>HUF Deed / PAN</en>
+        <hi>HUF डीड / पैन</hi>
+      </registration>
+      <description>
+        <en>Family unit consisting of lineal descendants and managed by the karta.</en>
+        <hi>वंशानुगत वंशजों से बनी और कर्ता द्वारा प्रबंधित पारिवारिक इकाई।</hi>
+      </description>
+    </subtype>
+    <subtype id="domestic-company">
+      <name>
+        <en>Domestic Ordinary Company</en>
+        <hi>घरेलू साधारण कंपनी</hi>
+      </name>
+      <registration>
+        <en>Corporate Identity Number (CIN)</en>
+        <hi>कॉर्पोरेट पहचान संख्या (CIN)</hi>
+      </registration>
+      <description>
+        <en>An Indian company incorporated under the Companies Act.</en>
+        <hi>कंपनी अधिनियम के तहत निगमित एक भारतीय कंपनी।</hi>
+      </description>
+    </subtype>
+    <subtype id="opc">
+      <name>
+        <en>Domestic One Person Company (OPC)</en>
+        <hi>घरेलू एक व्यक्ति कंपनी (OPC)</hi>
+      </name>
+      <registration>
+        <en>Corporate Identity Number (CIN)</en>
+        <hi>कॉर्पोरेट पहचान संख्या (CIN)</hi>
+      </registration>
+      <description>
+        <en>A one person company incorporated under Indian company law.</en>
+        <hi>भारतीय कंपनी कानून के तहत निगमित एक व्यक्ति कंपनी।</hi>
+      </description>
+    </subtype>
+    <subtype id="producer-company">
+      <name>
+        <en>Producer Company</en>
+        <hi>उत्पादक कंपनी</hi>
+      </name>
+      <registration>
+        <en>Corporate Identity Number (CIN)</en>
+        <hi>कॉर्पोरेट पहचान संख्या (CIN)</hi>
+      </registration>
+      <description>
+        <en>A company formed by producers, farmers, or producer institutions under the Companies Act framework.</en>
+        <hi>कंपनी अधिनियम के ढांचे के तहत उत्पादकों, किसानों या उत्पादक संस्थानों द्वारा बनाई गई कंपनी।</hi>
+      </description>
+    </subtype>
+    <subtype id="nidhi">
+      <name>
+        <en>Nidhi Company</en>
+        <hi>निधि कंपनी</hi>
+      </name>
+      <registration>
+        <en>Corporate Identity Number (CIN)</en>
+        <hi>कॉर्पोरेट पहचान संख्या (CIN)</hi>
+      </registration>
+      <description>
+        <en>A Nidhi company is incorporated to cultivate thrift and savings among its members.</en>
+        <hi>एक निधि कंपनी अपने सदस्यों के बीच बचत को बढ़ावा देने के लिए निगमित की जाती है।</hi>
+      </description>
+    </subtype>
+    <subtype id="section8-company">
+      <name>
+        <en>Section 8 Company</en>
+        <hi>धारा 8 कंपनी</hi>
+      </name>
+      <registration>
+        <en>CIN / Section 8 License</en>
+        <hi>CIN / धारा 8 लाइसेंस</hi>
+      </registration>
+      <description>
+        <en>A not-for-profit company licensed under Section 8 of the Companies Act.</en>
+        <hi>कंपनी अधिनियम की धारा 8 के तहत लाइसेंस प्राप्त एक गैर-लाभकारी कंपनी।</hi>
+      </description>
+    </subtype>
+    <subtype id="foreign-company">
+      <name>
+        <en>Foreign Company / Overseas Corporate Body (OCB)</en>
+        <hi>विदेशी कंपनी / विदेशी कॉर्पोरेट निकाय (OCB)</hi>
+      </name>
+      <registration>
+        <en>RBI FCRN / MCA FCRN / RBI Approval</en>
+        <hi>RBI FCRN / MCA FCRN / RBI स्वीकृति</hi>
+      </registration>
+      <description>
+        <en>A foreign company or overseas corporate body recognized for Indian regulatory or investment purposes.</en>
+        <hi>भारतीय नियामक या निवेश उद्देश्यों के लिए मान्यता प्राप्त एक विदेशी कंपनी या विदेशी कॉर्पोरेट निकाय।</hi>
+      </description>
+    </subtype>
+    <subtype id="partnership-firm">
+      <name>
+        <en>Unlimited Liability Firm / Partnership Firm</en>
+        <hi>साझेदारी फर्म (Partnership Firm)</hi>
+      </name>
+      <registration>
+        <en>Partnership Deed / Registrar of Firms Registration Number</en>
+        <hi>साझेदारी विलेख (Deed) / फर्म रजिस्ट्रार पंजीकरण संख्या</hi>
+      </registration>
+      <description>
+        <en>An ordinary partnership firm formed by partners under a partnership deed.</en>
+        <hi>साझेदारों द्वारा साझेदारी विलेख के तहत बनाई गई एक साधारण साझेदारी फर्म।</hi>
+      </description>
+    </subtype>
+    <subtype id="llp">
+      <name>
+        <en>Limited Liability Partnership (LLP)</en>
+        <hi>सीमित देयता साझेदारी (LLP)</hi>
+      </name>
+      <registration>
+        <en>LLPIN issued by MCA</en>
+        <hi>MCA द्वारा जारी LLPIN</hi>
+      </registration>
+      <description>
+        <en>A limited liability partnership registered under the LLP Act.</en>
+        <hi>LLP अधिनियम के तहत पंजीकृत एक सीमित देयता साझेदारी।</hi>
+      </description>
+    </subtype>
+    <subtype id="joint-venture-firm">
+      <name>
+        <en>Joint Venture structured as Firm / LLP</en>
+        <hi>फर्म / एलएलपी के रूप में संरचित संयुक्त उद्यम</hi>
+      </name>
+      <registration>
+        <en>Partnership Deed / LLPIN</en>
+        <hi>साझेदारी विलेख / LLPIN</hi>
+      </registration>
+      <description>
+        <en>A joint venture is an arrangement and may be legally structured as a partnership firm or LLP.</en>
+        <hi>एक संयुक्त उद्यम एक व्यवस्था है और इसे कानूनी रूप से साझेदारी फर्म या एलएलपी के रूप में संरचित किया जा सकता है।</hi>
+      </description>
+    </subtype>
+    <subtype id="registered-trust">
+      <name>
+        <en>Trust</en>
+        <hi>ट्रस्ट</hi>
+      </name>
+      <registration>
+        <en>Trust Deed / Trust Registration</en>
+        <hi>ट्रस्ट विलेख (Deed) / ट्रस्ट पंजीकरण</hi>
+      </registration>
+      <description>
+        <en>A private, public, religious, or charitable trust formed under a trust deed or relevant public trust law.</en>
+        <hi>ट्रस्ट विलेख या प्रासंगिक सार्वजनिक ट्रस्ट कानून के तहत गठित एक निजी, सार्वजनिक, धार्मिक या धर्मार्थ ट्रस्ट।</hi>
+      </description>
+    </subtype>
+    <subtype id="mutual-fund">
+      <name>
+        <en>Mutual Fund (MF)</en>
+        <hi>म्यूचुअल फंड (MF)</hi>
+      </name>
+      <registration>
+        <en>SEBI Mutual Fund Registration Number</en>
+        <hi>सेबी म्यूचुअल फंड पंजीकरण संख्या</hi>
+      </registration>
+      <description>
+        <en>Indian mutual funds are commonly organized as trusts and regulated by SEBI.</en>
+        <hi>भारतीय म्यूचुअल फंड आमतौर पर ट्रस्टों के रूप में व्यवस्थित होते हैं और सेबी (SEBI) द्वारा विनियमित होते हैं।</hi>
+      </description>
+    </subtype>
+    <subtype id="aif-trust">
+      <name>
+        <en>Alternative Investment Fund as Trust</en>
+        <hi>ट्रस्ट के रूप में वैकल्पिक निवेश कोष (AIF)</hi>
+      </name>
+      <registration>
+        <en>SEBI AIF Registration Number</en>
+        <hi>सेबी एआईएफ (AIF) पंजीकरण संख्या</hi>
+      </registration>
+      <description>
+        <en>An AIF may be constituted as a trust, company, or LLP. This subtype represents the trust form.</en>
+        <hi>एक एआईएफ का गठन एक ट्रस्ट, कंपनी या एलएलपी के रूप में किया जा सकता है। यह उपश्रेणी ट्रस्ट रूप का प्रतिनिधित्व करती है।</hi>
+      </description>
+    </subtype>
+    <subtype id="nps-trust">
+      <name>
+        <en>Local Pension Fund - NPS Trust</en>
+        <hi>स्थानीय पेंशन फंड - एनपीएस (NPS) ट्रस्ट</hi>
+      </name>
+      <registration>
+        <en>PFRDA Registration Number</en>
+        <hi>PFRDA पंजीकरण संख्या</hi>
+      </registration>
+      <description>
+        <en>NPS-related trust or pension structure regulated by PFRDA.</en>
+        <hi>PFRDA द्वारा विनियमित एनपीएस-संबंधित ट्रस्ट या पेंशन संरचना।</hi>
+      </description>
+    </subtype>
+    <subtype id="charitable-trust">
+      <name>
+        <en>Charitable Organisation as Trust</en>
+        <hi>ट्रस्ट के रूप में धर्मार्थ संगठन</hi>
+      </name>
+      <registration>
+        <en>Trust Deed / Charity Commissioner / Relevant Registration</en>
+        <hi>ट्रस्ट विलेख / चैरिटी कमिश्नर / प्रासंगिक पंजीकरण</hi>
+      </registration>
+      <description>
+        <en>A charitable organization legally constituted as a trust.</en>
+        <hi>एक धर्मार्थ संगठन जो कानूनी रूप से ट्रस्ट के रूप में स्थापित है।</hi>
+      </description>
+    </subtype>
+    <subtype id="aop">
+      <name>
+        <en>Association of Persons (AOP)</en>
+        <hi>व्यक्तियों का संघ (AOP)</hi>
+      </name>
+      <registration>
+        <en>AOP Deed / PAN</en>
+        <hi>एओपी (AOP) विलेख / पैन</hi>
+      </registration>
+      <description>
+        <en>A group of persons joining for a common purpose, often assessed as an AOP.</en>
+        <hi>एक सामान्य उद्देश्य के लिए शामिल होने वाले व्यक्तियों का समूह, जिसे अक्सर एओपी (AOP) के रूप में मूल्यांकित किया जाता है।</hi>
+      </description>
+    </subtype>
+    <subtype id="boi">
+      <name>
+        <en>Body of Individuals (BOI)</en>
+        <hi>व्यक्तियों का निकाय (BOI)</hi>
+      </name>
+      <registration>
+        <en>BOI Deed / PAN</en>
+        <hi>बीओआई (BOI) विलेख / पैन</hi>
+      </registration>
+      <description>
+        <en>A body consisting of individuals, generally mapped to PAN category B.</en>
+        <hi>व्यक्तियों से मिलकर बना एक निकाय, जिसे आमतौर पर पैन श्रेणी B से मैप किया जाता है।</hi>
+      </description>
+    </subtype>
+    <subtype id="society">
+      <name>
+        <en>Society</en>
+        <hi>सोसायटी (Society)</hi>
+      </name>
+      <registration>
+        <en>Society Registration Number</en>
+        <hi>सोसायटी पंजीकरण संख्या</hi>
+      </registration>
+      <description>
+        <en>A society registered under applicable societies registration law.</en>
+        <hi>लागू सोसायटी पंजीकरण कानून के तहत पंजीकृत सोसायटी।</hi>
+      </description>
+    </subtype>
+    <subtype id="cooperative-society">
+      <name>
+        <en>Cooperative Society</en>
+        <hi>सहकारी समिति</hi>
+      </name>
+      <registration>
+        <en>Cooperative Society Registration Number</en>
+        <hi>सहकारी समिति पंजीकरण संख्या</hi>
+      </registration>
+      <description>
+        <en>A cooperative society registered under state cooperative law.</en>
+        <hi>राज्य सहकारी कानून के तहत पंजीकृत एक सहकारी समिति।</hi>
+      </description>
+    </subtype>
+    <subtype id="multi-state-cooperative">
+      <name>
+        <en>Multi-State Cooperative Society</en>
+        <hi>बहु-राज्य सहकारी समिति</hi>
+      </name>
+      <registration>
+        <en>MSCS Registration Number</en>
+        <hi>MSCS पंजीकरण संख्या</hi>
+      </registration>
+      <description>
+        <en>A cooperative society operating in more than one state and registered under the Multi-State Cooperative Societies law.</en>
+        <hi>एक से अधिक राज्यों में संचालित और बहु-राज्य सहकारी समिति कानून के तहत पंजीकृत सहकारी समिति।</hi>
+      </description>
+    </subtype>
+    <subtype id="housing-society">
+      <name>
+        <en>Corporate Housing Society</en>
+        <hi>कॉर्पोरेट हाउसिंग सोसायटी</hi>
+      </name>
+      <registration>
+        <en>Cooperative Society Registration Number</en>
+        <hi>सहकारी समिति पंजीकरण संख्या</hi>
+      </registration>
+      <description>
+        <en>A housing society commonly formed as a cooperative body.</en>
+        <hi>एक हाउसिंग सोसाइटी जो आमतौर पर एक सहकारी निकाय के रूप में बनाई जाती है।</hi>
+      </description>
+    </subtype>
+    <subtype id="rwa">
+      <name>
+        <en>Residents Welfare Association (RWA)</en>
+        <hi>निवासी कल्याण संघ (RWA)</hi>
+      </name>
+      <registration>
+        <en>Society Registration Number</en>
+        <hi>सोसायटी पंजीकरण संख्या</hi>
+      </registration>
+      <description>
+        <en>An association representing residents of a locality, complex, or housing community.</en>
+        <hi>एक स्थानीयता, परिसर या हाउसिंग सोसायटी के निवासियों का प्रतिनिधित्व करने वाला संघ।</hi>
+      </description>
+    </subtype>
+    <subtype id="central-govt">
+      <name>
+        <en>Government - Central</en>
+        <hi>सरकार - केंद्रीय</hi>
+      </name>
+      <registration>
+        <en>Ministry / Department Notification</en>
+        <hi>मंत्रालय / विभाग अधिसूचना</hi>
+      </registration>
+      <description>
+        <en>A department, ministry, or body of the Central Government.</en>
+        <hi>केंद्र सरकार का एक विभाग, मंत्रालय या निकाय।</hi>
+      </description>
+    </subtype>
+    <subtype id="state-govt">
+      <name>
+        <en>Government - State</en>
+        <hi>सरकार - राज्य</hi>
+      </name>
+      <registration>
+        <en>State Government Notification</en>
+        <hi>राज्य सरकार की अधिसूचना</hi>
+      </registration>
+      <description>
+        <en>A department, ministry, or body of a State Government.</en>
+        <hi>राज्य सरकार का एक विभाग, मंत्रालय या निकाय।</hi>
+      </description>
+    </subtype>
+    <subtype id="govt-others">
+      <name>
+        <en>Government - Others</en>
+        <hi>सरकार - अन्य</hi>
+      </name>
+      <registration>
+        <en>Statutory Notification / Enabling Law</en>
+        <hi>वैधानिक अधिसूचना / सक्षम कानून</hi>
+      </registration>
+      <description>
+        <en>Other government, statutory, juridical, or local public bodies depending on constitution.</en>
+        <hi>संविधान के आधार पर अन्य सरकारी, वैधानिक, न्यायिक या स्थानीय सार्वजनिक निकाय।</hi>
+      </description>
+    </subtype>
+    <subtype id="epfo">
+      <name>
+        <en>Local Pension Fund - EPFO</en>
+        <hi>स्थानीय पेंशन फंड - EPFO</hi>
+      </name>
+      <registration>
+        <en>Statutory Act Registration / EPFO Establishment Details</en>
+        <hi>वैधानिक अधिनियम पंजीकरण / EPFO स्थापना विवरण</hi>
+      </registration>
+      <description>
+        <en>EPFO or similar statutory pension institution categorized as government or juridical depending on the specific holder.</en>
+        <hi>ईपीएफओ (EPFO) या इसी तरह का वैधानिक पेंशन संस्थान जिसे विशिष्ट धारक के आधार पर सरकार या न्यायिक के रूप में वर्गीकृत किया गया है।</hi>
+      </description>
+    </subtype>
+    <subtype id="municipal-corporation">
+      <name>
+        <en>Government - Local Authority - Municipal Corporation</en>
+        <hi>स्थानीय प्राधिकरण - नगर निगम</hi>
+      </name>
+      <registration>
+        <en>State / Central Statute</en>
+        <hi>राज्य / केंद्रीय अधिनियम</hi>
+      </registration>
+      <description>
+        <en>A municipal corporation or municipality established under applicable law.</en>
+        <hi>लागू कानून के तहत स्थापित एक नगर निगम या नगर पालिका।</hi>
+      </description>
+    </subtype>
+    <subtype id="panchayat">
+      <name>
+        <en>Government - Local Authority - Panchayats</en>
+        <hi>स्थानीय प्राधिकरण - पंचायतें</hi>
+      </name>
+      <registration>
+        <en>State / Central Statute</en>
+        <hi>राज्य / केंद्रीय अधिनियम</hi>
+      </registration>
+      <description>
+        <en>A panchayat or rural local authority established under applicable law.</en>
+        <hi>लागू कानून के तहत स्थापित एक पंचायत या ग्रामीण स्थानीय प्राधिकरण।</hi>
+      </description>
+    </subtype>
+    <subtype id="bank">
+      <name>
+        <en>Bank</en>
+        <hi>बैंक (Bank)</hi>
+      </name>
+      <registration>
+        <en>RBI Banking License</en>
+        <hi>आरबीआई (RBI) बैंकिंग लाइसेंस</hi>
+      </registration>
+      <description>
+        <en>A banking company or banking institution regulated by RBI.</en>
+        <hi>आरबीआई (RBI) द्वारा विनियमित एक बैंकिंग कंपनी या बैंकिंग संस्थान।</hi>
+      </description>
+    </subtype>
+    <subtype id="nbfc">
+      <name>
+        <en>Non-Banking Financial Company (NBFC)</en>
+        <hi>गैर-बैंकिंग वित्तीय कंपनी (NBFC)</hi>
+      </name>
+      <registration>
+        <en>RBI NBFC Certificate of Registration</en>
+        <hi>आरबीआई NBFC पंजीकरण प्रमाणपत्र (CoR)</hi>
+      </registration>
+      <description>
+        <en>A non-banking financial company registered with RBI.</en>
+        <hi>आरबीआई (RBI) के साथ पंजीकृत एक गैर-बैंकिंग वित्तीय कंपनी।</hi>
+      </description>
+    </subtype>
+    <subtype id="insurance-company">
+      <name>
+        <en>Insurance Company</en>
+        <hi>बीमा कंपनी (Insurance Company)</hi>
+      </name>
+      <registration>
+        <en>IRDAI Registration Number / CIN</en>
+        <hi>IRDAI पंजीकरण संख्या / CIN</hi>
+      </registration>
+      <description>
+        <en>An insurance or reinsurance company regulated by IRDAI.</en>
+        <hi>IRDAI द्वारा विनियमित एक बीमा या पुनर्बीमा कंपनी।</hi>
+      </description>
+    </subtype>
+    <subtype id="arc">
+      <name>
+        <en>Asset Reconstruction Company</en>
+        <hi>एसेट रिकंस्ट्रक्शन कंपनी (ARC)</hi>
+      </name>
+      <registration>
+        <en>RBI ARC Registration Number</en>
+        <hi>आरबीआई (RBI) ARC पंजीकरण संख्या</hi>
+      </registration>
+      <description>
+        <en>An asset reconstruction company registered with RBI.</en>
+        <hi>आरबीआई (RBI) के साथ पंजीकृत एक परिसंपत्ति पुनर्निर्माण कंपनी।</hi>
+      </description>
+    </subtype>
+    <subtype id="portfolio-manager">
+      <name>
+        <en>Portfolio Manager</en>
+        <hi>पोर्टफोलियो प्रबंधक</hi>
+      </name>
+      <registration>
+        <en>SEBI Portfolio Manager Registration Number</en>
+        <hi>सेबी (SEBI) पोर्टफोलियो प्रबंधक पंजीकरण संख्या</hi>
+      </registration>
+      <description>
+        <en>A portfolio manager regulated by SEBI and structured as a company or LLP.</en>
+        <hi>सेबी (SEBI) द्वारा विनियमित और एक कंपनी या एलएलपी के रूप में संरचित पोर्टफोलियो प्रबंधक।</hi>
+      </description>
+    </subtype>
+    <subtype id="aif-company-llp">
+      <name>
+        <en>Alternative Investment Fund as Company / LLP</en>
+        <hi>कंपनी / एलएलपी के रूप में वैकल्पिक निवेश कोष (AIF)</hi>
+      </name>
+      <registration>
+        <en>SEBI AIF Registration Number</en>
+        <hi>सेबी (SEBI) एआईएफ (AIF) पंजीकरण संख्या</hi>
+      </registration>
+      <description>
+        <en>An AIF constituted as a company or LLP instead of a trust.</en>
+        <hi>एक एआईएफ (AIF) जिसे ट्रस्ट के बजाय एक कंपनी या एलएलपी के रूप में गठित किया गया है।</hi>
+      </description>
+    </subtype>
+    <subtype id="fpi-cat1-central-bank">
+      <name>
+        <en>FPI Category I - Central Bank</en>
+        <hi>एफपीआई श्रेणी I - केंद्रीय बैंक</hi>
+      </name>
+      <registration>
+        <en>SEBI FPI Registration Number plus home regulator details</en>
+        <hi>सेबी एफपीआई पंजीकरण संख्या और गृह नियामक विवरण</hi>
+      </registration>
+      <description>
+        <en>A central bank or similar monetary authority registered as Category I FPI.</en>
+        <hi>एक केंद्रीय बैंक या समान मौद्रिक प्राधिकरण जो श्रेणी I FPI के रूप में पंजीकृत है।</hi>
+      </description>
+    </subtype>
+    <subtype id="fpi-cat1-swf">
+      <name>
+        <en>FPI Category I - Sovereign Wealth Fund</en>
+        <hi>एफपीआई श्रेणी I - सॉवरेन वेल्थ फंड</hi>
+      </name>
+      <registration>
+        <en>SEBI FPI Registration Number</en>
+        <hi>सेबी एफपीआई पंजीकरण संख्या</hi>
+      </registration>
+      <description>
+        <en>A sovereign wealth fund eligible as Category I FPI.</en>
+        <hi>श्रेणी I FPI के रूप में योग्य एक सॉवरेन वेल्थ फंड।</hi>
+      </description>
+    </subtype>
+    <subtype id="fpi-cat1-multilateral">
+      <name>
+        <en>FPI Category I - International / Multilateral Organization / Agency</en>
+        <hi>एफपीआई श्रेणी I - अंतर्राष्ट्रीय / बहुपक्षीय संगठन / एजेंसी</hi>
+      </name>
+      <registration>
+        <en>SEBI FPI Registration Number</en>
+        <hi>सेबी एफपीआई पंजीकरण संख्या</hi>
+      </registration>
+      <description>
+        <en>An international or multilateral agency registered as Category I FPI.</en>
+        <hi>श्रेणी I FPI के रूप में पंजीकृत एक अंतर्राष्ट्रीय या बहुपक्षीय एजेंसी।</hi>
+      </description>
+    </subtype>
+    <subtype id="fpi-cat1-govt-owned">
+      <name>
+        <en>FPI Category I - Entity at least 75% Government owned or controlled</en>
+        <hi>एफपीआई श्रेणी I - कम से कम 75% सरकारी स्वामित्व या नियंत्रित इकाई</hi>
+      </name>
+      <registration>
+        <en>SEBI FPI Registration Number</en>
+        <hi>सेबी एफपीआई पंजीकरण संख्या</hi>
+      </registration>
+      <description>
+        <en>An entity controlled or at least 75% owned by government and eligible as Category I FPI.</en>
+        <hi>सरकार द्वारा नियंत्रित या कम से कम 75% स्वामित्व वाली इकाई और श्रेणी I FPI के लिए योग्य।</hi>
+      </description>
+    </subtype>
+    <subtype id="fpi-cat1-pension-fund">
+      <name>
+        <en>FPI Category I - Pension Fund</en>
+        <hi>एफपीआई श्रेणी I - पेंशन फंड</hi>
+      </name>
+      <registration>
+        <en>SEBI FPI Registration Number</en>
+        <hi>सेबी एफपीआई पंजीकरण संख्या</hi>
+      </registration>
+      <description>
+        <en>A pension fund eligible for Category I FPI registration.</en>
+        <hi>श्रेणी I FPI पंजीकरण के लिए योग्य एक पेंशन फंड।</hi>
+      </description>
+    </subtype>
+    <subtype id="fpi-cat1-university-fund">
+      <name>
+        <en>FPI Category I - University Fund</en>
+        <hi>एफपीआई श्रेणी I - विश्वविद्यालय निधि</hi>
+      </name>
+      <registration>
+        <en>SEBI FPI Registration Number</en>
+        <hi>सेबी एफपीआई पंजीकरण संख्या</hi>
+      </registration>
+      <description>
+        <en>A university fund eligible for Category I FPI registration.</en>
+        <hi>श्रेणी I FPI पंजीकरण के लिए योग्य एक विश्वविद्यालय निधि।</hi>
+      </description>
+    </subtype>
+    <subtype id="fpi-cat1-insurance">
+      <name>
+        <en>FPI Category I - Appropriately Regulated Insurance / Reinsurance Entity</en>
+        <hi>एफपीआई श्रेणी I - उचित रूप से विनियमित बीमा / पुनर्बीमा इकाई</hi>
+      </name>
+      <registration>
+        <en>SEBI FPI Registration Number</en>
+        <hi>सेबी एफपीआई पंजीकरण संख्या</hi>
+      </registration>
+      <description>
+        <en>An appropriately regulated insurance or reinsurance entity registered as FPI.</en>
+        <hi>FPI के रूप में पंजीकृत एक उपयुक्त रूप से विनियमित बीमा या पुनर्बीमा इकाई।</hi>
+      </description>
+    </subtype>
+    <subtype id="fpi-cat1-bank">
+      <name>
+        <en>FPI Category I - Appropriately Regulated Bank</en>
+        <hi>एफपीआई श्रेणी I - उपयुक्त रूप से विनियमित बैंक</hi>
+      </name>
+      <registration>
+        <en>SEBI FPI Registration Number</en>
+        <hi>सेबी एफपीआई पंजीकरण संख्या</hi>
+      </registration>
+      <description>
+        <en>An appropriately regulated bank registered as Category I FPI.</en>
+        <hi>श्रेणी I FPI के रूप में पंजीकृत एक उपयुक्त रूप से विनियमित बैंक।</hi>
+      </description>
+    </subtype>
+    <subtype id="fpi-cat1-amc">
+      <name>
+        <en>FPI Category I - Appropriately Regulated Asset Management Company</en>
+        <hi>एफपीआई श्रेणी I - उपयुक्त रूप से विनियमित परिसंपत्ति प्रबंधन कंपनी</hi>
+      </name>
+      <registration>
+        <en>SEBI FPI Registration Number</en>
+        <hi>सेबी एफपीआई पंजीकरण संख्या</hi>
+      </registration>
+      <description>
+        <en>An appropriately regulated asset management company eligible as Category I FPI.</en>
+        <hi>श्रेणी I FPI के रूप में पात्र एक उपयुक्त रूप से विनियमित परिसंपत्ति प्रबंधन कंपनी।</hi>
+      </description>
+    </subtype>
+    <subtype id="fpi-cat1-investment-manager">
+      <name>
+        <en>FPI Category I - Appropriately Regulated Investment Manager</en>
+        <hi>एफपीआई श्रेणी I - उपयुक्त रूप से विनियमित निवेश प्रबंधक</hi>
+      </name>
+      <registration>
+        <en>SEBI FPI Registration Number</en>
+        <hi>सेबी एफपीआई पंजीकरण संख्या</hi>
+      </registration>
+      <description>
+        <en>An appropriately regulated investment manager structured as company or firm.</en>
+        <hi>कंपनी या फर्म के रूप में संरचित एक उपयुक्त रूप से विनियमित निवेश प्रबंधक।</hi>
+      </description>
+    </subtype>
+    <subtype id="fpi-cat1-investment-advisor">
+      <name>
+        <en>FPI Category I - Appropriately Regulated Investment Advisor</en>
+        <hi>एफपीआई श्रेणी I - उपयुक्त रूप से विनियमित निवेश सलाहकार</hi>
+      </name>
+      <registration>
+        <en>SEBI FPI Registration Number</en>
+        <hi>सेबी एफपीआई पंजीकरण संख्या</hi>
+      </registration>
+      <description>
+        <en>An appropriately regulated investment adviser or advisor.</en>
+        <hi>एक उपयुक्त रूप से विनियमित निवेश सलाहकार।</hi>
+      </description>
+    </subtype>
+    <subtype id="fpi-cat1-portfolio-manager">
+      <name>
+        <en>FPI Category I - Appropriately Regulated Portfolio Manager</en>
+        <hi>एफपीआई श्रेणी I - उपयुक्त रूप से विनियमित पोर्टफोलियो प्रबंधक</hi>
+      </name>
+      <registration>
+        <en>SEBI FPI Registration Number</en>
+        <hi>सेबी एफपीआई पंजीकरण संख्या</hi>
+      </registration>
+      <description>
+        <en>An appropriately regulated portfolio manager registered as FPI.</en>
+        <hi>FPI के रूप में पंजीकृत एक उपयुक्त रूप से विनियमित पोर्टफोलियो प्रबंधक।</hi>
+      </description>
+    </subtype>
+    <subtype id="fpi-cat1-broker-dealer">
+      <name>
+        <en>FPI Category I - Appropriately Regulated Broker Dealer</en>
+        <hi>एफपीआई श्रेणी I - उपयुक्त रूप से विनियमित ब्रोकर डीलर</hi>
+      </name>
+      <registration>
+        <en>SEBI FPI Registration Number</en>
+        <hi>सेबी एफपीआई पंजीकरण संख्या</hi>
+      </registration>
+      <description>
+        <en>An appropriately regulated broker dealer registered as FPI.</en>
+        <hi>FPI के रूप में पंजीकृत एक उपयुक्त रूप से विनियमित ब्रोकर डीलर।</hi>
+      </description>
+    </subtype>
+    <subtype id="fpi-cat1-swap-dealer">
+      <name>
+        <en>FPI Category I - Appropriately Regulated Swap Dealer</en>
+        <hi>एफपीआई श्रेणी I - उपयुक्त रूप से विनियमित स्वैप डीलर</hi>
+      </name>
+      <registration>
+        <en>SEBI FPI Registration Number</en>
+        <hi>सेबी एफपीआई पंजीकरण संख्या</hi>
+      </registration>
+      <description>
+        <en>An appropriately regulated swap dealer registered as FPI.</en>
+        <hi>FPI के रूप में पंजीकृत एक उपयुक्त रूप से विनियमित स्वैप डीलर।</hi>
+      </description>
+    </subtype>
+    <subtype id="fpi-cat1-regulated-fund">
+      <name>
+        <en>FPI Category I - Appropriately Regulated Fund</en>
+        <hi>एफपीआई श्रेणी I - उपयुक्त रूप से विनियमित फंड</hi>
+      </name>
+      <registration>
+        <en>SEBI FPI Registration Number</en>
+        <hi>सेबी एफपीआई पंजीकरण संख्या</hi>
+      </registration>
+      <description>
+        <en>An appropriately regulated fund eligible for Category I FPI.</en>
+        <hi>श्रेणी I FPI के लिए योग्य एक उपयुक्त रूप से विनियमित फंड।</hi>
+      </description>
+    </subtype>
+    <subtype id="fpi-cat1-unregulated-fund-cat1-manager">
+      <name>
+        <en>FPI Category I - Unregulated Fund whose Investment Manager is Category I FPI</en>
+        <hi>एफपीआई श्रेणी I - अनियमित फंड जिसका निवेश प्रबंधक श्रेणी I एफपीआई है</hi>
+      </name>
+      <registration>
+        <en>SEBI FPI Registration Number</en>
+        <hi>सेबी एफपीआई पंजीकरण संख्या</hi>
+      </registration>
+      <description>
+        <en>An unregulated fund eligible due to its investment manager being Category I FPI.</en>
+        <hi>एक अनियमित फंड जो योग्य है क्योंकि इसका निवेश प्रबंधक श्रेणी I एफपीआई है।</hi>
+      </description>
+    </subtype>
+    <subtype id="fpi-cat1-university-endowment">
+      <name>
+        <en>FPI Category I - University Related Endowment</en>
+        <hi>एफपीआई श्रेणी I - विश्वविद्यालय से संबंधित बंदोबस्ती (Endowment)</hi>
+      </name>
+      <registration>
+        <en>SEBI FPI Registration Number</en>
+        <hi>सेबी एफपीआई पंजीकरण संख्या</hi>
+      </registration>
+      <description>
+        <en>A university-related endowment eligible as Category I FPI.</en>
+        <hi>श्रेणी I FPI के रूप में योग्य विश्वविद्यालय से संबंधित बंदोबस्ती (Endowment)।</hi>
+      </description>
+    </subtype>
+    <subtype id="fpi-cat1-fatf-manager">
+      <name>
+        <en>FPI Category I - Entity whose Investment Manager is Category I FPI from FATF jurisdiction</en>
+        <hi>एफपीआई श्रेणी I - वह इकाई जिसका निवेश प्रबंधक FATF क्षेत्राधिकार से श्रेणी I FPI है</hi>
+      </name>
+      <registration>
+        <en>SEBI FPI Registration Number</en>
+        <hi>सेबी एफपीआई पंजीकरण संख्या</hi>
+      </registration>
+      <description>
+        <en>An entity eligible due to its investment manager being an eligible Category I FPI from a FATF member jurisdiction.</en>
+        <hi>FATF सदस्य क्षेत्राधिकार से श्रेणी I FPI होने के कारण योग्य इकाई।</hi>
+      </description>
+    </subtype>
+    <subtype id="fpi-cat1-owned-by-pension">
+      <name>
+        <en>FPI Category I - Entity at least 75% owned by Pension Fund</en>
+        <hi>एफपीआई श्रेणी I - पेंशन फंड द्वारा कम से कम 75% स्वामित्व वाली इकाई</hi>
+      </name>
+      <registration>
+        <en>SEBI FPI Registration Number</en>
+        <hi>सेबी एफपीआई पंजीकरण संख्या</hi>
+      </registration>
+      <description>
+        <en>An entity substantially owned by an eligible pension fund.</en>
+        <hi>एक योग्य पेंशन फंड के स्वामित्व वाली इकाई।</hi>
+      </description>
+    </subtype>
+    <subtype id="fpi-cat1-owned-by-university">
+      <name>
+        <en>FPI Category I - Entity at least 75% owned by University Fund</en>
+        <hi>एफपीआई श्रेणी I - विश्वविद्यालय निधि द्वारा कम से कम 75% स्वामित्व वाली इकाई</hi>
+      </name>
+      <registration>
+        <en>SEBI FPI Registration Number</en>
+        <hi>सेबी एफपीआई पंजीकरण संख्या</hi>
+      </registration>
+      <description>
+        <en>An entity substantially owned by an eligible university fund.</en>
+        <hi>एक योग्य विश्वविद्यालय निधि के स्वामित्व वाली इकाई।</hi>
+      </description>
+    </subtype>
+    <subtype id="fpi-cat1-owned-by-regulated">
+      <name>
+        <en>FPI Category I - Entity at least 75% owned by Appropriately Regulated Entity</en>
+        <hi>एफपीआई श्रेणी I - उपयुक्त रूप से विनियमित इकाई द्वारा कम से कम 75% स्वामित्व वाली इकाई</hi>
+      </name>
+      <registration>
+        <en>SEBI FPI Registration Number</en>
+        <hi>सेबी एफपीआई पंजीकरण संख्या</hi>
+      </registration>
+      <description>
+        <en>An entity substantially owned by an appropriately regulated entity.</en>
+        <hi>एक उपयुक्त रूप से विनियमित इकाई के स्वामित्व वाली इकाई।</hi>
+      </description>
+    </subtype>
+    <subtype id="fpi-cat1-owned-by-endowment">
+      <name>
+        <en>FPI Category I - Entity at least 75% owned by University Related Endowment</en>
+        <hi>एफपीआई श्रेणी I - विश्वविद्यालय बंदोबस्ती द्वारा कम से कम 75% स्वामित्व वाली इकाई</hi>
+      </name>
+      <registration>
+        <en>SEBI FPI Registration Number</en>
+        <hi>सेबी एफपीआई पंजीकरण संख्या</hi>
+      </registration>
+      <description>
+        <en>An entity substantially owned by a university-related endowment.</en>
+        <hi>एक विश्वविद्यालय से संबंधित बंदोबस्ती के स्वामित्व वाली इकाई।</hi>
+      </description>
+    </subtype>
+    <subtype id="fpi-cat1-stock-exchange">
+      <name>
+        <en>FPI Category I - Appropriately Regulated Stock Exchange</en>
+        <hi>एफपीआई श्रेणी I - उपयुक्त रूप से विनियमित स्टॉक एक्सचेंज</hi>
+      </name>
+      <registration>
+        <en>SEBI FPI Registration Number</en>
+        <hi>सेबी एफपीआई पंजीकरण संख्या</hi>
+      </registration>
+      <description>
+        <en>An appropriately regulated stock exchange registered as FPI.</en>
+        <hi>FPI के रूप में पंजीकृत एक उपयुक्त रूप से विनियमित शेयर बाजार।</hi>
+      </description>
+    </subtype>
+    <subtype id="fpi-cat1-clearing-corp">
+      <name>
+        <en>FPI Category I - Appropriately Regulated Clearing Corporation</en>
+        <hi>एफपीआई श्रेणी I - उपयुक्त रूप से विनियमित समाशोधन निगम</hi>
+      </name>
+      <registration>
+        <en>SEBI FPI Registration Number</en>
+        <hi>सेबी एफपीआई पंजीकरण संख्या</hi>
+      </registration>
+      <description>
+        <en>An appropriately regulated clearing corporation registered as FPI.</en>
+        <hi>FPI के रूप में पंजीकृत एक उपयुक्त रूप से विनियमित समाशोधन निगम।</hi>
+      </description>
+    </subtype>
+    <subtype id="fpi-cat1-csd">
+      <name>
+        <en>FPI Category I - Appropriately Regulated Central Securities Depository</en>
+        <hi>एफपीआई श्रेणी I - उपयुक्त रूप से विनियमित केंद्रीय प्रतिभूति निक्षेपागार</hi>
+      </name>
+      <registration>
+        <en>SEBI FPI Registration Number</en>
+        <hi>सेबी एफपीआई पंजीकरण संख्या</hi>
+      </registration>
+      <description>
+        <en>An appropriately regulated central securities depository registered as FPI.</en>
+        <hi>FPI के रूप में पंजीकृत एक उपयुक्त रूप से विनियमित केंद्रीय प्रतिभूति निक्षेपागार (CSD)।</hi>
+      </description>
+    </subtype>
+    <subtype id="fpi-cat2-regulated-fund">
+      <name>
+        <en>FPI Category II - Appropriately Regulated Fund not eligible as Category I FPI</en>
+        <hi>एफपीआई श्रेणी II - उपयुक्त रूप से विनियमित फंड जो श्रेणी I FPI के लिए योग्य नहीं है</hi>
+      </name>
+      <registration>
+        <en>SEBI FPI Registration Number</en>
+        <hi>सेबी एफपीआई पंजीकरण संख्या</hi>
+      </registration>
+      <description>
+        <en>An appropriately regulated fund registered as Category II FPI.</en>
+        <hi>एक उपयुक्त रूप से विनियमित फंड जो श्रेणी II FPI के रूप में पंजीकृत है।</hi>
+      </description>
+    </subtype>
+    <subtype id="fpi-cat2-endowment-foundation">
+      <name>
+        <en>FPI Category II - Endowment / Foundation</en>
+        <hi>एफपीआई श्रेणी II - बंदोबस्ती / फाउंडेशन</hi>
+      </name>
+      <registration>
+        <en>SEBI FPI Registration Number</en>
+        <hi>सेबी एफपीआई पंजीकरण संख्या</hi>
+      </registration>
+      <description>
+        <en>An endowment or foundation registered as Category II FPI.</en>
+        <hi>एक बंदोबस्ती या फाउंडेशन जो श्रेणी II FPI के रूप में पंजीकृत है।</hi>
+      </description>
+    </subtype>
+    <subtype id="fpi-cat2-charitable">
+      <name>
+        <en>FPI Category II - Charitable Organisation</en>
+        <hi>एफपीआई श्रेणी II - धर्मार्थ संगठन</hi>
+      </name>
+      <registration>
+        <en>SEBI FPI Registration Number</en>
+        <hi>सेबी एफपीआई पंजीकरण संख्या</hi>
+      </registration>
+      <description>
+        <en>A charitable organization registered as Category II FPI.</en>
+        <hi>श्रेणी II FPI के रूप में पंजीकृत एक धर्मार्थ संगठन।</hi>
+      </description>
+    </subtype>
+    <subtype id="fpi-cat2-corporate-body">
+      <name>
+        <en>FPI Category II - Corporate Body</en>
+        <hi>एफपीआई श्रेणी II - कॉर्पोरेट निकाय</hi>
+      </name>
+      <registration>
+        <en>SEBI FPI Registration Number</en>
+        <hi>सेबी एफपीआई पंजीकरण संख्या</hi>
+      </registration>
+      <description>
+        <en>A foreign corporate body registered as Category II FPI.</en>
+        <hi>एक विदेशी कॉर्पोरेट निकाय जो श्रेणी II FPI के रूप में पंजीकृत है।</hi>
+      </description>
+    </subtype>
+    <subtype id="fpi-cat2-family-office">
+      <name>
+        <en>FPI Category II - Family Office</en>
+        <hi>एफपीआई श्रेणी II - पारिवारिक कार्यालय</hi>
+      </name>
+      <registration>
+        <en>SEBI FPI Registration Number</en>
+        <hi>सेबी एफपीआई पंजीकरण संख्या</hi>
+      </registration>
+      <description>
+        <en>A family office registered as Category II FPI depending on its constitution.</en>
+        <hi>एक पारिवारिक कार्यालय जो इसके गठन के आधार पर श्रेणी II FPI के रूप में पंजीकृत है।</hi>
+      </description>
+    </subtype>
+    <subtype id="fpi-cat2-individual">
+      <name>
+        <en>FPI Category II - Individual FPI</en>
+        <hi>एफपीआई श्रेणी II - व्यक्तिगत एफपीआई</hi>
+      </name>
+      <registration>
+        <en>SEBI FPI Registration Number plus Passport</en>
+        <hi>सेबी एफपीआई पंजीकरण संख्या और पासपोर्ट</hi>
+      </registration>
+      <description>
+        <en>An individual foreign investor registered as Category II FPI.</en>
+        <hi>एक व्यक्तिगत विदेशी निवेशक जो श्रेणी II FPI के रूप में पंजीकृत है।</hi>
+      </description>
+    </subtype>
+    <subtype id="fpi-cat2-client-entity">
+      <name>
+        <en>FPI Category II - Regulated Entity investing on behalf of Client</en>
+        <hi>एफपीआई श्रेणी II - ग्राहकों की ओर से निवेश करने वाली विनियमित इकाई</hi>
+      </name>
+      <registration>
+        <en>SEBI FPI Registration Number</en>
+        <hi>सेबी एफपीआई पंजीकरण संख्या</hi>
+      </registration>
+      <description>
+        <en>An appropriately regulated entity investing on behalf of clients.</en>
+        <hi>ग्राहकों की ओर से निवेश करने वाली एक उपयुक्त रूप से विनियमित इकाई।</hi>
+      </description>
+    </subtype>
+    <subtype id="fpi-cat2-unregulated-lp-trust">
+      <name>
+        <en>FPI Category II - Unregulated Fund - Limited Partnership / Trust</en>
+        <hi>एफपीआई श्रेणी II - अनियमित फंड - सीमित भागीदारी / ट्रस्ट</hi>
+      </name>
+      <registration>
+        <en>SEBI FPI Registration Number</en>
+        <hi>सेबी एफपीआई पंजीकरण संख्या</hi>
+      </registration>
+      <description>
+        <en>An unregulated fund structured as a limited partnership or trust.</en>
+        <hi>एक अनियमित फंड जिसे सीमित भागीदारी या ट्रस्ट के रूप में संरचित किया गया है।</hi>
+      </description>
+    </subtype>
+    <subtype id="fpi-cat2-others">
+      <name>
+        <en>FPI Category II - Others</en>
+        <hi>एफपीआई श्रेणी II - अन्य</hi>
+      </name>
+      <registration>
+        <en>SEBI FPI Registration Number</en>
+        <hi>सेबी एफपीआई पंजीकरण संख्या</hi>
+      </registration>
+      <description>
+        <en>Other eligible Category II FPI applicants depending on their legal constitution.</en>
+        <hi>उनके कानूनी गठन के आधार पर अन्य पात्र श्रेणी II एफपीआई आवेदक।</hi>
+      </description>
+    </subtype>
+    <subtype id="fvci">
+      <name>
+        <en>Foreign Venture Capital Investor (FVCI)</en>
+        <hi>विदेशी उद्यम पूंजी निवेशक (FVCI)</hi>
+      </name>
+      <registration>
+        <en>SEBI FVCI Registration Number</en>
+        <hi>सेबी एफवीसीआई (FVCI) पंजीकरण संख्या</hi>
+      </registration>
+      <description>
+        <en>A foreign venture capital investor registered with SEBI.</en>
+        <hi>सेबी (SEBI) के साथ पंजीकृत एक विदेशी उद्यम पूंजी निवेशक।</hi>
+      </description>
+    </subtype>
+    <subtype id="branch-office">
+      <name>
+        <en>Branch Office</en>
+        <hi>शाखा कार्यालय</hi>
+      </name>
+      <registration>
+        <en>RBI Approval / MCA FCRN</en>
+        <hi>आरबीआई (RBI) स्वीकृति / MCA FCRN</hi>
+      </registration>
+      <description>
+        <en>An Indian branch office of a foreign company. It is an office type, not a separate legal entity category.</en>
+        <hi>एक विदेशी कंपनी का भारतीय शाखा कार्यालय। यह एक कार्यालय प्रकार है, न कि एक अलग कानूनी इकाई।</hi>
+      </description>
+    </subtype>
+    <subtype id="liaison-office">
+      <name>
+        <en>Liaison Office</en>
+        <hi>सम्पर्क कार्यालय</hi>
+      </name>
+      <registration>
+        <en>RBI Approval / MCA FCRN</en>
+        <hi>आरबीआई स्वीकृति / MCA FCRN</hi>
+      </registration>
+      <description>
+        <en>An Indian liaison office of a foreign company. Also commonly misspelled as liason office.</en>
+        <hi>एक विदेशी कंपनी का भारतीय संपर्क कार्यालय।</hi>
+      </description>
+    </subtype>
+    <subtype id="project-office">
+      <name>
+        <en>Project Office</en>
+        <hi>परियोजना कार्यालय</hi>
+      </name>
+      <registration>
+        <en>RBI Approval / MCA FCRN</en>
+        <hi>आरबीआई स्वीकृति / MCA FCRN</hi>
+      </registration>
+      <description>
+        <en>An Indian project office of a foreign company set up for a specific project.</en>
+        <hi>एक विशिष्ट परियोजना के लिए स्थापित एक विदेशी कंपनी का भारतीय परियोजना कार्यालय।</hi>
+      </description>
+    </subtype>
+    <subtype id="fdi">
+      <name>
+        <en>Foreign Direct Investment (FDI)</en>
+        <hi>प्रत्यक्ष विदेशी निवेश (FDI)</hi>
+      </name>
+      <registration>
+        <en>RBI UIN / FC-GPR / FDI Reporting</en>
+        <hi>RBI UIN / FC-GPR / FDI रिपोर्टिंग</hi>
+      </registration>
+      <description>
+        <en>FDI is an investment route, usually involving a foreign investor and an Indian investee company.</en>
+        <hi>प्रत्यक्ष विदेशी निवेश (FDI) एक निवेश मार्ग है, जिसमें आमतौर पर एक विदेशी निवेशक और एक भारतीय निवेश प्राप्तकर्ता कंपनी शामिल होती है।</hi>
+      </description>
+    </subtype>
+    <subtype id="depository-receipts">
+      <name>
+        <en>Depository Receipts</en>
+        <hi>डिपॉजिटरी रसीदें (Depository Receipts)</hi>
+      </name>
+      <registration>
+        <en>SEBI / RBI Custodian Approval</en>
+        <hi>सेबी / आरबीआई कस्टोडियन स्वीकृति</hi>
+      </registration>
+      <description>
+        <en>Depository receipts are instruments linked to an underlying issuer company.</en>
+        <hi>डिपॉजिटरी रसीदें एक अंतर्निहित जारीकर्ता कंपनी से जुड़े वित्तीय साधन हैं।</hi>
+      </description>
+    </subtype>
+    <subtype id="fccb">
+      <name>
+        <en>Foreign Currency Convertible Bond (FCCB)</en>
+        <hi>विदेशी मुद्रा परिवर्तनीय बॉन्ड (FCCB)</hi>
+      </name>
+      <registration>
+        <en>RBI Loan Registration Number (LRN)</en>
+        <hi>आरबीआई ऋण पंजीकरण संख्या (LRN)</hi>
+      </registration>
+      <description>
+        <en>FCCB is a debt or convertible instrument issued by a company, not a separate legal entity.</en>
+        <hi>FCCB एक कंपनी द्वारा जारी किया गया ऋण या परिवर्तनीय साधन है, कोई अलग कानूनी इकाई नहीं।</hi>
+      </description>
+    </subtype>
+    <subtype id="joint-venture-company">
+      <name>
+        <en>Joint Venture structured as Company</en>
+        <hi>कंपनी के रूप में संरचित संयुक्त उद्यम</hi>
+      </name>
+      <registration>
+        <en>CIN / Shareholders Agreement</en>
+        <hi>CIN / शेयरधारक समझौता</hi>
+      </registration>
+      <description>
+        <en>A joint venture is a business arrangement and may be structured as a company.</en>
+        <hi>एक संयुक्त उद्यम एक व्यावसायिक व्यवस्था है और इसे एक कंपनी के रूप में संरचित किया जा सकता है।</hi>
+      </description>
+    </subtype>
+  </subtypes>
+</translations>

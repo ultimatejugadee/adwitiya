@@ -316,6 +316,31 @@
             transform: translateX(27px);
         }
 
+        .lang-select {
+            width: auto;
+            border: 0;
+            outline: none;
+            border-radius: 8px;
+            padding: 4px 8px;
+            background: rgba(255, 255, 255, 0.15);
+            color: var(--text);
+            font-size: 13px;
+            box-shadow: none;
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            cursor: pointer;
+            transition: background 0.18s ease;
+        }
+
+        .lang-select:focus {
+            background: rgba(255, 255, 255, 0.25);
+            transform: none;
+        }
+
+        .lang-select option {
+            background: var(--bg2);
+            color: var(--text);
+        }
+
         .autocomplete {
             position: absolute;
             left: 0;
@@ -543,15 +568,21 @@
 
     <main class="page">
         <section class="hero">
-            <h1>अद्वितीय (Adwitiya)</h1>
+            <h1 id="heroTitle">अद्वितीय (Adwitiya)</h1>
         </section>
 
         <section class="app-card">
             <div class="form">
                 <div class="field full">
                     <label for="pan">
-                        PAN Number
-                        <span class="hint">Format: ABCDE1234F</span>
+                        <span id="labelPan">PAN Number</span>
+                        <span style="display: flex; align-items: center; gap: 12px;">
+                            <span class="hint" id="labelFormat">Format: ABCDE1234F</span>
+                            <select id="langSelect" class="lang-select" aria-label="Select Language">
+                                <option value="en">English</option>
+                                <option value="hi">हिंदी</option>
+                            </select>
+                        </span>
                     </label>
                     <input id="pan" maxlength="10" placeholder="Enter PAN" autocomplete="off" class="state-blank" />
                     <div id="panMessage" class="message warn">
@@ -565,8 +596,8 @@
 
                 <div class="field">
                     <label for="entityInput">
-                        Entity Type
-                        <span class="hint">Search by name, alias, or keyword</span>
+                        <span id="labelEntity">Entity Type</span>
+                        <span id="labelEntityHint" class="hint">Search by name, alias, or keyword</span>
                     </label>
                     <input id="entityInput" placeholder="Type entity type, e.g. individual, trust, FPI"
                         autocomplete="off" />
@@ -575,8 +606,8 @@
 
                 <div class="field">
                     <label for="subtypeSelect">
-                        Additional Subcategory
-                        <span class="hint">Based on selected entity type</span>
+                        <span id="labelSubtype">Additional Subcategory</span>
+                        <span id="labelSubtypeHint" class="hint">Based on selected entity type</span>
                     </label>
                     <select id="subtypeSelect" disabled>
                         <option value="">Select entity type first</option>
@@ -585,13 +616,13 @@
 
                 <div class="full details">
                     <div class="info-box">
-                        <h3>Entity Type Description</h3>
+                        <h3 id="headingEntityDescription">Entity Type Description</h3>
                         <p id="entityDescription">Select an entity type to see its classification meaning.</p>
                         <div id="entityPills" class="pill-row"></div>
                     </div>
 
                     <div class="info-box">
-                        <h3>Subtype Description</h3>
+                        <h3 id="headingSubtypeDescription">Subtype Description</h3>
                         <p id="subtypeDescription">Select a subcategory to see registration and details.</p>
                         <div id="registration" class="registration"></div>
                     </div>
@@ -609,6 +640,7 @@
 
     <script>
         const XML_FILE = "investor-entities.xml";
+        const LABELS_FILE = "labels.xml";
 
         const panInput = document.getElementById("pan");
         const panMessage = document.getElementById("panMessage");
@@ -626,6 +658,16 @@
         let entityTypes = [];
         let selectedEntity = null;
         let selectedSubtype = null;
+
+        let currentLang = localStorage.getItem("adwitiya_lang") || "en";
+        
+        let translations = {
+            interface: {},
+            panCategories: {},
+            groups: {},
+            entityTypes: {},
+            subtypes: {}
+        };
 
         function attr(node, name, fallback = "") {
             return node.getAttribute(name) || fallback;
@@ -677,6 +719,132 @@
             }
         }
 
+        function t(id, variables = {}) {
+            const entry = translations.interface[id];
+            if (!entry) return "";
+            let text = entry[currentLang] || entry["en"] || "";
+            for (const [key, value] of Object.entries(variables)) {
+                text = text.replace(`{${key}}`, value);
+            }
+            return text;
+        }
+
+        function getCategoryLabel(code) {
+            const translation = translations.panCategories[code];
+            if (translation && translation.label[currentLang]) {
+                return translation.label[currentLang];
+            }
+            const localCat = panCategories[code];
+            return localCat ? localCat.label : code;
+        }
+
+        function getCategoryDescription(code) {
+            const translation = translations.panCategories[code];
+            if (translation && translation.description[currentLang]) {
+                return translation.description[currentLang];
+            }
+            const localCat = panCategories[code];
+            return localCat ? localCat.description : "";
+        }
+
+        function getGroupName(id, fallbackName) {
+            const translation = translations.groups[id];
+            if (translation && translation.name[currentLang]) {
+                return translation.name[currentLang];
+            }
+            return fallbackName;
+        }
+
+        function getEntityName(id, fallbackName) {
+            const translation = translations.entityTypes[id];
+            if (translation && translation.name[currentLang]) {
+                return translation.name[currentLang];
+            }
+            return fallbackName;
+        }
+
+        function getEntityLegalStatus(id, fallbackStatus) {
+            const translation = translations.entityTypes[id];
+            if (translation && translation.legalStatus[currentLang]) {
+                return translation.legalStatus[currentLang];
+            }
+            return fallbackStatus;
+        }
+
+        function getEntityDescription(id, fallbackDesc) {
+            const translation = translations.entityTypes[id];
+            if (translation && translation.description[currentLang]) {
+                return translation.description[currentLang];
+            }
+            return fallbackDesc;
+        }
+
+        function getSubtypeName(id, fallbackName) {
+            const translation = translations.subtypes[id];
+            if (translation && translation.name[currentLang]) {
+                return translation.name[currentLang];
+            }
+            return fallbackName;
+        }
+
+        function getSubtypeRegistration(id, fallbackReg) {
+            const translation = translations.subtypes[id];
+            if (translation && translation.registration[currentLang]) {
+                return translation.registration[currentLang];
+            }
+            return fallbackReg;
+        }
+
+        function getSubtypeDescription(id, fallbackDesc) {
+            const translation = translations.subtypes[id];
+            if (translation && translation.description[currentLang]) {
+                return translation.description[currentLang];
+            }
+            return fallbackDesc;
+        }
+
+        function translateUI() {
+            document.title = t("app_title") || "Adwitiya - Investor Entity Classification";
+            
+            const heroTitle = document.getElementById("heroTitle");
+            if (heroTitle) heroTitle.innerHTML = t("hero_title");
+            
+            const labelPan = document.getElementById("labelPan");
+            if (labelPan) labelPan.textContent = t("pan_label");
+            
+            const labelFormat = document.getElementById("labelFormat");
+            if (labelFormat) labelFormat.textContent = t("pan_hint");
+            
+            panInput.placeholder = t("pan_placeholder");
+            
+            const showAllContainer = document.getElementById("showAllContainer");
+            if (showAllContainer) showAllContainer.setAttribute("aria-label", t("show_all_aria"));
+            
+            const labelEntity = document.getElementById("labelEntity");
+            if (labelEntity) labelEntity.textContent = t("entity_label");
+            
+            const labelEntityHint = document.getElementById("labelEntityHint");
+            if (labelEntityHint) labelEntityHint.textContent = t("entity_hint");
+            
+            if (!selectedEntity) {
+                entityInput.placeholder = t("entity_placeholder");
+            } else {
+                entityInput.value = getEntityName(selectedEntity.id, selectedEntity.name);
+            }
+            
+            const labelSubtype = document.getElementById("labelSubtype");
+            if (labelSubtype) labelSubtype.textContent = t("subtype_label");
+            
+            const labelSubtypeHint = document.getElementById("labelSubtypeHint");
+            if (labelSubtypeHint) labelSubtypeHint.textContent = t("subtype_hint");
+            
+            const headingEntityDescription = document.getElementById("headingEntityDescription");
+            if (headingEntityDescription) headingEntityDescription.textContent = t("desc_entity_title");
+            
+            const headingSubtypeDescription = document.getElementById("headingSubtypeDescription");
+            if (headingSubtypeDescription) headingSubtypeDescription.textContent = t("desc_subtype_title");
+        }
+
         function updatePANMessage() {
             const pan = panInput.value.trim().toUpperCase();
             const fourth = getCurrentPanChar();
@@ -687,7 +855,7 @@
 
             if (!pan) {
                 panMessage.className = "message warn";
-                panMessageText.innerHTML = "Enter a PAN to identify the fourth-character PAN category.";
+                panMessageText.innerHTML = t("msg_enter_pan");
                 showAllContainer.style.display = "none";
                 showAllToggle.checked = false;
                 return;
@@ -695,12 +863,12 @@
 
             if (pan.length < 10) {
                 panMessage.className = "message warn";
-                panMessageText.innerHTML = `PAN is incomplete. Indian PAN should contain <strong>5 letters, 4 digits, and 1 final letter</strong>.`;
+                panMessageText.innerHTML = t("msg_pan_incomplete");
                 showAllContainer.style.display = "none";
                 showAllToggle.checked = false;
             } else if (!isPANFormatValid(pan)) {
                 panMessage.className = "message bad";
-                panMessageText.innerHTML = `Invalid PAN format. Expected pattern is <strong>AAAAA9999A</strong>.`;
+                panMessageText.innerHTML = t("msg_pan_invalid");
                 showAllContainer.style.display = "none";
                 showAllToggle.checked = false;
             } else {
@@ -708,20 +876,111 @@
                 showAllContainer.style.display = "inline-block";
 
                 if (fourth) {
-                    const cat = panCategories[fourth];
-                    if (cat) {
-                        panMessageText.innerHTML = `The PAN is generally classified as <strong>${cat.label}</strong> and entity types are filtered based on the same. Please use the toggle button to show complete list.`;
+                    const catLabel = getCategoryLabel(fourth);
+                    if (translations.panCategories[fourth] || panCategories[fourth]) {
+                        panMessageText.innerHTML = t("msg_pan_valid_classified", { category: catLabel });
                     } else {
-                        panMessageText.innerHTML = `The PAN is valid, but the fourth character <strong>${fourth}</strong> is not mapped in the XML PAN category database.`;
+                        panMessageText.innerHTML = t("msg_pan_valid_unmapped", { char: fourth });
                     }
                 } else {
-                    panMessageText.innerHTML = `PAN format is valid.`;
+                    panMessageText.innerHTML = t("msg_pan_valid");
                 }
+            }
+        }
+
+        async function loadLabelsXML() {
+            try {
+                const res = await fetch(LABELS_FILE);
+                if (!res.ok) throw new Error("Labels file not found");
+                const text = await res.text();
+                const xml = new DOMParser().parseFromString(text, "application/xml");
+
+                if (xml.querySelector("parsererror")) {
+                    throw new Error("Invalid labels XML format");
+                }
+
+                function queryText(node, selector) {
+                    const found = node.querySelector(selector);
+                    return found ? found.textContent.trim() : "";
+                }
+
+                xml.querySelectorAll("interface > label").forEach(node => {
+                    const id = attr(node, "id");
+                    translations.interface[id] = {
+                        en: queryText(node, "en"),
+                        hi: queryText(node, "hi")
+                    };
+                });
+
+                xml.querySelectorAll("panCategories > panCategory").forEach(node => {
+                    const code = attr(node, "code");
+                    translations.panCategories[code] = {
+                        label: {
+                            en: queryText(node, "label > en"),
+                            hi: queryText(node, "label > hi")
+                        },
+                        description: {
+                            en: queryText(node, "description > en"),
+                            hi: queryText(node, "description > hi")
+                        }
+                    };
+                });
+
+                xml.querySelectorAll("groups > group").forEach(node => {
+                    const id = attr(node, "id");
+                    translations.groups[id] = {
+                        name: {
+                            en: queryText(node, "name > en"),
+                            hi: queryText(node, "name > hi")
+                        }
+                    };
+                });
+
+                xml.querySelectorAll("entityTypes > entityType").forEach(node => {
+                    const id = attr(node, "id");
+                    translations.entityTypes[id] = {
+                        name: {
+                            en: queryText(node, "name > en"),
+                            hi: queryText(node, "name > hi")
+                        },
+                        legalStatus: {
+                            en: queryText(node, "legalStatus > en"),
+                            hi: queryText(node, "legalStatus > hi")
+                        },
+                        description: {
+                            en: queryText(node, "description > en"),
+                            hi: queryText(node, "description > hi")
+                        }
+                    };
+                });
+
+                xml.querySelectorAll("subtypes > subtype").forEach(node => {
+                    const id = attr(node, "id");
+                    translations.subtypes[id] = {
+                        name: {
+                            en: queryText(node, "name > en"),
+                            hi: queryText(node, "name > hi")
+                        },
+                        registration: {
+                            en: queryText(node, "registration > en"),
+                            hi: queryText(node, "registration > hi")
+                        },
+                        description: {
+                            en: queryText(node, "description > en"),
+                            hi: queryText(node, "description > hi")
+                        }
+                    };
+                });
+            } catch (err) {
+                console.error("Failed to load translations:", err);
             }
         }
 
         async function loadXML() {
             try {
+                await loadLabelsXML();
+                translateUI();
+
                 const res = await fetch(XML_FILE);
                 if (!res.ok) throw new Error("XML file not found");
                 const text = await res.text();
@@ -741,10 +1000,12 @@
                 entityTypes = [];
 
                 xml.querySelectorAll("group").forEach(group => {
+                    const groupId = attr(group, "id");
                     const groupName = attr(group, "name");
 
                     group.querySelectorAll(":scope > entityType").forEach(entityNode => {
                         const entity = {
+                            groupId: groupId,
                             group: groupName,
                             id: attr(entityNode, "id"),
                             name: attr(entityNode, "name"),
@@ -771,13 +1032,13 @@
                 });
 
                 if (dataStatus) {
-                    dataStatus.textContent = `XML database loaded: ${entityTypes.length} entity types available.`;
+                    dataStatus.textContent = t("status_loaded", { count: entityTypes.length });
                     dataStatus.style.color = "#bbf7d0";
                 }
                 refreshUI();
             } catch (err) {
                 if (dataStatus) {
-                    dataStatus.textContent = `Could not load ${XML_FILE}. Use a local server and keep both files together.`;
+                    dataStatus.textContent = t("status_error", { file: XML_FILE });
                     dataStatus.style.color = "#fecdd3";
                 }
                 console.error(err);
@@ -790,35 +1051,49 @@
             entityTypes.forEach(entity => {
                 const entityAllowed = canShowForPAN(entity.panChars);
 
-                // Add parent row (Investor Category alone)
                 if (entityAllowed) {
+                    const rawGroupEn = entity.group;
+                    const rawGroupHi = getGroupName(entity.groupId, "");
+                    const rawNameEn = entity.name;
+                    const rawNameHi = getEntityName(entity.id, "");
+                    const rawStatusEn = entity.legalStatus;
+                    const rawStatusHi = getEntityLegalStatus(entity.id, "");
+                    const rawDescEn = entity.description;
+                    const rawDescHi = getEntityDescription(entity.id, "");
+
                     rows.push({
                         entity,
                         subtype: null,
                         isParent: true,
                         searchable: [
-                            entity.group,
-                            entity.name,
-                            entity.legalStatus,
-                            entity.description,
+                            rawGroupEn, rawGroupHi,
+                            rawNameEn, rawNameHi,
+                            rawStatusEn, rawStatusHi,
+                            rawDescEn, rawDescHi,
                             entity.aliases.join(" ")
                         ].join(" ").toLowerCase()
                     });
                 }
 
-                // Add child rows (Subcategories)
                 entity.subtypes.forEach(subtype => {
                     const subtypeAllowed = canShowForPAN(subtype.panChars);
 
                     if (entityAllowed || subtypeAllowed) {
+                        const rawNameEn = subtype.name;
+                        const rawNameHi = getSubtypeName(subtype.id, "");
+                        const rawDescEn = subtype.description;
+                        const rawDescHi = getSubtypeDescription(subtype.id, "");
+                        const rawRegEn = subtype.registration;
+                        const rawRegHi = getSubtypeRegistration(subtype.id, "");
+
                         rows.push({
                             entity,
                             subtype,
                             isParent: false,
                             searchable: [
-                                subtype.name,
-                                subtype.description,
-                                subtype.registration,
+                                rawNameEn, rawNameHi,
+                                rawDescEn, rawDescHi,
+                                rawRegEn, rawRegHi,
                                 subtype.keywords.join(" ")
                             ].join(" ").toLowerCase()
                         });
@@ -847,11 +1122,11 @@
 
             if (!records.length) {
                 autocomplete.innerHTML = `
-          <div class="option">
-            <div class="path">No matching category found</div>
-            <div class="opt-desc">Try enabling “Show all categories” or searching another keyword.</div>
-          </div>
-        `;
+                  <div class="option">
+                    <div class="path">${t("no_category_found")}</div>
+                    <div class="opt-desc" style="max-height: 200px; opacity: 1; margin-top: 5px;">${t("no_category_hint")}</div>
+                  </div>
+                `;
                 autocomplete.classList.add("show");
                 return;
             }
@@ -860,7 +1135,18 @@
                 const div = document.createElement("div");
                 div.className = "option" + (row.isParent ? " parent" : " child");
 
-                const rawDesc = row.isParent ? row.entity.description : (row.subtype.description || row.entity.description);
+                const rawName = row.isParent 
+                    ? getEntityName(row.entity.id, row.entity.name) 
+                    : getSubtypeName(row.subtype.id, row.subtype.name);
+                
+                const rawGroup = row.isParent 
+                    ? getGroupName(row.entity.groupId, row.entity.group) 
+                    : "";
+
+                const rawDesc = row.isParent 
+                    ? getEntityDescription(row.entity.id, row.entity.description) 
+                    : (getSubtypeDescription(row.subtype.id, row.subtype.description) || getEntityDescription(row.entity.id, row.entity.description));
+
                 const descMatches = doFilter && rawDesc.toLowerCase().includes(query);
                 
                 const descText = highlight(rawDesc, highlightQuery);
@@ -868,26 +1154,26 @@
 
                 if (row.isParent) {
                     div.innerHTML = `
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <div class="path">
-                  ${highlight(row.entity.group, highlightQuery)}
-                  <span>▸</span>
-                  ${highlight(row.entity.name, highlightQuery)}
-                </div>
-                <div class="info-icon" title="View description">i</div>
-            </div>
-            <div class="opt-desc"${descStyle}>${descText}</div>
-          `;
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div class="path">
+                          ${highlight(rawGroup, highlightQuery)}
+                          <span>▸</span>
+                          ${highlight(rawName, highlightQuery)}
+                        </div>
+                        <div class="info-icon" title="${t("view_desc_tooltip")}">i</div>
+                    </div>
+                    <div class="opt-desc"${descStyle}>${descText}</div>
+                  `;
                 } else {
                     div.innerHTML = `
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <div class="path">
-                  ${highlight(row.subtype.name, highlightQuery)}
-                </div>
-                <div class="info-icon" title="View description">i</div>
-            </div>
-            <div class="opt-desc"${descStyle}>${descText}</div>
-          `;
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div class="path">
+                          ${highlight(rawName, highlightQuery)}
+                        </div>
+                        <div class="info-icon" title="${t("view_desc_tooltip")}">i</div>
+                    </div>
+                    <div class="opt-desc"${descStyle}>${descText}</div>
+                  `;
                 }
 
                 const infoIcon = div.querySelector(".info-icon");
@@ -916,7 +1202,7 @@
 
             selectedSubtype = selectedEntity.subtypes.find(s => s.id === subtypeId) || null;
 
-            entityInput.value = selectedEntity.name;
+            entityInput.value = getEntityName(selectedEntity.id, selectedEntity.name);
             populateSubtypeSelect();
 
             if (selectedSubtype) {
@@ -931,7 +1217,7 @@
 
             if (!selectedEntity) {
                 subtypeSelect.disabled = true;
-                subtypeSelect.innerHTML = `<option value="">Select entity type first</option>`;
+                subtypeSelect.innerHTML = `<option value="">${t("subtype_placeholder")}</option>`;
                 return;
             }
 
@@ -942,36 +1228,36 @@
             subtypeSelect.disabled = false;
 
             if (!visibleSubtypes.length) {
-                subtypeSelect.innerHTML = `<option value="">No subtype compatible with current PAN filter</option>`;
+                subtypeSelect.innerHTML = `<option value="">${t("subtype_no_compatible")}</option>`;
                 return;
             }
 
-            subtypeSelect.innerHTML = `<option value="">Choose additional subcategory</option>`;
+            subtypeSelect.innerHTML = `<option value="">${t("subtype_choose")}</option>`;
 
             visibleSubtypes.forEach(sub => {
                 const option = document.createElement("option");
                 option.value = sub.id;
-                option.textContent = sub.name;
+                option.textContent = getSubtypeName(sub.id, sub.name);
                 subtypeSelect.appendChild(option);
             });
         }
 
         function updateDescriptions() {
             if (!selectedEntity) {
-                entityDescription.textContent = "Select an entity type to see its classification meaning.";
-                subtypeDescription.textContent = "Select a subcategory to see registration and details.";
+                entityDescription.textContent = t("desc_entity_default");
+                subtypeDescription.textContent = t("desc_subtype_default");
                 registration.innerHTML = "";
                 entityPills.innerHTML = "";
                 return;
             }
 
-            entityDescription.textContent = selectedEntity.description;
+            entityDescription.textContent = getEntityDescription(selectedEntity.id, selectedEntity.description);
 
             entityPills.innerHTML = "";
             [
-                `Group: ${selectedEntity.group}`,
-                `Legal status: ${selectedEntity.legalStatus}`,
-                `PAN: ${selectedEntity.panChars.join(" / ")}`
+                t("pill_group", { value: getGroupName(selectedEntity.groupId, selectedEntity.group) }),
+                t("pill_legal", { value: getEntityLegalStatus(selectedEntity.id, selectedEntity.legalStatus) }),
+                t("pill_pan", { value: selectedEntity.panChars.join(" / ") })
             ].forEach(text => {
                 const pill = document.createElement("span");
                 pill.className = "pill";
@@ -980,16 +1266,22 @@
             });
 
             if (!selectedSubtype) {
-                subtypeDescription.textContent = "Select a subcategory to see registration and details.";
+                subtypeDescription.textContent = t("desc_subtype_default");
                 registration.innerHTML = "";
                 return;
             }
 
-            subtypeDescription.textContent = selectedSubtype.description;
+            subtypeDescription.textContent = getSubtypeDescription(selectedSubtype.id, selectedSubtype.description);
+            
+            const regLabel = t("reg_identifier");
+            const panLabel = t("reg_pan_mapping");
+            const regVal = getSubtypeRegistration(selectedSubtype.id, selectedSubtype.registration) || "PAN / relevant registration";
+            const panVal = selectedSubtype.panChars.join(" / ");
+            
             registration.innerHTML = `
-        <strong>Usual identifier / registration:</strong> ${selectedSubtype.registration || "PAN / relevant registration"}
-        <br><strong>Subtype PAN mapping:</strong> ${selectedSubtype.panChars.join(" / ")}
-      `;
+                <strong>${regLabel}:</strong> ${regVal}
+                <br><strong>${panLabel}:</strong> ${panVal}
+            `;
         }
 
         function refreshUI() {
@@ -1048,6 +1340,17 @@
             selectedSubtype = selectedEntity.subtypes.find(s => s.id === subtypeSelect.value) || null;
             updateDescriptions();
         });
+
+        const langSelect = document.getElementById("langSelect");
+        if (langSelect) {
+            langSelect.value = currentLang;
+            langSelect.addEventListener("change", (e) => {
+                currentLang = e.target.value;
+                localStorage.setItem("adwitiya_lang", currentLang);
+                translateUI();
+                refreshUI();
+            });
+        }
 
         loadXML();
     </script>
