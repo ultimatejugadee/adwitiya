@@ -146,6 +146,75 @@
       <en>PAN: {value}</en>
       <hi>पैन (PAN): {value}</hi>
     </label>
+    
+    <label id="pan_exempted_label">
+      <en>PAN Exempted</en>
+      <hi>पैन छूट (PAN Exempted)</hi>
+    </label>
+    <label id="exemption_category_label">
+      <en>Exemption Category</en>
+      <hi>छूट की श्रेणी (Exemption Category)</hi>
+    </label>
+    <label id="exemption_subcategory_label">
+      <en>Exemption Sub-category</en>
+      <hi>छूट की उप-श्रेणी (Exemption Sub-category)</hi>
+    </label>
+    <label id="exemption_sikkim_label">
+      <en>Investors Residing in the State of Sikkim</en>
+      <hi>सिक्किम राज्य में रहने वाले निवेशक</hi>
+    </label>
+    <label id="exemption_micro_label">
+      <en>Micro-Investments in Mutual Funds (SIPs / Lumpsum)</en>
+      <hi>म्यूचुअल फंड में सूक्ष्म निवेश (SIP / एकमुश्त)</hi>
+    </label>
+    <label id="exemption_official_label">
+      <en>Official Entities and Appointees (In Institutional/Official Capacity)</en>
+      <hi>आधिकारिक संस्थाएं और नियुक्त व्यक्ति (संस्थागत/आधिकारिक क्षमता में)</hi>
+    </label>
+    <label id="exemption_multilateral_label">
+      <en>Multilateral Agencies &amp; UN Entities</en>
+      <hi>बहुपक्षीय एजेंसियां और संयुक्त राष्ट्र (UN) संस्थाएं</hi>
+    </label>
+    <label id="exemption_govt_label">
+      <en>Government Bodies (Central / State Government)</en>
+      <hi>सरकारी निकाय (केंद्र / राज्य सरकार)</hi>
+    </label>
+    <label id="exemption_consular_label">
+      <en>Consular Offices / Embassies</en>
+      <hi>वाणिज्य दूतावास / दूतावास</hi>
+    </label>
+    <label id="exemption_court_label">
+      <en>Court-Appointed Officials (Official Liquidator, Court Receiver, etc.)</en>
+      <hi>न्यायालय द्वारा नियुक्त अधिकारी (आधिकारिक परिसमापक, कोर्ट रिसीवर, आदि)</hi>
+    </label>
+    <label id="exemption_sikkim_desc">
+      <en>Residents of Sikkim are exempt from the mandatory PAN requirement for transactions in the securities market. KYC is completed using alternative resident documents to issue a PEKRN.</en>
+      <hi>सिक्किम के निवासी प्रतिभूति बाजार में लेनदेन के लिए अनिवार्य पैन आवश्यकता से मुक्त हैं। पीईकेआरएन (PEKRN) जारी करने के लिए वैकल्पिक निवासी दस्तावेजों का उपयोग करके केवाईसी पूरा किया जाता है।</hi>
+    </label>
+    <label id="exemption_micro_desc">
+      <en>Micro-investments in mutual funds are exempt from PAN up to ₹50,000 per rolling 12-month period or per financial year per Mutual Fund. Applicable only for retail individuals (including NRIs, excluding HUFs/non-individuals). Requires a PEKRN.</en>
+      <hi>म्यूचुअल फंड में सूक्ष्म निवेश के लिए प्रति म्यूचुअल फंड हाउस प्रति वर्ष ₹50,000 तक पैन से छूट है। यह केवल खुदरा व्यक्तियों (अनिवासी भारतीयों सहित, हिंदू अविभाजित परिवारों/गैर-व्यक्तियों को छोड़कर) के लिए लागू है। पीईकेआरएन आवश्यक है।</hi>
+    </label>
+    <label id="exemption_govt_desc">
+      <en>PAN is not insisted upon for transactions undertaken explicitly on behalf of the Central Government and State Governments in their official institutional capacity.</en>
+      <hi>केंद्र सरकार और राज्य सरकारों की ओर से उनकी आधिकारिक संस्थागत क्षमता में स्पष्ट रूप से किए गए लेनदेन के लिए पैन पर जोर नहीं दिया जाता है।</hi>
+    </label>
+    <label id="exemption_consular_desc">
+      <en>PAN is not required for transactions undertaken by foreign consular offices and embassies in India in their official capacity.</en>
+      <hi>भारत में विदेशी वाणिज्य दूतावासों और दूतावासों द्वारा अपनी आधिकारिक क्षमता में किए गए लेनदेन के लिए पैन की आवश्यकता नहीं है।</hi>
+    </label>
+    <label id="exemption_court_desc">
+      <en>PAN is not insisted upon for officials appointed by courts (e.g. Official Liquidator, Court Receiver, or Official Assignee) when managing assets under judicial direction.</en>
+      <hi>न्यायिक निर्देश के तहत संपत्तियों का प्रबंधन करते समय न्यायालयों द्वारा नियुक्त अधिकारियों (जैसे आधिकारिक परिसमापक, कोर्ट रिसीवर, या आधिकारिक असाइनी) के लिए पैन पर जोर नहीं दिया जाता है।</hi>
+    </label>
+    <label id="exemption_multilateral_desc">
+      <en>UN entities and specific multilateral agencies exempt from paying income tax or filing tax returns in India are not required to provide a PAN.</en>
+      <hi>संयुक्त राष्ट्र (UN) संस्थाओं और विशिष्ट बहुपक्षीय एजेंसियों को भारत में आयकर भुगतान या कर रिटर्न दाखिल करने से छूट दी गई है, उनके लिए पैन प्रदान करना आवश्यक नहीं है।</hi>
+    </label>
+    <label id="exemption_select_prompt">
+      <en>Select exemption category and subcategory to filter entity types.</en>
+      <hi>संस्था प्रकारों को फ़िल्टर करने के लिए छूट श्रेणी और उपश्रेणी का चयन करें।</hi>
+    </label>
   </interface>
 
   <!-- PAN Categories -->
@@ -632,16 +701,16 @@
     </subtype>
     <subtype id="section8-company">
       <name>
-        <en>Section 8 Company</en>
-        <hi>धारा 8 कंपनी</hi>
+        <en>Section 8 / Section 25 Company</en>
+        <hi>धारा 8 / धारा 25 कंपनी</hi>
       </name>
       <registration>
         <en>CIN / Section 8 License</en>
         <hi>CIN / धारा 8 लाइसेंस</hi>
       </registration>
       <description>
-        <en>A not-for-profit company licensed under Section 8 of the Companies Act.</en>
-        <hi>कंपनी अधिनियम की धारा 8 के तहत लाइसेंस प्राप्त एक गैर-लाभकारी कंपनी।</hi>
+        <en>A not-for-profit company licensed under Section 8 of the Companies Act 2013, Earlier section 25 company as per companies act 1956</en>
+        <hi>कंपनी अधिनियम 2013 की धारा 8 के तहत लाइसेंस प्राप्त एक गैर-लाभकारी कंपनी। पहले कंपनी अधिनियम 1956 के अनुसार धारा 25 की कंपनी</hi>
       </description>
     </subtype>
     <subtype id="foreign-company">

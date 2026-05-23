@@ -576,8 +576,12 @@
                 <div class="field full">
                     <label for="pan">
                         <span id="labelPan">PAN Number</span>
-                        <span style="display: flex; align-items: center; gap: 12px;">
+                        <span style="display: flex; align-items: center; gap: 16px;">
                             <span class="hint" id="labelFormat">Format: ABCDE1234F</span>
+                            <span style="display: inline-flex; align-items: center; gap: 6px; font-weight: 500; font-size: 13px; cursor: pointer; user-select: none; color: var(--text); vertical-align: middle;">
+                                <input type="checkbox" id="panExempted" style="width: 16px; height: 16px; margin: 0; cursor: pointer; vertical-align: middle;" />
+                                <label for="panExempted" id="labelPanExempted" style="cursor: pointer; margin: 0; font-weight: 500; font-size: 13px; line-height: 1; vertical-align: middle;">PAN Exempted</label>
+                            </span>
                             <select id="langSelect" class="lang-select" aria-label="Select Language">
                                 <option value="en">English</option>
                                 <option value="hi">हिंदी</option>
@@ -585,6 +589,22 @@
                         </span>
                     </label>
                     <input id="pan" maxlength="10" placeholder="Enter PAN" autocomplete="off" class="state-blank" />
+                    
+                    <div id="exemptionContainer" style="display: none; flex-direction: column; gap: 12px; margin-top: 10px;">
+                        <div style="display: flex; flex-direction: column; gap: 6px;">
+                            <label for="exemptionCategorySelect" style="font-size: 13px; color: var(--muted); font-weight: 500;" id="labelExemptionCategory">Exemption Category</label>
+                            <select id="exemptionCategorySelect">
+                                <!-- Options will be populated dynamically -->
+                            </select>
+                        </div>
+                        <div id="exemptionSubcategoryWrapper" style="display: none; flex-direction: column; gap: 6px;">
+                            <label for="exemptionSubcategorySelect" style="font-size: 13px; color: var(--muted); font-weight: 500;" id="labelExemptionSubcategory">Exemption Sub-category</label>
+                            <select id="exemptionSubcategorySelect">
+                                <!-- Options will be populated dynamically -->
+                            </select>
+                        </div>
+                    </div>
+
                     <div id="panMessage" class="message warn">
                         <span id="panMessageText">Enter a PAN to identify the fourth-character PAN category.</span>
                         <label class="switch" id="showAllContainer" aria-label="Show all categories" style="display: none; margin-left: auto;">
@@ -643,6 +663,14 @@
         const LABELS_FILE = "labels.xml";
 
         const panInput = document.getElementById("pan");
+        const panExemptedToggle = document.getElementById("panExempted");
+        const exemptionContainer = document.getElementById("exemptionContainer");
+        const exemptionCategorySelect = document.getElementById("exemptionCategorySelect");
+        const exemptionSubcategoryWrapper = document.getElementById("exemptionSubcategoryWrapper");
+        const exemptionSubcategorySelect = document.getElementById("exemptionSubcategorySelect");
+        const labelPanExempted = document.getElementById("labelPanExempted");
+        const labelExemptionCategory = document.getElementById("labelExemptionCategory");
+        const labelExemptionSubcategory = document.getElementById("labelExemptionSubcategory");
         const panMessage = document.getElementById("panMessage");
         const showAllToggle = document.getElementById("showAll");
         const entityInput = document.getElementById("entityInput");
@@ -698,8 +726,29 @@
             return /^[A-Z]{5}[0-9]{4}[A-Z]$/.test(pan);
         }
 
+        function getAllowedExemptionPanChars() {
+            if (!panExemptedToggle || !panExemptedToggle.checked) return [];
+            const cat = exemptionCategorySelect.value;
+            if (cat === "sikkim") return ['P'];
+            if (cat === "micro") return ['P'];
+            if (cat === "multilateral") return ['J', 'G'];
+            if (cat === "official") {
+                const sub = exemptionSubcategorySelect.value;
+                if (sub === "govt") return ['G'];
+                if (sub === "consular") return ['G', 'J'];
+                if (sub === "court") return ['J', 'G', 'T'];
+            }
+            return [];
+        }
+
         function canShowForPAN(panChars) {
             if (showAllToggle.checked) return true;
+
+            if (panExemptedToggle && panExemptedToggle.checked) {
+                const allowed = getAllowedExemptionPanChars();
+                if (allowed.length === 0) return true;
+                return panChars.some(char => allowed.includes(char));
+            }
 
             const panChar = getCurrentPanChar();
             if (!panChar) return true;
@@ -803,6 +852,79 @@
             return fallbackDesc;
         }
 
+        function populateExemptionDropdowns() {
+            if (!exemptionCategorySelect) return;
+            const catSelect = exemptionCategorySelect;
+            const savedCatValue = catSelect.value;
+
+            catSelect.innerHTML = "";
+            
+            // Add placeholder option
+            const placeholderOpt = document.createElement("option");
+            placeholderOpt.value = "";
+            placeholderOpt.textContent = currentLang === "hi" ? "-- छूट श्रेणी चुनें --" : "-- Select Exemption Category --";
+            catSelect.appendChild(placeholderOpt);
+
+            const categories = [
+                { id: "sikkim", labelKey: "exemption_sikkim_label" },
+                { id: "micro", labelKey: "exemption_micro_label" },
+                { id: "official", labelKey: "exemption_official_label" },
+                { id: "multilateral", labelKey: "exemption_multilateral_label" }
+            ];
+
+            categories.forEach(cat => {
+                const opt = document.createElement("option");
+                opt.value = cat.id;
+                opt.textContent = t(cat.labelKey);
+                catSelect.appendChild(opt);
+            });
+
+            // Restore selection if it existed
+            if (savedCatValue) {
+                catSelect.value = savedCatValue;
+            }
+
+            populateExemptionSubcategory();
+        }
+
+        function populateExemptionSubcategory() {
+            if (!exemptionSubcategorySelect) return;
+            const subSelect = exemptionSubcategorySelect;
+            const savedSubValue = subSelect.value;
+
+            subSelect.innerHTML = "";
+
+            const cat = exemptionCategorySelect.value;
+            if (cat === "official") {
+                exemptionSubcategoryWrapper.style.display = "flex";
+
+                // Add placeholder
+                const placeholderOpt = document.createElement("option");
+                placeholderOpt.value = "";
+                placeholderOpt.textContent = currentLang === "hi" ? "-- उप-श्रेणी चुनें --" : "-- Select Sub-category --";
+                subSelect.appendChild(placeholderOpt);
+
+                const subcategories = [
+                    { id: "govt", labelKey: "exemption_govt_label" },
+                    { id: "consular", labelKey: "exemption_consular_label" },
+                    { id: "court", labelKey: "exemption_court_label" }
+                ];
+
+                subcategories.forEach(sub => {
+                    const opt = document.createElement("option");
+                    opt.value = sub.id;
+                    opt.textContent = t(sub.labelKey);
+                    subSelect.appendChild(opt);
+                });
+
+                if (savedSubValue) {
+                    subSelect.value = savedSubValue;
+                }
+            } else {
+                exemptionSubcategoryWrapper.style.display = "none";
+            }
+        }
+
         function translateUI() {
             document.title = t("app_title") || "Adwitiya - Investor Entity Classification";
             
@@ -843,13 +965,49 @@
             
             const headingSubtypeDescription = document.getElementById("headingSubtypeDescription");
             if (headingSubtypeDescription) headingSubtypeDescription.textContent = t("desc_subtype_title");
+
+            if (labelPanExempted) labelPanExempted.textContent = t("pan_exempted_label");
+            if (labelExemptionCategory) labelExemptionCategory.textContent = t("exemption_category_label");
+            if (labelExemptionSubcategory) labelExemptionSubcategory.textContent = t("exemption_subcategory_label");
+            populateExemptionDropdowns();
         }
 
         function updatePANMessage() {
-            const pan = panInput.value.trim().toUpperCase();
-            const fourth = getCurrentPanChar();
             const showAllContainer = document.getElementById("showAllContainer");
             const panMessageText = document.getElementById("panMessageText");
+
+            if (panExemptedToggle && panExemptedToggle.checked) {
+                panMessage.className = "message good";
+                showAllContainer.style.display = "none";
+                
+                const cat = exemptionCategorySelect.value;
+                if (cat === "sikkim") {
+                    panMessageText.innerHTML = t("exemption_sikkim_desc");
+                } else if (cat === "micro") {
+                    panMessageText.innerHTML = t("exemption_micro_desc");
+                } else if (cat === "multilateral") {
+                    panMessageText.innerHTML = t("exemption_multilateral_desc");
+                } else if (cat === "official") {
+                    const sub = exemptionSubcategorySelect.value;
+                    if (sub === "govt") {
+                        panMessageText.innerHTML = t("exemption_govt_desc");
+                    } else if (sub === "consular") {
+                        panMessageText.innerHTML = t("exemption_consular_desc");
+                    } else if (sub === "court") {
+                        panMessageText.innerHTML = t("exemption_court_desc");
+                    } else {
+                        panMessageText.innerHTML = t("exemption_select_prompt");
+                    }
+                } else {
+                    panMessageText.innerHTML = t("exemption_select_prompt");
+                }
+                
+                panInput.classList.remove("state-blank", "state-invalid", "state-valid");
+                return;
+            }
+
+            const pan = panInput.value.trim().toUpperCase();
+            const fourth = getCurrentPanChar();
 
             updatePANOutline();
 
@@ -1305,6 +1463,38 @@
             refreshUI();
             if (document.activeElement === entityInput) renderSuggestions();
         });
+
+        if (panExemptedToggle) {
+            panExemptedToggle.addEventListener("change", () => {
+                const labelFormat = document.getElementById("labelFormat");
+                if (panExemptedToggle.checked) {
+                    panInput.style.display = "none";
+                    if (labelFormat) labelFormat.style.display = "none";
+                    exemptionContainer.style.display = "flex";
+                } else {
+                    panInput.style.display = "block";
+                    if (labelFormat) labelFormat.style.display = "";
+                    exemptionContainer.style.display = "none";
+                }
+                refreshUI();
+                if (document.activeElement === entityInput) renderSuggestions();
+            });
+        }
+
+        if (exemptionCategorySelect) {
+            exemptionCategorySelect.addEventListener("change", () => {
+                populateExemptionSubcategory();
+                refreshUI();
+                if (document.activeElement === entityInput) renderSuggestions();
+            });
+        }
+
+        if (exemptionSubcategorySelect) {
+            exemptionSubcategorySelect.addEventListener("change", () => {
+                refreshUI();
+                if (document.activeElement === entityInput) renderSuggestions();
+            });
+        }
 
         showAllToggle.addEventListener("change", () => {
             refreshUI();
