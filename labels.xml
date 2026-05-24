@@ -28,8 +28,8 @@
     </label>
     
     <label id="msg_enter_pan">
-      <en>Enter a PAN to identify the fourth-character PAN category.</en>
-      <hi>चतुर्थ-वर्ण पैन श्रेणी की पहचान करने के लिए एक पैन दर्ज करें।</hi>
+      <en>Enter a PAN or, in case of PAN exemption, check 'PAN Exempted' from top and select a suitable reason..</en>
+      <hi>पैन (PAN) दर्ज करें या पैन छूट के मामले में, 'पैन छूट (PAN Exempted)' चुनें और उपयुक्त कारण का चयन करें।</hi>
     </label>
     <label id="msg_pan_incomplete">
       <en>PAN is incomplete. Indian PAN should contain &lt;strong&gt;5 letters, 4 digits, and 1 final letter&lt;/strong&gt;.</en>
