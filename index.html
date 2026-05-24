@@ -1362,44 +1362,6 @@
                     <input id="kycSigDate" type="date" required />
                 </div>
 
-                <!-- Section G: Verification Details / For Office Use Only -->
-                <h2 class="section-title full" id="kycIpvTitle" style="margin-top: 20px; border-top: 1px solid var(--card-border); padding-top: 20px;">For Office Use Only (Verification Details)</h2>
-                
-                <div class="field">
-                    <label for="kycIpvName" id="labelKycIpvName">Name of Person doing IPV*</label>
-                    <input id="kycIpvName" placeholder="Enter IPV officer name" required />
-                </div>
-                <div class="field">
-                    <label for="kycIpvDesig" id="labelKycIpvDesig">Designation*</label>
-                    <input id="kycIpvDesig" value="Compliance Officer" required />
-                </div>
-                <div class="field">
-                    <label for="kycIpvOrg" id="labelKycIpvOrg">Organization Name*</label>
-                    <input id="kycIpvOrg" value="ZERODHA BROKING LTD." readonly style="background: rgba(15,23,42,0.04); cursor: not-allowed;" />
-                </div>
-                <div class="field">
-                    <label for="kycIpvDate" id="labelKycIpvDate">Date of IPV*</label>
-                    <input id="kycIpvDate" type="date" required />
-                </div>
-                <div class="field">
-                    <label for="kycIpvEmpId" id="labelKycIpvEmpId">Employee ID*</label>
-                    <input id="kycIpvEmpId" placeholder="Enter Employee ID" required />
-                </div>
-                <div class="field">
-                    <label for="kycIpvSig" id="labelKycIpvSig">IPV Signature (Type Name)*</label>
-                    <input id="kycIpvSig" placeholder="Type name to sign" required style="font-family: 'Brush Script MT', cursive, sans-serif; font-size: 22px; font-weight: bold; color: var(--success);" />
-                </div>
-                
-                <div class="field full toggle-row">
-                    <div class="toggle-copy">
-                        <label for="kycIpvVerified" id="labelKycIpvVerified" style="margin-bottom: 0; cursor: pointer;">Originals Verified and Self-Attested Document Copies Received</label>
-                    </div>
-                    <label class="switch">
-                        <input type="checkbox" id="kycIpvVerified" required />
-                        <span class="slider"></span>
-                    </label>
-                </div>
-
                 <div class="field full" style="text-align: right; margin-top: 15px;">
                     <button type="submit" class="theme-toggle-btn" style="padding: 12px 28px; font-size: 16px; font-weight: bold; border-radius: 12px; background: linear-gradient(135deg, var(--accent), var(--accent2)); color: white; border: 0; cursor: pointer;">Submit KYC Form</button>
                 </div>
@@ -1482,7 +1444,6 @@
         // Verification & Signatures
         const kycClientSig = document.getElementById("kycClientSig");
         const kycSigDate = document.getElementById("kycSigDate");
-        const kycIpvDate = document.getElementById("kycIpvDate");
 
         // Postal Directory database variables
         const CSV_FILE = "all-india-pincode-directory-till-last-month_data.gov.in.csv";
@@ -1876,14 +1837,6 @@
                 "labelKycDeclText4": "kyc_decl_text_4",
                 "labelKycClientSig": "kyc_client_sig",
                 "labelKycSigDate": "kyc_sig_date",
-                "kycIpvTitle": "kyc_office_title",
-                "labelKycIpvName": "kyc_ipv_name",
-                "labelKycIpvDesig": "kyc_ipv_desig",
-                "labelKycIpvOrg": "kyc_ipv_org",
-                "labelKycIpvDate": "kyc_ipv_date",
-                "labelKycIpvEmpId": "kyc_ipv_emp_id",
-                "labelKycIpvSig": "kyc_ipv_sig",
-                "labelKycIpvVerified": "kyc_ipv_verified",
                 "kycFooterNote": "kyc_postal_db_note",
                 "labelKycPostalDbNote": "kyc_postal_db_note",
                 "labelKycCircle": "kyc_circle",
@@ -2008,11 +1961,7 @@
                 "kycBankBranch": "kyc_bank_branch",
                 "kycNetworth": "kyc_networth",
                 "kycOccupationOthers": "kyc_occ_others",
-                "kycClientSig": "kyc_client_sig",
-                "kycIpvName": "kyc_ipv_name",
-                "kycIpvDesig": "kyc_ipv_desig",
-                "kycIpvEmpId": "kyc_ipv_emp_id",
-                "kycIpvSig": "kyc_ipv_sig"
+                "kycClientSig": "kyc_client_sig"
             };
 
             for (const [elemId, labelId] of Object.entries(placeholderMappings)) {
@@ -3224,7 +3173,6 @@
             // Set default dates
             const todayStr = new Date().toISOString().split("T")[0];
             if (kycSigDate) kycSigDate.value = todayStr;
-            if (kycIpvDate) kycIpvDate.value = todayStr;
         }
 
         // --- End KYC Postal Lookup and Form Logic ---

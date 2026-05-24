@@ -787,39 +787,7 @@
       <hi>अन्य (Others)</hi>
     </label>
     
-    <!-- Section G (IPV) -->
-    <label id="kyc_ipv_title">
-      <en>For Office Use Only (Verification Details)</en>
-      <hi>केवल कार्यालय उपयोग के लिए (सत्यापन विवरण)</hi>
-    </label>
-    <label id="kyc_ipv_name">
-      <en>Name of Person doing IPV*</en>
-      <hi>IPV करने वाले व्यक्ति का नाम*</hi>
-    </label>
-    <label id="kyc_ipv_desig">
-      <en>Designation*</en>
-      <hi>पदनाम*</hi>
-    </label>
-    <label id="kyc_ipv_org">
-      <en>Organization Name*</en>
-      <hi>संगठन का नाम*</hi>
-    </label>
-    <label id="kyc_ipv_date">
-      <en>Date of IPV*</en>
-      <hi>IPV की तिथि*</hi>
-    </label>
-    <label id="kyc_ipv_emp_id">
-      <en>Employee ID*</en>
-      <hi>कर्मचारी आईडी*</hi>
-    </label>
-    <label id="kyc_ipv_sig">
-      <en>IPV Signature (Type Name)*</en>
-      <hi>IPV हस्ताक्षर (नाम टाइप करें)*</hi>
-    </label>
-    <label id="kyc_ipv_verified">
-      <en>Originals Verified and Self-Attested Document Copies Received</en>
-      <hi>मूल प्रतियों का सत्यापन किया गया और स्व-सत्यापित दस्तावेज़ प्रतियाँ प्राप्त हुईं</hi>
-    </label>
+
   </interface>
 
   <!-- PAN Categories -->
