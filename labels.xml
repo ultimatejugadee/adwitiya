@@ -215,6 +215,611 @@
       <en>Select exemption category and subcategory to filter entity types.</en>
       <hi>संस्था प्रकारों को फ़िल्टर करने के लिए छूट श्रेणी और उपश्रेणी का चयन करें।</hi>
     </label>
+    
+    <!-- KYC Form Localizations -->
+    <label id="kyc_header">
+      <en>Know Your Client (KYC) Application Form - for Individuals</en>
+      <hi>अपने ग्राहक को जानें (केवाईसी) आवेदन पत्र - व्यक्तियों के लिए</hi>
+    </label>
+    <label id="kyc_instruction">
+      <en>Please fill this form in English and BLOCK Letters (except for postal fields which are auto-loaded from directory)</en>
+      <hi>कृपया इस फॉर्म को अंग्रेजी और बड़े अक्षरों में भरें (केवल डाक क्षेत्रों को छोड़कर जो निर्देशिका से ऑटो-लोड होते हैं)</hi>
+    </label>
+    <label id="kyc_office_use">
+      <en>For Office Use Only</en>
+      <hi>केवल कार्यालय उपयोग के लिए</hi>
+    </label>
+    <label id="kyc_app_type">
+      <en>Application Type*</en>
+      <hi>आवेदन का प्रकार*</hi>
+    </label>
+    <label id="kyc_app_type_new">
+      <en>New</en>
+      <hi>नया (New)</hi>
+    </label>
+    <label id="kyc_app_type_update">
+      <en>Update</en>
+      <hi>अद्यतन (Update)</hi>
+    </label>
+    <label id="kyc_number">
+      <en>KYC Number</en>
+      <hi>केवाईसी संख्या (KYC Number)</hi>
+    </label>
+    <label id="kyc_account_type">
+      <en>Account Type*</en>
+      <hi>खाता प्रकार*</hi>
+    </label>
+    <label id="kyc_ac_normal">
+      <en>Normal</en>
+      <hi>सामान्य (Normal)</hi>
+    </label>
+    <label id="kyc_ac_simplified">
+      <en>Simplified (for low risk customers)</en>
+      <hi>सरलीकृत (कम जोखिम वाले ग्राहकों के लिए)</hi>
+    </label>
+    <label id="kyc_ac_small">
+      <en>Small</en>
+      <hi>छोटा (Small)</hi>
+    </label>
+    
+    <!-- Section A -->
+    <label id="kyc_sec_a_title">
+      <en>A. Identity Details</en>
+      <hi>क. पहचान का विवरण</hi>
+    </label>
+    <label id="kyc_fullname">
+      <en>Name (Same as ID Proof)*</en>
+      <hi>पूरा नाम (पहचान पत्र के अनुसार)*</hi>
+    </label>
+    <label id="kyc_maidenname">
+      <en>Maiden Name (If any)</en>
+      <hi>विवाह पूर्व नाम (यदि कोई हो)</hi>
+    </label>
+    <label id="kyc_father_spouse">
+      <en>Father's / Spouse's Name*</en>
+      <hi>पिता / जीवनसाथी का नाम*</hi>
+    </label>
+    <label id="kyc_mothername">
+      <en>Mother's Name*</en>
+      <hi>माता का नाम*</hi>
+    </label>
+    <label id="kyc_gender">
+      <en>Gender*</en>
+      <hi>लिंग*</hi>
+    </label>
+    <label id="kyc_gender_male">
+      <en>Male</en>
+      <hi>पुरुष (Male)</hi>
+    </label>
+    <label id="kyc_gender_female">
+      <en>Female</en>
+      <hi>महिला (Female)</hi>
+    </label>
+    <label id="kyc_gender_trans">
+      <en>Transgender</en>
+      <hi>ट्रांसजेंडर (Transgender)</hi>
+    </label>
+    <label id="kyc_marital">
+      <en>Marital Status*</en>
+      <hi>वैवाहिक स्थिति*</hi>
+    </label>
+    <label id="kyc_marital_single">
+      <en>Single</en>
+      <hi>अविवाहित (Single)</hi>
+    </label>
+    <label id="kyc_marital_married">
+      <en>Married</en>
+      <hi>विवाहित (Married)</hi>
+    </label>
+    <label id="kyc_marital_other">
+      <en>Other</en>
+      <hi>अन्य (Other)</hi>
+    </label>
+    <label id="kyc_dob">
+      <en>Date of Birth (DOB)*</en>
+      <hi>जन्म तिथि (DOB)*</hi>
+    </label>
+    <label id="kyc_citizenship">
+      <en>Citizenship*</en>
+      <hi>नागरिकता*</hi>
+    </label>
+    <label id="kyc_citizen_indian">
+      <en>Indian</en>
+      <hi>भारतीय (Indian)</hi>
+    </label>
+    <label id="kyc_citizen_other">
+      <en>Other (Foreign)</en>
+      <hi>अन्य (विदेशी)</hi>
+    </label>
+    <label id="kyc_country_code">
+      <en>ISO Country Code</en>
+      <hi>ISO देश कोड</hi>
+    </label>
+    <label id="kyc_residence_status">
+      <en>Residential Status*</en>
+      <hi>आवासीय स्थिति*</hi>
+    </label>
+    <label id="kyc_res_individual">
+      <en>Resident Individual</en>
+      <hi>निवासी व्यक्ति</hi>
+    </label>
+    <label id="kyc_res_nri">
+      <en>Non Resident Indian</en>
+      <hi>अनिवासी भारतीय (NRI)</hi>
+    </label>
+    <label id="kyc_res_pio">
+      <en>Person of Indian Origin</en>
+      <hi>भारतीय मूल के व्यक्ति (PIO)</hi>
+    </label>
+    <label id="kyc_res_foreign">
+      <en>Foreign National</en>
+      <hi>विदेशी नागरिक</hi>
+    </label>
+    
+    <label id="kyc_tax_outside_checkbox">
+      <en>Residence for tax purposes in jurisdiction(s) outside India</en>
+      <hi>भारत के बाहर क्षेत्राधिकार(ओं) में कर उद्देश्यों के लिए निवास (यदि लागू हो)</hi>
+    </label>
+    <label id="kyc_tax_jurisdiction">
+      <en>ISO Country Code of Tax Residence</en>
+      <hi>कर निवास का ISO देश कोड</hi>
+    </label>
+    <label id="kyc_tin">
+      <en>Tax Identification Number / Equivalent</en>
+      <hi>कर पहचान संख्या (TIN) या समकक्ष</hi>
+    </label>
+    <label id="kyc_birth_country">
+      <en>ISO Country Code of Birth</en>
+      <hi>जन्म का ISO देश कोड</hi>
+    </label>
+    <label id="kyc_birth_place">
+      <en>Place of Birth</en>
+      <hi>जन्म स्थान</hi>
+    </label>
+    <label id="kyc_pan_card">
+      <en>PAN*</en>
+      <hi>पैन (PAN)*</hi>
+    </label>
+    <label id="kyc_aadhaar">
+      <en>Unique Identification Number (UID) / Aadhaar*</en>
+      <hi>विशिष्ट पहचान संख्या (UID) / आधार*</hi>
+    </label>
+    <label id="kyc_poi_submitted">
+      <en>Proof of Identity Submitted*</en>
+      <hi>प्रस्तुत पहचान का प्रमाण*</hi>
+    </label>
+    <label id="kyc_poi_pan">
+      <en>PAN Card</en>
+      <hi>पैन कार्ड (PAN Card)</hi>
+    </label>
+    <label id="kyc_poi_other">
+      <en>Other (Please Specify)</en>
+      <hi>अन्य (कृपया विवरण दें)</hi>
+    </label>
+    <label id="kyc_photograph_label">
+      <en>Affix Passport Size Photo*</en>
+      <hi>पासपोर्ट आकार का फोटो अपलोड करें*</hi>
+    </label>
+    
+    <!-- Section B -->
+    <label id="kyc_sec_b_title">
+      <en>B. Address Details</en>
+      <hi>ख. पते का विवरण</hi>
+    </label>
+    <label id="kyc_contact_title">
+      <en>1. Contact Details</en>
+      <hi>1. संपर्क विवरण</hi>
+    </label>
+    <label id="kyc_phone_off">
+      <en>Telephone (Office)</en>
+      <hi>टेलीफोन (कार्यालय)</hi>
+    </label>
+    <label id="kyc_phone_res">
+      <en>Telephone (Residence)</en>
+      <hi>टेलीफोन (निवास)</hi>
+    </label>
+    <label id="kyc_mobile">
+      <en>Mobile No*</en>
+      <hi>मोबाइल नंबर*</hi>
+    </label>
+    <label id="kyc_email">
+      <en>Email ID*</en>
+      <hi>ईमेल आईडी*</hi>
+    </label>
+    
+    <label id="kyc_address_type">
+      <en>Address Type*</en>
+      <hi>पते का प्रकार*</hi>
+    </label>
+    <label id="kyc_addr_residential">
+      <en>Residential</en>
+      <hi>आवासीय (Residential)</hi>
+    </label>
+    <label id="kyc_addr_business">
+      <en>Business</en>
+      <hi>व्यावसायिक (Business)</hi>
+    </label>
+    <label id="kyc_addr_unspecified">
+      <en>Unspecified</en>
+      <hi>अनिर्दिष्ट (Unspecified)</hi>
+    </label>
+    
+    <label id="kyc_corr_address_title">
+      <en>2. Residence / Correspondence Address</en>
+      <hi>2. निवास / पत्राचार का पता</hi>
+    </label>
+    <label id="kyc_address_line">
+      <en>Street Address*</en>
+      <hi>गली का पता/मकान नंबर*</hi>
+    </label>
+    <label id="kyc_pincode">
+      <en>Pin Code*</en>
+      <hi>पिन कोड (Pin Code)*</hi>
+    </label>
+    <label id="kyc_state">
+      <en>State / U.T Code*</en>
+      <hi>राज्य / केंद्र शासित प्रदेश*</hi>
+    </label>
+    <label id="kyc_district">
+      <en>District*</en>
+      <hi>जिला (District)*</hi>
+    </label>
+    <label id="kyc_city_town">
+      <en>City / Town / Post Office*</en>
+      <hi>शहर / कस्बा / डाकघर*</hi>
+    </label>
+    <label id="kyc_country">
+      <en>Country / ISO Code</en>
+      <hi>देश / ISO कोड</hi>
+    </label>
+    <label id="kyc_poa_submitted">
+      <en>Specify Proof of Address Submitted*</en>
+      <hi>प्रस्तुत पते के प्रमाण को निर्दिष्ट करें*</hi>
+    </label>
+    
+    <label id="kyc_permanent_address_title">
+      <en>3. Permanent Address</en>
+      <hi>3. स्थायी पता</hi>
+    </label>
+    <label id="kyc_same_address">
+      <en>Same as Correspondence Address</en>
+      <hi>पत्राचार पते के समान</hi>
+    </label>
+    
+    <label id="kyc_foreign_address_title">
+      <en>4. Address in foreign jurisdiction for Tax Purpose (if applicable)</en>
+      <hi>4. विदेशी कर क्षेत्राधिकार में पता (यदि लागू हो)</hi>
+    </label>
+    
+    <!-- Auto-filled Fields -->
+    <label id="kyc_circle">
+      <en>Postal Circle</en>
+      <hi>डाक सर्कल (Postal Circle)</hi>
+    </label>
+    <label id="kyc_region">
+      <en>Postal Region</en>
+      <hi>डाक क्षेत्र (Postal Region)</hi>
+    </label>
+    <label id="kyc_division">
+      <en>Postal Division</en>
+      <hi>डाक प्रभाग (Postal Division)</hi>
+    </label>
+    <label id="kyc_office_type">
+      <en>Office Type</en>
+      <hi>कार्यालय प्रकार</hi>
+    </label>
+    <label id="kyc_delivery_status">
+      <en>Delivery Status</en>
+      <hi>वितरण स्थिति</hi>
+    </label>
+    <label id="kyc_coordinates">
+      <en>Geographic Coordinates (Lat, Lng)</en>
+      <hi>भौगोलिक निर्देशांक (अक्षांश, देशांतर)</hi>
+    </label>
+    <label id="kyc_postal_db_note">
+      <en>Address details fetched from postal database are in English.</en>
+      <hi>डाक डेटाबेस से प्राप्त पते के विवरण अंग्रेजी में हैं।</hi>
+    </label>
+    <label id="kyc_show_all_states">
+      <en>Show all states</en>
+      <hi>सभी राज्य दिखाएं</hi>
+    </label>
+    
+    <!-- Section C -->
+    <label id="kyc_sec_c_title">
+      <en>C. Declaration</en>
+      <hi>ग. घोषणा</hi>
+    </label>
+    <label id="kyc_client_sig">
+      <en>Client Signature (Type Name to sign)*</en>
+      <hi>ग्राहक के हस्ताक्षर (हस्ताक्षर करने के लिए नाम टाइप करें)*</hi>
+    </label>
+    <label id="kyc_sig_date">
+      <en>Date*</en>
+      <hi>दिनांक*</hi>
+    </label>
+    
+    <!-- Section D -->
+    <label id="kyc_sec_d_title">
+      <en>D. Details of Related Person</en>
+      <hi>घ. संबंधित व्यक्ति का विवरण</hi>
+    </label>
+    <label id="kyc_rel_action">
+      <en>Action</en>
+      <hi>कार्रवाई (Action)</hi>
+    </label>
+    <label id="kyc_rel_action_add">
+      <en>Addition of Related Person</en>
+      <hi>संबंधित व्यक्ति को जोड़ना</hi>
+    </label>
+    <label id="kyc_rel_action_del">
+      <en>Deletion of Related Person</en>
+      <hi>संबंधित व्यक्ति को हटाना</hi>
+    </label>
+    <label id="kyc_rel_number">
+      <en>KYC Number of Related Person</en>
+      <hi>संबंधित व्यक्ति की केवाईसी संख्या</hi>
+    </label>
+    <label id="kyc_rel_type">
+      <en>Related Person Type</en>
+      <hi>संबंधित व्यक्ति का प्रकार</hi>
+    </label>
+    <label id="kyc_rel_type_guardian">
+      <en>Guardian of Minor</en>
+      <hi>नाबालिग का अभिभावक</hi>
+    </label>
+    <label id="kyc_rel_type_assignee">
+      <en>Assignee</en>
+      <hi>समनुदेशिती (Assignee)</hi>
+    </label>
+    <label id="kyc_rel_type_rep">
+      <en>Authorized Representative</en>
+      <hi>अधिकृत प्रतिनिधि</hi>
+    </label>
+    <label id="kyc_rel_name">
+      <en>Name of Related Person</en>
+      <hi>संबंधित व्यक्ति का नाम</hi>
+    </label>
+    <label id="kyc_rel_poi">
+      <en>Identity Proof Submitted</en>
+      <hi>प्रस्तुत पहचान का प्रमाण</hi>
+    </label>
+    <label id="kyc_rel_poi_num">
+      <en>Number / Identification No</en>
+      <hi>संख्या / पहचान संख्या</hi>
+    </label>
+    <label id="kyc_rel_poi_exp">
+      <en>Expiry Date</en>
+      <hi>समाप्ति तिथि</hi>
+    </label>
+    <label id="kyc_rel_sma_code">
+      <en>Simplified Measures Account - Document Type Code</en>
+      <hi>सरलीकृत उपाय खाता - दस्तावेज़ प्रकार कोड</hi>
+    </label>
+    
+    <!-- Trading Details -->
+    <label id="kyc_trading_details_title">
+      <en>Trading Account Related Details</en>
+      <hi>ट्रेडिंग खाते से संबंधित विवरण</hi>
+    </label>
+    <label id="kyc_bank_title">
+      <en>A. Bank Account Details</en>
+      <hi>क. बैंक खाते का विवरण</hi>
+    </label>
+    <label id="kyc_bank_type">
+      <en>Account Type*</en>
+      <hi>खाता प्रकार*</hi>
+    </label>
+    <label id="kyc_bank_type_savings">
+      <en>Savings</en>
+      <hi>बचत (Savings)</hi>
+    </label>
+    <label id="kyc_bank_type_current">
+      <en>Current</en>
+      <hi>चालू (Current)</hi>
+    </label>
+    <label id="kyc_bank_type_nre">
+      <en>NRE (NRI Account)</en>
+      <hi>NRE (अनिवासी खाता)</hi>
+    </label>
+    <label id="kyc_bank_type_nro">
+      <en>NRO (NRI Account)</en>
+      <hi>NRO (अनिवासी खाता)</hi>
+    </label>
+    <label id="kyc_bank_type_others">
+      <en>Others</en>
+      <hi>अन्य (Others)</hi>
+    </label>
+    
+    <label id="kyc_bank_name">
+      <en>Bank Name*</en>
+      <hi>बैंक का नाम*</hi>
+    </label>
+    <label id="kyc_bank_branch">
+      <en>Branch Address*</en>
+      <hi>शाखा का पता*</hi>
+    </label>
+    <label id="kyc_bank_ac_num">
+      <en>Account Number*</en>
+      <hi>खाता संख्या*</hi>
+    </label>
+    <label id="kyc_bank_micr">
+      <en>MICR Number</en>
+      <hi>एमआईसीआर (MICR) संख्या</hi>
+    </label>
+    <label id="kyc_bank_ifsc">
+      <en>IFSC Code*</en>
+      <hi>आईएफएससी (IFSC) कोड*</hi>
+    </label>
+    
+    <!-- Other details -->
+    <label id="kyc_other_title">
+      <en>B. Other Details</en>
+      <hi>ख. अन्य विवरण</hi>
+    </label>
+    <label id="kyc_income_range">
+      <en>Gross Annual Income Details*</en>
+      <hi>सकल वार्षिक आय का विवरण*</hi>
+    </label>
+    <label id="kyc_inc_below_1l">
+      <en>Below Rs 1 Lakh</en>
+      <hi>1 लाख रुपये से कम</hi>
+    </label>
+    <label id="kyc_inc_1_5l">
+      <en>Rs 1-5 Lakh</en>
+      <hi>1-5 लाख रुपये</hi>
+    </label>
+    <label id="kyc_inc_5_10l">
+      <en>Rs 5-10 Lakh</en>
+      <hi>5-10 लाख रुपये</hi>
+    </label>
+    <label id="kyc_inc_10_25l">
+      <en>Rs 10-25 Lakh</en>
+      <hi>10-25 लाख रुपये</hi>
+    </label>
+    <label id="kyc_inc_25_1c">
+      <en>Rs 25 Lakhs to 1 Cr</en>
+      <hi>25 लाख से 1 करोड़ रुपये</hi>
+    </label>
+    <label id="kyc_inc_above_1c">
+      <en>&gt; Rs 1 Cr</en>
+      <hi>1 करोड़ रुपये से अधिक</hi>
+    </label>
+    
+    <label id="kyc_networth">
+      <en>OR Net-worth as on date</en>
+      <hi>या किसी विशिष्ट तिथि पर नेट-वर्थ</hi>
+    </label>
+    
+    <label id="kyc_occupation">
+      <en>Occupation*</en>
+      <hi>व्यवसाय*</hi>
+    </label>
+    <label id="kyc_occ_private">
+      <en>Private Sector</en>
+      <hi>निजी क्षेत्र</hi>
+    </label>
+    <label id="kyc_occ_public">
+      <en>Public Sector</en>
+      <hi>सार्वजनिक क्षेत्र</hi>
+    </label>
+    <label id="kyc_occ_govt">
+      <en>Government Service</en>
+      <hi>सरकारी सेवा</hi>
+    </label>
+    <label id="kyc_occ_business">
+      <en>Business</en>
+      <hi>व्यापार</hi>
+    </label>
+    <label id="kyc_occ_professional">
+      <en>Professional</en>
+      <hi>पेशेवर</hi>
+    </label>
+    <label id="kyc_occ_agri">
+      <en>Agriculturist</en>
+      <hi>कृषक</hi>
+    </label>
+    <label id="kyc_occ_retired">
+      <en>Retired</en>
+      <hi>सेवानिवृत्त</hi>
+    </label>
+    <label id="kyc_occ_housewife">
+      <en>Housewife</en>
+      <hi>गृहणी</hi>
+    </label>
+    <label id="kyc_occ_student">
+      <en>Student</en>
+      <hi>छात्र</hi>
+    </label>
+    <label id="kyc_occ_self">
+      <en>Self Employed</en>
+      <hi>स्व-नियोजित</hi>
+    </label>
+    <label id="kyc_occ_others">
+      <en>Others (please specify)</en>
+      <hi>अन्य (कृपया विवरण दें)</hi>
+    </label>
+    
+    <label id="kyc_pep">
+      <en>Politically Exposed Person (PEP) Status*</en>
+      <hi>राजनीतिक रूप से उजागर व्यक्ति (PEP) की स्थिति*</hi>
+    </label>
+    <label id="kyc_pep_yes">
+      <en>Politically Exposed Person (PEP)</en>
+      <hi>राजनीतिक रूप से उजागर व्यक्ति (PEP)</hi>
+    </label>
+    <label id="kyc_pep_related">
+      <en>Related to a Politically Exposed Person (PEP)</en>
+      <hi>राजनीतिक रूप से उजागर व्यक्ति (PEP) से संबंधित</hi>
+    </label>
+    <label id="kyc_pep_no">
+      <en>Not Applicable / Neither</en>
+      <hi>लागू नहीं / दोनों में से कोई नहीं</hi>
+    </label>
+    
+    <label id="kyc_rdd_mode">
+      <en>Mode to receive RDD &amp; Documents*</en>
+      <hi>आरडीडी और दस्तावेज़ प्राप्त करने का माध्यम*</hi>
+    </label>
+    <label id="kyc_rdd_physical">
+      <en>Physical</en>
+      <hi>भौतिक (Physical)</hi>
+    </label>
+    <label id="kyc_rdd_electronic">
+      <en>Electronic</en>
+      <hi>इलेक्ट्रॉनिक (Electronic)</hi>
+    </label>
+    
+    <label id="kyc_commodity_capacity">
+      <en>In what capacity do you trade commodities?</en>
+      <hi>आप किस क्षमता में कमोडिटीज का व्यापार करते हैं?</hi>
+    </label>
+    <label id="kyc_comm_farmer">
+      <en>Farmer / Farmer Producer Organisation</en>
+      <hi>किसान / किसान उत्पादक संगठन</hi>
+    </label>
+    <label id="kyc_comm_vcp">
+      <en>Value Chain Participant</en>
+      <hi>मूल्य श्रृंखला भागीदार (VCP)</hi>
+    </label>
+    <label id="kyc_comm_others">
+      <en>Others</en>
+      <hi>अन्य (Others)</hi>
+    </label>
+    
+    <!-- Section G (IPV) -->
+    <label id="kyc_ipv_title">
+      <en>For Office Use Only (Verification Details)</en>
+      <hi>केवल कार्यालय उपयोग के लिए (सत्यापन विवरण)</hi>
+    </label>
+    <label id="kyc_ipv_name">
+      <en>Name of Person doing IPV*</en>
+      <hi>IPV करने वाले व्यक्ति का नाम*</hi>
+    </label>
+    <label id="kyc_ipv_desig">
+      <en>Designation*</en>
+      <hi>पदनाम*</hi>
+    </label>
+    <label id="kyc_ipv_org">
+      <en>Organization Name*</en>
+      <hi>संगठन का नाम*</hi>
+    </label>
+    <label id="kyc_ipv_date">
+      <en>Date of IPV*</en>
+      <hi>IPV की तिथि*</hi>
+    </label>
+    <label id="kyc_ipv_emp_id">
+      <en>Employee ID*</en>
+      <hi>कर्मचारी आईडी*</hi>
+    </label>
+    <label id="kyc_ipv_sig">
+      <en>IPV Signature (Type Name)*</en>
+      <hi>IPV हस्ताक्षर (नाम टाइप करें)*</hi>
+    </label>
+    <label id="kyc_ipv_verified">
+      <en>Originals Verified and Self-Attested Document Copies Received</en>
+      <hi>मूल प्रतियों का सत्यापन किया गया और स्व-सत्यापित दस्तावेज़ प्रतियाँ प्राप्त हुईं</hi>
+    </label>
   </interface>
 
   <!-- PAN Categories -->

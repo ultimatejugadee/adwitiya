@@ -718,6 +718,37 @@
                 padding: 20px;
             }
         }
+
+        /* KYC Form Styles */
+        .section-title {
+            grid-column: 1 / -1;
+            font-size: 19px;
+            font-weight: 800;
+            color: var(--accent);
+            margin: 18px 0 6px 0;
+            letter-spacing: -0.01em;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid var(--box-border);
+            padding-bottom: 6px;
+        }
+
+        .subsection-title {
+            grid-column: 1 / -1;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text);
+            margin: 12px 0 4px 0;
+        }
+
+        .kyc-card input[readonly] {
+            opacity: 0.75;
+            cursor: not-allowed;
+        }
+        
+        .photo-field {
+            align-self: start;
+        }
     </style>
 </head>
 
@@ -811,6 +842,573 @@
                 </div>
             </div>
         </section>
+
+        <!-- KYC Form Section -->
+        <section class="app-card kyc-card" style="margin-top: 30px;" id="kycCardSection">
+            <div class="card-top">
+                <span class="card-title" id="kycHeader">Know Your Client (KYC) Application Form - for Individuals</span>
+                <span class="data-status" id="kycInstruction">Please fill this form in English and BLOCK Letters (except for postal fields which are auto-loaded from directory)</span>
+            </div>
+            <form id="kycForm" class="form" onsubmit="event.preventDefault(); alert('KYC Form Submitted Successfully!');">
+                <!-- Section A: Identity Details -->
+                <h2 class="section-title full" id="kycSecATitle">A. Identity Details</h2>
+                
+                <div class="field">
+                    <label for="kycFullname" id="labelKycFullname">Name (Same as ID Proof)*</label>
+                    <input id="kycFullname" placeholder="Enter Full Name" required />
+                </div>
+                <div class="field">
+                    <label for="kycMaidenname" id="labelKycMaidenname">Maiden Name (If any)</label>
+                    <input id="kycMaidenname" placeholder="Enter Maiden Name" />
+                </div>
+                <div class="field">
+                    <label for="kycFatherSpouse" id="labelKycFatherSpouse">Father's / Spouse's Name*</label>
+                    <input id="kycFatherSpouse" placeholder="Enter Father's / Spouse's Name" required />
+                </div>
+                <div class="field">
+                    <label for="kycMothername" id="labelKycMothername">Mother's Name*</label>
+                    <input id="kycMothername" placeholder="Enter Mother's Name" required />
+                </div>
+                
+                <div class="field">
+                    <label for="kycGender" id="labelKycGender">Gender*</label>
+                    <select id="kycGender" required>
+                        <option value="" id="optKycGenderPlaceholder">-- Select Gender --</option>
+                        <option value="male" id="optKycGenderMale">Male</option>
+                        <option value="female" id="optKycGenderFemale">Female</option>
+                        <option value="trans" id="optKycGenderTrans">Transgender</option>
+                    </select>
+                </div>
+                
+                <div class="field">
+                    <label for="kycMarital" id="labelKycMarital">Marital Status*</label>
+                    <select id="kycMarital" required>
+                        <option value="" id="optKycMaritalPlaceholder">-- Select Marital Status --</option>
+                        <option value="single" id="optKycMaritalSingle">Single</option>
+                        <option value="married" id="optKycMaritalMarried">Married</option>
+                        <option value="other" id="optKycMaritalOther">Other</option>
+                    </select>
+                </div>
+                
+                <div class="field">
+                    <label for="kycDob" id="labelKycDob">Date of Birth (DOB)*</label>
+                    <input id="kycDob" type="date" required />
+                </div>
+                
+                <div class="field">
+                    <label for="kycCitizenship" id="labelKycCitizenship">Citizenship*</label>
+                    <select id="kycCitizenship" required>
+                        <option value="indian" id="optKycCitizenIndian">Indian</option>
+                        <option value="other" id="optKycCitizenOther">Other (Foreign)</option>
+                    </select>
+                </div>
+
+                <div class="field" id="kycCitizenCountryWrapper" style="display: none;">
+                    <label for="kycCitizenCountry" id="labelKycCountryCode">ISO Country Code</label>
+                    <input id="kycCitizenCountry" placeholder="e.g. US, GB" maxlength="2" />
+                </div>
+                
+                <div class="field">
+                    <label for="kycResidenceStatus" id="labelKycResidenceStatus">Residential Status*</label>
+                    <select id="kycResidenceStatus" required>
+                        <option value="resident" id="optKycResIndividual">Resident Individual</option>
+                        <option value="nri" id="optKycResNri">Non Resident Indian</option>
+                        <option value="pio" id="optKycResPio">Person of Indian Origin</option>
+                        <option value="foreign" id="optKycResForeign">Foreign National</option>
+                    </select>
+                </div>
+
+                <!-- Photograph Box -->
+                <div class="field photo-field" style="grid-row: span 3; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 2px dashed var(--input-border); border-radius: 16px; padding: 16px; background: rgba(255,255,255,0.02); text-align: center;">
+                    <label id="labelKycPhotograph" style="margin-bottom: 8px;">Affix Passport Size Photo*</label>
+                    <div id="photoPreviewContainer" style="width: 120px; height: 150px; border: 1px solid var(--box-border); display: flex; align-items: center; justify-content: center; background: var(--box-bg); border-radius: 8px; margin-bottom: 8px; overflow: hidden; position: relative;">
+                        <span id="photoPlaceholder" style="font-size: 11px; color: var(--muted); text-align: center; padding: 4px;">[F1] Photo Preview</span>
+                        <img id="photoImg" style="display: none; width: 100%; height: 100%; object-fit: cover;" />
+                    </div>
+                    <input type="file" id="kycPhotoFile" accept="image/*" style="display: none;" />
+                    <button type="button" id="kycPhotoBtn" class="theme-toggle-btn" style="padding: 6px 12px; font-size: 13px;">Upload Photograph</button>
+                </div>
+                
+                <!-- Tax Residency Details -->
+                <div class="field full toggle-row" style="margin-top: 10px;">
+                    <div class="toggle-copy">
+                        <label for="kycTaxOutside" id="labelKycTaxOutsideCheckbox" style="margin-bottom: 0; cursor: pointer;">Residence for tax purposes in jurisdiction(s) outside India</label>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="kycTaxOutside" />
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                
+                <div class="field tax-outside-field" style="display: none;">
+                    <label for="kycTaxJurisdiction" id="labelKycTaxJurisdiction">ISO Country Code of Tax Residence</label>
+                    <input id="kycTaxJurisdiction" placeholder="e.g. US" maxlength="2" />
+                </div>
+                <div class="field tax-outside-field" style="display: none;">
+                    <label for="kycTin" id="labelKycTin">Tax Identification Number / Equivalent</label>
+                    <input id="kycTin" placeholder="Enter TIN" />
+                </div>
+                <div class="field tax-outside-field" style="display: none;">
+                    <label for="kycBirthCountry" id="labelKycBirthCountry">ISO Country Code of Birth</label>
+                    <input id="kycBirthCountry" placeholder="e.g. IN" maxlength="2" />
+                </div>
+                <div class="field tax-outside-field" style="display: none;">
+                    <label for="kycBirthPlace" id="labelKycBirthPlace">Place of Birth</label>
+                    <input id="kycBirthPlace" placeholder="Enter Place of Birth" />
+                </div>
+
+                <!-- Identification Numbers -->
+                <div class="field">
+                    <label for="kycPan" id="labelKycPanCard">PAN*</label>
+                    <input id="kycPan" placeholder="Enter PAN" maxlength="10" required style="font-weight: bold; letter-spacing: 0.1em; text-transform: uppercase;" />
+                </div>
+                <div class="field">
+                    <label for="kycAadhaar" id="labelKycAadhaar">Unique Identification Number (UID) / Aadhaar*</label>
+                    <input id="kycAadhaar" placeholder="Enter 12-digit Aadhaar" maxlength="12" required />
+                </div>
+                
+                <div class="field">
+                    <label for="kycPoiSubmitted" id="labelKycPoiSubmitted">Proof of Identity Submitted*</label>
+                    <select id="kycPoiSubmitted" required>
+                        <option value="pan" id="optKycPoiPan">PAN Card</option>
+                        <option value="other" id="optKycPoiOther">Other (Please Specify)</option>
+                    </select>
+                </div>
+                <div class="field" id="kycPoiOtherSpecWrapper" style="display: none;">
+                    <label for="kycPoiOtherSpec" id="labelKycPoiOtherSpec">Specify Proof of Identity</label>
+                    <input id="kycPoiOtherSpec" placeholder="e.g. Passport, Voter ID" />
+                </div>
+
+                <!-- Section B: Address Details -->
+                <h2 class="section-title full" id="kycSecBTitle" style="margin-top: 20px; border-top: 1px solid var(--card-border); padding-top: 20px;">B. Address Details</h2>
+                
+                <!-- Contact Details -->
+                <h3 class="subsection-title full" id="kycContactTitle">1. Contact Details</h3>
+                <div class="field">
+                    <label for="kycMobile" id="labelKycMobile">Mobile No*</label>
+                    <input id="kycMobile" placeholder="Enter 10-digit mobile" maxlength="10" required />
+                </div>
+                <div class="field">
+                    <label for="kycEmail" id="labelKycEmail">Email ID*</label>
+                    <input id="kycEmail" type="email" placeholder="Enter email address" required />
+                </div>
+                <div class="field">
+                    <label for="kycPhoneOff" id="labelKycPhoneOff">Telephone (Office)</label>
+                    <input id="kycPhoneOff" placeholder="Enter office number" />
+                </div>
+                <div class="field">
+                    <label for="kycPhoneRes" id="labelKycPhoneRes">Telephone (Residence)</label>
+                    <input id="kycPhoneRes" placeholder="Enter residence number" />
+                </div>
+
+                <!-- Correspondence Address -->
+                <h3 class="subsection-title full" id="kycCorrAddressTitle" style="margin-top: 15px;">2. Residence / Correspondence Address</h3>
+                
+                <div class="field">
+                    <label for="kycAddressType" id="labelKycAddressType">Address Type*</label>
+                    <select id="kycAddressType" required>
+                        <option value="residential" id="optKycAddrResidential">Residential</option>
+                        <option value="business" id="optKycAddrBusiness">Business</option>
+                        <option value="unspecified" id="optKycAddrUnspecified">Unspecified</option>
+                    </select>
+                </div>
+                
+                <!-- PIN Code FIRST as requested! -->
+                <div class="field">
+                    <label for="kycPincode">
+                        <span id="labelKycPincode">Pin Code*</span>
+                        <span style="display: inline-flex; align-items: center; gap: 4px; cursor: pointer; user-select: none;">
+                            <input type="checkbox" id="kycShowAllStates" style="width: 14px; height: 14px; margin: 0; cursor: pointer;" />
+                            <label for="kycShowAllStates" id="labelKycShowAllStates" style="cursor: pointer; margin: 0; font-weight: 500; font-size: 11px;">Show all states</label>
+                        </span>
+                    </label>
+                    <input id="kycPincode" placeholder="Enter 6-digit PIN" maxlength="6" required />
+                    <div id="pincodeStatusMsg" style="font-size: 11px; margin-top: 4px; color: var(--muted);"></div>
+                </div>
+
+                <div class="field">
+                    <label for="kycState" id="labelKycState">State / U.T Code*</label>
+                    <select id="kycState" required>
+                        <option value="">Enter PIN first</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="kycDistrict" id="labelKycDistrict">District*</label>
+                    <select id="kycDistrict" required>
+                        <option value="">Enter PIN first</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="kycCityTown" id="labelKycCityTown">City / Town / Post Office*</label>
+                    <select id="kycCityTown" required>
+                        <option value="">Enter PIN first</option>
+                    </select>
+                </div>
+                
+                <div class="field">
+                    <label for="kycAddressLine" id="labelKycAddressLine">Street Address*</label>
+                    <input id="kycAddressLine" placeholder="Building, Street, Area" required />
+                </div>
+
+                <div class="field">
+                    <label for="kycCountry" id="labelKycCountry">Country / ISO Code</label>
+                    <input id="kycCountry" value="India / IN" readonly style="background: rgba(15,23,42,0.04); cursor: not-allowed;" />
+                </div>
+
+                <div class="field">
+                    <label for="kycPoaSubmitted" id="labelKycPoaSubmitted">Specify Proof of Address Submitted*</label>
+                    <input id="kycPoaSubmitted" placeholder="e.g. Aadhaar, Electricity Bill, Passport" required />
+                </div>
+                
+                <!-- Post office metadata read-only fields -->
+                <div class="full details" id="corrPostalMetaWrapper" style="display: none; margin-top: 10px;">
+                    <div class="info-box" style="grid-column: span 2; min-height: auto; padding: 12px 18px;">
+                        <div style="font-size: 12px; color: var(--accent); font-weight: bold; margin-bottom: 6px;" id="labelKycPostalDbNote">Address details fetched from postal database are in English.</div>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; font-size: 13px;">
+                            <div><strong id="labelKycCircle">Postal Circle</strong>: <span id="corrPostalCircle">-</span></div>
+                            <div><strong id="labelKycRegion">Postal Region</strong>: <span id="corrPostalRegion">-</span></div>
+                            <div><strong id="labelKycDivision">Postal Division</strong>: <span id="corrPostalDivision">-</span></div>
+                            <div><strong id="labelKycOfficeType">Office Type</strong>: <span id="corrPostalOfficeType">-</span></div>
+                            <div><strong id="labelKycDeliveryStatus">Delivery Status</strong>: <span id="corrPostalDelivery">-</span></div>
+                            <div><strong id="labelKycCoordinates">Geographic Coordinates (Lat, Lng)</strong>: <span id="corrPostalCoords">-</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Permanent Address -->
+                <div class="full" style="display: flex; align-items: center; justify-content: space-between; margin-top: 25px; border-top: 1px dashed var(--card-border); padding-top: 20px;">
+                    <h3 class="subsection-title" id="kycPermanentAddressTitle" style="margin: 0;">3. Permanent Address</h3>
+                    <span style="display: inline-flex; align-items: center; gap: 6px; font-weight: 500; font-size: 13px; cursor: pointer; user-select: none; color: var(--text);">
+                        <input type="checkbox" id="kycSameAddress" style="width: 16px; height: 16px; margin: 0; cursor: pointer;" />
+                        <label for="kycSameAddress" id="labelKycSameAddress" style="cursor: pointer; margin: 0; font-weight: 500; font-size: 13px;">Same as Correspondence Address</label>
+                    </span>
+                </div>
+                
+                <div class="field perm-field">
+                    <label for="kycPermPincode">
+                        <span id="labelKycPermPincode">Pin Code*</span>
+                        <span style="display: inline-flex; align-items: center; gap: 4px; cursor: pointer; user-select: none;">
+                            <input type="checkbox" id="kycPermShowAllStates" style="width: 14px; height: 14px; margin: 0; cursor: pointer;" />
+                            <label for="kycPermShowAllStates" id="labelKycPermShowAllStates" style="cursor: pointer; margin: 0; font-weight: 500; font-size: 11px;">Show all states</label>
+                        </span>
+                    </label>
+                    <input id="kycPermPincode" placeholder="Enter 6-digit PIN" maxlength="6" required />
+                    <div id="permPincodeStatusMsg" style="font-size: 11px; margin-top: 4px; color: var(--muted);"></div>
+                </div>
+
+                <div class="field perm-field">
+                    <label for="kycPermState" id="labelKycPermState">State / U.T Code*</label>
+                    <select id="kycPermState" required>
+                        <option value="">Enter PIN first</option>
+                    </select>
+                </div>
+
+                <div class="field perm-field">
+                    <label for="kycPermDistrict" id="labelKycPermDistrict">District*</label>
+                    <select id="kycPermDistrict" required>
+                        <option value="">Enter PIN first</option>
+                    </select>
+                </div>
+
+                <div class="field perm-field">
+                    <label for="kycPermCityTown" id="labelKycPermCityTown">City / Town / Post Office*</label>
+                    <select id="kycPermCityTown" required>
+                        <option value="">Enter PIN first</option>
+                    </select>
+                </div>
+                
+                <div class="field perm-field">
+                    <label for="kycPermAddressLine" id="labelKycPermAddressLine">Street Address*</label>
+                    <input id="kycPermAddressLine" placeholder="Building, Street, Area" required />
+                </div>
+
+                <div class="field perm-field">
+                    <label for="kycPermCountry" id="labelKycPermCountry">Country / ISO Code</label>
+                    <input id="kycPermCountry" value="India / IN" readonly style="background: rgba(15,23,42,0.04); cursor: not-allowed;" />
+                </div>
+                
+                <!-- Permanent office metadata read-only fields -->
+                <div class="full details perm-field" id="permPostalMetaWrapper" style="display: none; margin-top: 10px;">
+                    <div class="info-box" style="grid-column: span 2; min-height: auto; padding: 12px 18px;">
+                        <div style="font-size: 12px; color: var(--accent); font-weight: bold; margin-bottom: 6px;">Address details fetched from postal database are in English.</div>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; font-size: 13px;">
+                            <div><strong>Postal Circle</strong>: <span id="permPostalCircle">-</span></div>
+                            <div><strong>Postal Region</strong>: <span id="permPostalRegion">-</span></div>
+                            <div><strong>Postal Division</strong>: <span id="permPostalDivision">-</span></div>
+                            <div><strong>Office Type</strong>: <span id="permPostalOfficeType">-</span></div>
+                            <div><strong>Delivery Status</strong>: <span id="permPostalDelivery">-</span></div>
+                            <div><strong>Geographic Coordinates (Lat, Lng)</strong>: <span id="permPostalCoords">-</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Address in Foreign Jurisdiction -->
+                <h3 class="subsection-title full" id="kycForeignAddressTitle" style="margin-top: 25px; border-top: 1px dashed var(--card-border); padding-top: 20px;">4. Address in foreign tax jurisdiction (if applicable)</h3>
+                
+                <div class="field">
+                    <label for="kycForeignAddress" id="labelKycForeignAddress">Street Address</label>
+                    <input id="kycForeignAddress" placeholder="Building, Street, Area outside India" />
+                </div>
+                <div class="field">
+                    <label for="kycForeignCity" id="labelKycForeignCity">City / Town</label>
+                    <input id="kycForeignCity" placeholder="Enter foreign city" />
+                </div>
+                <div class="field">
+                    <label for="kycForeignDistrict" id="labelKycForeignDistrict">District / State</label>
+                    <input id="kycForeignDistrict" placeholder="Enter foreign district/state" />
+                </div>
+                <div class="field">
+                    <label for="kycForeignPincode" id="labelKycForeignPincode">Zip / Postal Code</label>
+                    <input id="kycForeignPincode" placeholder="Enter zip/postal code" />
+                </div>
+                <div class="field">
+                    <label for="kycForeignCountry" id="labelKycForeignCountry">Country / ISO Code</label>
+                    <input id="kycForeignCountry" placeholder="e.g. United States / US" />
+                </div>
+
+                <!-- Section D: Related Person -->
+                <h2 class="section-title full" id="kycSecDTitle" style="margin-top: 20px; border-top: 1px solid var(--card-border); padding-top: 20px;">D. Details of Related Person</h2>
+                
+                <div class="field">
+                    <label for="kycRelAction" id="labelKycRelAction">Action</label>
+                    <select id="kycRelAction">
+                        <option value="">-- Select Action --</option>
+                        <option value="add" id="optKycRelActionAdd">Addition of Related Person</option>
+                        <option value="del" id="optKycRelActionDel">Deletion of Related Person</option>
+                    </select>
+                </div>
+                
+                <div class="field">
+                    <label for="kycRelNumber" id="labelKycRelNumber">KYC Number of Related Person</label>
+                    <input id="kycRelNumber" placeholder="Enter related person's KYC Number" />
+                </div>
+                
+                <div class="field">
+                    <label for="kycRelType" id="labelKycRelType">Related Person Type</label>
+                    <select id="kycRelType">
+                        <option value="">-- Select Type --</option>
+                        <option value="guardian" id="optKycRelTypeGuardian">Guardian of Minor</option>
+                        <option value="assignee" id="optKycRelTypeAssignee">Assignee</option>
+                        <option value="rep" id="optKycRelTypeRep">Authorized Representative</option>
+                    </select>
+                </div>
+                
+                <div class="field">
+                    <label for="kycRelName" id="labelKycRelName">Name of Related Person</label>
+                    <input id="kycRelName" placeholder="Enter related person name" />
+                </div>
+                
+                <div class="field">
+                    <label for="kycRelPoi" id="labelKycRelPoi">Identity Proof Submitted</label>
+                    <input id="kycRelPoi" placeholder="e.g. PAN Card, Passport" />
+                </div>
+                <div class="field">
+                    <label for="kycRelPoiNum" id="labelKycRelPoiNum">Number / Identification No</label>
+                    <input id="kycRelPoiNum" placeholder="Enter document number" />
+                </div>
+                <div class="field">
+                    <label for="kycRelPoiExp" id="labelKycRelPoiExp">Expiry Date</label>
+                    <input id="kycRelPoiExp" type="date" />
+                </div>
+                <div class="field">
+                    <label for="kycRelSmaCode" id="labelKycRelSmaCode">Simplified Measures Account - Document Type Code</label>
+                    <input id="kycRelSmaCode" placeholder="Enter type code" />
+                </div>
+
+                <!-- Trading Account Related Details -->
+                <h2 class="section-title full" id="kycTradingDetailsTitle" style="margin-top: 20px; border-top: 1px solid var(--card-border); padding-top: 20px;">Trading Account Related Details</h2>
+                
+                <!-- Bank Account Details -->
+                <h3 class="subsection-title full" id="kycBankTitle">A. Bank Account Details</h3>
+                
+                <div class="field">
+                    <label for="kycBankType" id="labelKycBankType">Account Type*</label>
+                    <select id="kycBankType" required>
+                        <option value="" id="optKycBankTypePlaceholder">-- Select Account Type --</option>
+                        <option value="savings" id="optKycBankTypeSavings">Savings</option>
+                        <option value="current" id="optKycBankTypeCurrent">Current</option>
+                        <option value="nre" id="optKycBankTypeNre">NRE (NRI Account)</option>
+                        <option value="nro" id="optKycBankTypeNro">NRO (NRI Account)</option>
+                        <option value="others" id="optKycBankTypeOthers">Others</option>
+                    </select>
+                </div>
+                
+                <div class="field">
+                    <label for="kycBankName" id="labelKycBankName">Bank Name*</label>
+                    <input id="kycBankName" placeholder="Enter bank name" required />
+                </div>
+                
+                <div class="field">
+                    <label for="kycBankAcNum" id="labelKycBankAcNum">Account Number*</label>
+                    <input id="kycBankAcNum" placeholder="Enter bank account number" required />
+                </div>
+                
+                <div class="field">
+                    <label for="kycBankIfsc" id="labelKycBankIfsc">IFSC Code*</label>
+                    <input id="kycBankIfsc" placeholder="Enter 11-digit IFSC" maxlength="11" required style="font-weight: bold; text-transform: uppercase;" />
+                </div>
+                
+                <div class="field">
+                    <label for="kycBankMicr" id="labelKycBankMicr">MICR Number</label>
+                    <input id="kycBankMicr" placeholder="Enter 9-digit MICR" maxlength="9" />
+                </div>
+
+                <div class="field">
+                    <label for="kycBankBranch" id="labelKycBankBranch">Branch Address*</label>
+                    <input id="kycBankBranch" placeholder="Enter bank branch address" required />
+                </div>
+
+                <!-- Other Details -->
+                <h3 class="subsection-title full" id="kycOtherTitle" style="margin-top: 15px;">B. Other Details</h3>
+                
+                <div class="field">
+                    <label for="kycIncomeRange" id="labelKycIncomeRange">Gross Annual Income Details*</label>
+                    <select id="kycIncomeRange" required>
+                        <option value="" id="optKycIncomeRangePlaceholder">-- Select Income Range --</option>
+                        <option value="below1l" id="optKycIncBelow1l">Below Rs 1 Lakh</option>
+                        <option value="1_5l" id="optKycInc1_5l">Rs 1-5 Lakh</option>
+                        <option value="5_10l" id="optKycInc5_10l">Rs 5-10 Lakh</option>
+                        <option value="10_25l" id="optKycInc10_25l">Rs 10-25 Lakh</option>
+                        <option value="25_1c" id="optKycInc25_1c">Rs 25 Lakhs to 1 Cr</option>
+                        <option value="above1c" id="optKycIncAbove1c">&gt; Rs 1 Cr</option>
+                    </select>
+                </div>
+                
+                <div class="field">
+                    <label for="kycNetworth" id="labelKycNetworth">OR Net-worth as on date</label>
+                    <input id="kycNetworth" placeholder="e.g. Rs 5,00,000 as of 31-Mar-2026" />
+                </div>
+                
+                <div class="field">
+                    <label for="kycOccupation" id="labelKycOccupation">Occupation*</label>
+                    <select id="kycOccupation" required>
+                        <option value="" id="optKycOccupationPlaceholder">-- Select Occupation --</option>
+                        <option value="private" id="optKycOccPrivate">Private Sector</option>
+                        <option value="public" id="optKycOccPublic">Public Sector</option>
+                        <option value="govt" id="optKycOccGovt">Government Service</option>
+                        <option value="business" id="optKycOccBusiness">Business</option>
+                        <option value="professional" id="optKycOccProfessional">Professional</option>
+                        <option value="agri" id="optKycOccAgri">Agriculturist</option>
+                        <option value="retired" id="optKycOccRetired">Retired</option>
+                        <option value="housewife" id="optKycOccHousewife">Housewife</option>
+                        <option value="student" id="optKycOccStudent">Student</option>
+                        <option value="self" id="optKycOccSelf">Self Employed</option>
+                        <option value="others" id="optKycOccOthers">Others (please specify)</option>
+                    </select>
+                </div>
+                <div class="field" id="kycOccupationOthersWrapper" style="display: none;">
+                    <label for="kycOccupationOthers" id="labelKycOccupationOthers">Specify Occupation</label>
+                    <input id="kycOccupationOthers" placeholder="Specify occupation" />
+                </div>
+
+                <div class="field">
+                    <label for="kycPep" id="labelKycPep">Politically Exposed Person (PEP) Status*</label>
+                    <select id="kycPep" required>
+                        <option value="no" id="optKycPepNo">Not Applicable / Neither</option>
+                        <option value="yes" id="optKycPepYes">Politically Exposed Person (PEP)</option>
+                        <option value="related" id="optKycPepRelated">Related to a Politically Exposed Person (PEP)</option>
+                    </select>
+                </div>
+                
+                <div class="field">
+                    <label for="kycRddMode" id="labelKycRddMode">Mode to receive RDD & Documents*</label>
+                    <select id="kycRddMode" required>
+                        <option value="electronic" id="optKycRddElectronic">Electronic</option>
+                        <option value="physical" id="optKycRddPhysical">Physical</option>
+                    </select>
+                </div>
+                
+                <div class="field">
+                    <label for="kycCommodityCapacity" id="labelKycCommodityCapacity">In what capacity do you trade commodities?</label>
+                    <select id="kycCommodityCapacity">
+                        <option value="" id="optKycCommodityPlaceholder">-- Select Capacity (if applicable) --</option>
+                        <option value="farmer" id="optKycCommFarmer">Farmer / Farmer Producer Organisation</option>
+                        <option value="vcp" id="optKycCommVcp">Value Chain Participant</option>
+                        <option value="others" id="optKycCommOthers">Others</option>
+                    </select>
+                </div>
+
+                <!-- Section C: Declaration -->
+                <h2 class="section-title full" id="kycSecCTitle" style="margin-top: 20px; border-top: 1px solid var(--card-border); padding-top: 20px;">C. Declaration</h2>
+                
+                <div class="full" style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px; font-size: 13px; color: var(--muted); line-height: 1.6;">
+                    <div style="display: flex; gap: 10px; align-items: flex-start;">
+                        <input type="checkbox" id="kycDecl1" required style="width: 18px; height: 18px; margin-top: 2px;" />
+                        <label for="kycDecl1" id="labelKycDeclText1" style="font-weight: normal; margin: 0; line-height: 1.4; color: var(--muted);">I/We declare that the details furnished above are true and correct to the best of my knowledge and undertake all liabilities w.r.t any incorrect information, I also confirm to inform Zerodha w.r.t any changes in the future.</label>
+                    </div>
+                    <div style="display: flex; gap: 10px; align-items: flex-start;">
+                        <input type="checkbox" id="kycDecl2" required style="width: 18px; height: 18px; margin-top: 2px;" />
+                        <label for="kycDecl2" id="labelKycDeclText2" style="font-weight: normal; margin: 0; line-height: 1.4; color: var(--muted);">I/We are also aware that for Aadhaar OVD based KYC, my KYC shall be validated against my Aadhaar.</label>
+                    </div>
+                    <div style="display: flex; gap: 10px; align-items: flex-start;">
+                        <input type="checkbox" id="kycDecl3" required style="width: 18px; height: 18px; margin-top: 2px;" />
+                        <label for="kycDecl3" id="labelKycDeclText3" style="font-weight: normal; margin: 0; line-height: 1.4; color: var(--muted);">I/We hereby consent to sharing my/our masked Aadhaar with readable QR code or my Aadhaar XML/Digilocker XML file, along with passcode and as applicable, with KRA and other Intermediaries with whom I/We or Zerodha have a business relationship for KYC purposes only.</label>
+                    </div>
+                    <div style="display: flex; gap: 10px; align-items: flex-start;">
+                        <input type="checkbox" id="kycDecl4" required style="width: 18px; height: 18px; margin-top: 2px;" />
+                        <label for="kycDecl4" id="labelKycDeclText4" style="font-weight: normal; margin: 0; line-height: 1.4; color: var(--muted);">I/We hereby consent to receiving information from CVL KRA & C-KYC Registry through SMS/Email on the above registered number/Email ID.</label>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="kycClientSig" id="labelKycClientSig">Client Signature (Type Name to sign)*</label>
+                    <input id="kycClientSig" placeholder="Type name to sign digitally [F2]" required style="font-family: 'Brush Script MT', cursive, sans-serif; font-size: 22px; font-weight: bold; color: var(--accent2);" />
+                </div>
+                
+                <div class="field">
+                    <label for="kycSigDate" id="labelKycSigDate">Date*</label>
+                    <input id="kycSigDate" type="date" required />
+                </div>
+
+                <!-- Section G: Verification Details / For Office Use Only -->
+                <h2 class="section-title full" id="kycIpvTitle" style="margin-top: 20px; border-top: 1px solid var(--card-border); padding-top: 20px;">For Office Use Only (Verification Details)</h2>
+                
+                <div class="field">
+                    <label for="kycIpvName" id="labelKycIpvName">Name of Person doing IPV*</label>
+                    <input id="kycIpvName" placeholder="Enter IPV officer name" required />
+                </div>
+                <div class="field">
+                    <label for="kycIpvDesig" id="labelKycIpvDesig">Designation*</label>
+                    <input id="kycIpvDesig" value="Compliance Officer" required />
+                </div>
+                <div class="field">
+                    <label for="kycIpvOrg" id="labelKycIpvOrg">Organization Name*</label>
+                    <input id="kycIpvOrg" value="ZERODHA BROKING LTD." readonly style="background: rgba(15,23,42,0.04); cursor: not-allowed;" />
+                </div>
+                <div class="field">
+                    <label for="kycIpvDate" id="labelKycIpvDate">Date of IPV*</label>
+                    <input id="kycIpvDate" type="date" required />
+                </div>
+                <div class="field">
+                    <label for="kycIpvEmpId" id="labelKycIpvEmpId">Employee ID*</label>
+                    <input id="kycIpvEmpId" placeholder="Enter Employee ID" required />
+                </div>
+                <div class="field">
+                    <label for="kycIpvSig" id="labelKycIpvSig">IPV Signature (Type Name)*</label>
+                    <input id="kycIpvSig" placeholder="Type name to sign" required style="font-family: 'Brush Script MT', cursive, sans-serif; font-size: 22px; font-weight: bold; color: var(--success);" />
+                </div>
+                
+                <div class="field full toggle-row">
+                    <div class="toggle-copy">
+                        <label for="kycIpvVerified" id="labelKycIpvVerified" style="margin-bottom: 0; cursor: pointer;">Originals Verified and Self-Attested Document Copies Received</label>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="kycIpvVerified" required />
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <div class="field full" style="text-align: right; margin-top: 15px;">
+                    <button type="submit" class="theme-toggle-btn" style="padding: 12px 28px; font-size: 16px; font-weight: bold; border-radius: 12px; background: linear-gradient(135deg, var(--accent), var(--accent2)); color: white; border: 0; cursor: pointer;">Submit KYC Form</button>
+                </div>
+            </form>
+            
+            <div class="footer-note" id="kycFooterNote">
+                * Asterisk indicates mandatory fields. The postal database is updated as of last month.
+            </div>
+        </section>
     </main>
 
     <div id="descModal" class="modal">
@@ -843,6 +1441,55 @@
         const registration = document.getElementById("registration");
         const entityPills = document.getElementById("entityPills");
         const dataStatus = document.getElementById("dataStatus");
+
+        // KYC Form DOM References
+        const kycForm = document.getElementById("kycForm");
+        const kycCitizenship = document.getElementById("kycCitizenship");
+        const kycCitizenCountryWrapper = document.getElementById("kycCitizenCountryWrapper");
+        const kycCitizenCountry = document.getElementById("kycCitizenCountry");
+        const kycTaxOutside = document.getElementById("kycTaxOutside");
+        const taxOutsideFields = document.querySelectorAll(".tax-outside-field");
+        const kycPoiSubmitted = document.getElementById("kycPoiSubmitted");
+        const kycPoiOtherSpecWrapper = document.getElementById("kycPoiOtherSpecWrapper");
+        const kycPoiOtherSpec = document.getElementById("kycPoiOtherSpec");
+        
+        // Correspondence Address DOM References
+        const kycPincode = document.getElementById("kycPincode");
+        const kycShowAllStates = document.getElementById("kycShowAllStates");
+        const kycState = document.getElementById("kycState");
+        const kycDistrict = document.getElementById("kycDistrict");
+        const kycCityTown = document.getElementById("kycCityTown");
+        const pincodeStatusMsg = document.getElementById("pincodeStatusMsg");
+        
+        // Permanent Address DOM References
+        const kycSameAddress = document.getElementById("kycSameAddress");
+        const kycPermPincode = document.getElementById("kycPermPincode");
+        const kycPermShowAllStates = document.getElementById("kycPermShowAllStates");
+        const kycPermState = document.getElementById("kycPermState");
+        const kycPermDistrict = document.getElementById("kycPermDistrict");
+        const kycPermCityTown = document.getElementById("kycPermCityTown");
+        const permPincodeStatusMsg = document.getElementById("permPincodeStatusMsg");
+        
+        // Other KYC inputs
+        const kycOccupation = document.getElementById("kycOccupation");
+        const kycOccupationOthersWrapper = document.getElementById("kycOccupationOthersWrapper");
+        const kycOccupationOthers = document.getElementById("kycOccupationOthers");
+        const kycPhotoFile = document.getElementById("kycPhotoFile");
+        const kycPhotoBtn = document.getElementById("kycPhotoBtn");
+        const photoImg = document.getElementById("photoImg");
+        const photoPlaceholder = document.getElementById("photoPlaceholder");
+        
+        // Verification & Signatures
+        const kycClientSig = document.getElementById("kycClientSig");
+        const kycSigDate = document.getElementById("kycSigDate");
+        const kycIpvDate = document.getElementById("kycIpvDate");
+
+        // Postal Directory database variables
+        const CSV_FILE = "all-india-pincode-directory-till-last-month_data.gov.in.csv";
+        const pincodeMap = new Map();
+        const allStates = new Set();
+        const stateDistrictsMap = new Map();
+        let pincodeDbLoaded = false;
 
         let panCategories = {};
         let entityTypes = [];
@@ -1136,6 +1783,244 @@
             if (typeof updateThemeUI === "function") {
                 updateThemeUI();
             }
+            if (typeof translateKycUI === "function") {
+                translateKycUI();
+            }
+        }
+
+        function translateKycUI() {
+            // Update labels and static text
+            const textMappings = {
+                "kycHeader": "kyc_header",
+                "kycInstruction": "kyc_instruction",
+                "kycSecATitle": "kyc_sec_a_title",
+                "labelKycFullname": "kyc_fullname",
+                "labelKycMaidenname": "kyc_maidenname",
+                "labelKycFatherSpouse": "kyc_father_spouse",
+                "labelKycMothername": "kyc_mothername",
+                "labelKycGender": "kyc_gender",
+                "labelKycMarital": "kyc_marital",
+                "labelKycDob": "kyc_dob",
+                "labelKycCitizenship": "kyc_citizenship",
+                "labelKycCountryCode": "kyc_country_code",
+                "labelKycResidenceStatus": "kyc_residence_status",
+                "labelKycPhotograph": "kyc_photograph_label",
+                "labelKycTaxOutsideCheckbox": "kyc_tax_outside_checkbox",
+                "labelKycTaxJurisdiction": "kyc_tax_jurisdiction",
+                "labelKycTin": "kyc_tin",
+                "labelKycBirthCountry": "kyc_birth_country",
+                "labelKycBirthPlace": "kyc_birth_place",
+                "labelKycPanCard": "kyc_pan_card",
+                "labelKycAadhaar": "kyc_aadhaar",
+                "labelKycPoiSubmitted": "kyc_poi_submitted",
+                "labelKycPoiOtherSpec": "kyc_poi_other",
+                "kycSecBTitle": "kyc_sec_b_title",
+                "kycContactTitle": "kyc_contact_title",
+                "labelKycMobile": "kyc_mobile",
+                "labelKycEmail": "kyc_email",
+                "labelKycPhoneOff": "kyc_phone_off",
+                "labelKycPhoneRes": "kyc_phone_res",
+                "kycCorrAddressTitle": "kyc_corr_address_title",
+                "labelKycAddressType": "kyc_address_type",
+                "labelKycPincode": "kyc_pincode",
+                "labelKycShowAllStates": "kyc_show_all_states",
+                "labelKycState": "kyc_state",
+                "labelKycDistrict": "kyc_district",
+                "labelKycCityTown": "kyc_city_town",
+                "labelKycAddressLine": "kyc_address_line",
+                "labelKycCountry": "kyc_country",
+                "labelKycPoaSubmitted": "kyc_poa_submitted",
+                "kycPermanentAddressTitle": "kyc_permanent_address_title",
+                "labelKycSameAddress": "kyc_same_address",
+                "labelKycPermPincode": "kyc_pincode",
+                "labelKycPermShowAllStates": "kyc_show_all_states",
+                "labelKycPermState": "kyc_state",
+                "labelKycPermDistrict": "kyc_district",
+                "labelKycPermCityTown": "kyc_city_town",
+                "labelKycPermAddressLine": "kyc_address_line",
+                "labelKycPermCountry": "kyc_country",
+                "kycForeignAddressTitle": "kyc_foreign_address_title",
+                "labelKycForeignAddress": "kyc_address_line",
+                "labelKycForeignCity": "kyc_city_town",
+                "labelKycForeignDistrict": "kyc_district",
+                "labelKycForeignPincode": "kyc_pincode",
+                "labelKycForeignCountry": "kyc_country",
+                "kycSecDTitle": "kyc_sec_d_title",
+                "labelKycRelAction": "kyc_rel_action",
+                "labelKycRelNumber": "kyc_rel_number",
+                "labelKycRelType": "kyc_rel_type",
+                "labelKycRelName": "kyc_rel_name",
+                "labelKycRelPoi": "kyc_rel_poi",
+                "labelKycRelPoiNum": "kyc_rel_poi_num",
+                "labelKycRelPoiExp": "kyc_rel_poi_exp",
+                "labelKycRelSmaCode": "kyc_rel_sma_code",
+                "kycTradingDetailsTitle": "kyc_trading_details_title",
+                "kycBankTitle": "kyc_bank_title",
+                "labelKycBankType": "kyc_bank_type",
+                "labelKycBankName": "kyc_bank_name",
+                "labelKycBankBranch": "kyc_bank_branch",
+                "labelKycBankAcNum": "kyc_bank_ac_num",
+                "labelKycBankMicr": "kyc_bank_micr",
+                "labelKycBankIfsc": "kyc_bank_ifsc",
+                "kycOtherTitle": "kyc_other_title",
+                "labelKycIncomeRange": "kyc_income_range",
+                "labelKycNetworth": "kyc_networth",
+                "labelKycOccupation": "kyc_occupation",
+                "labelKycPep": "kyc_pep",
+                "labelKycRddMode": "kyc_rdd_mode",
+                "labelKycCommodityCapacity": "kyc_commodity_capacity",
+                "kycSecCTitle": "kyc_sec_c_title",
+                "labelKycDeclText1": "kyc_decl_text_1",
+                "labelKycDeclText2": "kyc_decl_text_2",
+                "labelKycDeclText3": "kyc_decl_text_3",
+                "labelKycDeclText4": "kyc_decl_text_4",
+                "labelKycClientSig": "kyc_client_sig",
+                "labelKycSigDate": "kyc_sig_date",
+                "kycIpvTitle": "kyc_office_title",
+                "labelKycIpvName": "kyc_ipv_name",
+                "labelKycIpvDesig": "kyc_ipv_desig",
+                "labelKycIpvOrg": "kyc_ipv_org",
+                "labelKycIpvDate": "kyc_ipv_date",
+                "labelKycIpvEmpId": "kyc_ipv_emp_id",
+                "labelKycIpvSig": "kyc_ipv_sig",
+                "labelKycIpvVerified": "kyc_ipv_verified",
+                "kycFooterNote": "kyc_postal_db_note",
+                "labelKycPostalDbNote": "kyc_postal_db_note",
+                "labelKycCircle": "kyc_circle",
+                "labelKycRegion": "kyc_region",
+                "labelKycDivision": "kyc_division",
+                "labelKycOfficeType": "kyc_office_type",
+                "labelKycDeliveryStatus": "kyc_delivery_status",
+                "labelKycCoordinates": "kyc_coordinates"
+            };
+
+            for (const [elemId, labelId] of Object.entries(textMappings)) {
+                const elem = document.getElementById(elemId);
+                if (elem) elem.textContent = t(labelId) || elem.textContent;
+            }
+
+            // Option lists that require dynamic translation
+            const optionMappings = {
+                "optKycGenderPlaceholder": "kyc_gender",
+                "optKycGenderMale": "kyc_gender_male",
+                "optKycGenderFemale": "kyc_gender_female",
+                "optKycGenderTrans": "kyc_gender_trans",
+                "optKycMaritalPlaceholder": "kyc_marital",
+                "optKycMaritalSingle": "kyc_marital_single",
+                "optKycMaritalMarried": "kyc_marital_married",
+                "optKycMaritalOther": "kyc_marital_other",
+                "optKycCitizenIndian": "kyc_citizen_indian",
+                "optKycCitizenOther": "kyc_citizen_other",
+                "optKycResIndividual": "kyc_res_individual",
+                "optKycResNri": "kyc_res_nri",
+                "optKycResPio": "kyc_res_pio",
+                "optKycResForeign": "kyc_res_foreign",
+                "optKycPoiPan": "kyc_poi_pan",
+                "optKycPoiOther": "kyc_poi_other",
+                "optKycAddrResidential": "kyc_addr_residential",
+                "optKycAddrBusiness": "kyc_addr_business",
+                "optKycAddrUnspecified": "kyc_addr_unspecified",
+                "optKycRelActionAdd": "kyc_rel_action_add",
+                "optKycRelActionDel": "kyc_rel_action_del",
+                "optKycRelTypeGuardian": "kyc_rel_type_guardian",
+                "optKycRelTypeAssignee": "kyc_rel_type_assignee",
+                "optKycRelTypeRep": "kyc_rel_type_rep",
+                "optKycBankTypeSavings": "kyc_bank_type_savings",
+                "optKycBankTypeCurrent": "kyc_bank_type_current",
+                "optKycBankTypeNre": "kyc_bank_type_nre",
+                "optKycBankTypeNro": "kyc_bank_type_nro",
+                "optKycBankTypeOthers": "kyc_bank_type_others",
+                "optKycIncBelow1l": "kyc_inc_below_1l",
+                "optKycInc1_5l": "kyc_inc_1_5l",
+                "optKycInc5_10l": "kyc_inc_5_10l",
+                "optKycInc10_25l": "kyc_inc_10_25l",
+                "optKycInc25_1c": "kyc_inc_25_1c",
+                "optKycIncAbove1c": "kyc_inc_above_1c",
+                "optKycOccPrivate": "kyc_occ_private",
+                "optKycOccPublic": "kyc_occ_public",
+                "optKycOccGovt": "kyc_occ_govt",
+                "optKycOccBusiness": "kyc_occ_business",
+                "optKycOccProfessional": "kyc_occ_professional",
+                "optKycOccAgri": "kyc_occ_agri",
+                "optKycOccRetired": "kyc_occ_retired",
+                "optKycOccHousewife": "kyc_occ_housewife",
+                "optKycOccStudent": "kyc_occ_student",
+                "optKycOccSelf": "kyc_occ_self",
+                "optKycOccOthers": "kyc_occ_others",
+                "optKycPepNo": "kyc_pep_no",
+                "optKycPepYes": "kyc_pep_yes",
+                "optKycPepRelated": "kyc_pep_related",
+                "optKycRddElectronic": "kyc_rdd_electronic",
+                "optKycRddPhysical": "kyc_rdd_physical",
+                "optKycCommFarmer": "kyc_comm_farmer",
+                "optKycCommVcp": "kyc_comm_vcp",
+                "optKycCommOthers": "kyc_comm_others"
+            };
+
+            for (const [elemId, labelId] of Object.entries(optionMappings)) {
+                const elem = document.getElementById(elemId);
+                if (elem) {
+                    if (elemId.includes("Placeholder")) {
+                        elem.textContent = "-- " + (t(labelId) || "Select") + " --";
+                    } else {
+                        elem.textContent = t(labelId) || elem.textContent;
+                    }
+                }
+            }
+
+            // Input placeholders
+            const placeholderMappings = {
+                "kycFullname": "kyc_fullname",
+                "kycMaidenname": "kyc_maidenname",
+                "kycFatherSpouse": "kyc_father_spouse",
+                "kycMothername": "kyc_mothername",
+                "kycCitizenCountry": "kyc_country_code",
+                "kycTaxJurisdiction": "kyc_country_code",
+                "kycTin": "kyc_tin",
+                "kycBirthCountry": "kyc_country_code",
+                "kycBirthPlace": "kyc_birth_place",
+                "kycPan": "kyc_pan_card",
+                "kycAadhaar": "kyc_aadhaar",
+                "kycPoiOtherSpec": "kyc_poi_other",
+                "kycMobile": "kyc_mobile",
+                "kycEmail": "kyc_email",
+                "kycPhoneOff": "kyc_phone_off",
+                "kycPhoneRes": "kyc_phone_res",
+                "kycPincode": "kyc_pincode",
+                "kycAddressLine": "kyc_address_line",
+                "kycPoaSubmitted": "kyc_poa_submitted",
+                "kycPermPincode": "kyc_pincode",
+                "kycPermAddressLine": "kyc_address_line",
+                "kycForeignAddress": "kyc_address_line",
+                "kycForeignCity": "kyc_city_town",
+                "kycForeignDistrict": "kyc_district",
+                "kycForeignPincode": "kyc_pincode",
+                "kycForeignCountry": "kyc_country",
+                "kycRelNumber": "kyc_rel_number",
+                "kycRelName": "kyc_rel_name",
+                "kycRelPoi": "kyc_rel_poi",
+                "kycRelPoiNum": "kyc_rel_poi_num",
+                "kycRelSmaCode": "kyc_rel_sma_code",
+                "kycBankName": "kyc_bank_name",
+                "kycBankAcNum": "kyc_bank_ac_num",
+                "kycBankIfsc": "kyc_bank_ifsc",
+                "kycBankMicr": "kyc_bank_micr",
+                "kycBankBranch": "kyc_bank_branch",
+                "kycNetworth": "kyc_networth",
+                "kycOccupationOthers": "kyc_occ_others",
+                "kycClientSig": "kyc_client_sig",
+                "kycIpvName": "kyc_ipv_name",
+                "kycIpvDesig": "kyc_ipv_desig",
+                "kycIpvEmpId": "kyc_ipv_emp_id",
+                "kycIpvSig": "kyc_ipv_sig"
+            };
+
+            for (const [elemId, labelId] of Object.entries(placeholderMappings)) {
+                const elem = document.getElementById(elemId);
+                if (elem) {
+                    elem.placeholder = t(labelId).replace("*", "") || elem.placeholder;
+                }
+            }
         }
 
         function updatePANMessage() {
@@ -1360,6 +2245,7 @@
                     dataStatus.style.color = "#bbf7d0";
                 }
                 refreshUI();
+                loadPincodeDatabase();
             } catch (err) {
                 if (dataStatus) {
                     dataStatus.textContent = t("status_error", { file: XML_FILE });
@@ -1731,7 +2617,623 @@
             });
         }
 
+        // --- KYC Postal Lookup and Form Event Logic ---
+
+        async function loadPincodeDatabase() {
+            const pincodeInputs = [kycPincode, kycPermPincode];
+            pincodeInputs.forEach(input => {
+                input.disabled = true;
+                input.placeholder = currentLang === "hi" ? "[डाक डेटाबेस लोड हो रहा है...]" : "[Loading PIN database...]";
+            });
+            if (pincodeStatusMsg) {
+                pincodeStatusMsg.textContent = currentLang === "hi" ? "डाक कोड डेटाबेस लोड हो रहा है..." : "Loading postal directory database...";
+                pincodeStatusMsg.style.color = "var(--accent)";
+            }
+
+            try {
+                const res = await fetch(CSV_FILE);
+                if (!res.ok) throw new Error("Postal directory CSV file not found");
+                const csvText = await res.text();
+
+                const lines = csvText.split(/\r?\n/);
+                if (lines.length === 0) throw new Error("Empty CSV file");
+
+                for (let i = 1; i < lines.length; i++) {
+                    const line = lines[i];
+                    if (!line) continue;
+
+                    let fields = [];
+                    let idx = 0;
+                    while (idx < line.length) {
+                        if (line[idx] === '"') {
+                            let endIdx = line.indexOf('"', idx + 1);
+                            if (endIdx === -1) endIdx = line.length;
+                            fields.push(line.substring(idx + 1, endIdx));
+                            idx = endIdx + 2;
+                        } else {
+                            let endIdx = line.indexOf(',', idx);
+                            if (endIdx === -1) endIdx = line.length;
+                            fields.push(line.substring(idx, endIdx));
+                            idx = endIdx + 1;
+                        }
+                    }
+
+                    if (fields.length < 9) continue;
+
+                    const pincode = fields[4];
+                    const state = fields[8];
+                    const district = fields[7];
+
+                    if (!pincode || !state || !district) continue;
+
+                    const cleanState = state.toUpperCase().trim();
+                    const cleanDistrict = district.toUpperCase().trim();
+
+                    allStates.add(cleanState);
+                    if (!stateDistrictsMap.has(cleanState)) {
+                        stateDistrictsMap.set(cleanState, new Set());
+                    }
+                    stateDistrictsMap.get(cleanState).add(cleanDistrict);
+
+                    if (!pincodeMap.has(pincode)) {
+                        pincodeMap.set(pincode, []);
+                    }
+                    pincodeMap.get(pincode).push({
+                        circle: fields[0] || "Not Available",
+                        region: fields[1] || "Not Available",
+                        division: fields[2] || "Not Available",
+                        office: fields[3] || "Not Available",
+                        type: fields[5] || "Not Available",
+                        delivery: fields[6] || "Not Available",
+                        district: cleanDistrict,
+                        state: cleanState,
+                        lat: fields[9] === "NA" || !fields[9] ? "Not Available" : fields[9],
+                        lng: fields[10] === "NA" || !fields[10] ? "Not Available" : fields[10]
+                    });
+                }
+
+                pincodeDbLoaded = true;
+                if (pincodeStatusMsg) {
+                    pincodeStatusMsg.textContent = "";
+                }
+                console.log("Pincode database parsed successfully. Size:", pincodeMap.size);
+
+            } catch (err) {
+                console.error("Failed to load postal database:", err);
+                const failMsg = currentLang === "hi" ? "डाक डेटाबेस लोड करने में विफल। मैन्युअल प्रविष्टि सक्षम।" : "Failed to load postal database. Manual entry enabled.";
+                if (pincodeStatusMsg) {
+                    pincodeStatusMsg.textContent = failMsg;
+                    pincodeStatusMsg.style.color = "var(--danger)";
+                }
+                if (permPincodeStatusMsg) {
+                    permPincodeStatusMsg.textContent = failMsg;
+                    permPincodeStatusMsg.style.color = "var(--danger)";
+                }
+                if (kycShowAllStates) kycShowAllStates.checked = true;
+                if (kycPermShowAllStates) kycPermShowAllStates.checked = true;
+            } finally {
+                pincodeInputs.forEach(input => {
+                    input.disabled = false;
+                    input.placeholder = currentLang === "hi" ? "६-अंकों का पिन दर्ज करें" : "Enter 6-digit PIN";
+                });
+                updateAddressDropdowns(kycPincode, kycState, kycDistrict, kycCityTown, kycShowAllStates, "corr");
+                updateAddressDropdowns(kycPermPincode, kycPermState, kycPermDistrict, kycPermCityTown, kycPermShowAllStates, "perm");
+            }
+        }
+
+        function setCityInputMode(type, isManual) {
+            const selectId = type === "corr" ? "kycCityTown" : "kycPermCityTown";
+            const manualId = type === "corr" ? "kycCityTownManual" : "kycPermCityTownManual";
+            
+            let selectElem = document.getElementById(selectId);
+            let manualElem = document.getElementById(manualId);
+            
+            if (!manualElem) {
+                manualElem = document.createElement("input");
+                manualElem.id = manualId;
+                manualElem.placeholder = currentLang === "hi" ? "शहर / कस्बा दर्ज करें" : "Enter City/Town";
+                manualElem.className = selectElem.className;
+                manualElem.required = selectElem.required;
+                selectElem.parentNode.appendChild(manualElem);
+            }
+            
+            if (isManual) {
+                selectElem.style.display = "none";
+                selectElem.required = false;
+                manualElem.style.display = "block";
+                manualElem.required = true;
+            } else {
+                selectElem.style.display = "block";
+                selectElem.required = true;
+                manualElem.style.display = "none";
+                manualElem.required = false;
+            }
+        }
+
+        function updateAddressDropdowns(pincodeInput, stateSelect, districtSelect, citySelect, showAllToggle, type) {
+            const pincode = pincodeInput.value.trim();
+            const matchingOffices = pincodeMap.get(pincode) || [];
+            const isManualMode = showAllToggle.checked || !pincodeDbLoaded || pincode.length < 6 || matchingOffices.length === 0;
+
+            const savedState = stateSelect.value;
+            const savedDistrict = districtSelect.value;
+
+            stateSelect.innerHTML = "";
+            districtSelect.innerHTML = "";
+            citySelect.innerHTML = "";
+
+            if (isManualMode) {
+                setCityInputMode(type, true);
+
+                const statePlaceholder = document.createElement("option");
+                statePlaceholder.value = "";
+                statePlaceholder.textContent = currentLang === "hi" ? "-- राज्य चुनें --" : "-- Select State --";
+                stateSelect.appendChild(statePlaceholder);
+
+                const sortedStates = Array.from(allStates).sort();
+                sortedStates.forEach(s => {
+                    const opt = document.createElement("option");
+                    opt.value = s;
+                    opt.textContent = s;
+                    stateSelect.appendChild(opt);
+                });
+
+                if (savedState) {
+                    stateSelect.value = savedState;
+                }
+
+                const activeState = stateSelect.value;
+                const districtPlaceholder = document.createElement("option");
+                districtPlaceholder.value = "";
+                districtPlaceholder.textContent = currentLang === "hi" ? "-- जिला चुनें --" : "-- Select District --";
+                districtSelect.appendChild(districtPlaceholder);
+
+                if (activeState && stateDistrictsMap.has(activeState)) {
+                    const districts = Array.from(stateDistrictsMap.get(activeState)).sort();
+                    districts.forEach(d => {
+                        const opt = document.createElement("option");
+                        opt.value = d;
+                        opt.textContent = d;
+                        districtSelect.appendChild(opt);
+                    });
+                    if (savedDistrict) {
+                        districtSelect.value = savedDistrict;
+                    }
+                }
+
+                const metaBox = document.getElementById(type === "corr" ? "corrPostalMetaWrapper" : "permPostalMetaWrapper");
+                if (metaBox) metaBox.style.display = "none";
+
+            } else {
+                setCityInputMode(type, false);
+
+                const uniqueStates = [...new Set(matchingOffices.map(o => o.state))].sort();
+                const uniqueDistricts = [...new Set(matchingOffices.map(o => o.district))].sort();
+
+                uniqueStates.forEach(s => {
+                    const opt = document.createElement("option");
+                    opt.value = s;
+                    opt.textContent = s;
+                    stateSelect.appendChild(opt);
+                });
+                if (uniqueStates.length === 1) {
+                    stateSelect.value = uniqueStates[0];
+                } else if (savedState && uniqueStates.includes(savedState)) {
+                    stateSelect.value = savedState;
+                }
+
+                uniqueDistricts.forEach(d => {
+                    const opt = document.createElement("option");
+                    opt.value = d;
+                    opt.textContent = d;
+                    districtSelect.appendChild(opt);
+                });
+                if (uniqueDistricts.length === 1) {
+                    districtSelect.value = uniqueDistricts[0];
+                } else if (savedDistrict && uniqueDistricts.includes(savedDistrict)) {
+                    districtSelect.value = savedDistrict;
+                }
+
+                const cityPlaceholder = document.createElement("option");
+                cityPlaceholder.value = "";
+                cityPlaceholder.textContent = currentLang === "hi" ? "-- डाकघर चुनें --" : "-- Select Post Office --";
+                citySelect.appendChild(cityPlaceholder);
+
+                matchingOffices.forEach(o => {
+                    const opt = document.createElement("option");
+                    opt.value = o.office;
+                    opt.textContent = o.office;
+                    citySelect.appendChild(opt);
+                });
+
+                const metaBox = document.getElementById(type === "corr" ? "corrPostalMetaWrapper" : "permPostalMetaWrapper");
+                if (metaBox) metaBox.style.display = "block";
+            }
+        }
+
+        function updatePostalMetadata(type) {
+            const pincodeInput = type === "corr" ? kycPincode : kycPermPincode;
+            const citySelect = type === "corr" ? kycCityTown : kycPermCityTown;
+            const stateSelect = type === "corr" ? kycState : kycPermState;
+            const districtSelect = type === "corr" ? kycDistrict : kycPermDistrict;
+
+            const pincode = pincodeInput.value.trim();
+            const selectedOfficeName = citySelect.value;
+            
+            const offices = pincodeMap.get(pincode) || [];
+            const office = offices.find(o => o.office === selectedOfficeName);
+
+            const suffix = type === "corr" ? "corr" : "perm";
+            
+            if (office) {
+                document.getElementById(`${suffix}PostalCircle`).textContent = office.circle;
+                document.getElementById(`${suffix}PostalRegion`).textContent = office.region;
+                document.getElementById(`${suffix}PostalDivision`).textContent = office.division;
+                document.getElementById(`${suffix}PostalOfficeType`).textContent = office.type;
+                document.getElementById(`${suffix}PostalDelivery`).textContent = office.delivery;
+                document.getElementById(`${suffix}PostalCoords`).textContent = `${office.lat}, ${office.lng}`;
+                
+                stateSelect.value = office.state;
+                
+                const uniqueDistricts = [...new Set(offices.map(o => o.district))].sort();
+                districtSelect.innerHTML = "";
+                uniqueDistricts.forEach(d => {
+                    const opt = document.createElement("option");
+                    opt.value = d;
+                    opt.textContent = d;
+                    districtSelect.appendChild(opt);
+                });
+                districtSelect.value = office.district;
+            } else {
+                document.getElementById(`${suffix}PostalCircle`).textContent = "-";
+                document.getElementById(`${suffix}PostalRegion`).textContent = "-";
+                document.getElementById(`${suffix}PostalDivision`).textContent = "-";
+                document.getElementById(`${suffix}PostalOfficeType`).textContent = "-";
+                document.getElementById(`${suffix}PostalDelivery`).textContent = "-";
+                document.getElementById(`${suffix}PostalCoords`).textContent = "-";
+            }
+        }
+
+        function syncCorrespondenceToPermanent() {
+            if (!kycSameAddress.checked) return;
+
+            kycPermPincode.value = kycPincode.value;
+            kycPermShowAllStates.checked = kycShowAllStates.checked;
+            
+            updateAddressDropdowns(kycPermPincode, kycPermState, kycPermDistrict, kycPermCityTown, kycPermShowAllStates, "perm");
+            
+            kycPermState.value = kycState.value;
+            
+            if (kycPermShowAllStates.checked) {
+                const activeState = kycPermState.value;
+                kycPermDistrict.innerHTML = "";
+                const placeholder = document.createElement("option");
+                placeholder.value = "";
+                placeholder.textContent = currentLang === "hi" ? "-- जिला चुनें --" : "-- Select District --";
+                kycPermDistrict.appendChild(placeholder);
+                if (activeState && stateDistrictsMap.has(activeState)) {
+                    const districts = Array.from(stateDistrictsMap.get(activeState)).sort();
+                    districts.forEach(d => {
+                        const opt = document.createElement("option");
+                        opt.value = d;
+                        opt.textContent = d;
+                        kycPermDistrict.appendChild(opt);
+                    });
+                }
+            }
+            kycPermDistrict.value = kycDistrict.value;
+
+            const isManual = kycPermShowAllStates.checked || !pincodeDbLoaded || kycPermPincode.value.length < 6 || !pincodeMap.has(kycPermPincode.value);
+            if (isManual) {
+                const corrManualInput = document.getElementById("kycCityTownManual");
+                const permManualInput = document.getElementById("kycPermCityTownManual");
+                if (corrManualInput && permManualInput) {
+                    permManualInput.value = corrManualInput.value;
+                }
+            } else {
+                kycPermCityTown.value = kycCityTown.value;
+                updatePostalMetadata("perm");
+            }
+
+            document.getElementById("kycPermAddressLine").value = document.getElementById("kycAddressLine").value;
+        }
+
+        function setupAddressEvents(pincodeInput, stateSelect, districtSelect, citySelect, showAllToggle, type) {
+            pincodeInput.addEventListener("input", () => {
+                pincodeInput.value = pincodeInput.value.replace(/[^0-9]/g, "").slice(0, 6);
+                
+                const pincode = pincodeInput.value.trim();
+                const statusMsg = type === "corr" ? pincodeStatusMsg : permPincodeStatusMsg;
+
+                if (pincode.length === 6) {
+                    if (pincodeDbLoaded) {
+                        const offices = pincodeMap.get(pincode) || [];
+                        if (offices.length > 0) {
+                            if (statusMsg) {
+                                statusMsg.textContent = currentLang === "hi" ? "डाक कोड मिल गया!" : "PIN code found!";
+                                statusMsg.style.color = "var(--success)";
+                            }
+                            showAllToggle.checked = false;
+                            updateAddressDropdowns(pincodeInput, stateSelect, districtSelect, citySelect, showAllToggle, type);
+                        } else {
+                            if (statusMsg) {
+                                statusMsg.textContent = currentLang === "hi" ? "निर्देशिका में पिन नहीं मिला। मैन्युअल इनपुट सक्षम।" : "PIN not found. Manual entry enabled.";
+                                statusMsg.style.color = "var(--warning)";
+                            }
+                            showAllToggle.checked = true;
+                            updateAddressDropdowns(pincodeInput, stateSelect, districtSelect, citySelect, showAllToggle, type);
+                        }
+                    }
+                } else {
+                    if (statusMsg) statusMsg.textContent = "";
+                    updateAddressDropdowns(pincodeInput, stateSelect, districtSelect, citySelect, showAllToggle, type);
+                }
+                
+                if (type === "corr" && kycSameAddress && kycSameAddress.checked) {
+                    syncCorrespondenceToPermanent();
+                }
+            });
+
+            showAllToggle.addEventListener("change", () => {
+                updateAddressDropdowns(pincodeInput, stateSelect, districtSelect, citySelect, showAllToggle, type);
+                if (type === "corr" && kycSameAddress && kycSameAddress.checked) {
+                    syncCorrespondenceToPermanent();
+                }
+            });
+
+            stateSelect.addEventListener("change", () => {
+                if (showAllToggle.checked) {
+                    const savedDistrict = districtSelect.value;
+                    districtSelect.innerHTML = "";
+                    const districtPlaceholder = document.createElement("option");
+                    districtPlaceholder.value = "";
+                    districtPlaceholder.textContent = currentLang === "hi" ? "-- जिला चुनें --" : "-- Select District --";
+                    districtSelect.appendChild(districtPlaceholder);
+
+                    const activeState = stateSelect.value;
+                    if (activeState && stateDistrictsMap.has(activeState)) {
+                        const districts = Array.from(stateDistrictsMap.get(activeState)).sort();
+                        districts.forEach(d => {
+                            const opt = document.createElement("option");
+                            opt.value = d;
+                            opt.textContent = d;
+                            districtSelect.appendChild(opt);
+                        });
+                        if (savedDistrict) {
+                            districtSelect.value = savedDistrict;
+                        }
+                    }
+                }
+                if (type === "corr" && kycSameAddress && kycSameAddress.checked) {
+                    syncCorrespondenceToPermanent();
+                }
+            });
+
+            districtSelect.addEventListener("change", () => {
+                if (type === "corr" && kycSameAddress && kycSameAddress.checked) {
+                    syncCorrespondenceToPermanent();
+                }
+            });
+
+            citySelect.addEventListener("change", () => {
+                if (!showAllToggle.checked) {
+                    updatePostalMetadata(type);
+                }
+                if (type === "corr" && kycSameAddress && kycSameAddress.checked) {
+                    syncCorrespondenceToPermanent();
+                }
+            });
+            
+            document.addEventListener("input", e => {
+                if (e.target && e.target.id === (type === "corr" ? "kycCityTownManual" : "kycPermCityTownManual")) {
+                    if (type === "corr" && kycSameAddress && kycSameAddress.checked) {
+                        syncCorrespondenceToPermanent();
+                    }
+                }
+            });
+        }
+
+        function setupKycEvents() {
+            // Live sync of street address
+            const kycAddressLineInput = document.getElementById("kycAddressLine");
+            if (kycAddressLineInput) {
+                kycAddressLineInput.addEventListener("input", () => {
+                    if (kycSameAddress && kycSameAddress.checked) {
+                        document.getElementById("kycPermAddressLine").value = kycAddressLineInput.value;
+                    }
+                });
+            }
+
+            // Same address toggle checkbox
+            if (kycSameAddress) {
+                kycSameAddress.addEventListener("change", () => {
+                    const permFields = document.querySelectorAll(".perm-field input, .perm-field select");
+                    if (kycSameAddress.checked) {
+                        syncCorrespondenceToPermanent();
+                        permFields.forEach(f => {
+                            if (f.id !== "kycSameAddress") {
+                                f.disabled = true;
+                                f.style.background = "rgba(15,23,42,0.04)";
+                                f.style.cursor = "not-allowed";
+                            }
+                        });
+                    } else {
+                        permFields.forEach(f => {
+                            f.disabled = false;
+                            f.style.background = "";
+                            f.style.cursor = "";
+                        });
+                        updateAddressDropdowns(kycPermPincode, kycPermState, kycPermDistrict, kycPermCityTown, kycPermShowAllStates, "perm");
+                    }
+                });
+            }
+
+            // Citizenship toggle
+            if (kycCitizenship) {
+                kycCitizenship.addEventListener("change", () => {
+                    if (kycCitizenship.value === "other") {
+                        kycCitizenCountryWrapper.style.display = "block";
+                        kycCitizenCountry.required = true;
+                    } else {
+                        kycCitizenCountryWrapper.style.display = "none";
+                        kycCitizenCountry.required = false;
+                        kycCitizenCountry.value = "";
+                    }
+                });
+            }
+
+            // Tax Residency Outside India toggle
+            if (kycTaxOutside) {
+                kycTaxOutside.addEventListener("change", () => {
+                    taxOutsideFields.forEach(f => {
+                        f.style.display = kycTaxOutside.checked ? "block" : "none";
+                        const input = f.querySelector("input");
+                        if (input) {
+                            input.required = kycTaxOutside.checked;
+                            if (!kycTaxOutside.checked) input.value = "";
+                        }
+                    });
+                });
+            }
+
+            // Proof of Identity Specifier toggle
+            if (kycPoiSubmitted) {
+                kycPoiSubmitted.addEventListener("change", () => {
+                    if (kycPoiSubmitted.value === "other") {
+                        kycPoiOtherSpecWrapper.style.display = "block";
+                        kycPoiOtherSpec.required = true;
+                    } else {
+                        kycPoiOtherSpecWrapper.style.display = "none";
+                        kycPoiOtherSpec.required = false;
+                        kycPoiOtherSpec.value = "";
+                    }
+                });
+            }
+
+            // Occupation Specifier toggle
+            if (kycOccupation) {
+                kycOccupation.addEventListener("change", () => {
+                    if (kycOccupation.value === "others") {
+                        kycOccupationOthersWrapper.style.display = "block";
+                        kycOccupationOthers.required = true;
+                    } else {
+                        kycOccupationOthersWrapper.style.display = "none";
+                        kycOccupationOthers.required = false;
+                        kycOccupationOthers.value = "";
+                    }
+                });
+            }
+
+            // Photo Upload
+            if (kycPhotoBtn && kycPhotoFile) {
+                kycPhotoBtn.addEventListener("click", () => {
+                    kycPhotoFile.click();
+                });
+
+                kycPhotoFile.addEventListener("change", () => {
+                    const file = kycPhotoFile.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            photoImg.src = e.target.result;
+                            photoImg.style.display = "block";
+                            photoPlaceholder.style.display = "none";
+                            kycPhotoBtn.textContent = currentLang === "hi" ? "फोटो बदलें" : "Change Photo";
+                        }
+                        reader.readAsDataURL(file);
+                    }
+                });
+            }
+
+            // Document validations
+            // PAN
+            const kycPanInput = document.getElementById("kycPan");
+            if (kycPanInput) {
+                kycPanInput.addEventListener("input", () => {
+                    kycPanInput.value = kycPanInput.value.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 10);
+                });
+                kycPanInput.addEventListener("change", () => {
+                    const val = kycPanInput.value.trim();
+                    if (val && !/^[A-Z]{5}[0-9]{4}[A-Z]$/.test(val)) {
+                        alert(currentLang === "hi" ? "अमान्य पैन प्रारूप! कृपया AAAAA9999A का उपयोग करें।" : "Invalid PAN format! Please use AAAAA9999A format.");
+                        kycPanInput.focus();
+                    }
+                });
+            }
+
+            // Aadhaar
+            const kycAadhaarInput = document.getElementById("kycAadhaar");
+            if (kycAadhaarInput) {
+                kycAadhaarInput.addEventListener("input", () => {
+                    kycAadhaarInput.value = kycAadhaarInput.value.replace(/[^0-9]/g, "").slice(0, 12);
+                });
+                kycAadhaarInput.addEventListener("change", () => {
+                    const val = kycAadhaarInput.value.trim();
+                    if (val && val.length !== 12) {
+                        alert(currentLang === "hi" ? "आधार नंबर ठीक १२ अंकों का होना चाहिए!" : "Aadhaar number must be exactly 12 digits!");
+                        kycAadhaarInput.focus();
+                    }
+                });
+            }
+
+            // Mobile
+            const kycMobileInput = document.getElementById("kycMobile");
+            if (kycMobileInput) {
+                kycMobileInput.addEventListener("input", () => {
+                    kycMobileInput.value = kycMobileInput.value.replace(/[^0-9]/g, "").slice(0, 10);
+                });
+                kycMobileInput.addEventListener("change", () => {
+                    const val = kycMobileInput.value.trim();
+                    if (val && val.length !== 10) {
+                        alert(currentLang === "hi" ? "मोबाइल नंबर १० अंकों का होना चाहिए!" : "Mobile number must be exactly 10 digits!");
+                        kycMobileInput.focus();
+                    }
+                });
+            }
+
+            // Bank IFSC
+            const kycBankIfscInput = document.getElementById("kycBankIfsc");
+            if (kycBankIfscInput) {
+                kycBankIfscInput.addEventListener("input", () => {
+                    kycBankIfscInput.value = kycBankIfscInput.value.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 11);
+                });
+                kycBankIfscInput.addEventListener("change", () => {
+                    const val = kycBankIfscInput.value.trim();
+                    if (val && !/^[A-Z]{4}0[A-Z0-9]{6}$/.test(val)) {
+                        alert(currentLang === "hi" ? "अमान्य आईएफएससी (IFSC) कोड! प्रारूप: ABCD0123456" : "Invalid IFSC Code! Expected format: ABCD0123456");
+                        kycBankIfscInput.focus();
+                    }
+                });
+            }
+
+            // Bank MICR
+            const kycBankMicrInput = document.getElementById("kycBankMicr");
+            if (kycBankMicrInput) {
+                kycBankMicrInput.addEventListener("input", () => {
+                    kycBankMicrInput.value = kycBankMicrInput.value.replace(/[^0-9]/g, "").slice(0, 9);
+                });
+                kycBankMicrInput.addEventListener("change", () => {
+                    const val = kycBankMicrInput.value.trim();
+                    if (val && val.length !== 9) {
+                        alert(currentLang === "hi" ? "अमान्य एमआईसीआर (MICR) कोड! ९ अंकों की संख्या होनी चाहिए।" : "Invalid MICR Code! Must be a 9-digit number.");
+                        kycBankMicrInput.focus();
+                    }
+                });
+            }
+
+            // Set default dates
+            const todayStr = new Date().toISOString().split("T")[0];
+            if (kycSigDate) kycSigDate.value = todayStr;
+            if (kycIpvDate) kycIpvDate.value = todayStr;
+        }
+
+        // --- End KYC Postal Lookup and Form Logic ---
+
         updateThemeUI();
+
+        setupAddressEvents(kycPincode, kycState, kycDistrict, kycCityTown, kycShowAllStates, "corr");
+        setupAddressEvents(kycPermPincode, kycPermState, kycPermDistrict, kycPermCityTown, kycPermShowAllStates, "perm");
+        setupKycEvents();
 
         loadXML();
     </script>
