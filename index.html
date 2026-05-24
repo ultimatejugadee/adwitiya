@@ -287,7 +287,7 @@
             font-weight: 450;
         }
 
-        input,
+        input:not([type="checkbox"]),
         select {
             width: 100%;
             border: 0;
@@ -328,9 +328,15 @@
             box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.2), 0 10px 28px rgba(0, 0, 0, 0.16);
         }
 
-        input:focus,
+        input:not([type="checkbox"]):focus,
         select:focus {
             transform: translateY(-1px);
+        }
+
+        input[type="checkbox"] {
+            flex-shrink: 0;
+            accent-color: var(--accent);
+            cursor: pointer;
         }
 
         #pan {
