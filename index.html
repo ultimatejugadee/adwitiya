@@ -310,32 +310,44 @@
         }
 
         #pan.state-blank,
-        #kycEmail.state-blank {
+        #kycEmail.state-blank,
+        #kycMobile.state-blank,
+        .contact-value-input.state-blank {
             outline: 3px solid var(--warning);
             box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.2), 0 10px 28px rgba(0, 0, 0, 0.16);
         }
         [data-theme="light"] #pan.state-blank,
-        [data-theme="light"] #kycEmail.state-blank {
+        [data-theme="light"] #kycEmail.state-blank,
+        [data-theme="light"] #kycMobile.state-blank,
+        [data-theme="light"] .contact-value-input.state-blank {
             outline: 3px solid var(--warning);
             box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.2), 0 10px 28px rgba(0, 0, 0, 0.16);
         }
         #pan.state-invalid,
-        #kycEmail.state-invalid {
+        #kycEmail.state-invalid,
+        #kycMobile.state-invalid,
+        .contact-value-input.state-invalid {
             outline: 3px solid var(--danger);
             box-shadow: 0 0 0 3px rgba(251, 113, 133, 0.2), 0 10px 28px rgba(0, 0, 0, 0.16);
         }
         [data-theme="light"] #pan.state-invalid,
-        [data-theme="light"] #kycEmail.state-invalid {
+        [data-theme="light"] #kycEmail.state-invalid,
+        [data-theme="light"] #kycMobile.state-invalid,
+        [data-theme="light"] .contact-value-input.state-invalid {
             outline: 3px solid var(--danger);
             box-shadow: 0 0 0 3px rgba(225, 29, 72, 0.2), 0 10px 28px rgba(0, 0, 0, 0.16);
         }
         #pan.state-valid,
-        #kycEmail.state-valid {
+        #kycEmail.state-valid,
+        #kycMobile.state-valid,
+        .contact-value-input.state-valid {
             outline: 3px solid var(--success);
             box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.2), 0 10px 28px rgba(0, 0, 0, 0.16);
         }
         [data-theme="light"] #pan.state-valid,
-        [data-theme="light"] #kycEmail.state-valid {
+        [data-theme="light"] #kycEmail.state-valid,
+        [data-theme="light"] #kycMobile.state-valid,
+        [data-theme="light"] .contact-value-input.state-valid {
             outline: 3px solid var(--success);
             box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.2), 0 10px 28px rgba(0, 0, 0, 0.16);
         }
@@ -3452,21 +3464,43 @@
             
             const val = select.value;
             const isNumber = ["whatsapp", "mobile_alt", "phone_off", "phone_res"].includes(val);
+            const isMobile = ["whatsapp", "mobile_alt"].includes(val);
+
+            input.classList.remove("state-blank", "state-invalid", "state-valid");
             
             if (isNumber) {
                 input.placeholder = t("kyc_placeholder_number") || (currentLang === "hi" ? "नंबर दर्ज करें" : "Enter number");
                 input.type = "tel";
+                
+                const validateDynMobile = () => {
+                    if (isMobile) {
+                        const inputVal = input.value.trim();
+                        input.classList.remove("state-blank", "state-invalid", "state-valid");
+                        if (!inputVal) {
+                            input.classList.add("state-blank");
+                        } else if (inputVal.length === 10) {
+                            input.classList.add("state-valid");
+                        } else {
+                            input.classList.add("state-invalid");
+                        }
+                    }
+                };
+
                 input.oninput = (e) => {
-                    if (val === "whatsapp" || val === "mobile_alt") {
+                    if (isMobile) {
                         e.target.value = e.target.value.replace(/[^0-9]/g, "").slice(0, 10);
+                        validateDynMobile();
                     } else {
                         e.target.value = e.target.value.replace(/[^0-9\-+() ]/g, "");
                     }
                 };
+                input.onblur = validateDynMobile;
+                validateDynMobile();
             } else {
                 input.placeholder = t("kyc_placeholder_handle") || (currentLang === "hi" ? "हैंडल या उपयोगकर्ता नाम दर्ज करें" : "Enter handle or username");
                 input.type = "text";
                 input.oninput = null;
+                input.onblur = null;
             }
         }
 
@@ -3897,9 +3931,23 @@
             // Mobile
             const kycMobileInput = document.getElementById("kycMobile");
             if (kycMobileInput) {
+                const validateMobile = () => {
+                    const val = kycMobileInput.value.trim();
+                    kycMobileInput.classList.remove("state-blank", "state-invalid", "state-valid");
+                    if (!val) {
+                        kycMobileInput.classList.add("state-blank");
+                    } else if (val.length === 10) {
+                        kycMobileInput.classList.add("state-valid");
+                    } else {
+                        kycMobileInput.classList.add("state-invalid");
+                    }
+                };
+
                 kycMobileInput.addEventListener("input", () => {
                     kycMobileInput.value = kycMobileInput.value.replace(/[^0-9]/g, "").slice(0, 10);
+                    validateMobile();
                 });
+                kycMobileInput.addEventListener("blur", validateMobile);
                 kycMobileInput.addEventListener("change", () => {
                     const val = kycMobileInput.value.trim();
                     if (val && val.length !== 10) {
@@ -3907,6 +3955,7 @@
                         kycMobileInput.focus();
                     }
                 });
+                validateMobile();
             }
 
             // Bank IFSC
