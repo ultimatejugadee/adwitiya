@@ -45,6 +45,22 @@
             <description>OCI is a citizenship or immigration status of a natural person and not a separate legal entity category.</description>
             <keywords>OCI,overseas citizen,person,individual,foreign citizen</keywords>
           </subtype>
+          <subtype id="resident-individual" name="Resident Individual" panChars="P" registration="Aadhaar / PAN / Passport">
+            <description>A natural person residing in India.</description>
+            <keywords>resident individual,resident,individual,person</keywords>
+          </subtype>
+          <subtype id="nri" name="Non Resident Indian (NRI)" panChars="P" registration="Passport / OCI Card / Visa">
+            <description>A person of Indian origin or Indian citizen residing outside India.</description>
+            <keywords>NRI,non resident indian,foreign resident,individual</keywords>
+          </subtype>
+          <subtype id="pio" name="Person of Indian Origin (PIO)" panChars="P" registration="PIO Card / OCI Card">
+            <description>A person of Indian origin holding a PIO card or status.</description>
+            <keywords>PIO,person of indian origin,individual,card</keywords>
+          </subtype>
+          <subtype id="foreign-national" name="Foreign National" panChars="P" registration="Passport / Visa / Tax Residency Certificate">
+            <description>A foreign citizen who is not an OCI or PIO holder.</description>
+            <keywords>foreign national,foreigner,foreign citizen,passport,visa</keywords>
+          </subtype>
         </subtypes>
       </entityType>
     </group>

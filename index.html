@@ -875,8 +875,7 @@
 
                     <div class="info-box">
                         <h3 id="headingSubtypeDescription">Subtype Description</h3>
-                        <p id="subtypeDescription">Select a subcategory to see registration and details.</p>
-                        <div id="registration" class="registration"></div>
+                        <p id="subtypeDescription">Select a subcategory to see details.</p>
                     </div>
                 </div>
 
@@ -892,7 +891,7 @@
                         </label>
                     </div>
                     
-                    <div class="tax-fields-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px;">
+                    <div class="tax-fields-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
                         <div class="field tax-outside-field" style="display: none;">
                             <label for="kycTaxJurisdiction" id="labelKycTaxJurisdiction">ISO Country Code of Tax Residence</label>
                             <div class="custom-select-wrapper" style="position: relative;">
@@ -931,20 +930,12 @@
                 <h2 class="section-title full" id="kycSecATitle">A. Identity Details</h2>
                 
                 <div class="field">
-                    <label for="kycFullname" id="labelKycFullname">Name (Same as ID Proof)*</label>
-                    <input id="kycFullname" placeholder="Enter Full Name" required />
+                    <label for="kycLastname" id="labelKycLastname">Last Name/Surname (Same as ID Proof)*</label>
+                    <input id="kycLastname" placeholder="Enter Last Name/Surname" required />
                 </div>
                 <div class="field">
-                    <label for="kycMaidenname" id="labelKycMaidenname">Maiden Name (If any)</label>
-                    <input id="kycMaidenname" placeholder="Enter Maiden Name" />
-                </div>
-                <div class="field">
-                    <label for="kycFatherSpouse" id="labelKycFatherSpouse">Father's / Spouse's Name*</label>
-                    <input id="kycFatherSpouse" placeholder="Enter Father's / Spouse's Name" required />
-                </div>
-                <div class="field">
-                    <label for="kycMothername" id="labelKycMothername">Mother's Name*</label>
-                    <input id="kycMothername" placeholder="Enter Mother's Name" required />
+                    <label for="kycFirstmiddle" id="labelKycFirstmiddle">First Name and Middle Name (if applicable; Same as ID Proof)*</label>
+                    <input id="kycFirstmiddle" placeholder="Enter First and Middle Name" required />
                 </div>
                 
                 <div class="field">
@@ -955,6 +946,29 @@
                         <option value="female" id="optKycGenderFemale">Female</option>
                         <option value="trans" id="optKycGenderTrans">Transgender</option>
                     </select>
+                </div>
+                
+                <div class="field" id="kycMaidennameWrapper" style="display: none;">
+                    <label for="kycMaidenname" id="labelKycMaidenname">Maiden Name (If any)</label>
+                    <input id="kycMaidenname" placeholder="Enter Maiden Name" />
+                </div>
+
+                <div class="field">
+                    <label for="kycFatherSpouseType" id="labelKycFatherSpouseType">Father / Spouse Selection*</label>
+                    <select id="kycFatherSpouseType" required>
+                        <option value="" id="optKycFatherSpouseTypePlaceholder">-- Select Relationship --</option>
+                        <option value="father" id="optKycFatherSpouseTypeFather">Father</option>
+                        <option value="spouse" id="optKycFatherSpouseTypeSpouse">Spouse</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label for="kycFatherSpouse" id="labelKycFatherSpouse">Father's / Spouse's Name*</label>
+                    <input id="kycFatherSpouse" placeholder="Enter Father's / Spouse's Name" required />
+                </div>
+                
+                <div class="field">
+                    <label for="kycMothername" id="labelKycMothername">Mother's Name*</label>
+                    <input id="kycMothername" placeholder="Enter Mother's Name" required />
                 </div>
                 
                 <div class="field">
@@ -988,15 +1002,7 @@
                     </div>
                 </div>
                 
-                <div class="field">
-                    <label for="kycResidenceStatus" id="labelKycResidenceStatus">Residential Status*</label>
-                    <select id="kycResidenceStatus" required>
-                        <option value="resident" id="optKycResIndividual">Resident Individual</option>
-                        <option value="nri" id="optKycResNri">Non Resident Indian</option>
-                        <option value="pio" id="optKycResPio">Person of Indian Origin</option>
-                        <option value="foreign" id="optKycResForeign">Foreign National</option>
-                    </select>
-                </div>
+
 
                 <!-- Photograph Box -->
                 <div class="field photo-field" style="grid-row: span 3; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 2px dashed var(--input-border); border-radius: 16px; padding: 16px; background: rgba(255,255,255,0.02); text-align: center;">
@@ -1463,6 +1469,13 @@
 
         // KYC Form DOM References
         const kycForm = document.getElementById("kycForm");
+        const kycLastname = document.getElementById("kycLastname");
+        const kycFirstmiddle = document.getElementById("kycFirstmiddle");
+        const kycGender = document.getElementById("kycGender");
+        const kycMaidennameWrapper = document.getElementById("kycMaidennameWrapper");
+        const kycFatherSpouseType = document.getElementById("kycFatherSpouseType");
+        const labelKycFatherSpouse = document.getElementById("labelKycFatherSpouse");
+        const kycFatherSpouse = document.getElementById("kycFatherSpouse");
         const kycCitizenship = document.getElementById("kycCitizenship");
         const kycCitizenCountryWrapper = document.getElementById("kycCitizenCountryWrapper");
         const kycCitizenCountry = document.getElementById("kycCitizenCountry");
@@ -1822,7 +1835,9 @@
                 "kycHeader": "kyc_header",
                 "kycInstruction": "kyc_instruction",
                 "kycSecATitle": "kyc_sec_a_title",
-                "labelKycFullname": "kyc_fullname",
+                "labelKycLastname": "kyc_lastname",
+                "labelKycFirstmiddle": "kyc_firstmiddle",
+                "labelKycFatherSpouseType": "kyc_father_spouse_select",
                 "labelKycMaidenname": "kyc_maidenname",
                 "labelKycFatherSpouse": "kyc_father_spouse",
                 "labelKycMothername": "kyc_mothername",
@@ -1831,7 +1846,6 @@
                 "labelKycDob": "kyc_dob",
                 "labelKycCitizenship": "kyc_citizenship",
                 "labelKycCountryCode": "kyc_country_code",
-                "labelKycResidenceStatus": "kyc_residence_status",
                 "labelKycPhotograph": "kyc_photograph_label",
                 "labelKycTaxOutsideCheckbox": "kyc_tax_outside_checkbox",
                 "labelKycTaxJurisdiction": "kyc_tax_jurisdiction",
@@ -1926,6 +1940,9 @@
                 "optKycModeOnline": "kyc_mode_online",
                 "optKycModeDigiLocker": "kyc_mode_digilocker",
                 "optKycGenderPlaceholder": "kyc_gender",
+                "optKycFatherSpouseTypePlaceholder": "kyc_father_spouse_select_placeholder",
+                "optKycFatherSpouseTypeFather": "kyc_father_option",
+                "optKycFatherSpouseTypeSpouse": "kyc_spouse_option",
                 "optKycGenderMale": "kyc_gender_male",
                 "optKycGenderFemale": "kyc_gender_female",
                 "optKycGenderTrans": "kyc_gender_trans",
@@ -1935,10 +1952,6 @@
                 "optKycMaritalOther": "kyc_marital_other",
                 "optKycCitizenIndian": "kyc_citizen_indian",
                 "optKycCitizenOther": "kyc_citizen_other",
-                "optKycResIndividual": "kyc_res_individual",
-                "optKycResNri": "kyc_res_nri",
-                "optKycResPio": "kyc_res_pio",
-                "optKycResForeign": "kyc_res_foreign",
                 "optKycPoiPan": "kyc_poi_pan",
                 "optKycPoiOther": "kyc_poi_other",
                 "optKycAddrResidential": "kyc_addr_residential",
@@ -1994,7 +2007,8 @@
 
             // Input placeholders
             const placeholderMappings = {
-                "kycFullname": "kyc_fullname",
+                "kycLastname": "kyc_lastname",
+                "kycFirstmiddle": "kyc_firstmiddle",
                 "kycMaidenname": "kyc_maidenname",
                 "kycFatherSpouse": "kyc_father_spouse",
                 "kycMothername": "kyc_mothername",
@@ -2039,6 +2053,13 @@
                 if (elem) {
                     elem.placeholder = t(labelId).replace("*", "") || elem.placeholder;
                 }
+            }
+
+            if (typeof updateFatherSpouseLabel === "function") {
+                updateFatherSpouseLabel();
+            }
+            if (typeof updateMaidenNameVisibility === "function") {
+                updateMaidenNameVisibility();
             }
         }
 
@@ -2617,11 +2638,44 @@
             }
         }
 
+        function updateMaidenNameVisibility() {
+            if (kycGender && kycMaidennameWrapper) {
+                if (kycGender.value === "female") {
+                    kycMaidennameWrapper.style.display = "block";
+                } else {
+                    kycMaidennameWrapper.style.display = "none";
+                    const input = kycMaidennameWrapper.querySelector("input");
+                    if (input) input.value = "";
+                }
+            }
+        }
+
+        function updateFatherSpouseLabel() {
+            if (!kycFatherSpouseType || !labelKycFatherSpouse) return;
+            const val = kycFatherSpouseType.value;
+            if (val === "father") {
+                labelKycFatherSpouse.textContent = t("kyc_father_name") || "Father's Name*";
+                if (kycFatherSpouse) {
+                    kycFatherSpouse.placeholder = currentLang === "hi" ? "पिता का नाम दर्ज करें" : "Enter Father's Name";
+                }
+            } else if (val === "spouse") {
+                labelKycFatherSpouse.textContent = t("kyc_spouse_name") || "Spouse's Name*";
+                if (kycFatherSpouse) {
+                    kycFatherSpouse.placeholder = currentLang === "hi" ? "जीवनसाथी का नाम दर्ज करें" : "Enter Spouse's Name";
+                }
+            } else {
+                labelKycFatherSpouse.textContent = t("kyc_father_spouse") || "Father's / Spouse's Name*";
+                if (kycFatherSpouse) {
+                    kycFatherSpouse.placeholder = currentLang === "hi" ? "पिता / जीवनसाथी का नाम दर्ज करें" : "Enter Father's / Spouse's Name";
+                }
+            }
+        }
+
         function updateDescriptions() {
             if (!selectedEntity) {
                 entityDescription.textContent = t("desc_entity_default");
                 subtypeDescription.textContent = t("desc_subtype_default");
-                registration.innerHTML = "";
+                if (registration) registration.innerHTML = "";
                 updateTaxResidencyVisibility();
                 return;
             }
@@ -2630,22 +2684,24 @@
 
             if (!selectedSubtype) {
                 subtypeDescription.textContent = t("desc_subtype_default");
-                registration.innerHTML = "";
+                if (registration) registration.innerHTML = "";
                 updateTaxResidencyVisibility();
                 return;
             }
 
             subtypeDescription.textContent = getSubtypeDescription(selectedSubtype.id, selectedSubtype.description);
             
-            const regLabel = t("reg_identifier");
-            const panLabel = t("reg_pan_mapping");
-            const regVal = getSubtypeRegistration(selectedSubtype.id, selectedSubtype.registration) || "PAN / relevant registration";
-            const panVal = selectedSubtype.panChars.join(" / ");
-            
-            registration.innerHTML = `
-                <strong>${regLabel}:</strong> ${regVal}
-                <br><strong>${panLabel}:</strong> ${panVal}
-            `;
+            if (registration) {
+                const regLabel = t("reg_identifier");
+                const panLabel = t("reg_pan_mapping");
+                const regVal = getSubtypeRegistration(selectedSubtype.id, selectedSubtype.registration) || "PAN / relevant registration";
+                const panVal = selectedSubtype.panChars.join(" / ");
+                
+                registration.innerHTML = `
+                    <strong>${regLabel}:</strong> ${regVal}
+                    <br><strong>${panLabel}:</strong> ${panVal}
+                `;
+            }
             updateTaxResidencyVisibility();
         }
 
@@ -3249,6 +3305,20 @@
                         kycCitizenCountry.required = false;
                         kycCitizenCountry.value = "";
                     }
+                });
+            }
+
+            // Gender toggle for Maiden Name
+            if (kycGender) {
+                kycGender.addEventListener("change", () => {
+                    updateMaidenNameVisibility();
+                });
+            }
+
+            // Relationship selection toggle for Father/Spouse name label
+            if (kycFatherSpouseType) {
+                kycFatherSpouseType.addEventListener("change", () => {
+                    updateFatherSpouseLabel();
                 });
             }
 

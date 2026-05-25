@@ -287,6 +287,38 @@
       <en>Name (Same as ID Proof)*</en>
       <hi>पूरा नाम (पहचान पत्र के अनुसार)*</hi>
     </label>
+    <label id="kyc_lastname">
+      <en>Last Name/Surname (Same as ID Proof)*</en>
+      <hi>अंतिम नाम/उपनाम (पहचान पत्र के अनुसार)*</hi>
+    </label>
+    <label id="kyc_firstmiddle">
+      <en>First Name and Middle Name (if applicable; Same as ID Proof)*</en>
+      <hi>प्रथम नाम और मध्य नाम (यदि लागू हो; पहचान पत्र के अनुसार)*</hi>
+    </label>
+    <label id="kyc_father_spouse_select">
+      <en>Father / Spouse Selection*</en>
+      <hi>पिता / जीवनसाथी चयन*</hi>
+    </label>
+    <label id="kyc_father_spouse_select_placeholder">
+      <en>Select Relationship</en>
+      <hi>संबंध चुनें</hi>
+    </label>
+    <label id="kyc_father_option">
+      <en>Father</en>
+      <hi>पिता (Father)</hi>
+    </label>
+    <label id="kyc_spouse_option">
+      <en>Spouse</en>
+      <hi>जीवनसाथी (Spouse)</hi>
+    </label>
+    <label id="kyc_father_name">
+      <en>Father's Name*</en>
+      <hi>पिता का नाम*</hi>
+    </label>
+    <label id="kyc_spouse_name">
+      <en>Spouse's Name*</en>
+      <hi>जीवनसाथी का नाम*</hi>
+    </label>
     <label id="kyc_maidenname">
       <en>Maiden Name (If any)</en>
       <hi>विवाह पूर्व नाम (यदि कोई हो)</hi>
@@ -1230,6 +1262,62 @@
       <description>
         <en>OCI is a citizenship or immigration status of a natural person and not a separate legal entity category.</en>
         <hi>OCI एक प्राकृतिक व्यक्ति की नागरिकता या आप्रवासन स्थिति है न कि एक अलग कानूनी इकाई श्रेणी।</hi>
+      </description>
+    </subtype>
+    <subtype id="resident-individual">
+      <name>
+        <en>Resident Individual</en>
+        <hi>निवासी व्यक्ति (Resident Individual)</hi>
+      </name>
+      <registration>
+        <en>Aadhaar / PAN / Passport</en>
+        <hi>आधार / पैन / पासपोर्ट</hi>
+      </registration>
+      <description>
+        <en>A natural person residing in India.</en>
+        <hi>भारत में रहने वाला एक प्राकृतिक व्यक्ति।</hi>
+      </description>
+    </subtype>
+    <subtype id="nri">
+      <name>
+        <en>Non Resident Indian (NRI)</en>
+        <hi>अनिवासी भारतीय (NRI)</hi>
+      </name>
+      <registration>
+        <en>Passport / OCI Card / Visa</en>
+        <hi>पासपोर्ट / ओसीआई कार्ड / वीजा</hi>
+      </registration>
+      <description>
+        <en>A person of Indian origin or Indian citizen residing outside India.</en>
+        <hi>भारत से बाहर रहने वाला एक भारतीय मूल का व्यक्ति या भारतीय नागरिक।</hi>
+      </description>
+    </subtype>
+    <subtype id="pio">
+      <name>
+        <en>Person of Indian Origin (PIO)</en>
+        <hi>भारतीय मूल के व्यक्ति (PIO)</hi>
+      </name>
+      <registration>
+        <en>PIO Card / OCI Card</en>
+        <hi>पीआईओ कार्ड / ओसीआई कार्ड</hi>
+      </registration>
+      <description>
+        <en>A person of Indian origin holding a PIO card or status.</en>
+        <hi>पीआईओ कार्ड या दर्जा रखने वाला भारतीय मूल का व्यक्ति।</hi>
+      </description>
+    </subtype>
+    <subtype id="foreign-national">
+      <name>
+        <en>Foreign National</en>
+        <hi>विदेशी नागरिक (Foreign National)</hi>
+      </name>
+      <registration>
+        <en>Passport / Visa / Tax Residency Certificate</en>
+        <hi>पासपोर्ट / वीजा / टैक्स रेजीडेंसी सर्टिफिकेट</hi>
+      </registration>
+      <description>
+        <en>A foreign citizen who is not an OCI or PIO holder.</en>
+        <hi>एक विदेशी नागरिक जो ओसीआई या पीआईओ धारक नहीं है।</hi>
       </description>
     </subtype>
     <subtype id="huf-standard">
