@@ -618,8 +618,16 @@
       <hi>2. निवास / पत्राचार का पता</hi>
     </label>
     <label id="kyc_address_line">
-      <en>Street Address*</en>
-      <hi>गली का पता/मकान नंबर*</hi>
+      <en>Address Line 1*</en>
+      <hi>पता पंक्ति 1*</hi>
+    </label>
+    <label id="kyc_address_line_2">
+      <en>Address Line 2</en>
+      <hi>पता पंक्ति 2</hi>
+    </label>
+    <label id="kyc_address_line_3">
+      <en>Address Line 3</en>
+      <hi>पता पंक्ति 3</hi>
     </label>
     <label id="kyc_pincode">
       <en>Pin Code*</en>
@@ -633,9 +641,21 @@
       <en>District*</en>
       <hi>जिला (District)*</hi>
     </label>
+    <label id="kyc_city_town_village">
+      <en>City / Town / Village*</en>
+      <hi>शहर / कस्बा / गाँव*</hi>
+    </label>
     <label id="kyc_city_town">
-      <en>City / Town / Post Office*</en>
-      <hi>शहर / कस्बा / डाकघर*</hi>
+      <en>Post Office*</en>
+      <hi>डाकघर*</hi>
+    </label>
+    <label id="kyc_foreign_address_line">
+      <en>Address Line 1</en>
+      <hi>पता पंक्ति 1</hi>
+    </label>
+    <label id="kyc_foreign_city">
+      <en>City / Town / Village</en>
+      <hi>शहर / कस्बा / गाँव</hi>
     </label>
     <label id="kyc_country">
       <en>Country / ISO Code</en>

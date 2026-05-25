@@ -1208,15 +1208,56 @@
                 </div>
 
                 <div class="field">
-                    <label for="kycCityTown" id="labelKycCityTown">City / Town / Post Office*</label>
+                    <label for="kycCityVillage" id="labelKycCityVillage">City / Town / Village*</label>
+                    <input id="kycCityVillage" placeholder="Enter City/Town/Village" required />
+                </div>
+
+                <div class="field">
+                    <label for="kycCityTown" id="labelKycCityTown">Post Office*</label>
                     <select id="kycCityTown" required>
                         <option value="">Enter PIN first</option>
                     </select>
                 </div>
                 
                 <div class="field">
-                    <label for="kycAddressLine" id="labelKycAddressLine">Street Address*</label>
+                    <label for="kycAddressLine" id="labelKycAddressLine">Address Line 1*</label>
                     <input id="kycAddressLine" placeholder="Building, Street, Area" required />
+                </div>
+
+                <div class="field" id="kycAddressLine2Wrapper" style="display: none;">
+                    <label for="kycAddressLine2" id="labelKycAddressLine2">Address Line 2</label>
+                    <div style="display: flex; gap: 8px; align-items: center;">
+                        <input id="kycAddressLine2" placeholder="Apartment, Suite, Unit, etc. (Optional)" style="flex-grow: 1;" />
+                        <button type="button" class="theme-toggle-btn" id="removeKycAddressLine2Btn" style="background: var(--danger); color: white; border: none; border-radius: 12px; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="field" id="kycAddressLine3Wrapper" style="display: none;">
+                    <label for="kycAddressLine3" id="labelKycAddressLine3">Address Line 3</label>
+                    <div style="display: flex; gap: 8px; align-items: center;">
+                        <input id="kycAddressLine3" placeholder="Landmark, Area, etc. (Optional)" style="flex-grow: 1;" />
+                        <button type="button" class="theme-toggle-btn" id="removeKycAddressLine3Btn" style="background: var(--danger); color: white; border: none; border-radius: 12px; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="field" id="addCorrAddressLineBtnWrapper">
+                    <button type="button" id="addCorrAddressLineBtn" class="theme-toggle-btn" style="padding: 10px 16px; font-size: 13px; border-radius: 12px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        <span>Add Address Line</span>
+                    </button>
                 </div>
 
                 <div class="field">
@@ -1228,21 +1269,7 @@
                     <label for="kycPoaSubmitted" id="labelKycPoaSubmitted">Specify Proof of Address Submitted*</label>
                     <input id="kycPoaSubmitted" placeholder="e.g. Aadhaar, Electricity Bill, Passport" required />
                 </div>
-                
-                <!-- Post office metadata read-only fields -->
-                <div class="full details" id="corrPostalMetaWrapper" style="display: none; margin-top: 10px;">
-                    <div class="info-box" style="grid-column: span 2; min-height: auto; padding: 12px 18px;">
-                        <div style="font-size: 12px; color: var(--accent); font-weight: bold; margin-bottom: 6px;" id="labelKycPostalDbNote">Address details fetched from postal database are in English.</div>
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; font-size: 13px;">
-                            <div><strong id="labelKycCircle">Postal Circle</strong>: <span id="corrPostalCircle">-</span></div>
-                            <div><strong id="labelKycRegion">Postal Region</strong>: <span id="corrPostalRegion">-</span></div>
-                            <div><strong id="labelKycDivision">Postal Division</strong>: <span id="corrPostalDivision">-</span></div>
-                            <div><strong id="labelKycOfficeType">Office Type</strong>: <span id="corrPostalOfficeType">-</span></div>
-                            <div><strong id="labelKycDeliveryStatus">Delivery Status</strong>: <span id="corrPostalDelivery">-</span></div>
-                            <div><strong id="labelKycCoordinates">Geographic Coordinates (Lat, Lng)</strong>: <span id="corrPostalCoords">-</span></div>
-                        </div>
-                    </div>
-                </div>
+
 
                 <!-- Permanent Address -->
                 <div class="full" style="display: flex; align-items: center; justify-content: space-between; margin-top: 25px; border-top: 1px dashed var(--card-border); padding-top: 20px;">
@@ -1280,35 +1307,61 @@
                 </div>
 
                 <div class="field perm-field">
-                    <label for="kycPermCityTown" id="labelKycPermCityTown">City / Town / Post Office*</label>
+                    <label for="kycPermCityVillage" id="labelKycPermCityVillage">City / Town / Village*</label>
+                    <input id="kycPermCityVillage" placeholder="Enter City/Town/Village" required />
+                </div>
+
+                <div class="field perm-field">
+                    <label for="kycPermCityTown" id="labelKycPermCityTown">Post Office*</label>
                     <select id="kycPermCityTown" required>
                         <option value="">Enter PIN first</option>
                     </select>
                 </div>
                 
                 <div class="field perm-field">
-                    <label for="kycPermAddressLine" id="labelKycPermAddressLine">Street Address*</label>
+                    <label for="kycPermAddressLine" id="labelKycPermAddressLine">Address Line 1*</label>
                     <input id="kycPermAddressLine" placeholder="Building, Street, Area" required />
+                </div>
+
+                <div class="field perm-field" id="kycPermAddressLine2Wrapper" style="display: none;">
+                    <label for="kycPermAddressLine2" id="labelKycPermAddressLine2">Address Line 2</label>
+                    <div style="display: flex; gap: 8px; align-items: center;">
+                        <input id="kycPermAddressLine2" placeholder="Apartment, Suite, Unit, etc. (Optional)" style="flex-grow: 1;" />
+                        <button type="button" class="theme-toggle-btn" id="removeKycPermAddressLine2Btn" style="background: var(--danger); color: white; border: none; border-radius: 12px; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="field perm-field" id="kycPermAddressLine3Wrapper" style="display: none;">
+                    <label for="kycPermAddressLine3" id="labelKycPermAddressLine3">Address Line 3</label>
+                    <div style="display: flex; gap: 8px; align-items: center;">
+                        <input id="kycPermAddressLine3" placeholder="Landmark, Area, etc. (Optional)" style="flex-grow: 1;" />
+                        <button type="button" class="theme-toggle-btn" id="removeKycPermAddressLine3Btn" style="background: var(--danger); color: white; border: none; border-radius: 12px; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="field perm-field" id="addPermAddressLineBtnWrapper">
+                    <button type="button" id="addPermAddressLineBtn" class="theme-toggle-btn" style="padding: 10px 16px; font-size: 13px; border-radius: 12px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        <span>Add Address Line</span>
+                    </button>
                 </div>
 
                 <div class="field perm-field">
                     <label for="kycPermCountry" id="labelKycPermCountry">Country / ISO Code</label>
                     <input id="kycPermCountry" value="India / IN" readonly style="background: rgba(15,23,42,0.04); cursor: not-allowed;" />
-                </div>
-                
-                <!-- Permanent office metadata read-only fields -->
-                <div class="full details perm-field" id="permPostalMetaWrapper" style="display: none; margin-top: 10px;">
-                    <div class="info-box" style="grid-column: span 2; min-height: auto; padding: 12px 18px;">
-                        <div style="font-size: 12px; color: var(--accent); font-weight: bold; margin-bottom: 6px;">Address details fetched from postal database are in English.</div>
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; font-size: 13px;">
-                            <div><strong>Postal Circle</strong>: <span id="permPostalCircle">-</span></div>
-                            <div><strong>Postal Region</strong>: <span id="permPostalRegion">-</span></div>
-                            <div><strong>Postal Division</strong>: <span id="permPostalDivision">-</span></div>
-                            <div><strong>Office Type</strong>: <span id="permPostalOfficeType">-</span></div>
-                            <div><strong>Delivery Status</strong>: <span id="permPostalDelivery">-</span></div>
-                            <div><strong>Geographic Coordinates (Lat, Lng)</strong>: <span id="permPostalCoords">-</span></div>
-                        </div>
-                    </div>
                 </div>
 
 
@@ -1997,8 +2050,11 @@
                 "labelKycShowAllStates": "kyc_show_all_states",
                 "labelKycState": "kyc_state",
                 "labelKycDistrict": "kyc_district",
+                "labelKycCityVillage": "kyc_city_town_village",
                 "labelKycCityTown": "kyc_city_town",
                 "labelKycAddressLine": "kyc_address_line",
+                "labelKycAddressLine2": "kyc_address_line_2",
+                "labelKycAddressLine3": "kyc_address_line_3",
                 "labelKycCountry": "kyc_country",
                 "labelKycPoaSubmitted": "kyc_poa_submitted",
                 "kycPermanentAddressTitle": "kyc_permanent_address_title",
@@ -2007,11 +2063,14 @@
                 "labelKycPermShowAllStates": "kyc_show_all_states",
                 "labelKycPermState": "kyc_state",
                 "labelKycPermDistrict": "kyc_district",
+                "labelKycPermCityVillage": "kyc_city_town_village",
                 "labelKycPermCityTown": "kyc_city_town",
                 "labelKycPermAddressLine": "kyc_address_line",
+                "labelKycPermAddressLine2": "kyc_address_line_2",
+                "labelKycPermAddressLine3": "kyc_address_line_3",
                 "labelKycPermCountry": "kyc_country",
-                "labelKycForeignAddress": "kyc_address_line",
-                "labelKycForeignCity": "kyc_city_town",
+                "labelKycForeignAddress": "kyc_foreign_address_line",
+                "labelKycForeignCity": "kyc_foreign_city",
                 "labelKycForeignDistrict": "kyc_district",
                 "labelKycForeignPincode": "kyc_pincode",
                 "kycSecDTitle": "kyc_sec_d_title",
@@ -2177,12 +2236,17 @@
                 "kycMobile": "kyc_mobile",
                 "kycEmail": "kyc_email",
                 "kycPincode": "kyc_pincode",
+                "kycCityVillage": "kyc_city_town_village",
                 "kycAddressLine": "kyc_address_line",
+                "kycAddressLine2": "kyc_address_line_2",
+                "kycAddressLine3": "kyc_address_line_3",
                 "kycPoaSubmitted": "kyc_poa_submitted",
-                "kycPermPincode": "kyc_pincode",
+                "kycPermCityVillage": "kyc_city_town_village",
                 "kycPermAddressLine": "kyc_address_line",
-                "kycForeignAddress": "kyc_address_line",
-                "kycForeignCity": "kyc_city_town",
+                "kycPermAddressLine2": "kyc_address_line_2",
+                "kycPermAddressLine3": "kyc_address_line_3",
+                "kycForeignAddress": "kyc_foreign_address_line",
+                "kycForeignCity": "kyc_foreign_city",
                 "kycForeignDistrict": "kyc_district",
                 "kycForeignPincode": "kyc_pincode",
                 "kycRelNumber": "kyc_rel_number",
@@ -2222,6 +2286,28 @@
             const kycWhatsappConsentLabel = document.getElementById("labelKycWhatsappConsent");
             if (kycWhatsappConsentLabel) {
                 kycWhatsappConsentLabel.textContent = t("kyc_whatsapp_consent") || "Receive updates on WhatsApp on my above mobile number";
+            }
+
+            // Translate manual Post Office placeholders
+            const corrManual = document.getElementById("kycCityTownManual");
+            if (corrManual) {
+                corrManual.placeholder = currentLang === "hi" ? "डाकघर दर्ज करें" : "Enter Post Office";
+            }
+            const permManual = document.getElementById("kycPermCityTownManual");
+            if (permManual) {
+                permManual.placeholder = currentLang === "hi" ? "डाकघर दर्ज करें" : "Enter Post Office";
+            }
+
+            // Translate Add Address Line buttons
+            const addCorrBtn = document.getElementById("addCorrAddressLineBtn");
+            if (addCorrBtn) {
+                const addCorrSpan = addCorrBtn.querySelector("span");
+                if (addCorrSpan) addCorrSpan.textContent = currentLang === "hi" ? "पता पंक्ति जोड़ें" : "Add Address Line";
+            }
+            const addPermBtn = document.getElementById("addPermAddressLineBtn");
+            if (addPermBtn) {
+                const addPermSpan = addPermBtn.querySelector("span");
+                if (addPermSpan) addPermSpan.textContent = currentLang === "hi" ? "पता पंक्ति जोड़ें" : "Add Address Line";
             }
 
             // Translate existing options in dynamic rows
@@ -3155,7 +3241,7 @@
             if (!manualElem) {
                 manualElem = document.createElement("input");
                 manualElem.id = manualId;
-                manualElem.placeholder = currentLang === "hi" ? "शहर / कस्बा दर्ज करें" : "Enter City/Town";
+                manualElem.placeholder = currentLang === "hi" ? "डाकघर दर्ज करें" : "Enter Post Office";
                 manualElem.className = selectElem.className;
                 manualElem.required = selectElem.required;
                 selectElem.parentNode.appendChild(manualElem);
@@ -3290,12 +3376,18 @@
             const suffix = type === "corr" ? "corr" : "perm";
             
             if (office) {
-                document.getElementById(`${suffix}PostalCircle`).textContent = office.circle;
-                document.getElementById(`${suffix}PostalRegion`).textContent = office.region;
-                document.getElementById(`${suffix}PostalDivision`).textContent = office.division;
-                document.getElementById(`${suffix}PostalOfficeType`).textContent = office.type;
-                document.getElementById(`${suffix}PostalDelivery`).textContent = office.delivery;
-                document.getElementById(`${suffix}PostalCoords`).textContent = `${office.lat}, ${office.lng}`;
+                const circleElem = document.getElementById(`${suffix}PostalCircle`);
+                if (circleElem) circleElem.textContent = office.circle;
+                const regionElem = document.getElementById(`${suffix}PostalRegion`);
+                if (regionElem) regionElem.textContent = office.region;
+                const divisionElem = document.getElementById(`${suffix}PostalDivision`);
+                if (divisionElem) divisionElem.textContent = office.division;
+                const officeTypeElem = document.getElementById(`${suffix}PostalOfficeType`);
+                if (officeTypeElem) officeTypeElem.textContent = office.type;
+                const deliveryElem = document.getElementById(`${suffix}PostalDelivery`);
+                if (deliveryElem) deliveryElem.textContent = office.delivery;
+                const coordsElem = document.getElementById(`${suffix}PostalCoords`);
+                if (coordsElem) coordsElem.textContent = `${office.lat}, ${office.lng}`;
                 
                 stateSelect.value = office.state;
                 
@@ -3309,12 +3401,18 @@
                 });
                 districtSelect.value = office.district;
             } else {
-                document.getElementById(`${suffix}PostalCircle`).textContent = "-";
-                document.getElementById(`${suffix}PostalRegion`).textContent = "-";
-                document.getElementById(`${suffix}PostalDivision`).textContent = "-";
-                document.getElementById(`${suffix}PostalOfficeType`).textContent = "-";
-                document.getElementById(`${suffix}PostalDelivery`).textContent = "-";
-                document.getElementById(`${suffix}PostalCoords`).textContent = "-";
+                const circleElem = document.getElementById(`${suffix}PostalCircle`);
+                if (circleElem) circleElem.textContent = "-";
+                const regionElem = document.getElementById(`${suffix}PostalRegion`);
+                if (regionElem) regionElem.textContent = "-";
+                const divisionElem = document.getElementById(`${suffix}PostalDivision`);
+                if (divisionElem) divisionElem.textContent = "-";
+                const officeTypeElem = document.getElementById(`${suffix}PostalOfficeType`);
+                if (officeTypeElem) officeTypeElem.textContent = "-";
+                const deliveryElem = document.getElementById(`${suffix}PostalDelivery`);
+                if (deliveryElem) deliveryElem.textContent = "-";
+                const coordsElem = document.getElementById(`${suffix}PostalCoords`);
+                if (coordsElem) coordsElem.textContent = "-";
             }
         }
 
@@ -3359,7 +3457,29 @@
                 updatePostalMetadata("perm");
             }
 
+            const corrCityVillage = document.getElementById("kycCityVillage");
+            const permCityVillage = document.getElementById("kycPermCityVillage");
+            if (corrCityVillage && permCityVillage) {
+                permCityVillage.value = corrCityVillage.value;
+            }
+
             document.getElementById("kycPermAddressLine").value = document.getElementById("kycAddressLine").value;
+            syncAddressLines();
+        }
+
+        function syncAddressLines() {
+            if (!kycSameAddress || !kycSameAddress.checked) return;
+            
+            const line2Val = document.getElementById("kycAddressLine2").value;
+            const line3Val = document.getElementById("kycAddressLine3").value;
+            
+            document.getElementById("kycPermAddressLine2").value = line2Val;
+            document.getElementById("kycPermAddressLine3").value = line3Val;
+
+            document.getElementById("kycPermAddressLine2Wrapper").style.display = document.getElementById("kycAddressLine2Wrapper").style.display;
+            document.getElementById("kycPermAddressLine3Wrapper").style.display = document.getElementById("kycAddressLine3Wrapper").style.display;
+            
+            document.getElementById("addPermAddressLineBtnWrapper").style.display = document.getElementById("addCorrAddressLineBtnWrapper").style.display;
         }
 
         function setupAddressEvents(pincodeInput, stateSelect, districtSelect, citySelect, showAllToggle, type) {
@@ -3595,7 +3715,7 @@
         }
 
         function setupKycEvents() {
-            // Live sync of street address
+            // Live sync of street address (Address Line 1)
             const kycAddressLineInput = document.getElementById("kycAddressLine");
             if (kycAddressLineInput) {
                 kycAddressLineInput.addEventListener("input", () => {
@@ -3605,23 +3725,132 @@
                 });
             }
 
+            // Live sync of city/town/village
+            const kycCityVillageInput = document.getElementById("kycCityVillage");
+            if (kycCityVillageInput) {
+                kycCityVillageInput.addEventListener("input", () => {
+                    if (kycSameAddress && kycSameAddress.checked) {
+                        document.getElementById("kycPermCityVillage").value = kycCityVillageInput.value;
+                    }
+                });
+            }
+
+            // Live sync of Address Line 2 and Address Line 3
+            const kycAddressLine2Input = document.getElementById("kycAddressLine2");
+            if (kycAddressLine2Input) {
+                kycAddressLine2Input.addEventListener("input", () => {
+                    if (kycSameAddress && kycSameAddress.checked) {
+                        document.getElementById("kycPermAddressLine2").value = kycAddressLine2Input.value;
+                    }
+                });
+            }
+            const kycAddressLine3Input = document.getElementById("kycAddressLine3");
+            if (kycAddressLine3Input) {
+                kycAddressLine3Input.addEventListener("input", () => {
+                    if (kycSameAddress && kycSameAddress.checked) {
+                        document.getElementById("kycPermAddressLine3").value = kycAddressLine3Input.value;
+                    }
+                });
+            }
+
+            // Correspondence Add Line Button & Controls
+            const addCorrBtn = document.getElementById("addCorrAddressLineBtn");
+            const corrLine2Wrapper = document.getElementById("kycAddressLine2Wrapper");
+            const corrLine3Wrapper = document.getElementById("kycAddressLine3Wrapper");
+            const addCorrBtnWrapper = document.getElementById("addCorrAddressLineBtnWrapper");
+
+            if (addCorrBtn) {
+                addCorrBtn.addEventListener("click", () => {
+                    if (corrLine2Wrapper.style.display === "none") {
+                        corrLine2Wrapper.style.display = "block";
+                    } else if (corrLine3Wrapper.style.display === "none") {
+                        corrLine3Wrapper.style.display = "block";
+                        addCorrBtnWrapper.style.display = "none";
+                    }
+                    syncAddressLines();
+                });
+            }
+
+            const removeCorrLine2 = document.getElementById("removeKycAddressLine2Btn");
+            if (removeCorrLine2) {
+                removeCorrLine2.addEventListener("click", () => {
+                    document.getElementById("kycAddressLine2").value = "";
+                    corrLine2Wrapper.style.display = "none";
+                    addCorrBtnWrapper.style.display = "block";
+                    syncAddressLines();
+                });
+            }
+
+            const removeCorrLine3 = document.getElementById("removeKycAddressLine3Btn");
+            if (removeCorrLine3) {
+                removeCorrLine3.addEventListener("click", () => {
+                    document.getElementById("kycAddressLine3").value = "";
+                    corrLine3Wrapper.style.display = "none";
+                    addCorrBtnWrapper.style.display = "block";
+                    syncAddressLines();
+                });
+            }
+
+            // Permanent Add Line Button & Controls
+            const addPermBtn = document.getElementById("addPermAddressLineBtn");
+            const permLine2Wrapper = document.getElementById("kycPermAddressLine2Wrapper");
+            const permLine3Wrapper = document.getElementById("kycPermAddressLine3Wrapper");
+            const addPermBtnWrapper = document.getElementById("addPermAddressLineBtnWrapper");
+
+            if (addPermBtn) {
+                addPermBtn.addEventListener("click", () => {
+                    if (permLine2Wrapper.style.display === "none") {
+                        permLine2Wrapper.style.display = "block";
+                    } else if (permLine3Wrapper.style.display === "none") {
+                        permLine3Wrapper.style.display = "block";
+                        addPermBtnWrapper.style.display = "none";
+                    }
+                });
+            }
+
+            const removePermLine2 = document.getElementById("removeKycPermAddressLine2Btn");
+            if (removePermLine2) {
+                removePermLine2.addEventListener("click", () => {
+                    document.getElementById("kycPermAddressLine2").value = "";
+                    permLine2Wrapper.style.display = "none";
+                    addPermBtnWrapper.style.display = "block";
+                });
+            }
+
+            const removePermLine3 = document.getElementById("removeKycPermAddressLine3Btn");
+            if (removePermLine3) {
+                removePermLine3.addEventListener("click", () => {
+                    document.getElementById("kycPermAddressLine3").value = "";
+                    permLine3Wrapper.style.display = "none";
+                    addPermBtnWrapper.style.display = "block";
+                });
+            }
+
             // Same address toggle checkbox
             if (kycSameAddress) {
                 kycSameAddress.addEventListener("change", () => {
-                    const permFields = document.querySelectorAll(".perm-field input, .perm-field select");
+                    const permFields = document.querySelectorAll(".perm-field input, .perm-field select, .perm-field button");
                     if (kycSameAddress.checked) {
                         syncCorrespondenceToPermanent();
                         permFields.forEach(f => {
                             if (f.id !== "kycSameAddress") {
                                 f.disabled = true;
-                                f.style.background = "rgba(15,23,42,0.04)";
+                                if (f.tagName === "BUTTON") {
+                                    f.style.opacity = "0.4";
+                                } else {
+                                    f.style.background = "rgba(15,23,42,0.04)";
+                                }
                                 f.style.cursor = "not-allowed";
                             }
                         });
                     } else {
                         permFields.forEach(f => {
                             f.disabled = false;
-                            f.style.background = "";
+                            if (f.tagName === "BUTTON") {
+                                f.style.opacity = "";
+                            } else {
+                                f.style.background = "";
+                            }
                             f.style.cursor = "";
                         });
                         updateAddressDropdowns(kycPermPincode, kycPermState, kycPermDistrict, kycPermCityTown, kycPermShowAllStates, "perm");
