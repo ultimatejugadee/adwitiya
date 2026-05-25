@@ -1255,20 +1255,20 @@
                 <h2 class="section-title full" id="kycSecDTitle" style="margin-top: 20px; border-top: 1px solid var(--card-border); padding-top: 20px;">D. Details of Related Person</h2>
                 
                 <div class="field">
-                    <label for="kycRelAction" id="labelKycRelAction">Action</label>
+                    <label for="kycRelAction" id="labelKycRelAction">Do you want to make any changes with respect to Related Person?</label>
                     <select id="kycRelAction">
-                        <option value="">-- Select Action --</option>
-                        <option value="add" id="optKycRelActionAdd">Addition of Related Person</option>
-                        <option value="del" id="optKycRelActionDel">Deletion of Related Person</option>
+                        <option value="no" id="optKycRelActionNo" selected>No</option>
+                        <option value="add" id="optKycRelActionAdd">Yes, Addition of Related Person</option>
+                        <option value="del" id="optKycRelActionDel">Yes, Deletion of Related Person</option>
                     </select>
                 </div>
                 
-                <div class="field">
+                <div class="field kyc-rel-field">
                     <label for="kycRelNumber" id="labelKycRelNumber">KYC Number of Related Person</label>
                     <input id="kycRelNumber" placeholder="Enter related person's KYC Number" />
                 </div>
                 
-                <div class="field">
+                <div class="field kyc-rel-field">
                     <label for="kycRelType" id="labelKycRelType">Related Person Type</label>
                     <select id="kycRelType">
                         <option value="">-- Select Type --</option>
@@ -1278,12 +1278,12 @@
                     </select>
                 </div>
                 
-                <div class="field">
+                <div class="field kyc-rel-field">
                     <label for="kycRelName" id="labelKycRelName">Name of Related Person</label>
                     <input id="kycRelName" placeholder="Enter related person name" />
                 </div>
                 
-                <div class="field" id="kycRelOvdSubmittedWrapper">
+                <div class="field kyc-rel-field" id="kycRelOvdSubmittedWrapper">
                     <label for="kycRelOvdSubmitted" id="labelKycRelOvdSubmitted">Officially Valid Document (OVD)*</label>
                     <select id="kycRelOvdSubmitted">
                         <option value="" id="optKycRelOvdPlaceholder">-- Select OVD --</option>
@@ -1297,17 +1297,17 @@
                     </select>
                 </div>
 
-                <div class="field">
+                <div class="field kyc-rel-field">
                     <label for="kycRelPoiNum" id="labelKycRelPoiNum">Number / Identification No</label>
                     <input id="kycRelPoiNum" placeholder="Enter document number" />
                 </div>
 
-                <div class="field" id="kycRelPoiExpWrapper" style="display: none;">
+                <div class="field kyc-rel-field" id="kycRelPoiExpWrapper" style="display: none;">
                     <label for="kycRelPoiExp" id="labelKycRelPoiExp">Expiry Date</label>
                     <input id="kycRelPoiExp" type="date" />
                 </div>
 
-                <div class="field" id="kycRelDeemedOvdSubmittedWrapper">
+                <div class="field kyc-rel-field" id="kycRelDeemedOvdSubmittedWrapper">
                     <label for="kycRelDeemedOvdSubmitted" id="labelKycRelDeemedOvdSubmitted">Deemed Officially Valid Document (OVD)</label>
                     <select id="kycRelDeemedOvdSubmitted">
                         <option value="" id="optKycRelDeemedOvdPlaceholder">-- Select Deemed OVD --</option>
@@ -1318,16 +1318,16 @@
                     </select>
                 </div>
 
-                <div class="field" id="kycRelDeemedOvdNumberWrapper" style="display: none;">
+                <div class="field kyc-rel-field" id="kycRelDeemedOvdNumberWrapper" style="display: none;">
                     <label for="kycRelDeemedOvdNumber" id="labelKycRelDeemedOvdNumber">Deemed Document Number / Identification Number*</label>
                     <input id="kycRelDeemedOvdNumber" placeholder="Enter Deemed Document/ID Number" />
                 </div>
 
-                <div class="field" id="kycRelDeemedOvdIssuanceWrapper" style="display: none;">
+                <div class="field kyc-rel-field" id="kycRelDeemedOvdIssuanceWrapper" style="display: none;">
                     <label for="kycRelDeemedOvdIssuance" id="labelKycRelDeemedOvdIssuance">Date of Issuance*</label>
                     <input id="kycRelDeemedOvdIssuance" type="date" />
                 </div>
-                <div class="field">
+                <div class="field kyc-rel-field">
                     <label for="kycRelSmaCode" id="labelKycRelSmaCode">Simplified Measures Account - Document Type Code</label>
                     <input id="kycRelSmaCode" placeholder="Enter type code" />
                 </div>
@@ -1554,6 +1554,7 @@
         const kycDeemedOvdIssuance = document.getElementById("kycDeemedOvdIssuance");
         const kycDeemedOvdIssuanceWrapper = document.getElementById("kycDeemedOvdIssuanceWrapper");
 
+        const kycRelAction = document.getElementById("kycRelAction");
         const kycRelOvdSubmitted = document.getElementById("kycRelOvdSubmitted");
         const kycRelDeemedOvdSubmitted = document.getElementById("kycRelDeemedOvdSubmitted");
         const kycRelPoiNum = document.getElementById("kycRelPoiNum");
@@ -2034,6 +2035,7 @@
                 "optKycAddrResidential": "kyc_addr_residential",
                 "optKycAddrBusiness": "kyc_addr_business",
                 "optKycAddrUnspecified": "kyc_addr_unspecified",
+                "optKycRelActionNo": "kyc_rel_action_no",
                 "optKycRelActionAdd": "kyc_rel_action_add",
                 "optKycRelActionDel": "kyc_rel_action_del",
                 "optKycRelTypeGuardian": "kyc_rel_type_guardian",
@@ -3575,6 +3577,8 @@
                 if (!kycRelOvdSubmitted || !kycRelDeemedOvdSubmitted || !kycRelPoiNum || !kycRelPoiExpWrapper || !kycRelPoiExp ||
                     !kycRelDeemedOvdNumber || !kycRelDeemedOvdNumberWrapper || !kycRelDeemedOvdIssuance || !kycRelDeemedOvdIssuanceWrapper) return;
 
+                if (kycRelAction && kycRelAction.value === "no") return;
+
                 const hasOvd = kycRelOvdSubmitted.value !== "";
 
                 if (hasOvd) {
@@ -3655,9 +3659,55 @@
                 });
             }
 
+            function updateRelActionState() {
+                if (!kycRelAction) return;
+                const actionValue = kycRelAction.value;
+                const isNo = actionValue === "no";
+                
+                const relFields = document.querySelectorAll(".kyc-rel-field");
+                
+                if (isNo) {
+                    relFields.forEach(field => {
+                        field.style.display = "none";
+                        const inputs = field.querySelectorAll("input, select");
+                        inputs.forEach(input => {
+                            input.required = false;
+                        });
+                    });
+                } else {
+                    const kycRelNumber = document.getElementById("kycRelNumber");
+                    const kycRelType = document.getElementById("kycRelType");
+                    const kycRelName = document.getElementById("kycRelName");
+                    const kycRelSmaCode = document.getElementById("kycRelSmaCode");
+                    
+                    const basicFields = [
+                        kycRelNumber ? kycRelNumber.parentElement : null,
+                        kycRelType ? kycRelType.parentElement : null,
+                        kycRelName ? kycRelName.parentElement : null,
+                        document.getElementById("kycRelOvdSubmittedWrapper"),
+                        document.getElementById("kycRelDeemedOvdSubmittedWrapper"),
+                        kycRelSmaCode ? kycRelSmaCode.parentElement : null
+                    ];
+                    
+                    basicFields.forEach(field => {
+                        if (field) field.style.display = "block";
+                    });
+                    
+                    // Let updateRelOvdState handle the remaining conditional fields
+                    updateRelOvdState();
+                }
+            }
+
+            if (kycRelAction) {
+                kycRelAction.addEventListener("change", () => {
+                    updateRelActionState();
+                });
+            }
+
             // Initialize states
             updateOvdState();
             updateRelOvdState();
+            updateRelActionState();
 
             // Mobile
             const kycMobileInput = document.getElementById("kycMobile");

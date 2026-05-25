@@ -670,16 +670,20 @@
       <hi>घ. संबंधित व्यक्ति का विवरण</hi>
     </label>
     <label id="kyc_rel_action">
-      <en>Action</en>
-      <hi>कार्रवाई (Action)</hi>
+      <en>Do you want to make any changes with respect to Related Person?</en>
+      <hi>क्या आप संबंधित व्यक्ति के संबंध में कोई बदलाव करना चाहते हैं?</hi>
+    </label>
+    <label id="kyc_rel_action_no">
+      <en>No</en>
+      <hi>नहीं</hi>
     </label>
     <label id="kyc_rel_action_add">
-      <en>Addition of Related Person</en>
-      <hi>संबंधित व्यक्ति को जोड़ना</hi>
+      <en>Yes, Addition of Related Person</en>
+      <hi>हाँ, संबंधित व्यक्ति को जोड़ना</hi>
     </label>
     <label id="kyc_rel_action_del">
-      <en>Deletion of Related Person</en>
-      <hi>संबंधित व्यक्ति को हटाना</hi>
+      <en>Yes, Deletion of Related Person</en>
+      <hi>हाँ, संबंधित व्यक्ति को हटाना</hi>
     </label>
     <label id="kyc_rel_number">
       <en>KYC Number of Related Person</en>
