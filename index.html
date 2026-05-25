@@ -904,6 +904,22 @@
                             <input id="kycTin" placeholder="Enter TIN" />
                         </div>
                         <div class="field tax-outside-field" style="display: none;">
+                            <label for="kycForeignAddress" id="labelKycForeignAddress">Street Address</label>
+                            <input id="kycForeignAddress" placeholder="Building, Street, Area outside India" />
+                        </div>
+                        <div class="field tax-outside-field" style="display: none;">
+                            <label for="kycForeignCity" id="labelKycForeignCity">City / Town</label>
+                            <input id="kycForeignCity" placeholder="Enter foreign city" />
+                        </div>
+                        <div class="field tax-outside-field" style="display: none;">
+                            <label for="kycForeignDistrict" id="labelKycForeignDistrict">District / State</label>
+                            <input id="kycForeignDistrict" placeholder="Enter foreign district/state" />
+                        </div>
+                        <div class="field tax-outside-field" style="display: none;">
+                            <label for="kycForeignPincode" id="labelKycForeignPincode">Zip / Postal Code</label>
+                            <input id="kycForeignPincode" placeholder="Enter zip/postal code" />
+                        </div>
+                        <div class="field tax-outside-field" style="display: none;">
                             <label for="kycBirthCountry" id="labelKycBirthCountry">ISO Country Code of Birth</label>
                             <div class="custom-select-wrapper" style="position: relative;">
                                 <input id="kycBirthCountry" class="country-search-input" placeholder="Search country..." autocomplete="off" />
@@ -1199,32 +1215,6 @@
                     </div>
                 </div>
 
-                <!-- Address in Foreign Jurisdiction -->
-                <h3 class="subsection-title full" id="kycForeignAddressTitle" style="margin-top: 25px; border-top: 1px dashed var(--card-border); padding-top: 20px;">4. Address in foreign tax jurisdiction (if applicable)</h3>
-                
-                <div class="field">
-                    <label for="kycForeignAddress" id="labelKycForeignAddress">Street Address</label>
-                    <input id="kycForeignAddress" placeholder="Building, Street, Area outside India" />
-                </div>
-                <div class="field">
-                    <label for="kycForeignCity" id="labelKycForeignCity">City / Town</label>
-                    <input id="kycForeignCity" placeholder="Enter foreign city" />
-                </div>
-                <div class="field">
-                    <label for="kycForeignDistrict" id="labelKycForeignDistrict">District / State</label>
-                    <input id="kycForeignDistrict" placeholder="Enter foreign district/state" />
-                </div>
-                <div class="field">
-                    <label for="kycForeignPincode" id="labelKycForeignPincode">Zip / Postal Code</label>
-                    <input id="kycForeignPincode" placeholder="Enter zip/postal code" />
-                </div>
-                <div class="field">
-                    <label for="kycForeignCountry" id="labelKycForeignCountry">Country / ISO Code</label>
-                    <div class="custom-select-wrapper" style="position: relative;">
-                        <input id="kycForeignCountry" class="country-search-input" placeholder="Search country..." autocomplete="off" />
-                        <div id="foreignCountryDropdown" class="autocomplete"></div>
-                    </div>
-                </div>
 
                 <!-- Section D: Related Person -->
                 <h2 class="section-title full" id="kycSecDTitle" style="margin-top: 20px; border-top: 1px solid var(--card-border); padding-top: 20px;">D. Details of Related Person</h2>
@@ -1484,8 +1474,6 @@
         const taxJurisdictionDropdown = document.getElementById("taxJurisdictionDropdown");
         const kycBirthCountry = document.getElementById("kycBirthCountry");
         const birthCountryDropdown = document.getElementById("birthCountryDropdown");
-        const kycForeignCountry = document.getElementById("kycForeignCountry");
-        const foreignCountryDropdown = document.getElementById("foreignCountryDropdown");
         const kycTaxOutside = document.getElementById("kycTaxOutside");
         const taxOutsideFields = document.querySelectorAll(".tax-outside-field");
         const kycPoiSubmitted = document.getElementById("kycPoiSubmitted");
@@ -1880,12 +1868,10 @@
                 "labelKycPermCityTown": "kyc_city_town",
                 "labelKycPermAddressLine": "kyc_address_line",
                 "labelKycPermCountry": "kyc_country",
-                "kycForeignAddressTitle": "kyc_foreign_address_title",
                 "labelKycForeignAddress": "kyc_address_line",
                 "labelKycForeignCity": "kyc_city_town",
                 "labelKycForeignDistrict": "kyc_district",
                 "labelKycForeignPincode": "kyc_pincode",
-                "labelKycForeignCountry": "kyc_country",
                 "kycSecDTitle": "kyc_sec_d_title",
                 "labelKycRelAction": "kyc_rel_action",
                 "labelKycRelNumber": "kyc_rel_number",
@@ -2032,7 +2018,6 @@
                 "kycForeignCity": "kyc_city_town",
                 "kycForeignDistrict": "kyc_district",
                 "kycForeignPincode": "kyc_pincode",
-                "kycForeignCountry": "kyc_country",
                 "kycRelNumber": "kyc_rel_number",
                 "kycRelName": "kyc_rel_name",
                 "kycRelPoi": "kyc_rel_poi",
@@ -2328,7 +2313,6 @@
             setupCountryAutocomplete(kycTaxJurisdiction, taxJurisdictionDropdown, true);
             setupCountryAutocomplete(kycBirthCountry, birthCountryDropdown, false);
             setupCountryAutocomplete(kycCitizenCountry, citizenCountryDropdown, false);
-            setupCountryAutocomplete(kycForeignCountry, foreignCountryDropdown, false);
         }
 
         async function loadXML() {
