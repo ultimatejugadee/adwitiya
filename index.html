@@ -1037,17 +1037,7 @@
                     <input id="kycAadhaar" placeholder="Enter 12-digit Aadhaar" maxlength="12" required />
                 </div>
                 
-                <div class="field">
-                    <label for="kycPoiSubmitted" id="labelKycPoiSubmitted">Proof of Identity Submitted*</label>
-                    <select id="kycPoiSubmitted" required>
-                        <option value="pan" id="optKycPoiPan">PAN Card</option>
-                        <option value="other" id="optKycPoiOther">Other (Please Specify)</option>
-                    </select>
-                </div>
-                <div class="field" id="kycPoiOtherSpecWrapper" style="display: none;">
-                    <label for="kycPoiOtherSpec" id="labelKycPoiOtherSpec">Specify Proof of Identity</label>
-                    <input id="kycPoiOtherSpec" placeholder="e.g. Passport, Voter ID" />
-                </div>
+
 
                 <!-- Section B: Address Details -->
                 <h2 class="section-title full" id="kycSecBTitle" style="margin-top: 20px; border-top: 1px solid var(--card-border); padding-top: 20px;">B. Address Details</h2>
@@ -1475,9 +1465,7 @@
         const birthCountryDropdown = document.getElementById("birthCountryDropdown");
         const kycTaxOutside = document.getElementById("kycTaxOutside");
         const taxOutsideFields = document.querySelectorAll(".tax-outside-field");
-        const kycPoiSubmitted = document.getElementById("kycPoiSubmitted");
-        const kycPoiOtherSpecWrapper = document.getElementById("kycPoiOtherSpecWrapper");
-        const kycPoiOtherSpec = document.getElementById("kycPoiOtherSpec");
+
         
         // Correspondence Address DOM References
         const kycPincode = document.getElementById("kycPincode");
@@ -1841,8 +1829,7 @@
                 "labelKycBirthCountry": "kyc_birth_country",
                 "labelKycBirthPlace": "kyc_birth_place",
                 "labelKycAadhaar": "kyc_aadhaar",
-                "labelKycPoiSubmitted": "kyc_poi_submitted",
-                "labelKycPoiOtherSpec": "kyc_poi_other",
+
                 "kycSecBTitle": "kyc_sec_b_title",
                 "kycContactTitle": "kyc_contact_title",
                 "labelKycMobile": "kyc_mobile",
@@ -1938,8 +1925,7 @@
                 "optKycMaritalOther": "kyc_marital_other",
                 "optKycCitizenIndian": "kyc_citizen_indian",
                 "optKycCitizenOther": "kyc_citizen_other",
-                "optKycPoiPan": "kyc_poi_pan",
-                "optKycPoiOther": "kyc_poi_other",
+
                 "optKycAddrResidential": "kyc_addr_residential",
                 "optKycAddrBusiness": "kyc_addr_business",
                 "optKycAddrUnspecified": "kyc_addr_unspecified",
@@ -2004,7 +1990,7 @@
                 "kycBirthCountry": "kyc_country_code",
                 "kycBirthPlace": "kyc_birth_place",
                 "kycAadhaar": "kyc_aadhaar",
-                "kycPoiOtherSpec": "kyc_poi_other",
+
                 "kycMobile": "kyc_mobile",
                 "kycEmail": "kyc_email",
                 "kycPhoneOff": "kyc_phone_off",
@@ -3324,19 +3310,7 @@
                 });
             }
 
-            // Proof of Identity Specifier toggle
-            if (kycPoiSubmitted) {
-                kycPoiSubmitted.addEventListener("change", () => {
-                    if (kycPoiSubmitted.value === "other") {
-                        kycPoiOtherSpecWrapper.style.display = "block";
-                        kycPoiOtherSpec.required = true;
-                    } else {
-                        kycPoiOtherSpecWrapper.style.display = "none";
-                        kycPoiOtherSpec.required = false;
-                        kycPoiOtherSpec.value = "";
-                    }
-                });
-            }
+
 
             // Occupation Specifier toggle
             if (kycOccupation) {

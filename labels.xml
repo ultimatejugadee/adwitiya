@@ -436,18 +436,7 @@
       <en>Unique Identification Number (UID) / Aadhaar*</en>
       <hi>विशिष्ट पहचान संख्या (UID) / आधार*</hi>
     </label>
-    <label id="kyc_poi_submitted">
-      <en>Proof of Identity Submitted*</en>
-      <hi>प्रस्तुत पहचान का प्रमाण*</hi>
-    </label>
-    <label id="kyc_poi_pan">
-      <en>PAN Card</en>
-      <hi>पैन कार्ड (PAN Card)</hi>
-    </label>
-    <label id="kyc_poi_other">
-      <en>Other (Please Specify)</en>
-      <hi>अन्य (कृपया विवरण दें)</hi>
-    </label>
+
     <label id="kyc_photograph_label">
       <en>Affix Passport Size Photo*</en>
       <hi>पासपोर्ट आकार का फोटो अपलोड करें*</hi>
