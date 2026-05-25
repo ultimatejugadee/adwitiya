@@ -822,6 +822,9 @@
                         </span>
                     </label>
                     <input id="pan" maxlength="10" placeholder="Enter PAN" autocomplete="off" class="state-blank" />
+                    <div id="panNote" style="font-size: 12px; color: var(--muted); margin-top: 8px; line-height: 1.45;">
+                        PAN is not included under the list of officially valid document for the purpose of identity under the rule 2(d) of the PML rules. Still, PAN is the key identification number and part of KYC requirements for all transactions in the securities market
+                    </div>
                     
                     <div id="exemptionContainer" style="display: none; flex-direction: column; gap: 12px; margin-top: 10px;">
                         <div style="display: flex; flex-direction: column; gap: 6px;">
@@ -937,10 +940,6 @@
 
         <!-- KYC Form Section -->
         <section class="app-card kyc-card" style="margin-top: 30px;" id="kycCardSection">
-            <div class="card-top">
-                <span class="card-title" id="kycHeader">Know Your Client (KYC) Application Form - for Individuals</span>
-                <span class="data-status" id="kycInstruction">Please fill this form in English and BLOCK Letters (except for postal fields which are auto-loaded from directory)</span>
-            </div>
             <form id="kycForm" class="form" onsubmit="event.preventDefault(); alert('KYC Form Submitted Successfully!');">
                 <!-- Section A: Identity Details -->
                 <h2 class="section-title full" id="kycSecATitle">A. Identity Details</h2>
@@ -1770,6 +1769,9 @@
             const labelPan = document.getElementById("labelPan");
             if (labelPan) labelPan.textContent = t("pan_label");
             
+            const panNote = document.getElementById("panNote");
+            if (panNote) panNote.textContent = t("pan_pml_rules_note");
+            
             const labelFormat = document.getElementById("labelFormat");
             if (labelFormat) labelFormat.textContent = t("pan_hint");
             
@@ -1820,8 +1822,6 @@
                 "labelApplicationType": "kyc_app_type",
                 "labelKycNumber": "kyc_number",
                 "labelKycMode": "kyc_mode_label",
-                "kycHeader": "kyc_header",
-                "kycInstruction": "kyc_instruction",
                 "kycSecATitle": "kyc_sec_a_title",
                 "labelKycLastname": "kyc_lastname",
                 "labelKycFirstmiddle": "kyc_firstmiddle",

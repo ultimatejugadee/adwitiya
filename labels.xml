@@ -22,6 +22,10 @@
       <en>Enter PAN</en>
       <hi>पैन दर्ज करें</hi>
     </label>
+    <label id="pan_pml_rules_note">
+      <en>PAN is not included under the list of officially valid document for the purpose of identity under the rule 2(d) of the PML rules. Still, PAN is the key identification number and part of KYC requirements for all transactions in the securities market</en>
+      <hi>पीएमएल नियमों के नियम 2(d) के तहत पहचान के उद्देश्य से आधिकारिक रूप से वैध दस्तावेजों की सूची में पैन शामिल नहीं है। फिर भी, पैन प्रमुख पहचान संख्या है और प्रतिभूति बाजार में सभी लेनदेन के लिए केवाईसी आवश्यकताओं का हिस्सा है</hi>
+    </label>
     <label id="show_all_aria">
       <en>Show all categories</en>
       <hi>सभी श्रेणियाँ दिखाएं</hi>
