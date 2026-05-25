@@ -33,6 +33,10 @@
             <description>A natural person who is non-resident for Indian tax purposes.</description>
             <keywords>non resident,NRI,foreign individual,passport,TRC</keywords>
           </subtype>
+          <subtype id="ftr" name="Foreign Tax Resident" panChars="P" registration="Tax Identification Number (TIN) / Tax Residency Certificate (TRC)">
+            <description>An individual who is a resident of a foreign country for tax purposes under FATCA/CRS regulations.</description>
+            <keywords>foreign tax resident,tax resident outside India,FATCA,CRS,TRC,TIN</keywords>
+          </subtype>
           <subtype id="sole-proprietorship" name="Sole Proprietorship" panChars="P" registration="GSTIN / Udyam / Shop and Establishment Registration">
             <description>A business carried on by an individual proprietor. PAN is generally the individual's PAN and therefore category P.</description>
             <keywords>sole prop,proprietor,proprietorship,individual business,shop,udyam,GSTIN</keywords>

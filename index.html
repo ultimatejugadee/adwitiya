@@ -229,6 +229,12 @@
             border-radius: var(--radius);
             box-shadow: var(--shadow);
             backdrop-filter: blur(22px);
+            position: relative;
+            z-index: 1;
+        }
+
+        .page > .app-card:first-of-type {
+            z-index: 10;
         }
 
         .card-top {
@@ -964,10 +970,6 @@
                 </div>
 
                 <!-- Identification Numbers -->
-                <div class="field">
-                    <label for="kycPan" id="labelKycPanCard">PAN*</label>
-                    <input id="kycPan" placeholder="Enter PAN" maxlength="10" required style="font-weight: bold; letter-spacing: 0.1em; text-transform: uppercase;" />
-                </div>
                 <div class="field">
                     <label for="kycAadhaar" id="labelKycAadhaar">Unique Identification Number (UID) / Aadhaar*</label>
                     <input id="kycAadhaar" placeholder="Enter 12-digit Aadhaar" maxlength="12" required />
@@ -1777,7 +1779,6 @@
                 "labelKycTin": "kyc_tin",
                 "labelKycBirthCountry": "kyc_birth_country",
                 "labelKycBirthPlace": "kyc_birth_place",
-                "labelKycPanCard": "kyc_pan_card",
                 "labelKycAadhaar": "kyc_aadhaar",
                 "labelKycPoiSubmitted": "kyc_poi_submitted",
                 "labelKycPoiOtherSpec": "kyc_poi_other",
@@ -1938,7 +1939,6 @@
                 "kycTin": "kyc_tin",
                 "kycBirthCountry": "kyc_country_code",
                 "kycBirthPlace": "kyc_birth_place",
-                "kycPan": "kyc_pan_card",
                 "kycAadhaar": "kyc_aadhaar",
                 "kycPoiOtherSpec": "kyc_poi_other",
                 "kycMobile": "kyc_mobile",
@@ -2463,6 +2463,8 @@
 
             populateSubtypeSelect();
             updateDescriptions();
+
+
         }
 
         panInput.addEventListener("input", () => {
@@ -3101,20 +3103,6 @@
             }
 
             // Document validations
-            // PAN
-            const kycPanInput = document.getElementById("kycPan");
-            if (kycPanInput) {
-                kycPanInput.addEventListener("input", () => {
-                    kycPanInput.value = kycPanInput.value.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 10);
-                });
-                kycPanInput.addEventListener("change", () => {
-                    const val = kycPanInput.value.trim();
-                    if (val && !/^[A-Z]{5}[0-9]{4}[A-Z]$/.test(val)) {
-                        alert(currentLang === "hi" ? "अमान्य पैन प्रारूप! कृपया AAAAA9999A का उपयोग करें।" : "Invalid PAN format! Please use AAAAA9999A format.");
-                        kycPanInput.focus();
-                    }
-                });
-            }
 
             // Aadhaar
             const kycAadhaarInput = document.getElementById("kycAadhaar");

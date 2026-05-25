@@ -1174,6 +1174,20 @@
         <hi>एक प्राकृतिक व्यक्ति जो भारतीय कर उद्देश्यों के लिए अनिवासी है।</hi>
       </description>
     </subtype>
+    <subtype id="ftr">
+      <name>
+        <en>Foreign Tax Resident</en>
+        <hi>विदेशी कर निवासी</hi>
+      </name>
+      <registration>
+        <en>Tax Identification Number (TIN) / Tax Residency Certificate (TRC)</en>
+        <hi>कर पहचान संख्या (TIN) / टैक्स रेजीडेंसी सर्टिफिकेट (TRC)</hi>
+      </registration>
+      <description>
+        <en>An individual who is a resident of a foreign country for tax purposes under FATCA/CRS regulations.</en>
+        <hi>एक व्यक्ति जो FATCA/CRS नियमों के तहत कर उद्देश्यों के लिए किसी विदेशी देश का निवासी है।</hi>
+      </description>
+    </subtype>
     <subtype id="sole-proprietorship">
       <name>
         <en>Sole Proprietorship</en>
