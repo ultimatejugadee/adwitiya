@@ -2550,6 +2550,7 @@
                 subtypeSelect.value = selectedSubtype.id;
             }
 
+            updateTaxResidencyDefault();
             updateDescriptions();
         }
 
@@ -2583,6 +2584,17 @@
             });
         }
 
+        function updateTaxResidencyDefault() {
+            const kycTaxOutside = document.getElementById("kycTaxOutside");
+            if (!kycTaxOutside) return;
+            const foreignTaxSubtypes = ["ftr", "nr", "oci", "foreign-national"];
+            if (selectedEntity && selectedEntity.id === "individual" && selectedSubtype) {
+                kycTaxOutside.checked = foreignTaxSubtypes.includes(selectedSubtype.id);
+            } else {
+                kycTaxOutside.checked = false;
+            }
+        }
+
         function updateTaxResidencyVisibility() {
             const taxResidencyWrapper = document.getElementById("taxResidencyWrapper");
             const kycTaxOutside = document.getElementById("kycTaxOutside");
@@ -2592,10 +2604,6 @@
 
             if (selectedEntity && selectedEntity.id === "individual") {
                 taxResidencyWrapper.style.display = "block";
-                
-                if (selectedSubtype && selectedSubtype.id === "ftr") {
-                    kycTaxOutside.checked = true;
-                }
                 
                 const showFields = kycTaxOutside.checked;
                 taxOutsideFields.forEach(f => {
@@ -2698,6 +2706,7 @@
                     selectedEntity = null;
                     selectedSubtype = null;
                     entityInput.value = "";
+                    updateTaxResidencyDefault();
                 }
             }
 
@@ -2766,6 +2775,7 @@
         entityInput.addEventListener("input", () => {
             selectedEntity = null;
             selectedSubtype = null;
+            updateTaxResidencyDefault();
             populateSubtypeSelect();
             updateDescriptions();
             renderSuggestions();
@@ -2790,6 +2800,7 @@
         subtypeSelect.addEventListener("change", () => {
             if (!selectedEntity) return;
             selectedSubtype = selectedEntity.subtypes.find(s => s.id === subtypeSelect.value) || null;
+            updateTaxResidencyDefault();
             updateDescriptions();
         });
 
