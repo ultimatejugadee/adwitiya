@@ -551,6 +551,50 @@
       <en>Email ID*</en>
       <hi>ईमेल आईडी*</hi>
     </label>
+    <label id="kyc_whatsapp_consent">
+      <en>Receive updates on WhatsApp on my above mobile number</en>
+      <hi>उपरोक्त मोबाइल नंबर पर व्हाट्सएप पर अपडेट प्राप्त करें</hi>
+    </label>
+    <label id="kyc_add_contact_field">
+      <en>Add More Numbers / Social Media Handles</en>
+      <hi>अधिक नंबर / सोशल मीडिया हैंडल जोड़ें</hi>
+    </label>
+    <label id="kyc_placeholder_number">
+      <en>Enter number</en>
+      <hi>नंबर दर्ज करें</hi>
+    </label>
+    <label id="kyc_placeholder_handle">
+      <en>Enter handle or username</en>
+      <hi>हैंडल या उपयोगकर्ता नाम दर्ज करें</hi>
+    </label>
+    <label id="kyc_whatsapp">
+      <en>WhatsApp</en>
+      <hi>व्हाट्सएप (WhatsApp)</hi>
+    </label>
+    <label id="kyc_telegram">
+      <en>Telegram</en>
+      <hi>टेलीग्राम (Telegram)</hi>
+    </label>
+    <label id="kyc_instagram">
+      <en>Instagram</en>
+      <hi>इंस्टाग्राम (Instagram)</hi>
+    </label>
+    <label id="kyc_discord">
+      <en>Discord</en>
+      <hi>डिस्कॉर्ड (Discord)</hi>
+    </label>
+    <label id="kyc_facebook">
+      <en>Facebook</en>
+      <hi>फेसबुक (Facebook)</hi>
+    </label>
+    <label id="kyc_mobile_alt">
+      <en>Mobile (Alternative)</en>
+      <hi>मोबाइल (वैकल्पिक)</hi>
+    </label>
+    <label id="kyc_confirm_delete">
+      <en>Are you sure you want to delete this contact detail?</en>
+      <hi>क्या आप वाकई इस संपर्क विवरण को हटाना चाहते हैं?</hi>
+    </label>
     
     <label id="kyc_address_type">
       <en>Address Type*</en>

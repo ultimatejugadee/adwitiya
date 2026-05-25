@@ -761,6 +761,39 @@
         .photo-field {
             align-self: start;
         }
+
+        /* Dynamic contact details styling */
+        .dynamic-contact-row {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr auto;
+            gap: 16px;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .remove-contact-btn {
+            transition: transform 0.15s ease, background-color 0.15s ease !important;
+        }
+
+        .remove-contact-btn:hover {
+            transform: scale(1.05);
+            background: #dc2626 !important;
+            border-color: #dc2626 !important;
+        }
+        
+        @media (max-width: 580px) {
+            .dynamic-contact-row {
+                grid-template-columns: 1fr;
+                gap: 12px;
+                border: 1px solid var(--box-border);
+                padding: 16px;
+                border-radius: 16px;
+                background: var(--child-bg);
+            }
+            .dynamic-contact-row > div:last-child {
+                justify-self: end;
+            }
+        }
     </style>
 </head>
 
@@ -1093,18 +1126,28 @@
                 <div class="field">
                     <label for="kycMobile" id="labelKycMobile">Mobile No*</label>
                     <input id="kycMobile" placeholder="Enter 10-digit mobile" maxlength="10" required />
+                    <div style="margin-top: 10px; display: flex; align-items: center; gap: 8px; font-weight: 500; font-size: 13px; color: var(--text);">
+                        <input type="checkbox" id="kycWhatsappConsent" style="width: 16px; height: 16px; margin: 0; cursor: pointer; vertical-align: middle;" />
+                        <label for="kycWhatsappConsent" id="labelKycWhatsappConsent" style="cursor: pointer; margin: 0; font-weight: 500; font-size: 13px; line-height: 1.2; vertical-align: middle; justify-content: flex-start; text-transform: none; display: inline-flex;">Receive updates on WhatsApp on my above mobile number</label>
+                    </div>
                 </div>
                 <div class="field">
                     <label for="kycEmail" id="labelKycEmail">Email ID*</label>
                     <input id="kycEmail" type="email" placeholder="Enter email address" required />
                 </div>
-                <div class="field">
-                    <label for="kycPhoneOff" id="labelKycPhoneOff">Telephone (Office)</label>
-                    <input id="kycPhoneOff" placeholder="Enter office number" />
-                </div>
-                <div class="field">
-                    <label for="kycPhoneRes" id="labelKycPhoneRes">Telephone (Residence)</label>
-                    <input id="kycPhoneRes" placeholder="Enter residence number" />
+
+                <!-- Dynamic Contacts Container -->
+                <div id="dynamicContactsContainer" class="full" style="display: flex; flex-direction: column; gap: 16px; margin-top: 10px;"></div>
+
+                <!-- Add Contact Button -->
+                <div class="full" style="display: flex; justify-content: flex-start; margin-top: 8px;">
+                    <button type="button" id="addContactFieldBtn" class="theme-toggle-btn" style="padding: 10px 20px; font-size: 14px; font-weight: 600; border-radius: 12px; display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        <span id="lblAddContactField">Add More Numbers / Social Media Handles</span>
+                    </button>
                 </div>
 
                 <!-- Correspondence Address -->
@@ -1929,8 +1972,7 @@
                 "kycContactTitle": "kyc_contact_title",
                 "labelKycMobile": "kyc_mobile",
                 "labelKycEmail": "kyc_email",
-                "labelKycPhoneOff": "kyc_phone_off",
-                "labelKycPhoneRes": "kyc_phone_res",
+                "labelKycWhatsappConsent": "kyc_whatsapp_consent",
                 "kycCorrAddressTitle": "kyc_corr_address_title",
                 "labelKycAddressType": "kyc_address_type",
                 "labelKycPincode": "kyc_pincode",
@@ -2116,8 +2158,6 @@
 
                 "kycMobile": "kyc_mobile",
                 "kycEmail": "kyc_email",
-                "kycPhoneOff": "kyc_phone_off",
-                "kycPhoneRes": "kyc_phone_res",
                 "kycPincode": "kyc_pincode",
                 "kycAddressLine": "kyc_address_line",
                 "kycPoaSubmitted": "kyc_poa_submitted",
@@ -2154,6 +2194,43 @@
             if (typeof updateMaidenNameVisibility === "function") {
                 updateMaidenNameVisibility();
             }
+
+            // Translate dynamic contacts add button and WhatsApp consent checkbox
+            const addContactBtnLbl = document.getElementById("lblAddContactField");
+            if (addContactBtnLbl) {
+                addContactBtnLbl.textContent = t("kyc_add_contact_field") || "Add More Numbers / Social Media Handles";
+            }
+
+            const kycWhatsappConsentLabel = document.getElementById("labelKycWhatsappConsent");
+            if (kycWhatsappConsentLabel) {
+                kycWhatsappConsentLabel.textContent = t("kyc_whatsapp_consent") || "Receive updates on WhatsApp on my above mobile number";
+            }
+
+            // Translate existing options in dynamic rows
+            document.querySelectorAll(".dynamic-contact-row").forEach(row => {
+                const select = row.querySelector(".contact-type-select");
+                if (select) {
+                    const optionMap = {
+                        "whatsapp": "kyc_whatsapp",
+                        "telegram": "kyc_telegram",
+                        "instagram": "kyc_instagram",
+                        "discord": "kyc_discord",
+                        "facebook": "kyc_facebook",
+                        "mobile_alt": "kyc_mobile_alt",
+                        "phone_off": "kyc_phone_off",
+                        "phone_res": "kyc_phone_res"
+                    };
+                    Array.from(select.options).forEach(opt => {
+                        const labelId = optionMap[opt.value];
+                        if (labelId) {
+                            opt.textContent = t(labelId) || opt.textContent;
+                        }
+                    });
+                }
+                if (typeof updateRowPlaceholder === "function") {
+                    updateRowPlaceholder(row);
+                }
+            });
         }
 
         function updatePANMessage() {
@@ -3362,6 +3439,121 @@
             });
         }
 
+        function updateRowPlaceholder(row) {
+            const select = row.querySelector(".contact-type-select");
+            const input = row.querySelector(".contact-value-input");
+            if (!select || !input) return;
+            
+            const val = select.value;
+            const isNumber = ["whatsapp", "mobile_alt", "phone_off", "phone_res"].includes(val);
+            
+            if (isNumber) {
+                input.placeholder = t("kyc_placeholder_number") || (currentLang === "hi" ? "नंबर दर्ज करें" : "Enter number");
+                input.type = "tel";
+                input.oninput = (e) => {
+                    if (val === "whatsapp" || val === "mobile_alt") {
+                        e.target.value = e.target.value.replace(/[^0-9]/g, "").slice(0, 10);
+                    } else {
+                        e.target.value = e.target.value.replace(/[^0-9\-+() ]/g, "");
+                    }
+                };
+            } else {
+                input.placeholder = t("kyc_placeholder_handle") || (currentLang === "hi" ? "हैंडल या उपयोगकर्ता नाम दर्ज करें" : "Enter handle or username");
+                input.type = "text";
+                input.oninput = null;
+            }
+        }
+
+        function createContactRow() {
+            const container = document.getElementById("dynamicContactsContainer");
+            if (!container) return;
+
+            const row = document.createElement("div");
+            row.className = "dynamic-contact-row";
+
+            const typeWrapper = document.createElement("div");
+            const select = document.createElement("select");
+            select.className = "contact-type-select";
+            select.style.width = "100%";
+            
+            const options = [
+                { value: "whatsapp", labelId: "kyc_whatsapp", defaultEn: "WhatsApp", defaultHi: "व्हाट्सएप (WhatsApp)" },
+                { value: "telegram", labelId: "kyc_telegram", defaultEn: "Telegram", defaultHi: "टेलीग्राम (Telegram)" },
+                { value: "instagram", labelId: "kyc_instagram", defaultEn: "Instagram", defaultHi: "इंस्टाग्राम (Instagram)" },
+                { value: "discord", labelId: "kyc_discord", defaultEn: "Discord", defaultHi: "डिस्कॉर्ड (Discord)" },
+                { value: "facebook", labelId: "kyc_facebook", defaultEn: "Facebook", defaultHi: "फेसबुक (Facebook)" },
+                { value: "mobile_alt", labelId: "kyc_mobile_alt", defaultEn: "Mobile (Alternative)", defaultHi: "मोबाइल (वैकल्पिक)" },
+                { value: "phone_off", labelId: "kyc_phone_off", defaultEn: "Telephone (Office)", defaultHi: "टेलीफोन (कार्यालय)" },
+                { value: "phone_res", labelId: "kyc_phone_res", defaultEn: "Telephone (Residence)", defaultHi: "टेलीफोन (निवास)" }
+            ];
+
+            options.forEach(opt => {
+                const o = document.createElement("option");
+                o.value = opt.value;
+                o.textContent = t(opt.labelId) || (currentLang === "hi" ? opt.defaultHi : opt.defaultEn);
+                select.appendChild(o);
+            });
+
+            typeWrapper.appendChild(select);
+
+            const valueWrapper = document.createElement("div");
+            const input = document.createElement("input");
+            input.type = "text";
+            input.className = "contact-value-input";
+            input.style.width = "100%";
+            input.required = true;
+
+            valueWrapper.appendChild(input);
+
+            const actionWrapper = document.createElement("div");
+            const removeBtn = document.createElement("button");
+            removeBtn.type = "button";
+            removeBtn.className = "remove-contact-btn theme-toggle-btn";
+            removeBtn.style.background = "var(--danger)";
+            removeBtn.style.color = "white";
+            removeBtn.style.border = "none";
+            removeBtn.style.borderRadius = "12px";
+            removeBtn.style.width = "48px";
+            removeBtn.style.height = "48px";
+            removeBtn.style.display = "flex";
+            removeBtn.style.alignItems = "center";
+            removeBtn.style.justifyContent = "center";
+            removeBtn.style.cursor = "pointer";
+            removeBtn.innerHTML = `
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+            `;
+
+            removeBtn.addEventListener("click", () => {
+                const value = input.value.trim();
+                if (value === "") {
+                    row.remove();
+                } else {
+                    const confirmMsg = t("kyc_confirm_delete") || (currentLang === "hi" 
+                        ? "क्या आप वाकई इस संपर्क विवरण को हटाना चाहते हैं?" 
+                        : "Are you sure you want to delete this contact detail?");
+                    if (confirm(confirmMsg)) {
+                        row.remove();
+                    }
+                }
+            });
+
+            actionWrapper.appendChild(removeBtn);
+
+            row.appendChild(typeWrapper);
+            row.appendChild(valueWrapper);
+            row.appendChild(actionWrapper);
+
+            select.addEventListener("change", () => {
+                updateRowPlaceholder(row);
+                input.value = "";
+            });
+
+            container.appendChild(row);
+            updateRowPlaceholder(row);
+        }
+
         function setupKycEvents() {
             // Live sync of street address
             const kycAddressLineInput = document.getElementById("kycAddressLine");
@@ -3731,6 +3923,14 @@
             // Set default dates
             const todayStr = new Date().toISOString().split("T")[0];
             if (kycSigDate) kycSigDate.value = todayStr;
+
+            // Dynamic contacts plus button click handler
+            const addContactFieldBtn = document.getElementById("addContactFieldBtn");
+            if (addContactFieldBtn) {
+                addContactFieldBtn.addEventListener("click", () => {
+                    createContactRow();
+                });
+            }
         }
 
         // --- End KYC Postal Lookup and Form Logic ---
