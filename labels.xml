@@ -245,6 +245,22 @@
       <en>KYC Number</en>
       <hi>केवाईसी संख्या (KYC Number)</hi>
     </label>
+    <label id="kyc_mode_label">
+      <en>KYC Mode*</en>
+      <hi>केवाईसी मोड (KYC Mode)*</hi>
+    </label>
+    <label id="kyc_mode_offline">
+      <en>Offline (In-person)</en>
+      <hi>ऑफ़लाइन (व्यक्तिगत रूप से)</hi>
+    </label>
+    <label id="kyc_mode_online">
+      <en>Online</en>
+      <hi>ऑनलाइन (Online)</hi>
+    </label>
+    <label id="kyc_mode_digilocker">
+      <en>DigiLocker</en>
+      <hi>डिजिलॉकर (DigiLocker)</hi>
+    </label>
     <label id="kyc_account_type">
       <en>Account Type*</en>
       <hi>खाता प्रकार*</hi>

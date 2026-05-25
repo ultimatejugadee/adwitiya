@@ -769,12 +769,47 @@
     <div class="orb two"></div>
 
     <main class="page">
+        <div class="top-controls" style="position: absolute; top: 20px; right: 16px; display: flex; align-items: center; gap: 12px; z-index: 100;">
+            <select id="langSelect" class="lang-select" aria-label="Select Language">
+                <option value="en">English</option>
+                <option value="hi">हिंदी</option>
+            </select>
+            <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle Theme">
+                <span id="themeIcon">☀️</span>
+            </button>
+        </div>
+
         <section class="hero">
             <h1 id="heroTitle">अद्वितीय (Adwitiya)</h1>
         </section>
 
         <section class="app-card">
             <div class="form">
+                <div class="field">
+                    <div style="display: flex; flex-direction: column; gap: 12px;">
+                        <div>
+                            <label for="applicationType" id="labelApplicationType" style="margin-bottom: 4px;">Application Type*</label>
+                            <select id="applicationType" required style="width: 100%;">
+                                <option value="new" id="optAppTypeNew">New</option>
+                                <option value="update" id="optAppTypeUpdate">Update</option>
+                            </select>
+                        </div>
+                        <div id="kycNumberWrapper" style="display: none;">
+                            <label for="kycNumber" id="labelKycNumber" style="margin-bottom: 4px;">KYC Number*</label>
+                            <input id="kycNumber" placeholder="Enter KYC Number" style="width: 100%;" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="kycMode" id="labelKycMode">KYC Mode*</label>
+                    <select id="kycMode" required style="width: 100%;">
+                        <option value="offline" id="optKycModeOffline">Offline (In-person)</option>
+                        <option value="online" id="optKycModeOnline">Online</option>
+                        <option value="digilocker" id="optKycModeDigiLocker">DigiLocker</option>
+                    </select>
+                </div>
+
                 <div class="field full">
                     <label for="pan">
                         <span id="labelPan">PAN Number</span>
@@ -784,13 +819,6 @@
                                 <input type="checkbox" id="panExempted" style="width: 16px; height: 16px; margin: 0; cursor: pointer; vertical-align: middle;" />
                                 <label for="panExempted" id="labelPanExempted" style="cursor: pointer; margin: 0; font-weight: 500; font-size: 13px; line-height: 1; vertical-align: middle;">PAN Exempted</label>
                             </span>
-                            <select id="langSelect" class="lang-select" aria-label="Select Language">
-                                <option value="en">English</option>
-                                <option value="hi">हिंदी</option>
-                            </select>
-                            <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle Theme">
-                                <span id="themeIcon">☀️</span>
-                            </button>
                         </span>
                     </label>
                     <input id="pan" maxlength="10" placeholder="Enter PAN" autocomplete="off" class="state-blank" />
@@ -843,13 +871,50 @@
                     <div class="info-box">
                         <h3 id="headingEntityDescription">Entity Type Description</h3>
                         <p id="entityDescription">Select an entity type to see its classification meaning.</p>
-                        <div id="entityPills" class="pill-row"></div>
                     </div>
 
                     <div class="info-box">
                         <h3 id="headingSubtypeDescription">Subtype Description</h3>
                         <p id="subtypeDescription">Select a subcategory to see registration and details.</p>
                         <div id="registration" class="registration"></div>
+                    </div>
+                </div>
+
+                <!-- Tax Residency Details -->
+                <div id="taxResidencyWrapper" class="field full" style="display: none; border-top: 1px solid var(--card-border); padding-top: 20px; margin-top: 20px;">
+                    <div class="toggle-row" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                        <div class="toggle-copy">
+                            <label for="kycTaxOutside" id="labelKycTaxOutsideCheckbox" style="margin-bottom: 0; cursor: pointer; font-weight: 600; color: var(--text);">Residence for tax purposes in jurisdiction(s) outside India</label>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="kycTaxOutside" />
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="tax-fields-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px;">
+                        <div class="field tax-outside-field" style="display: none;">
+                            <label for="kycTaxJurisdiction" id="labelKycTaxJurisdiction">ISO Country Code of Tax Residence</label>
+                            <div class="custom-select-wrapper" style="position: relative;">
+                                <input id="kycTaxJurisdiction" class="country-search-input" placeholder="Search country..." autocomplete="off" />
+                                <div id="taxJurisdictionDropdown" class="autocomplete"></div>
+                            </div>
+                        </div>
+                        <div class="field tax-outside-field" style="display: none;">
+                            <label for="kycTin" id="labelKycTin">Tax Identification Number / Equivalent</label>
+                            <input id="kycTin" placeholder="Enter TIN" />
+                        </div>
+                        <div class="field tax-outside-field" style="display: none;">
+                            <label for="kycBirthCountry" id="labelKycBirthCountry">ISO Country Code of Birth</label>
+                            <div class="custom-select-wrapper" style="position: relative;">
+                                <input id="kycBirthCountry" class="country-search-input" placeholder="Search country..." autocomplete="off" />
+                                <div id="birthCountryDropdown" class="autocomplete"></div>
+                            </div>
+                        </div>
+                        <div class="field tax-outside-field" style="display: none;">
+                            <label for="kycBirthPlace" id="labelKycBirthPlace">Place of Birth</label>
+                            <input id="kycBirthPlace" placeholder="Enter Place of Birth" />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -917,7 +982,10 @@
 
                 <div class="field" id="kycCitizenCountryWrapper" style="display: none;">
                     <label for="kycCitizenCountry" id="labelKycCountryCode">ISO Country Code</label>
-                    <input id="kycCitizenCountry" placeholder="e.g. US, GB" maxlength="2" />
+                    <div class="custom-select-wrapper" style="position: relative;">
+                        <input id="kycCitizenCountry" class="country-search-input" placeholder="Search country..." autocomplete="off" />
+                        <div id="citizenCountryDropdown" class="autocomplete"></div>
+                    </div>
                 </div>
                 
                 <div class="field">
@@ -941,33 +1009,6 @@
                     <button type="button" id="kycPhotoBtn" class="theme-toggle-btn" style="padding: 6px 12px; font-size: 13px;">Upload Photograph</button>
                 </div>
                 
-                <!-- Tax Residency Details -->
-                <div class="field full toggle-row" style="margin-top: 10px;">
-                    <div class="toggle-copy">
-                        <label for="kycTaxOutside" id="labelKycTaxOutsideCheckbox" style="margin-bottom: 0; cursor: pointer;">Residence for tax purposes in jurisdiction(s) outside India</label>
-                    </div>
-                    <label class="switch">
-                        <input type="checkbox" id="kycTaxOutside" />
-                        <span class="slider"></span>
-                    </label>
-                </div>
-                
-                <div class="field tax-outside-field" style="display: none;">
-                    <label for="kycTaxJurisdiction" id="labelKycTaxJurisdiction">ISO Country Code of Tax Residence</label>
-                    <input id="kycTaxJurisdiction" placeholder="e.g. US" maxlength="2" />
-                </div>
-                <div class="field tax-outside-field" style="display: none;">
-                    <label for="kycTin" id="labelKycTin">Tax Identification Number / Equivalent</label>
-                    <input id="kycTin" placeholder="Enter TIN" />
-                </div>
-                <div class="field tax-outside-field" style="display: none;">
-                    <label for="kycBirthCountry" id="labelKycBirthCountry">ISO Country Code of Birth</label>
-                    <input id="kycBirthCountry" placeholder="e.g. IN" maxlength="2" />
-                </div>
-                <div class="field tax-outside-field" style="display: none;">
-                    <label for="kycBirthPlace" id="labelKycBirthPlace">Place of Birth</label>
-                    <input id="kycBirthPlace" placeholder="Enter Place of Birth" />
-                </div>
 
                 <!-- Identification Numbers -->
                 <div class="field">
@@ -1173,7 +1214,10 @@
                 </div>
                 <div class="field">
                     <label for="kycForeignCountry" id="labelKycForeignCountry">Country / ISO Code</label>
-                    <input id="kycForeignCountry" placeholder="e.g. United States / US" />
+                    <div class="custom-select-wrapper" style="position: relative;">
+                        <input id="kycForeignCountry" class="country-search-input" placeholder="Search country..." autocomplete="off" />
+                        <div id="foreignCountryDropdown" class="autocomplete"></div>
+                    </div>
                 </div>
 
                 <!-- Section D: Related Person -->
@@ -1391,8 +1435,14 @@
     <script>
         const XML_FILE = "investor-entities.xml";
         const LABELS_FILE = "labels.xml";
+        const COUNTRIES_FILE = "countries.xml";
+        let countries = [];
 
         const panInput = document.getElementById("pan");
+        const applicationType = document.getElementById("applicationType");
+        const kycNumberWrapper = document.getElementById("kycNumberWrapper");
+        const kycNumberInput = document.getElementById("kycNumber");
+        const kycModeSelect = document.getElementById("kycMode");
         const panExemptedToggle = document.getElementById("panExempted");
         const exemptionContainer = document.getElementById("exemptionContainer");
         const exemptionCategorySelect = document.getElementById("exemptionCategorySelect");
@@ -1409,7 +1459,6 @@
         const entityDescription = document.getElementById("entityDescription");
         const subtypeDescription = document.getElementById("subtypeDescription");
         const registration = document.getElementById("registration");
-        const entityPills = document.getElementById("entityPills");
         const dataStatus = document.getElementById("dataStatus");
 
         // KYC Form DOM References
@@ -1417,6 +1466,13 @@
         const kycCitizenship = document.getElementById("kycCitizenship");
         const kycCitizenCountryWrapper = document.getElementById("kycCitizenCountryWrapper");
         const kycCitizenCountry = document.getElementById("kycCitizenCountry");
+        const citizenCountryDropdown = document.getElementById("citizenCountryDropdown");
+        const kycTaxJurisdiction = document.getElementById("kycTaxJurisdiction");
+        const taxJurisdictionDropdown = document.getElementById("taxJurisdictionDropdown");
+        const kycBirthCountry = document.getElementById("kycBirthCountry");
+        const birthCountryDropdown = document.getElementById("birthCountryDropdown");
+        const kycForeignCountry = document.getElementById("kycForeignCountry");
+        const foreignCountryDropdown = document.getElementById("foreignCountryDropdown");
         const kycTaxOutside = document.getElementById("kycTaxOutside");
         const taxOutsideFields = document.querySelectorAll(".tax-outside-field");
         const kycPoiSubmitted = document.getElementById("kycPoiSubmitted");
@@ -1760,6 +1816,9 @@
         function translateKycUI() {
             // Update labels and static text
             const textMappings = {
+                "labelApplicationType": "kyc_app_type",
+                "labelKycNumber": "kyc_number",
+                "labelKycMode": "kyc_mode_label",
                 "kycHeader": "kyc_header",
                 "kycInstruction": "kyc_instruction",
                 "kycSecATitle": "kyc_sec_a_title",
@@ -1861,6 +1920,11 @@
 
             // Option lists that require dynamic translation
             const optionMappings = {
+                "optAppTypeNew": "kyc_app_type_new",
+                "optAppTypeUpdate": "kyc_app_type_update",
+                "optKycModeOffline": "kyc_mode_offline",
+                "optKycModeOnline": "kyc_mode_online",
+                "optKycModeDigiLocker": "kyc_mode_digilocker",
                 "optKycGenderPlaceholder": "kyc_gender",
                 "optKycGenderMale": "kyc_gender_male",
                 "optKycGenderFemale": "kyc_gender_female",
@@ -2140,10 +2204,117 @@
             }
         }
 
+        async function loadCountriesXML() {
+            try {
+                const res = await fetch(COUNTRIES_FILE);
+                if (!res.ok) throw new Error("Countries XML not found");
+                const text = await res.text();
+                const xml = new DOMParser().parseFromString(text, "application/xml");
+                if (xml.querySelector("parsererror")) {
+                    throw new Error("Invalid Countries XML format");
+                }
+                countries = [];
+                xml.querySelectorAll("country").forEach(node => {
+                    countries.push({
+                        code: attr(node, "code"),
+                        name: attr(node, "name")
+                    });
+                });
+                console.log("Countries database loaded successfully. Size:", countries.length);
+                initCountryAutocompletes();
+            } catch (err) {
+                console.error("Failed to load countries database:", err);
+            }
+        }
+
+        function setupCountryAutocomplete(input, dropdown, excludeIndia) {
+            if (!input || !dropdown) return;
+
+            function renderDropdown(filterText = "") {
+                dropdown.innerHTML = "";
+                
+                // Parse out the ISO code if the input already contains "Country Name (XX)"
+                let cleanFilter = filterText;
+                const match = filterText.match(/^(.*?)\s*\([A-Z]{2}\)$/);
+                if (match) {
+                    cleanFilter = match[1];
+                }
+
+                let list = countries.filter(c => {
+                    const searchStr = `${c.name} ${c.code}`.toLowerCase();
+                    return searchStr.includes(cleanFilter.toLowerCase());
+                });
+
+                if (excludeIndia) {
+                    list = list.filter(c => c.code !== "IN");
+                } else {
+                    const indiaIndex = list.findIndex(c => c.code === "IN");
+                    if (indiaIndex > -1) {
+                        const india = list.splice(indiaIndex, 1)[0];
+                        list.unshift(india);
+                    }
+                }
+
+                if (list.length === 0) {
+                    const div = document.createElement("div");
+                    div.className = "option";
+                    div.style.padding = "10px 14px";
+                    div.style.color = "var(--muted)";
+                    div.style.cursor = "default";
+                    div.style.fontSize = "14px";
+                    div.textContent = "No matching country";
+                    dropdown.appendChild(div);
+                    dropdown.classList.add("show");
+                    return;
+                }
+
+                list.forEach(c => {
+                    const div = document.createElement("div");
+                    div.className = "option";
+                    div.style.padding = "10px 14px";
+                    div.style.cursor = "pointer";
+                    div.style.fontSize = "14px";
+                    div.style.transition = "background 0.2s, color 0.2s";
+                    div.textContent = `${c.name} (${c.code})`;
+                    
+                    div.addEventListener("mousedown", e => {
+                        e.preventDefault();
+                        input.value = `${c.name} (${c.code})`;
+                        input.dispatchEvent(new Event("input"));
+                        dropdown.classList.remove("show");
+                    });
+                    dropdown.appendChild(div);
+                });
+                dropdown.classList.add("show");
+            }
+
+            input.addEventListener("focus", () => {
+                renderDropdown(input.value);
+            });
+
+            input.addEventListener("input", () => {
+                renderDropdown(input.value);
+            });
+
+            input.addEventListener("blur", () => {
+                setTimeout(() => {
+                    dropdown.classList.remove("show");
+                }, 200);
+            });
+        }
+
+        function initCountryAutocompletes() {
+            setupCountryAutocomplete(kycTaxJurisdiction, taxJurisdictionDropdown, true);
+            setupCountryAutocomplete(kycBirthCountry, birthCountryDropdown, false);
+            setupCountryAutocomplete(kycCitizenCountry, citizenCountryDropdown, false);
+            setupCountryAutocomplete(kycForeignCountry, foreignCountryDropdown, false);
+        }
+
         async function loadXML() {
             try {
                 await loadLabelsXML();
                 translateUI();
+                await loadCountriesXML();
 
                 const res = await fetch(XML_FILE);
                 if (!res.ok) throw new Error("XML file not found");
@@ -2407,32 +2578,60 @@
             });
         }
 
+        function updateTaxResidencyVisibility() {
+            const taxResidencyWrapper = document.getElementById("taxResidencyWrapper");
+            const kycTaxOutside = document.getElementById("kycTaxOutside");
+            const taxOutsideFields = document.querySelectorAll(".tax-outside-field");
+
+            if (!taxResidencyWrapper || !kycTaxOutside) return;
+
+            if (selectedEntity && selectedEntity.id === "individual") {
+                taxResidencyWrapper.style.display = "block";
+                
+                if (selectedSubtype && selectedSubtype.id === "ftr") {
+                    kycTaxOutside.checked = true;
+                }
+                
+                const showFields = kycTaxOutside.checked;
+                taxOutsideFields.forEach(f => {
+                    f.style.display = showFields ? "block" : "none";
+                    const input = f.querySelector("input");
+                    if (input) {
+                        input.required = showFields;
+                        if (!showFields) {
+                            input.value = "";
+                        }
+                    }
+                });
+            } else {
+                taxResidencyWrapper.style.display = "none";
+                kycTaxOutside.checked = false;
+                taxOutsideFields.forEach(f => {
+                    f.style.display = "none";
+                    const input = f.querySelector("input");
+                    if (input) {
+                        input.required = false;
+                        input.value = "";
+                    }
+                });
+            }
+        }
+
         function updateDescriptions() {
             if (!selectedEntity) {
                 entityDescription.textContent = t("desc_entity_default");
                 subtypeDescription.textContent = t("desc_subtype_default");
                 registration.innerHTML = "";
-                entityPills.innerHTML = "";
+                updateTaxResidencyVisibility();
                 return;
             }
 
             entityDescription.textContent = getEntityDescription(selectedEntity.id, selectedEntity.description);
 
-            entityPills.innerHTML = "";
-            [
-                t("pill_group", { value: getGroupName(selectedEntity.groupId, selectedEntity.group) }),
-                t("pill_legal", { value: getEntityLegalStatus(selectedEntity.id, selectedEntity.legalStatus) }),
-                t("pill_pan", { value: selectedEntity.panChars.join(" / ") })
-            ].forEach(text => {
-                const pill = document.createElement("span");
-                pill.className = "pill";
-                pill.textContent = text;
-                entityPills.appendChild(pill);
-            });
-
             if (!selectedSubtype) {
                 subtypeDescription.textContent = t("desc_subtype_default");
                 registration.innerHTML = "";
+                updateTaxResidencyVisibility();
                 return;
             }
 
@@ -2447,6 +2646,7 @@
                 <strong>${regLabel}:</strong> ${regVal}
                 <br><strong>${panLabel}:</strong> ${panVal}
             `;
+            updateTaxResidencyVisibility();
         }
 
         function refreshUI() {
@@ -2465,6 +2665,19 @@
             updateDescriptions();
 
 
+        }
+
+        if (applicationType) {
+            applicationType.addEventListener("change", () => {
+                if (applicationType.value === "update") {
+                    kycNumberWrapper.style.display = "block";
+                    kycNumberInput.required = true;
+                } else {
+                    kycNumberWrapper.style.display = "none";
+                    kycNumberInput.required = false;
+                    kycNumberInput.value = "";
+                }
+            });
         }
 
         panInput.addEventListener("input", () => {
@@ -3042,14 +3255,7 @@
             // Tax Residency Outside India toggle
             if (kycTaxOutside) {
                 kycTaxOutside.addEventListener("change", () => {
-                    taxOutsideFields.forEach(f => {
-                        f.style.display = kycTaxOutside.checked ? "block" : "none";
-                        const input = f.querySelector("input");
-                        if (input) {
-                            input.required = kycTaxOutside.checked;
-                            if (!kycTaxOutside.checked) input.value = "";
-                        }
-                    });
+                    updateTaxResidencyVisibility();
                 });
             }
 
