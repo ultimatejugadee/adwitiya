@@ -1365,15 +1365,6 @@
                     <input id="kycBankIfsc" placeholder="Enter 11-digit IFSC" maxlength="11" required style="font-weight: bold; text-transform: uppercase;" />
                 </div>
                 
-                <div class="field">
-                    <label for="kycBankMicr" id="labelKycBankMicr">MICR Number</label>
-                    <input id="kycBankMicr" placeholder="Enter 9-digit MICR" maxlength="9" />
-                </div>
-
-                <div class="field">
-                    <label for="kycBankBranch" id="labelKycBankBranch">Branch Address*</label>
-                    <input id="kycBankBranch" placeholder="Enter bank branch address" required />
-                </div>
 
                 <!-- Other Details -->
                 <h3 class="subsection-title full" id="kycOtherTitle" style="margin-top: 15px;">B. Other Details</h3>
@@ -1978,9 +1969,7 @@
                 "kycBankTitle": "kyc_bank_title",
                 "labelKycBankType": "kyc_bank_type",
                 "labelKycBankName": "kyc_bank_name",
-                "labelKycBankBranch": "kyc_bank_branch",
                 "labelKycBankAcNum": "kyc_bank_ac_num",
-                "labelKycBankMicr": "kyc_bank_micr",
                 "labelKycBankIfsc": "kyc_bank_ifsc",
                 "kycOtherTitle": "kyc_other_title",
                 "labelKycIncomeRange": "kyc_income_range",
@@ -2147,8 +2136,6 @@
                 "kycBankName": "kyc_bank_name",
                 "kycBankAcNum": "kyc_bank_ac_num",
                 "kycBankIfsc": "kyc_bank_ifsc",
-                "kycBankMicr": "kyc_bank_micr",
-                "kycBankBranch": "kyc_bank_branch",
                 "kycNetworth": "kyc_networth",
                 "kycOccupationOthers": "kyc_occ_others",
                 "kycClientSig": "kyc_client_sig"
@@ -3739,20 +3726,7 @@
                 });
             }
 
-            // Bank MICR
-            const kycBankMicrInput = document.getElementById("kycBankMicr");
-            if (kycBankMicrInput) {
-                kycBankMicrInput.addEventListener("input", () => {
-                    kycBankMicrInput.value = kycBankMicrInput.value.replace(/[^0-9]/g, "").slice(0, 9);
-                });
-                kycBankMicrInput.addEventListener("change", () => {
-                    const val = kycBankMicrInput.value.trim();
-                    if (val && val.length !== 9) {
-                        alert(currentLang === "hi" ? "अमान्य एमआईसीआर (MICR) कोड! ९ अंकों की संख्या होनी चाहिए।" : "Invalid MICR Code! Must be a 9-digit number.");
-                        kycBankMicrInput.focus();
-                    }
-                });
-            }
+
 
             // Set default dates
             const todayStr = new Date().toISOString().split("T")[0];

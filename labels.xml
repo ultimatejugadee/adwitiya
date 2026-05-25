@@ -764,17 +764,9 @@
       <en>Bank Name*</en>
       <hi>बैंक का नाम*</hi>
     </label>
-    <label id="kyc_bank_branch">
-      <en>Branch Address*</en>
-      <hi>शाखा का पता*</hi>
-    </label>
     <label id="kyc_bank_ac_num">
       <en>Account Number*</en>
       <hi>खाता संख्या*</hi>
-    </label>
-    <label id="kyc_bank_micr">
-      <en>MICR Number</en>
-      <hi>एमआईसीआर (MICR) संख्या</hi>
     </label>
     <label id="kyc_bank_ifsc">
       <en>IFSC Code*</en>
