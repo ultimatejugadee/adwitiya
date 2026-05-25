@@ -665,6 +665,22 @@
       <en>Specify Proof of Address Submitted*</en>
       <hi>प्रस्तुत पते के प्रमाण को निर्दिष्ट करें*</hi>
     </label>
+    <label id="kyc_poa_submitted_placeholder">
+      <en>Select Proof of Address</en>
+      <hi>पते का प्रमाण चुनें</hi>
+    </label>
+    <label id="kyc_poa_id_number">
+      <en>Document Number / ID Number*</en>
+      <hi>दस्तावेज़ संख्या / आईडी संख्या*</hi>
+    </label>
+    <label id="kyc_poa_ovd_group">
+      <en>Officially Valid Documents (OVD)</en>
+      <hi>आधिकारिक रूप से वैध दस्तावेज (OVD)</hi>
+    </label>
+    <label id="kyc_poa_deemed_group">
+      <en>Deemed Officially Valid Documents (Deemed OVD)</en>
+      <hi>डीम्ड आधिकारिक रूप से वैध दस्तावेज (Deemed OVD)</hi>
+    </label>
     
     <label id="kyc_permanent_address_title">
       <en>3. Permanent Address</en>

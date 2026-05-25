@@ -1267,7 +1267,29 @@
 
                 <div class="field">
                     <label for="kycPoaSubmitted" id="labelKycPoaSubmitted">Specify Proof of Address Submitted*</label>
-                    <input id="kycPoaSubmitted" placeholder="e.g. Aadhaar, Electricity Bill, Passport" required />
+                    <select id="kycPoaSubmitted" required>
+                        <option value="" id="optKycPoaPlaceholder">-- Select Proof of Address --</option>
+                        <optgroup label="Officially Valid Documents (OVD)" id="grpKycPoaOvd">
+                            <option value="passport" id="optKycPoaPassport">Passport</option>
+                            <option value="driving_licence" id="optKycPoaDriving">Driving Licence</option>
+                            <option value="aadhaar" id="optKycPoaAadhaar">Proof of possession of Aadhaar number</option>
+                            <option value="voter_id" id="optKycPoaVoter">Voter's Identity Card (issued by ECI)</option>
+                            <option value="nrega" id="optKycPoaNrega">Job Card issued by NREGA</option>
+                            <option value="npr_letter" id="optKycPoaNpr">Letter issued by National Population Register</option>
+                            <option value="other_govt" id="optKycPoaOtherGovt">Any other document notified by Central Govt</option>
+                        </optgroup>
+                        <optgroup label="Deemed Officially Valid Documents (Deemed OVD)" id="grpKycPoaDeemed">
+                            <option value="utility_bill" id="optKycPoaDeemedUtility">Utility Bill - not more than 2 months old</option>
+                            <option value="property_tax" id="optKycPoaDeemedProperty">Property or Municipal Tax Receipt</option>
+                            <option value="ppo" id="optKycPoaDeemedPpo">Pension or Family Pension Payment Order (PPO)</option>
+                            <option value="employer_letter" id="optKycPoaDeemedEmployer">Employer Letter of Allotment/Accommodation</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="kycPoaIdNumber" id="labelKycPoaIdNumber">Document Number / ID Number*</label>
+                    <input id="kycPoaIdNumber" placeholder="Enter document/ID number" required />
                 </div>
 
 
@@ -2057,6 +2079,7 @@
                 "labelKycAddressLine3": "kyc_address_line_3",
                 "labelKycCountry": "kyc_country",
                 "labelKycPoaSubmitted": "kyc_poa_submitted",
+                "labelKycPoaIdNumber": "kyc_poa_id_number",
                 "kycPermanentAddressTitle": "kyc_permanent_address_title",
                 "labelKycSameAddress": "kyc_same_address",
                 "labelKycPermPincode": "kyc_pincode",
@@ -2139,6 +2162,19 @@
                 "optKycMaritalOther": "kyc_marital_other",
                 "optKycCitizenIndian": "kyc_citizen_indian",
                 "optKycCitizenOther": "kyc_citizen_other",
+
+                "optKycPoaPlaceholder": "kyc_poa_submitted_placeholder",
+                "optKycPoaPassport": "kyc_ovd_passport",
+                "optKycPoaDriving": "kyc_ovd_driving",
+                "optKycPoaAadhaar": "kyc_ovd_aadhaar",
+                "optKycPoaVoter": "kyc_ovd_voter",
+                "optKycPoaNrega": "kyc_ovd_nrega",
+                "optKycPoaNpr": "kyc_ovd_npr",
+                "optKycPoaOtherGovt": "kyc_ovd_other_govt",
+                "optKycPoaDeemedUtility": "kyc_deemed_utility",
+                "optKycPoaDeemedProperty": "kyc_deemed_property",
+                "optKycPoaDeemedPpo": "kyc_deemed_ppo",
+                "optKycPoaDeemedEmployer": "kyc_deemed_employer",
 
                 "optKycAddrResidential": "kyc_addr_residential",
                 "optKycAddrBusiness": "kyc_addr_business",
@@ -2240,7 +2276,7 @@
                 "kycAddressLine": "kyc_address_line",
                 "kycAddressLine2": "kyc_address_line_2",
                 "kycAddressLine3": "kyc_address_line_3",
-                "kycPoaSubmitted": "kyc_poa_submitted",
+                "kycPoaIdNumber": "kyc_poa_id_number",
                 "kycPermCityVillage": "kyc_city_town_village",
                 "kycPermAddressLine": "kyc_address_line",
                 "kycPermAddressLine2": "kyc_address_line_2",
@@ -2308,6 +2344,16 @@
             if (addPermBtn) {
                 const addPermSpan = addPermBtn.querySelector("span");
                 if (addPermSpan) addPermSpan.textContent = currentLang === "hi" ? "पता पंक्ति जोड़ें" : "Add Address Line";
+            }
+
+            // Translate Proof of Address optgroups
+            const grpCorrOvd = document.getElementById("grpKycPoaOvd");
+            if (grpCorrOvd) {
+                grpCorrOvd.label = t("kyc_poa_ovd_group") || "Officially Valid Documents (OVD)";
+            }
+            const grpCorrDeemed = document.getElementById("grpKycPoaDeemed");
+            if (grpCorrDeemed) {
+                grpCorrDeemed.label = t("kyc_poa_deemed_group") || "Deemed Officially Valid Documents (Deemed OVD)";
             }
 
             // Translate existing options in dynamic rows
