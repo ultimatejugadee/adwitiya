@@ -19,19 +19,21 @@
     <group id="individuals" name="Individuals and Personal Statuses">
       <entityType id="individual" name="Individual" legalStatus="Natural Person" panChars="P">
         <aliases>person,natural person,individual,human,resident,non resident,NRI,OCI,sole proprietor,proprietorship</aliases>
-        <description>An individual is a natural person. Tax residence, citizenship status, and sole proprietorship status do not create a separate PAN category; the PAN category remains P.</description>
+        <description>An individual is a natural person. Tax residence, citizenship status, and sole proprietorship status do not create a separate PAN category; the PAN category remains P. An account in the name of a sole proprietorship cannot be opened because it is not a separate legal entity and can be opened only in the name of the proprietor’s individual name.
+
+
+
+You can link the sole proprietorship’s bank account to this individual account, provided your bank proof (a cheque or statement) displays both the firm's name and your name as the proprietor. 
+
+</description>
         <subtypes>
-          <subtype id="ror" name="Resident and Ordinarily Resident (ROR)" panChars="P" registration="Aadhaar / PAN / Passport">
-            <description>Individual tax residential status for a person who is resident and ordinarily resident in India.</description>
-            <keywords>resident ordinarily resident,ROR,tax resident,individual,person</keywords>
-          </subtype>
           <subtype id="rnor" name="Resident but Not Ordinarily Resident (RNOR)" panChars="P" registration="Aadhaar / PAN / Passport">
             <description>Individual tax residential status for a person who is resident but not ordinarily resident in India.</description>
             <keywords>RNOR,not ordinarily resident,resident individual,person</keywords>
           </subtype>
-          <subtype id="nr" name="Non-Resident Individual (NR)" panChars="P" registration="Passport / Tax Residency Certificate (TRC)">
-            <description>A natural person who is non-resident for Indian tax purposes.</description>
-            <keywords>non resident,NRI,foreign individual,passport,TRC</keywords>
+          <subtype id="nr" name="Non-Resident Individual (NR) / Non Resident Indian (NRI)" panChars="P" registration="Passport / Visa / OCI Card / Tax Residency Certificate (TRC)">
+            <description>A person of Indian origin or Indian citizen residing outside India who is non-resident for Indian tax purposes. Only income earned or received in India is taxable. Differs from residents (ROR/RNOR) as foreign-sourced income is tax-exempt in India. Unique Identifier: Passport (Indian or Foreign), Visa, OCI Card, or Tax Residency Certificate (TRC).</description>
+            <keywords>non resident,NRI,foreign individual,passport,TRC,non resident indian,foreign resident,individual</keywords>
           </subtype>
           <subtype id="ftr" name="Foreign Tax Resident" panChars="P" registration="Tax Identification Number (TIN) / Tax Residency Certificate (TRC)">
             <description>An individual who is a resident of a foreign country for tax purposes under FATCA/CRS regulations.</description>
@@ -41,21 +43,13 @@
             <description>A business carried on by an individual proprietor. PAN is generally the individual's PAN and therefore category P.</description>
             <keywords>sole prop,proprietor,proprietorship,individual business,shop,udyam,GSTIN</keywords>
           </subtype>
-          <subtype id="oci" name="Overseas Citizen of India (OCI)" panChars="P" registration="OCI Card Number">
-            <description>OCI is a citizenship or immigration status of a natural person and not a separate legal entity category.</description>
-            <keywords>OCI,overseas citizen,person,individual,foreign citizen</keywords>
+          <subtype id="oci" name="Overseas Citizen of India (OCI) / Person of Indian Origin (PIO)" panChars="P" registration="OCI Card / PIO Card Number">
+            <description>A foreign citizen of Indian origin (except Pakistan/Bangladesh) holding OCI/PIO status. Differs from other foreign nationals as they enjoy lifetime entry/stay rights and broad economic/investment privileges in India. Unique Identifier: OCI Card Number or PIO Card Number.</description>
+            <keywords>OCI,overseas citizen,person,individual,foreign citizen,PIO,person of indian origin,card</keywords>
           </subtype>
-          <subtype id="resident-individual" name="Resident Individual" panChars="P" registration="Aadhaar / PAN / Passport">
-            <description>A natural person residing in India.</description>
-            <keywords>resident individual,resident,individual,person</keywords>
-          </subtype>
-          <subtype id="nri" name="Non Resident Indian (NRI)" panChars="P" registration="Passport / OCI Card / Visa">
-            <description>A person of Indian origin or Indian citizen residing outside India.</description>
-            <keywords>NRI,non resident indian,foreign resident,individual</keywords>
-          </subtype>
-          <subtype id="pio" name="Person of Indian Origin (PIO)" panChars="P" registration="PIO Card / OCI Card">
-            <description>A person of Indian origin holding a PIO card or status.</description>
-            <keywords>PIO,person of indian origin,individual,card</keywords>
+          <subtype id="resident-individual" name="Resident Individual / Resident and Ordinarily Resident (ROR)" panChars="P" registration="Aadhaar / PAN / Passport">
+            <description>A natural person residing in India, who meets the tax residency criteria of being resident and ordinarily resident in India (ROR). Unlike RNOR and NR, they are taxable in India on all worldwide income. Unique Identifier: Aadhaar, PAN, or Indian Passport.</description>
+            <keywords>resident individual,resident,individual,person,resident ordinarily resident,ROR,tax resident</keywords>
           </subtype>
           <subtype id="foreign-national" name="Foreign National" panChars="P" registration="Passport / Visa / Tax Residency Certificate">
             <description>A foreign citizen who is not an OCI or PIO holder.</description>

@@ -1180,20 +1180,6 @@
 
   <!-- Subtypes -->
   <subtypes>
-    <subtype id="ror">
-      <name>
-        <en>Resident and Ordinarily Resident (ROR)</en>
-        <hi>निवासी और सामान्यतः निवासी (ROR)</hi>
-      </name>
-      <registration>
-        <en>Aadhaar / PAN / Passport</en>
-        <hi>आधार / पैन / पासपोर्ट</hi>
-      </registration>
-      <description>
-        <en>Individual tax residential status for a person who is resident and ordinarily resident in India.</en>
-        <hi>भारत में निवासी और सामान्य रूप से निवासी व्यक्ति के लिए व्यक्तिगत कर आवासीय स्थिति।</hi>
-      </description>
-    </subtype>
     <subtype id="rnor">
       <name>
         <en>Resident but Not Ordinarily Resident (RNOR)</en>
@@ -1210,16 +1196,16 @@
     </subtype>
     <subtype id="nr">
       <name>
-        <en>Non-Resident Individual (NR)</en>
-        <hi>अनिवासी व्यक्ति (NR)</hi>
+        <en>Non-Resident Individual (NR) / Non Resident Indian (NRI)</en>
+        <hi>अनिवासी व्यक्ति (NR) / अनिवासी भारतीय (NRI)</hi>
       </name>
       <registration>
-        <en>Passport / Tax Residency Certificate (TRC)</en>
-        <hi>पासपोर्ट / टैक्स रेजीडेंसी सर्टिफिकेट (TRC)</hi>
+        <en>Passport / Visa / OCI Card / Tax Residency Certificate (TRC)</en>
+        <hi>पासपोर्ट / वीजा / ओसीआई कार्ड / टैक्स रेजीडेंसी सर्टिफिकेट (TRC)</hi>
       </registration>
       <description>
-        <en>A natural person who is non-resident for Indian tax purposes.</en>
-        <hi>एक प्राकृतिक व्यक्ति जो भारतीय कर उद्देश्यों के लिए अनिवासी है।</hi>
+        <en>A person of Indian origin or Indian citizen residing outside India who is non-resident for Indian tax purposes. Only income earned or received in India is taxable. Differs from residents (ROR/RNOR) as foreign-sourced income is tax-exempt in India. Unique Identifier: Passport (Indian or Foreign), Visa, OCI Card, or Tax Residency Certificate (TRC).</en>
+        <hi>भारतीय मूल का व्यक्ति या भारतीय नागरिक जो भारत से बाहर रहता है और भारतीय कर उद्देश्यों के लिए अनिवासी है। केवल भारत में अर्जित या प्राप्त आय ही कर योग्य है। निवासियों (ROR/RNOR) से भिन्न क्योंकि विदेशी स्रोतों से प्राप्त आय भारत में कर-मुक्त है। विशिष्ट पहचानकर्ता: पासपोर्ट (भारतीय या विदेशी), वीजा, ओसीआई कार्ड, या टैक्स रेजीडेंसी सर्टिफिकेट (TRC)।</hi>
       </description>
     </subtype>
     <subtype id="ftr">
@@ -1246,64 +1232,36 @@
         <hi>GSTIN / उद्यम / दुकान और स्थापना पंजीकरण</hi>
       </registration>
       <description>
-        <en>A business carried on by an individual proprietor. PAN is generally the individual's PAN and therefore category P.</en>
-        <hi>एक व्यक्तिगत मालिक द्वारा चलाया जाने वाला व्यवसाय। पैन आमतौर पर व्यक्तिगत मालिक का पैन होता है और इसलिए इसकी श्रेणी P होती है।</hi>
+        <en>A business carried on by an individual proprietor. PAN is generally the individual's PAN and therefore category P.  An account in the name of a sole proprietorship cannot be opened because it is not a separate legal entity and can be opened only in the name of the proprietor’s individual name. You can link the sole proprietorship’s bank account to this individual account, provided your bank proof (a cheque or statement) displays both the firm's name and your name as the proprietor.</en>
+        <hi>एक व्यक्तिगत मालिक द्वारा चलाया जाने वाला व्यवसाय। पैन आमतौर पर व्यक्तिगत मालिक का पैन होता है और इसलिए इसकी श्रेणी P होती है। एक सोल प्रोपराइटरशिप (एकल स्वामित्व) के नाम पर खाता नहीं खोला जा सकता क्योंकि यह एक अलग कानूनी इकाई (separate legal entity) नहीं है। यह खाता केवल प्रोपराइटर के व्यक्तिगत नाम पर ही खोला जा सकता है। आप सोल प्रोपराइटरशिप के बैंक खाते को इस व्यक्तिगत खाते से जोड़ सकते हैं, बशर्ते आपके बैंक प्रमाण (चेक या स्टेटमेंट) पर फर्म का नाम और प्रोपराइटर के रूप में आपका नाम, दोनों दर्ज हों।</hi>
       </description>
     </subtype>
     <subtype id="oci">
       <name>
-        <en>Overseas Citizen of India (OCI)</en>
-        <hi>भारत के प्रवासी नागरिक (OCI)</hi>
+        <en>Overseas Citizen of India (OCI) / Person of Indian Origin (PIO)</en>
+        <hi>भारत के प्रवासी नागरिक (OCI) / भारतीय मूल के व्यक्ति (PIO)</hi>
       </name>
       <registration>
-        <en>OCI Card Number</en>
-        <hi>ओसीआई कार्ड नंबर</hi>
+        <en>OCI Card / PIO Card Number</en>
+        <hi>ओसीआई कार्ड / पीआईओ कार्ड नंबर</hi>
       </registration>
       <description>
-        <en>OCI is a citizenship or immigration status of a natural person and not a separate legal entity category.</en>
-        <hi>OCI एक प्राकृतिक व्यक्ति की नागरिकता या आप्रवासन स्थिति है न कि एक अलग कानूनी इकाई श्रेणी।</hi>
+        <en>A foreign citizen of Indian origin (except Pakistan/Bangladesh) holding OCI/PIO status. Differs from other foreign nationals as they enjoy lifetime entry/stay rights and broad economic/investment privileges in India. Unique Identifier: OCI Card Number or PIO Card Number.</en>
+        <hi>भारतीय मूल का एक विदेशी नागरिक (पाकिस्तान/बांग्लादेश को छोड़कर) जिसके पास ओसीआई/पीआईओ दर्जा है। अन्य विदेशी नागरिकों से भिन्न क्योंकि वे भारत में आजीवन प्रवेश/प्रवास अधिकार और व्यापक आर्थिक/निवेश विशेषाधिकारों का आनंद लेते हैं। विशिष्ट पहचानकर्ता: ओसीआई कार्ड नंबर या पीआईओ कार्ड नंबर।</hi>
       </description>
     </subtype>
     <subtype id="resident-individual">
       <name>
-        <en>Resident Individual</en>
-        <hi>निवासी व्यक्ति (Resident Individual)</hi>
+        <en>Resident Individual / Resident and Ordinarily Resident (ROR)</en>
+        <hi>निवासी व्यक्ति (Resident Individual) / निवासी और सामान्यतः निवासी (ROR)</hi>
       </name>
       <registration>
         <en>Aadhaar / PAN / Passport</en>
         <hi>आधार / पैन / पासपोर्ट</hi>
       </registration>
       <description>
-        <en>A natural person residing in India.</en>
-        <hi>भारत में रहने वाला एक प्राकृतिक व्यक्ति।</hi>
-      </description>
-    </subtype>
-    <subtype id="nri">
-      <name>
-        <en>Non Resident Indian (NRI)</en>
-        <hi>अनिवासी भारतीय (NRI)</hi>
-      </name>
-      <registration>
-        <en>Passport / OCI Card / Visa</en>
-        <hi>पासपोर्ट / ओसीआई कार्ड / वीजा</hi>
-      </registration>
-      <description>
-        <en>A person of Indian origin or Indian citizen residing outside India.</en>
-        <hi>भारत से बाहर रहने वाला एक भारतीय मूल का व्यक्ति या भारतीय नागरिक।</hi>
-      </description>
-    </subtype>
-    <subtype id="pio">
-      <name>
-        <en>Person of Indian Origin (PIO)</en>
-        <hi>भारतीय मूल के व्यक्ति (PIO)</hi>
-      </name>
-      <registration>
-        <en>PIO Card / OCI Card</en>
-        <hi>पीआईओ कार्ड / ओसीआई कार्ड</hi>
-      </registration>
-      <description>
-        <en>A person of Indian origin holding a PIO card or status.</en>
-        <hi>पीआईओ कार्ड या दर्जा रखने वाला भारतीय मूल का व्यक्ति।</hi>
+        <en>A natural person residing in India, who meets the tax residency criteria of being resident and ordinarily resident in India (ROR). Unlike RNOR and NR, they are taxable in India on all worldwide income. Unique Identifier: Aadhaar, PAN, or Indian Passport.</en>
+        <hi>भारत में रहने वाला एक प्राकृतिक व्यक्ति, जो भारत में निवासी और सामान्य रूप से निवासी (ROR) होने के कर निवास मानदंडों को पूरा करता है। RNOR और NR के विपरीत, वे दुनिया भर की अपनी सभी आय पर भारत में कर योग्य हैं। विशिष्ट पहचानकर्ता: आधार, पैन या भारतीय पासपोर्ट।</hi>
       </description>
     </subtype>
     <subtype id="foreign-national">
