@@ -1032,9 +1032,55 @@
                 
 
                 <!-- Identification Numbers -->
-                <div class="field">
-                    <label for="kycAadhaar" id="labelKycAadhaar">Unique Identification Number (UID) / Aadhaar*</label>
-                    <input id="kycAadhaar" placeholder="Enter 12-digit Aadhaar" maxlength="12" required />
+                <div class="field" id="kycOvdSubmittedWrapper">
+                    <label for="kycOvdSubmitted" id="labelKycOvdSubmitted">Officially Valid Document (OVD)*</label>
+                    <select id="kycOvdSubmitted" required>
+                        <option value="" id="optKycOvdPlaceholder">-- Select OVD --</option>
+                        <option value="passport" id="optKycOvdPassport">Passport</option>
+                        <option value="driving_licence" id="optKycOvdDriving">Driving Licence</option>
+                        <option value="aadhaar" id="optKycOvdAadhaar">Proof of possession of Aadhaar number</option>
+                        <option value="voter_id" id="optKycOvdVoter">Voter's Identity Card (issued by ECI)</option>
+                        <option value="nrega" id="optKycOvdNrega">Job Card issued by NREGA</option>
+                        <option value="npr_letter" id="optKycOvdNpr">Letter issued by National Population Register</option>
+                        <option value="other_govt" id="optKycOvdOtherGovt">Any other document notified by Central Govt</option>
+                    </select>
+                    <div id="noteKycOvd" style="font-size: 12px; color: var(--muted); margin-top: 8px; line-height: 1.45;">
+                        Officially valid documents (OVDs) are government issued documents that can be accepted as identity and address proof and defined as per Rule 2 (d) of PML Rules
+                    </div>
+                </div>
+
+                <div class="field" id="kycOvdNumberWrapper">
+                    <label for="kycOvdNumber" id="labelKycOvdNumber">Document Number / Identification Number*</label>
+                    <input id="kycOvdNumber" placeholder="Enter Document/ID Number" />
+                </div>
+
+                <div class="field" id="kycOvdExpiryWrapper" style="display: none;">
+                    <label for="kycOvdExpiry" id="labelKycOvdExpiry">Expiry Date*</label>
+                    <input id="kycOvdExpiry" type="date" />
+                </div>
+
+                <div class="field" id="kycDeemedOvdSubmittedWrapper">
+                    <label for="kycDeemedOvdSubmitted" id="labelKycDeemedOvdSubmitted">Deemed Officially Valid Document (OVD)</label>
+                    <select id="kycDeemedOvdSubmitted">
+                        <option value="" id="optKycDeemedOvdPlaceholder">-- Select Deemed OVD --</option>
+                        <option value="utility_bill" id="optKycDeemedUtility">Utility Bill - not more than 2 months old (Electricity, Telephone, Post-paid Mobile, Piped Gas, Water)</option>
+                        <option value="property_tax" id="optKycDeemedProperty">Property or Municipal Tax Receipt</option>
+                        <option value="ppo" id="optKycDeemedPpo">Pension or Family Pension Payment Order (PPO) containing address</option>
+                        <option value="employer_letter" id="optKycDeemedEmployer">Employer Letter of Allotment of Accommodation / Leave and License Agreement</option>
+                    </select>
+                    <div id="noteKycDeemedOvd" style="font-size: 12px; color: var(--muted); margin-top: 8px; line-height: 1.45;">
+                        Note: In case the document furnished by the client does not contain updated address, Deemed OVDs are acceptable for the limited purpose of proof of address, provided that the client submits updated OVD with current address within a period of three months.
+                    </div>
+                </div>
+
+                <div class="field" id="kycDeemedOvdNumberWrapper" style="display: none;">
+                    <label for="kycDeemedOvdNumber" id="labelKycDeemedOvdNumber">Deemed Document Number / Identification Number*</label>
+                    <input id="kycDeemedOvdNumber" placeholder="Enter Deemed Document/ID Number" />
+                </div>
+
+                <div class="field" id="kycDeemedOvdIssuanceWrapper" style="display: none;">
+                    <label for="kycDeemedOvdIssuance" id="labelKycDeemedOvdIssuance">Date of Issuance*</label>
+                    <input id="kycDeemedOvdIssuance" type="date" />
                 </div>
                 
 
@@ -1237,17 +1283,49 @@
                     <input id="kycRelName" placeholder="Enter related person name" />
                 </div>
                 
-                <div class="field">
-                    <label for="kycRelPoi" id="labelKycRelPoi">Identity Proof Submitted</label>
-                    <input id="kycRelPoi" placeholder="e.g. PAN Card, Passport" />
+                <div class="field" id="kycRelOvdSubmittedWrapper">
+                    <label for="kycRelOvdSubmitted" id="labelKycRelOvdSubmitted">Officially Valid Document (OVD)*</label>
+                    <select id="kycRelOvdSubmitted">
+                        <option value="" id="optKycRelOvdPlaceholder">-- Select OVD --</option>
+                        <option value="passport" id="optKycRelOvdPassport">Passport</option>
+                        <option value="driving_licence" id="optKycRelOvdDriving">Driving Licence</option>
+                        <option value="aadhaar" id="optKycRelOvdAadhaar">Proof of possession of Aadhaar number</option>
+                        <option value="voter_id" id="optKycRelOvdVoter">Voter's Identity Card (issued by ECI)</option>
+                        <option value="nrega" id="optKycRelOvdNrega">Job Card issued by NREGA</option>
+                        <option value="npr_letter" id="optKycRelOvdNpr">Letter issued by National Population Register</option>
+                        <option value="other_govt" id="optKycRelOvdOtherGovt">Any other document notified by Central Govt</option>
+                    </select>
                 </div>
+
                 <div class="field">
                     <label for="kycRelPoiNum" id="labelKycRelPoiNum">Number / Identification No</label>
                     <input id="kycRelPoiNum" placeholder="Enter document number" />
                 </div>
-                <div class="field">
+
+                <div class="field" id="kycRelPoiExpWrapper" style="display: none;">
                     <label for="kycRelPoiExp" id="labelKycRelPoiExp">Expiry Date</label>
                     <input id="kycRelPoiExp" type="date" />
+                </div>
+
+                <div class="field" id="kycRelDeemedOvdSubmittedWrapper">
+                    <label for="kycRelDeemedOvdSubmitted" id="labelKycRelDeemedOvdSubmitted">Deemed Officially Valid Document (OVD)</label>
+                    <select id="kycRelDeemedOvdSubmitted">
+                        <option value="" id="optKycRelDeemedOvdPlaceholder">-- Select Deemed OVD --</option>
+                        <option value="utility_bill" id="optKycRelDeemedUtility">Utility Bill - not more than 2 months old (Electricity, Telephone, Post-paid Mobile, Piped Gas, Water)</option>
+                        <option value="property_tax" id="optKycRelDeemedProperty">Property or Municipal Tax Receipt</option>
+                        <option value="ppo" id="optKycRelDeemedPpo">Pension or Family Pension Payment Order (PPO) containing address</option>
+                        <option value="employer_letter" id="optKycRelDeemedEmployer">Employer Letter of Allotment of Accommodation / Leave and License Agreement</option>
+                    </select>
+                </div>
+
+                <div class="field" id="kycRelDeemedOvdNumberWrapper" style="display: none;">
+                    <label for="kycRelDeemedOvdNumber" id="labelKycRelDeemedOvdNumber">Deemed Document Number / Identification Number*</label>
+                    <input id="kycRelDeemedOvdNumber" placeholder="Enter Deemed Document/ID Number" />
+                </div>
+
+                <div class="field" id="kycRelDeemedOvdIssuanceWrapper" style="display: none;">
+                    <label for="kycRelDeemedOvdIssuance" id="labelKycRelDeemedOvdIssuance">Date of Issuance*</label>
+                    <input id="kycRelDeemedOvdIssuance" type="date" />
                 </div>
                 <div class="field">
                     <label for="kycRelSmaCode" id="labelKycRelSmaCode">Simplified Measures Account - Document Type Code</label>
@@ -1466,7 +1544,26 @@
         const kycTaxOutside = document.getElementById("kycTaxOutside");
         const taxOutsideFields = document.querySelectorAll(".tax-outside-field");
 
-        
+        const kycOvdSubmitted = document.getElementById("kycOvdSubmitted");
+        const kycDeemedOvdSubmitted = document.getElementById("kycDeemedOvdSubmitted");
+        const kycOvdNumber = document.getElementById("kycOvdNumber");
+        const kycOvdExpiry = document.getElementById("kycOvdExpiry");
+        const kycOvdExpiryWrapper = document.getElementById("kycOvdExpiryWrapper");
+        const kycDeemedOvdNumber = document.getElementById("kycDeemedOvdNumber");
+        const kycDeemedOvdNumberWrapper = document.getElementById("kycDeemedOvdNumberWrapper");
+        const kycDeemedOvdIssuance = document.getElementById("kycDeemedOvdIssuance");
+        const kycDeemedOvdIssuanceWrapper = document.getElementById("kycDeemedOvdIssuanceWrapper");
+
+        const kycRelOvdSubmitted = document.getElementById("kycRelOvdSubmitted");
+        const kycRelDeemedOvdSubmitted = document.getElementById("kycRelDeemedOvdSubmitted");
+        const kycRelPoiNum = document.getElementById("kycRelPoiNum");
+        const kycRelPoiExp = document.getElementById("kycRelPoiExp");
+        const kycRelPoiExpWrapper = document.getElementById("kycRelPoiExpWrapper");
+        const kycRelDeemedOvdNumber = document.getElementById("kycRelDeemedOvdNumber");
+        const kycRelDeemedOvdNumberWrapper = document.getElementById("kycRelDeemedOvdNumberWrapper");
+        const kycRelDeemedOvdIssuance = document.getElementById("kycRelDeemedOvdIssuance");
+        const kycRelDeemedOvdIssuanceWrapper = document.getElementById("kycRelDeemedOvdIssuanceWrapper");
+
         // Correspondence Address DOM References
         const kycPincode = document.getElementById("kycPincode");
         const kycShowAllStates = document.getElementById("kycShowAllStates");
@@ -1827,8 +1924,14 @@
                 "labelKycTaxJurisdiction": "kyc_tax_jurisdiction",
                 "labelKycTin": "kyc_tin",
                 "labelKycBirthCountry": "kyc_birth_country",
-                "labelKycBirthPlace": "kyc_birth_place",
-                "labelKycAadhaar": "kyc_aadhaar",
+                "labelKycOvdSubmitted": "kyc_ovd_submitted_label",
+                "labelKycDeemedOvdSubmitted": "kyc_deemed_ovd_label",
+                "labelKycOvdNumber": "kyc_ovd_number_label",
+                "labelKycOvdExpiry": "kyc_ovd_expiry_label",
+                "labelKycDeemedOvdNumber": "kyc_deemed_ovd_number_label",
+                "labelKycDeemedOvdIssuance": "kyc_deemed_ovd_issuance_label",
+                "noteKycOvd": "kyc_ovd_note",
+                "noteKycDeemedOvd": "kyc_deemed_ovd_note",
 
                 "kycSecBTitle": "kyc_sec_b_title",
                 "kycContactTitle": "kyc_contact_title",
@@ -1863,8 +1966,10 @@
                 "labelKycRelAction": "kyc_rel_action",
                 "labelKycRelNumber": "kyc_rel_number",
                 "labelKycRelType": "kyc_rel_type",
-                "labelKycRelName": "kyc_rel_name",
-                "labelKycRelPoi": "kyc_rel_poi",
+                "labelKycRelOvdSubmitted": "kyc_ovd_submitted_label",
+                "labelKycRelDeemedOvdSubmitted": "kyc_deemed_ovd_label",
+                "labelKycRelDeemedOvdNumber": "kyc_deemed_ovd_number_label",
+                "labelKycRelDeemedOvdIssuance": "kyc_deemed_ovd_issuance_label",
                 "labelKycRelPoiNum": "kyc_rel_poi_num",
                 "labelKycRelPoiExp": "kyc_rel_poi_exp",
                 "labelKycRelSmaCode": "kyc_rel_sma_code",
@@ -1963,7 +2068,33 @@
                 "optKycRddPhysical": "kyc_rdd_physical",
                 "optKycCommFarmer": "kyc_comm_farmer",
                 "optKycCommVcp": "kyc_comm_vcp",
-                "optKycCommOthers": "kyc_comm_others"
+                "optKycCommOthers": "kyc_comm_others",
+                "optKycOvdPlaceholder": "kyc_ovd_placeholder",
+                "optKycOvdPassport": "kyc_ovd_passport",
+                "optKycOvdDriving": "kyc_ovd_driving",
+                "optKycOvdAadhaar": "kyc_ovd_aadhaar",
+                "optKycOvdVoter": "kyc_ovd_voter",
+                "optKycOvdNrega": "kyc_ovd_nrega",
+                "optKycOvdNpr": "kyc_ovd_npr",
+                "optKycOvdOtherGovt": "kyc_ovd_other_govt",
+                "optKycDeemedOvdPlaceholder": "kyc_deemed_ovd_placeholder",
+                "optKycDeemedUtility": "kyc_deemed_utility",
+                "optKycDeemedProperty": "kyc_deemed_property",
+                "optKycDeemedPpo": "kyc_deemed_ppo",
+                "optKycDeemedEmployer": "kyc_deemed_employer",
+                "optKycRelOvdPlaceholder": "kyc_ovd_placeholder",
+                "optKycRelOvdPassport": "kyc_ovd_passport",
+                "optKycRelOvdDriving": "kyc_ovd_driving",
+                "optKycRelOvdAadhaar": "kyc_ovd_aadhaar",
+                "optKycRelOvdVoter": "kyc_ovd_voter",
+                "optKycRelOvdNrega": "kyc_ovd_nrega",
+                "optKycRelOvdNpr": "kyc_ovd_npr",
+                "optKycRelOvdOtherGovt": "kyc_ovd_other_govt",
+                "optKycRelDeemedOvdPlaceholder": "kyc_deemed_ovd_placeholder",
+                "optKycRelDeemedUtility": "kyc_deemed_utility",
+                "optKycRelDeemedProperty": "kyc_deemed_property",
+                "optKycRelDeemedPpo": "kyc_deemed_ppo",
+                "optKycRelDeemedEmployer": "kyc_deemed_employer"
             };
 
             for (const [elemId, labelId] of Object.entries(optionMappings)) {
@@ -1989,7 +2120,8 @@
                 "kycTin": "kyc_tin",
                 "kycBirthCountry": "kyc_country_code",
                 "kycBirthPlace": "kyc_birth_place",
-                "kycAadhaar": "kyc_aadhaar",
+                "kycOvdNumber": "kyc_ovd_number_label",
+                "kycDeemedOvdNumber": "kyc_deemed_ovd_number_label",
 
                 "kycMobile": "kyc_mobile",
                 "kycEmail": "kyc_email",
@@ -2006,8 +2138,9 @@
                 "kycForeignPincode": "kyc_pincode",
                 "kycRelNumber": "kyc_rel_number",
                 "kycRelName": "kyc_rel_name",
-                "kycRelPoi": "kyc_rel_poi",
+
                 "kycRelPoiNum": "kyc_rel_poi_num",
+                "kycRelDeemedOvdNumber": "kyc_deemed_ovd_number_label",
                 "kycRelSmaCode": "kyc_rel_sma_code",
                 "kycBankName": "kyc_bank_name",
                 "kycBankAcNum": "kyc_bank_ac_num",
@@ -3349,20 +3482,182 @@
 
             // Document validations
 
-            // Aadhaar
-            const kycAadhaarInput = document.getElementById("kycAadhaar");
-            if (kycAadhaarInput) {
-                kycAadhaarInput.addEventListener("input", () => {
-                    kycAadhaarInput.value = kycAadhaarInput.value.replace(/[^0-9]/g, "").slice(0, 12);
+            // Section A: OVD and Deemed OVD validation & handling logic
+            function updateOvdState() {
+                if (!kycOvdSubmitted || !kycDeemedOvdSubmitted || !kycOvdNumber || !kycOvdExpiryWrapper || !kycOvdExpiry ||
+                    !kycDeemedOvdNumber || !kycDeemedOvdNumberWrapper || !kycDeemedOvdIssuance || !kycDeemedOvdIssuanceWrapper) return;
+
+                const hasOvd = kycOvdSubmitted.value !== "";
+
+                if (hasOvd) {
+                    kycDeemedOvdSubmitted.disabled = false;
+                    kycDeemedOvdSubmitted.style.background = "";
+                    kycDeemedOvdSubmitted.style.cursor = "";
+
+                    // Standard OVD fields
+                    kycOvdNumber.required = true;
+                    document.getElementById("kycOvdNumberWrapper").style.display = "block";
+                    if (kycOvdSubmitted.value === "passport" || kycOvdSubmitted.value === "driving_licence") {
+                        kycOvdExpiryWrapper.style.display = "block";
+                        kycOvdExpiry.required = true;
+                    } else {
+                        kycOvdExpiryWrapper.style.display = "none";
+                        kycOvdExpiry.required = false;
+                        kycOvdExpiry.value = "";
+                    }
+                } else {
+                    kycDeemedOvdSubmitted.disabled = true;
+                    kycDeemedOvdSubmitted.style.background = "rgba(15,23,42,0.04)";
+                    kycDeemedOvdSubmitted.style.cursor = "not-allowed";
+                    kycDeemedOvdSubmitted.value = "";
+
+                    // Standard OVD fields
+                    kycOvdNumber.required = false;
+                    kycOvdNumber.value = "";
+                    document.getElementById("kycOvdNumberWrapper").style.display = "none";
+                    kycOvdExpiryWrapper.style.display = "none";
+                    kycOvdExpiry.required = false;
+                    kycOvdExpiry.value = "";
+                }
+
+                const hasDeemedOvd = kycDeemedOvdSubmitted.value !== "";
+
+                // Deemed OVD fields
+                if (hasDeemedOvd) {
+                    kycDeemedOvdNumber.required = true;
+                    kycDeemedOvdNumberWrapper.style.display = "block";
+                    kycDeemedOvdIssuance.required = true;
+                    kycDeemedOvdIssuanceWrapper.style.display = "block";
+                } else {
+                    kycDeemedOvdNumber.required = false;
+                    kycDeemedOvdNumber.value = "";
+                    kycDeemedOvdNumberWrapper.style.display = "none";
+                    kycDeemedOvdIssuance.required = false;
+                    kycDeemedOvdIssuance.value = "";
+                    kycDeemedOvdIssuanceWrapper.style.display = "none";
+                }
+
+                // Standard OVD dropdown is required in Section A
+                kycOvdSubmitted.required = true;
+            }
+
+            if (kycOvdSubmitted) {
+                kycOvdSubmitted.addEventListener("change", () => {
+                    updateOvdState();
                 });
-                kycAadhaarInput.addEventListener("change", () => {
-                    const val = kycAadhaarInput.value.trim();
-                    if (val && val.length !== 12) {
-                        alert(currentLang === "hi" ? "आधार नंबर ठीक १२ अंकों का होना चाहिए!" : "Aadhaar number must be exactly 12 digits!");
-                        kycAadhaarInput.focus();
+            }
+            if (kycDeemedOvdSubmitted) {
+                kycDeemedOvdSubmitted.addEventListener("change", () => {
+                    updateOvdState();
+                });
+            }
+
+            // Custom input and change validation on Section A Document Number (when Aadhaar is selected)
+            if (kycOvdNumber) {
+                kycOvdNumber.addEventListener("input", () => {
+                    if (kycOvdSubmitted && kycOvdSubmitted.value === "aadhaar") {
+                        kycOvdNumber.value = kycOvdNumber.value.replace(/[^0-9]/g, "").slice(0, 12);
+                    }
+                });
+                kycOvdNumber.addEventListener("change", () => {
+                    if (kycOvdSubmitted && kycOvdSubmitted.value === "aadhaar") {
+                        const val = kycOvdNumber.value.trim();
+                        if (val && val.length !== 12) {
+                            alert(currentLang === "hi" ? "आधार नंबर ठीक १२ अंकों का होना चाहिए!" : "Aadhaar number must be exactly 12 digits!");
+                            kycOvdNumber.focus();
+                        }
                     }
                 });
             }
+
+            // Section D: Related Person OVD and Deemed OVD validation & handling logic
+            function updateRelOvdState() {
+                if (!kycRelOvdSubmitted || !kycRelDeemedOvdSubmitted || !kycRelPoiNum || !kycRelPoiExpWrapper || !kycRelPoiExp ||
+                    !kycRelDeemedOvdNumber || !kycRelDeemedOvdNumberWrapper || !kycRelDeemedOvdIssuance || !kycRelDeemedOvdIssuanceWrapper) return;
+
+                const hasOvd = kycRelOvdSubmitted.value !== "";
+
+                if (hasOvd) {
+                    kycRelDeemedOvdSubmitted.disabled = false;
+                    kycRelDeemedOvdSubmitted.style.background = "";
+                    kycRelDeemedOvdSubmitted.style.cursor = "";
+
+                    // Standard OVD fields
+                    kycRelPoiNum.required = true;
+                    kycRelPoiNum.parentElement.style.display = "block";
+                    if (kycRelOvdSubmitted.value === "passport" || kycRelOvdSubmitted.value === "driving_licence") {
+                        kycRelPoiExpWrapper.style.display = "block";
+                        kycRelPoiExp.required = true;
+                    } else {
+                        kycRelPoiExpWrapper.style.display = "none";
+                        kycRelPoiExp.required = false;
+                        kycRelPoiExp.value = "";
+                    }
+                } else {
+                    kycRelDeemedOvdSubmitted.disabled = true;
+                    kycRelDeemedOvdSubmitted.style.background = "rgba(15,23,42,0.04)";
+                    kycRelDeemedOvdSubmitted.style.cursor = "not-allowed";
+                    kycRelDeemedOvdSubmitted.value = "";
+
+                    // Standard OVD fields
+                    kycRelPoiNum.required = false;
+                    kycRelPoiNum.value = "";
+                    kycRelPoiNum.parentElement.style.display = "none";
+                    kycRelPoiExpWrapper.style.display = "none";
+                    kycRelPoiExp.required = false;
+                    kycRelPoiExp.value = "";
+                }
+
+                const hasDeemedOvd = kycRelDeemedOvdSubmitted.value !== "";
+
+                // Deemed OVD fields
+                if (hasDeemedOvd) {
+                    kycRelDeemedOvdNumber.required = true;
+                    kycRelDeemedOvdNumberWrapper.style.display = "block";
+                    kycRelDeemedOvdIssuance.required = true;
+                    kycRelDeemedOvdIssuanceWrapper.style.display = "block";
+                } else {
+                    kycRelDeemedOvdNumber.required = false;
+                    kycRelDeemedOvdNumber.value = "";
+                    kycRelDeemedOvdNumberWrapper.style.display = "none";
+                    kycRelDeemedOvdIssuance.required = false;
+                    kycRelDeemedOvdIssuance.value = "";
+                    kycRelDeemedOvdIssuanceWrapper.style.display = "none";
+                }
+            }
+
+            if (kycRelOvdSubmitted) {
+                kycRelOvdSubmitted.addEventListener("change", () => {
+                    updateRelOvdState();
+                });
+            }
+            if (kycRelDeemedOvdSubmitted) {
+                kycRelDeemedOvdSubmitted.addEventListener("change", () => {
+                    updateRelOvdState();
+                });
+            }
+
+            // Custom input and change validation on Section D Document Number (when Aadhaar is selected)
+            if (kycRelPoiNum) {
+                kycRelPoiNum.addEventListener("input", () => {
+                    if (kycRelOvdSubmitted && kycRelOvdSubmitted.value === "aadhaar") {
+                        kycRelPoiNum.value = kycRelPoiNum.value.replace(/[^0-9]/g, "").slice(0, 12);
+                    }
+                });
+                kycRelPoiNum.addEventListener("change", () => {
+                    if (kycRelOvdSubmitted && kycRelOvdSubmitted.value === "aadhaar") {
+                        const val = kycRelPoiNum.value.trim();
+                        if (val && val.length !== 12) {
+                            alert(currentLang === "hi" ? "आधार नंबर ठीक १२ अंकों का होना चाहिए!" : "Aadhaar number must be exactly 12 digits!");
+                            kycRelPoiNum.focus();
+                        }
+                    }
+                });
+            }
+
+            // Initialize states
+            updateOvdState();
+            updateRelOvdState();
 
             // Mobile
             const kycMobileInput = document.getElementById("kycMobile");

@@ -436,6 +436,90 @@
       <en>Unique Identification Number (UID) / Aadhaar*</en>
       <hi>विशिष्ट पहचान संख्या (UID) / आधार*</hi>
     </label>
+    <label id="kyc_ovd_submitted_label">
+      <en>Officially Valid Document (OVD)*</en>
+      <hi>आधिकारिक रूप से वैध दस्तावेज (OVD)*</hi>
+    </label>
+    <label id="kyc_deemed_ovd_label">
+      <en>Deemed Officially Valid Document (OVD)</en>
+      <hi>डीम्ड आधिकारिक रूप से वैध दस्तावेज (OVD)</hi>
+    </label>
+    <label id="kyc_ovd_number_label">
+      <en>Document Number / Identification Number*</en>
+      <hi>दस्तावेज़ संख्या / पहचान संख्या*</hi>
+    </label>
+    <label id="kyc_ovd_expiry_label">
+      <en>Expiry Date*</en>
+      <hi>समाप्ति तिथि*</hi>
+    </label>
+    <label id="kyc_deemed_ovd_number_label">
+      <en>Deemed Document Number / Identification Number*</en>
+      <hi>डीम्ड दस्तावेज़ संख्या / पहचान संख्या*</hi>
+    </label>
+    <label id="kyc_deemed_ovd_issuance_label">
+      <en>Date of Issuance*</en>
+      <hi>जारी करने की तिथि*</hi>
+    </label>
+    <label id="kyc_ovd_note">
+      <en>Officially valid documents (OVDs) are government issued documents that can be accepted as identity and address proof and defined as per Rule 2 (d) of PML Rules</en>
+      <hi>आधिकारिक रूप से वैध दस्तावेज (OVDs) सरकार द्वारा जारी दस्तावेज हैं जिन्हें पहचान और पते के प्रमाण के रूप में स्वीकार किया जा सकता है और पीएमएल नियमों के नियम 2 (d) के अनुसार परिभाषित किया गया है</hi>
+    </label>
+    <label id="kyc_deemed_ovd_note">
+      <en>Note: In case the document furnished by the client does not contain updated address, the following documents (or their equivalent e-documents thereof) are acceptable for the limited purpose of proof of address, provided that the client submits updated officially valid document (or their equivalent e-documents thereof) with current address within a period of three months of submitting the following documents:</en>
+      <hi>नोट: यदि ग्राहक द्वारा प्रस्तुत दस्तावेज में अद्यतन पता नहीं है, तो पते के प्रमाण के सीमित उद्देश्य के लिए निम्नलिखित दस्तावेज (या उनके समकक्ष ई-दस्तावेज) स्वीकार्य हैं, बशर्ते कि ग्राहक निम्नलिखित दस्तावेज जमा करने के तीन महीने की अवधि के भीतर वर्तमान पते के साथ अद्यतन आधिकारिक रूप से वैध दस्तावेज (या उनके समकक्ष ई-दस्तावेज) प्रस्तुत करे:</hi>
+    </label>
+    <label id="kyc_ovd_placeholder">
+      <en>-- Select OVD --</en>
+      <hi>-- ओवीडी चुनें --</hi>
+    </label>
+    <label id="kyc_ovd_passport">
+      <en>Passport</en>
+      <hi>पासपोर्ट (Passport)</hi>
+    </label>
+    <label id="kyc_ovd_driving">
+      <en>Driving Licence</en>
+      <hi>ड्राइविंग लाइसेंस (Driving Licence)</hi>
+    </label>
+    <label id="kyc_ovd_aadhaar">
+      <en>Proof of possession of Aadhaar number</en>
+      <hi>आधार संख्या के कब्जे का प्रमाण</hi>
+    </label>
+    <label id="kyc_ovd_voter">
+      <en>Voter's Identity Card (issued by Election Commission of India)</en>
+      <hi>मतदाता पहचान पत्र (भारत निर्वाचन आयोग द्वारा जारी)</hi>
+    </label>
+    <label id="kyc_ovd_nrega">
+      <en>Job Card issued by NREGA (duly signed by a State Government officer)</en>
+      <hi>मनरेगा (NREGA) द्वारा जारी जॉब कार्ड (राज्य सरकार के अधिकारी द्वारा विधिवत हस्ताक्षरित)</hi>
+    </label>
+    <label id="kyc_ovd_npr">
+      <en>Letter issued by the National Population Register (containing name and address)</en>
+      <hi>राष्ट्रीय जनसंख्या रजिस्टर (NPR) द्वारा जारी पत्र (नाम और पते के साथ)</hi>
+    </label>
+    <label id="kyc_ovd_other_govt">
+      <en>Any other document notified by the Central Government</en>
+      <hi>केंद्र सरकार द्वारा अधिसूचित कोई अन्य दस्तावेज</hi>
+    </label>
+    <label id="kyc_deemed_ovd_placeholder">
+      <en>-- Select Deemed OVD --</en>
+      <hi>-- डीम्ड ओवीडी चुनें --</hi>
+    </label>
+    <label id="kyc_deemed_utility">
+      <en>Utility Bill - not more than 2 months old (Electricity, Telephone, Post-paid Mobile, Piped Gas, Water)</en>
+      <hi>उपयोगिता बिल - 2 महीने से अधिक पुराना नहीं (बिजली, टेलीफोन, पोस्ट-पेड मोबाइल, पाइप्ड गैस, पानी)</hi>
+    </label>
+    <label id="kyc_deemed_property">
+      <en>Property or Municipal Tax Receipt</en>
+      <hi>संपत्ति या नगर पालिका कर रसीद (Property or Municipal Tax Receipt)</hi>
+    </label>
+    <label id="kyc_deemed_ppo">
+      <en>Pension or Family Pension Payment Order (PPO) containing address</en>
+      <hi>पेंशन या पारिवारिक पेंशन भुगतान आदेश (PPO) जिसमें पता हो</hi>
+    </label>
+    <label id="kyc_deemed_employer">
+      <en>Employer Letter of Allotment of Accommodation / Leave and License Agreement</en>
+      <hi>आवास के आवंटन का नियोक्ता पत्र / छुट्टी और लाइसेंस समझौता</hi>
+    </label>
 
     <label id="kyc_photograph_label">
       <en>Affix Passport Size Photo*</en>
