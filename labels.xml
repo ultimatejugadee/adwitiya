@@ -1159,6 +1159,31 @@
       <hi>साफ़ करें</hi>
     </label>
 
+    <label id="ocr_quick_fill_btn_title">
+      <en>Quick Fill from OCR</en>
+      <hi>ओसीआर से त्वरित भरें</hi>
+    </label>
+    <label id="ocr_no_extracted_text_msg">
+      <en>No extracted text found. Please upload a document and click 'Extract Text' first.</en>
+      <hi>कोई निकाला गया पाठ नहीं मिला। कृपया पहले दस्तावेज़ अपलोड करें और 'पाठ निकालें' पर क्लिक करें।</hi>
+    </label>
+    <label id="ocr_quick_fill_title">
+      <en>Quick Fill Field</en>
+      <hi>त्वरित भरें फ़ील्ड</hi>
+    </label>
+    <label id="ocr_btn_clear_all">
+      <en>Clear All</en>
+      <hi>सभी साफ़ करें</hi>
+    </label>
+    <label id="ocr_btn_apply">
+      <en>Apply</en>
+      <hi>लागू करें</hi>
+    </label>
+    <label id="ocr_upload_misc">
+      <en>Upload Miscellaneous</en>
+      <hi>विविध दस्तावेज़ अपलोड करें</hi>
+    </label>
+
   </interface>
 
   <!-- PAN Categories -->

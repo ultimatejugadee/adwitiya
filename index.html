@@ -823,7 +823,7 @@
         /* OCR Drag and Drop Upload CSS */
         .ocr-upload-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
             gap: 16px;
             margin-top: 8px;
         }
@@ -840,20 +840,28 @@
             padding: 12px;
             text-align: center;
             cursor: pointer;
-            height: 55px; /* Compact height */
+            min-height: 55px;
+            height: 55px; /* Default height */
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             overflow: hidden;
             box-sizing: border-box;
-            transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+            transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1), min-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+        .ocr-upload-card.has-files {
+            height: auto;
+            min-height: 140px;
+            justify-content: flex-start;
+            padding-bottom: 16px;
         }
         .ocr-upload-card * {
             pointer-events: none;
         }
-        .ocr-upload-card .ocr-card-preview,
-        .ocr-upload-card .ocr-remove-btn {
+        .ocr-upload-card .ocr-previews-container,
+        .ocr-upload-card .ocr-preview-item,
+        .ocr-upload-card .ocr-preview-remove {
             pointer-events: auto;
         }
         .ocr-upload-card:hover {
@@ -871,6 +879,10 @@
             box-shadow: 0 0 20px rgba(99, 102, 241, 0.25);
             border-style: solid;
         }
+        .ocr-upload-card.has-files.dragover {
+            height: auto;
+            min-height: 140px;
+        }
         .ocr-card-compact {
             display: flex;
             align-items: center;
@@ -879,6 +891,7 @@
             font-size: 13px;
             font-weight: 650;
             color: var(--text);
+            width: 100%;
         }
         .ocr-card-expanded {
             display: none;
@@ -894,61 +907,74 @@
         .ocr-upload-card.dragover .ocr-card-expanded {
             display: flex;
         }
-        .ocr-card-preview {
-            display: none;
+        .ocr-upload-card.has-files .ocr-card-compact {
+            font-size: 11px;
+            color: var(--accent);
+            margin-bottom: 6px;
+            justify-content: flex-start;
+            border-bottom: 1.5px solid rgba(99, 102, 241, 0.12);
+            padding-bottom: 4px;
+        }
+        .ocr-upload-card.has-files .ocr-card-expanded {
+            display: none !important;
+        }
+
+        /* Previews Container for multiple files */
+        .ocr-previews-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
             width: 100%;
-            height: 100%;
-            flex-direction: column;
+            margin-top: 6px;
+        }
+        .ocr-preview-item {
+            position: relative;
+            width: 62px;
+            height: 62px;
+            border-radius: 8px;
+            border: 1px solid var(--box-border);
+            background: var(--bg2);
+            display: flex;
             align-items: center;
             justify-content: center;
-            position: absolute;
-            top: 0;
-            left: 0;
-            background: var(--bg2);
-            padding: 8px;
-            box-sizing: border-box;
-            z-index: 5;
-        }
-        .ocr-preview-img {
-            max-height: 80px;
-            max-width: 90%;
-            object-fit: contain;
-            border-radius: 8px;
-            margin-bottom: 4px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-        }
-        .ocr-preview-name {
-            font-size: 11px;
-            font-weight: 600;
-            color: var(--text);
-            white-space: nowrap;
             overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 90%;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+            animation: scaleIn 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .ocr-remove-btn {
+        .ocr-preview-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .ocr-preview-item .ocr-preview-remove {
             position: absolute;
-            top: 6px;
-            right: 6px;
+            top: 2px;
+            right: 2px;
             background: var(--danger);
             border: none;
             color: white;
             border-radius: 50%;
-            width: 22px;
-            height: 22px;
-            font-size: 12px;
+            width: 16px;
+            height: 16px;
+            font-size: 10px;
             font-weight: bold;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 2px 6px rgba(220, 38, 38, 0.3);
-            transition: transform 0.2s ease, background-color 0.2s ease;
+            box-shadow: 0 1px 4px rgba(220, 38, 38, 0.3);
+            transition: transform 0.15s ease, background-color 0.15s ease;
         }
-        .ocr-remove-btn:hover {
-            transform: scale(1.1);
+        .ocr-preview-item .ocr-preview-remove:hover {
+            transform: scale(1.15);
             background: #b91c1c;
         }
+        @keyframes scaleIn {
+            0% { transform: scale(0.85); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
         .ocr-spinner {
             border: 2.5px solid rgba(255, 255, 255, 0.1);
             border-top: 2.5px solid var(--accent);
@@ -991,6 +1017,66 @@
         }
         .ocr-provider-box:focus-within {
             border-color: var(--accent) !important;
+        }
+
+        /* Quick Fill Utility CSS */
+        .quick-fill-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+        .quick-fill-input {
+            padding-right: 38px !important;
+        }
+        .quick-fill-btn {
+            position: absolute;
+            right: 8px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            color: var(--muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            z-index: 10;
+            user-select: none;
+        }
+        .quick-fill-btn:hover {
+            color: var(--accent);
+            transform: scale(1.2);
+            background: rgba(99, 102, 241, 0.08);
+        }
+        [data-theme="dark"] .quick-fill-btn:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .quick-fill-word-btn {
+            padding: 8px 14px;
+            font-size: 13px;
+            font-weight: 600;
+            border-radius: 8px;
+            border: 1px solid var(--box-border);
+            background: var(--btn-bg);
+            color: var(--text);
+            cursor: pointer;
+            transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+            user-select: none;
+        }
+        .quick-fill-word-btn:hover {
+            background: var(--btn-border);
+            border-color: var(--accent);
+            transform: translateY(-1px);
+        }
+        .quick-fill-word-btn.active {
+            background: var(--accent) !important;
+            color: white !important;
+            border-color: var(--accent) !important;
+            box-shadow: 0 4px 10px rgba(99, 102, 241, 0.3);
+            transform: translateY(-1px);
         }
     </style>
 </head>
@@ -1050,7 +1136,7 @@
                     <div class="ocr-upload-grid">
                         <!-- PAN Card Dropzone -->
                         <div class="ocr-upload-card" id="ocrCardPan">
-                            <input type="file" id="ocrFilePan" accept="image/*" style="display: none;" />
+                            <input type="file" id="ocrFilePan" accept="image/*" style="display: none;" multiple />
                             <div class="ocr-card-compact">
                                 <span style="font-size: 16px;">💳</span>
                                 <span id="lblUploadPanCard">Upload PAN Card</span>
@@ -1059,16 +1145,12 @@
                                 <span style="font-size: 24px; animation: bounce 1.5s infinite;">📥</span>
                                 <span style="font-size: 11px; color: var(--muted);" id="lblDragDropPan">Drag & drop image here or click</span>
                             </div>
-                            <div class="ocr-card-preview">
-                                <img class="ocr-preview-img" alt="PAN Card Preview" />
-                                <div class="ocr-preview-name"></div>
-                                <button type="button" class="ocr-remove-btn">&times;</button>
-                            </div>
+                            <div class="ocr-previews-container"></div>
                         </div>
 
                         <!-- OVD Dropzone -->
                         <div class="ocr-upload-card" id="ocrCardOvd">
-                            <input type="file" id="ocrFileOvd" accept="image/*" style="display: none;" />
+                            <input type="file" id="ocrFileOvd" accept="image/*" style="display: none;" multiple />
                             <div class="ocr-card-compact">
                                 <span style="font-size: 16px;">📄</span>
                                 <span id="lblUploadOvd">Upload OVD</span>
@@ -1077,16 +1159,12 @@
                                 <span style="font-size: 24px; animation: bounce 1.5s infinite;">📥</span>
                                 <span style="font-size: 11px; color: var(--muted);" id="lblDragDropOvd">Drag & drop image here or click</span>
                             </div>
-                            <div class="ocr-card-preview">
-                                <img class="ocr-preview-img" alt="OVD Preview" />
-                                <div class="ocr-preview-name"></div>
-                                <button type="button" class="ocr-remove-btn">&times;</button>
-                            </div>
+                            <div class="ocr-previews-container"></div>
                         </div>
 
                         <!-- Deemed OVD Dropzone -->
                         <div class="ocr-upload-card" id="ocrCardDeemedOvd">
-                            <input type="file" id="ocrFileDeemedOvd" accept="image/*" style="display: none;" />
+                            <input type="file" id="ocrFileDeemedOvd" accept="image/*" style="display: none;" multiple />
                             <div class="ocr-card-compact">
                                 <span style="font-size: 16px;">🏢</span>
                                 <span id="lblUploadDeemedOvd">Upload Deemed OVD</span>
@@ -1095,11 +1173,21 @@
                                 <span style="font-size: 24px; animation: bounce 1.5s infinite;">📥</span>
                                 <span style="font-size: 11px; color: var(--muted);" id="lblDragDropDeemed">Drag & drop image here or click</span>
                             </div>
-                            <div class="ocr-card-preview">
-                                <img class="ocr-preview-img" alt="Deemed OVD Preview" />
-                                <div class="ocr-preview-name"></div>
-                                <button type="button" class="ocr-remove-btn">&times;</button>
+                            <div class="ocr-previews-container"></div>
+                        </div>
+
+                        <!-- Miscellaneous Dropzone -->
+                        <div class="ocr-upload-card" id="ocrCardMisc">
+                            <input type="file" id="ocrFileMisc" accept="image/*" style="display: none;" multiple />
+                            <div class="ocr-card-compact">
+                                <span style="font-size: 16px;">📁</span>
+                                <span id="lblUploadMisc">Upload Miscellaneous</span>
                             </div>
+                            <div class="ocr-card-expanded">
+                                <span style="font-size: 24px; animation: bounce 1.5s infinite;">📥</span>
+                                <span style="font-size: 11px; color: var(--muted);" id="lblDragDropMisc">Drag & drop image here or click</span>
+                            </div>
+                            <div class="ocr-previews-container"></div>
                         </div>
                     </div>
 
@@ -1132,6 +1220,7 @@
                             <button type="button" class="ocr-tab-btn active" data-tab="pan" id="tabBtnPan">PAN Card</button>
                             <button type="button" class="ocr-tab-btn" data-tab="ovd" id="tabBtnOvd" style="display: none;">OVD</button>
                             <button type="button" class="ocr-tab-btn" data-tab="deemed" id="tabBtnDeemed" style="display: none;">Deemed OVD</button>
+                            <button type="button" class="ocr-tab-btn" data-tab="misc" id="tabBtnMisc" style="display: none;">Miscellaneous</button>
                         </div>
                         <!-- Tab Contents -->
                         <div class="ocr-tab-contents">
@@ -1146,6 +1235,10 @@
                             <div class="ocr-tab-pane" id="tabContentDeemed" style="position: relative;">
                                 <textarea readonly style="width: 100%; height: 120px; border-radius: 8px; font-family: monospace; font-size: 12px; padding: 10px; box-sizing: border-box; background: rgba(0,0,0,0.15); color: var(--text); border: 1px solid var(--box-border); resize: vertical; outline: none;"></textarea>
                                 <button type="button" class="theme-toggle-btn" id="copyBtnDeemed" style="position: absolute; bottom: 8px; right: 8px; padding: 4px 8px; font-size: 11px;">Copy</button>
+                            </div>
+                            <div class="ocr-tab-pane" id="tabContentMisc" style="position: relative;">
+                                <textarea readonly style="width: 100%; height: 120px; border-radius: 8px; font-family: monospace; font-size: 12px; padding: 10px; box-sizing: border-box; background: rgba(0,0,0,0.15); color: var(--text); border: 1px solid var(--box-border); resize: vertical; outline: none;"></textarea>
+                                <button type="button" class="theme-toggle-btn" id="copyBtnMisc" style="position: absolute; bottom: 8px; right: 8px; padding: 4px 8px; font-size: 11px;">Copy</button>
                             </div>
                         </div>
                     </div>
@@ -2134,6 +2227,29 @@
             <div style="display: flex; justify-content: flex-end; gap: 12px;">
                 <button type="button" id="closeOcrSettingsModalBtn" class="theme-toggle-btn" style="padding: 8px 16px; font-size: 13px; border-radius: 8px; cursor: pointer;">Cancel</button>
                 <button type="button" id="saveOcrSettingsBtn" class="theme-toggle-btn" style="padding: 8px 16px; font-size: 13px; border-radius: 8px; background: var(--accent); color: white; border: none; font-weight: 600; cursor: pointer;">Save Settings</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Fill Popup Modal -->
+    <div id="quickFillModal" class="modal" style="z-index: 200;">
+        <div class="modal-content" style="max-width: 500px; padding: 22px; border-radius: 16px;">
+            <span class="close-modal" id="closeQuickFillModal">&times;</span>
+            <h3 id="ocrQuickFillTitle" style="margin-top: 0; margin-bottom: 16px; font-size: 17px; font-weight: 700; color: var(--accent);">Quick Fill Field</h3>
+            
+            <!-- Composed Text Field -->
+            <div style="margin-bottom: 16px;">
+                <input type="text" id="quickFillComposedText" style="width: 100%; font-size: 15px; padding: 10px 14px; border-radius: 10px; border: 1.5px solid var(--box-border); background: var(--bg2); color: var(--text); box-sizing: border-box; outline: none; transition: border-color 0.2s ease;" placeholder="Composed text..." />
+            </div>
+            
+            <!-- Word Select Buttons -->
+            <div id="quickFillWordsContainer" style="display: flex; flex-direction: column; gap: 8px; max-height: 220px; overflow-y: auto; padding: 12px; border: 1px solid var(--box-border); border-radius: 12px; background: rgba(0,0,0,0.03); margin-bottom: 20px; box-sizing: border-box;">
+                <!-- Word buttons will be injected dynamically here -->
+            </div>
+
+            <div style="display: flex; justify-content: flex-end; gap: 12px;">
+                <button type="button" id="quickFillClearBtn" class="theme-toggle-btn" style="padding: 8px 16px; font-size: 13px; border-radius: 8px; cursor: pointer;">Clear All</button>
+                <button type="button" id="quickFillApplyBtn" class="theme-toggle-btn" style="padding: 8px 16px; font-size: 13px; border-radius: 8px; background: var(--accent); color: white; border: none; font-weight: 600; cursor: pointer;">Apply</button>
             </div>
         </div>
     </div>
@@ -5710,10 +5826,19 @@
 
         // --- OCR and Document Upload Integration ---
         const ocrFiles = {
-            pan: null,
-            ovd: null,
-            deemed: null
+            pan: [],
+            ovd: [],
+            deemed: [],
+            misc: []
         };
+
+        const OCR_SYSTEM_PROMPT = `Perform OCR on this document image. Extract and return ONLY the unique details associated with the individual/user (such as names, dates of birth, addresses, document identification numbers, and contact details).
+
+CRITICAL INSTRUCTIONS:
+1. Do NOT include generic template words, standard labels, headers, instructions, or boilerplate phrases that are part of the standard document layout (e.g. skip "INCOME TAX DEPARTMENT", "GOVERNMENT OF INDIA", "Name:", "DOB:", "Father's Name:", "Address:", "Permanent Account Number", "Card", "Signature", "Year of Birth:", "Male", "Female", etc.). Keep only the actual values/details.
+2. Strip out all spaces inside identification numbers such as Aadhaar numbers, Mobile numbers, and VID numbers (where spaces are typically inserted for readability, e.g. "1234 5678 9012" must be formatted as "123456789012", and "+91 98765 43210" or "98765 43210" must have internal spaces removed).
+3. Preserve the relative vertical line breaks of the extracted values.
+4. Output only the extracted unique text/values, and nothing else. Do not add introductory or explanatory text.`;
 
         async function performOcrCall(provider, apiKey, modelName, base64Data, mimeType) {
             if (provider === "gemini") {
@@ -5724,7 +5849,7 @@
                     body: JSON.stringify({
                         contents: [{
                             parts: [
-                                { text: "Perform OCR on this document image. Return all readable text from it. Do not translate. Keep the original formatting as close as possible. Output only the extracted text and nothing else." },
+                                { text: OCR_SYSTEM_PROMPT },
                                 { inlineData: { mimeType: mimeType, data: base64Data } }
                             ]
                         }]
@@ -5751,7 +5876,7 @@
                         messages: [{
                             role: "user",
                             content: [
-                                { type: "text", text: "Perform OCR on this document image. Return all readable text from it. Do not translate. Keep the original formatting as close as possible. Output only the extracted text and nothing else." },
+                                { type: "text", text: OCR_SYSTEM_PROMPT },
                                 { type: "image_url", image_url: { url: `data:${mimeType};base64,${base64Data}` } }
                             ]
                         }]
@@ -5778,7 +5903,7 @@
                         messages: [{
                             role: "user",
                             content: [
-                                { type: "text", text: "Perform OCR on this document image. Return all readable text from it. Do not translate. Keep the original formatting as close as possible. Output only the extracted text and nothing else." },
+                                { type: "text", text: OCR_SYSTEM_PROMPT },
                                 { type: "image_url", image_url: { url: `data:${mimeType};base64,${base64Data}` } }
                             ]
                         }]
@@ -5815,7 +5940,7 @@
         }
 
         function updateOcrButtonVisibility() {
-            const hasFile = ocrFiles.pan || ocrFiles.ovd || ocrFiles.deemed;
+            const hasFile = ocrFiles.pan.length > 0 || ocrFiles.ovd.length > 0 || ocrFiles.deemed.length > 0 || ocrFiles.misc.length > 0;
             const actionRow = document.getElementById("ocrActionRow");
             if (actionRow) {
                 actionRow.style.display = hasFile ? "flex" : "none";
@@ -5826,27 +5951,69 @@
             }
         }
 
-        function handleOcrFile(file, cardKey, card, preview, previewImg, previewName) {
-            if (!file.type.startsWith("image/")) {
-                alert(currentLang === "hi" ? "कृपया केवल एक छवि फ़ाइल चुनें!" : "Please select an image file only!");
-                return;
-            }
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                previewImg.src = e.target.result;
-                const sizeKB = Math.round(file.size / 1024);
-                previewName.textContent = `${file.name} (${sizeKB} KB)`;
-                preview.style.display = "flex";
-                card.style.height = "140px";
+        function handleOcrFiles(files, cardKey) {
+            const camelKey = cardKey === "deemed" ? "DeemedOvd" : cardKey === "misc" ? "Misc" : cardKey.charAt(0).toUpperCase() + cardKey.slice(1);
+            const card = document.getElementById(`ocrCard${camelKey}`);
+            if (!card) return;
 
-                ocrFiles[cardKey] = {
-                    fileData: e.target.result.split(",")[1],
-                    fileType: file.type,
-                    fileName: file.name
+            Array.from(files).forEach(file => {
+                if (!file.type.startsWith("image/")) {
+                    alert(currentLang === "hi" ? "कृपया केवल एक छवि फ़ाइल चुनें!" : "Please select an image file only!");
+                    return;
+                }
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    ocrFiles[cardKey].push({
+                        fileData: e.target.result.split(",")[1],
+                        fileType: file.type,
+                        fileName: file.name
+                    });
+                    renderOcrPreviews(cardKey);
+                    updateOcrButtonVisibility();
                 };
-                updateOcrButtonVisibility();
-            };
-            reader.readAsDataURL(file);
+                reader.readAsDataURL(file);
+            });
+        }
+
+        function renderOcrPreviews(cardKey) {
+            const camelKey = cardKey === "deemed" ? "DeemedOvd" : cardKey === "misc" ? "Misc" : cardKey.charAt(0).toUpperCase() + cardKey.slice(1);
+            const card = document.getElementById(`ocrCard${camelKey}`);
+            if (!card) return;
+            const container = card.querySelector(".ocr-previews-container");
+            if (!container) return;
+
+            container.innerHTML = "";
+            const filesList = ocrFiles[cardKey];
+
+            if (filesList.length > 0) {
+                card.classList.add("has-files");
+                filesList.forEach((fileObj, index) => {
+                    const previewItem = document.createElement("div");
+                    previewItem.className = "ocr-preview-item";
+
+                    const img = document.createElement("img");
+                    img.src = `data:${fileObj.fileType};base64,${fileObj.fileData}`;
+                    img.alt = fileObj.fileName;
+                    previewItem.appendChild(img);
+
+                    const removeBtn = document.createElement("button");
+                    removeBtn.type = "button";
+                    removeBtn.className = "ocr-preview-remove";
+                    removeBtn.innerHTML = "&times;";
+                    removeBtn.addEventListener("click", (e) => {
+                        e.stopPropagation();
+                        e.preventDefault();
+                        ocrFiles[cardKey].splice(index, 1);
+                        renderOcrPreviews(cardKey);
+                        updateOcrButtonVisibility();
+                    });
+
+                    previewItem.appendChild(removeBtn);
+                    container.appendChild(previewItem);
+                });
+            } else {
+                card.classList.remove("has-files");
+            }
         }
 
         function switchTab(tabKey) {
@@ -5865,9 +6032,11 @@
                 "lblUploadPanCard": "ocr_upload_pan",
                 "lblUploadOvd": "ocr_upload_ovd",
                 "lblUploadDeemedOvd": "ocr_upload_deemed",
+                "lblUploadMisc": "ocr_upload_misc",
                 "lblDragDropPan": "ocr_drag_drop_hint",
                 "lblDragDropOvd": "ocr_drag_drop_hint",
                 "lblDragDropDeemed": "ocr_drag_drop_hint",
+                "lblDragDropMisc": "ocr_drag_drop_hint",
                 "lblOcrActiveModel": "ocr_using_model",
                 "lblExtractTextBtn": "ocr_extract_text_btn",
                 "ocrStatusText": "ocr_status_extracting",
@@ -5889,9 +6058,14 @@
                 "tabBtnPan": "ocr_upload_pan",
                 "tabBtnOvd": "ocr_upload_ovd",
                 "tabBtnDeemed": "ocr_upload_deemed",
+                "tabBtnMisc": "ocr_upload_misc",
                 "copyBtnPan": "ocr_btn_copy",
                 "copyBtnOvd": "ocr_btn_copy",
-                "copyBtnDeemed": "ocr_btn_copy"
+                "copyBtnDeemed": "ocr_btn_copy",
+                "copyBtnMisc": "ocr_btn_copy",
+                "ocrQuickFillTitle": "ocr_quick_fill_title",
+                "quickFillClearBtn": "ocr_btn_clear_all",
+                "quickFillApplyBtn": "ocr_btn_apply"
             };
 
             for (const [elemId, labelId] of Object.entries(ocrMappings)) {
@@ -5909,6 +6083,195 @@
                 if (elem) elem.placeholder = t(inp.placeholder) || elem.placeholder;
             });
             updateOcrActiveModelLabel();
+        }
+
+        // --- Quick Fill Utility Functions ---
+        let activeQuickFillTarget = null;
+        let quickFillClickedItems = [];
+
+        function showToast(message) {
+            const existing = document.getElementById("ocrToastMessage");
+            if (existing) existing.remove();
+            
+            const toast = document.createElement("div");
+            toast.id = "ocrToastMessage";
+            toast.textContent = message;
+            toast.style.position = "fixed";
+            toast.style.bottom = "24px";
+            toast.style.left = "50%";
+            toast.style.transform = "translateX(-50%)";
+            toast.style.background = "var(--danger)";
+            toast.style.color = "white";
+            toast.style.padding = "12px 24px";
+            toast.style.borderRadius = "12px";
+            toast.style.fontSize = "13px";
+            toast.style.fontWeight = "600";
+            toast.style.zIndex = "300";
+            toast.style.boxShadow = "0 8px 24px rgba(0,0,0,0.2)";
+            toast.style.opacity = "0";
+            toast.style.transition = "opacity 0.25s ease, transform 0.25s ease";
+            
+            document.body.appendChild(toast);
+            toast.offsetHeight; // trigger reflow
+            
+            toast.style.opacity = "1";
+            toast.style.transform = "translateX(-50%) translateY(-5px)";
+            
+            setTimeout(() => {
+                toast.style.opacity = "0";
+                toast.style.transform = "translateX(-50%) translateY(5px)";
+                setTimeout(() => {
+                    toast.remove();
+                }, 250);
+            }, 3000);
+        }
+
+        function getCombinedExtractedText() {
+            let combined = [];
+            const panText = document.querySelector("#tabContentPan textarea")?.value || "";
+            const ovdText = document.querySelector("#tabContentOvd textarea")?.value || "";
+            const deemedText = document.querySelector("#tabContentDeemed textarea")?.value || "";
+            const miscText = document.querySelector("#tabContentMisc textarea")?.value || "";
+            
+            const cleanAdd = (txt) => {
+                if (!txt) return;
+                const trimmed = txt.trim();
+                if (trimmed.startsWith("Error:") || trimmed.startsWith("Extracting...") || trimmed.startsWith("त्रुटि:") || trimmed.startsWith("निकाला जा रहा है...")) return;
+                combined.push(trimmed);
+            };
+            cleanAdd(panText);
+            cleanAdd(ovdText);
+            cleanAdd(deemedText);
+            cleanAdd(miscText);
+            return combined.join("\n\n\n");
+        }
+
+        function setupQuickFillIcons() {
+            const selectors = 'input[type="text"], input[type="email"], input[type="tel"], input:not([type])';
+            const inputs = document.querySelectorAll(selectors);
+            
+            inputs.forEach(input => {
+                const isOcrSetting = input.id && input.id.startsWith("ocr");
+                const isAutocomplete = input.id === "entityInput" || input.id === "kycTaxJurisdiction" || input.id === "kycBirthCountry" || input.id === "kycCitizenCountry";
+                const isReadonly = input.readOnly;
+                const isPhoto = input.type === "file";
+                const isDate = input.type === "date";
+                
+                if (isOcrSetting || isAutocomplete || isReadonly || isPhoto || isDate) return;
+                if (input.parentNode && input.parentNode.classList.contains("quick-fill-wrapper")) return;
+                
+                const wrapper = document.createElement("div");
+                wrapper.className = "quick-fill-wrapper";
+                
+                input.parentNode.insertBefore(wrapper, input);
+                wrapper.appendChild(input);
+                
+                input.classList.add("quick-fill-input");
+                
+                const btn = document.createElement("button");
+                btn.type = "button";
+                btn.className = "quick-fill-btn";
+                btn.title = t("ocr_quick_fill_btn_title") || "Quick Fill from OCR";
+                btn.innerHTML = "🪄";
+                
+                btn.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    openQuickFillPopup(input);
+                });
+                
+                wrapper.appendChild(btn);
+            });
+        }
+
+        function openQuickFillPopup(input) {
+            const allText = getCombinedExtractedText();
+            if (!allText.trim()) {
+                showToast(t("ocr_no_extracted_text_msg") || "No extracted text found. Please upload a document and click 'Extract Text' first.");
+                return;
+            }
+            
+            activeQuickFillTarget = input;
+            
+            const currentVal = input.value.trim();
+            const initialWords = currentVal ? currentVal.split(/\s+/) : [];
+            
+            const modal = document.getElementById("quickFillModal");
+            const composedInput = document.getElementById("quickFillComposedText");
+            const container = document.getElementById("quickFillWordsContainer");
+            
+            composedInput.value = input.value;
+            container.innerHTML = "";
+            
+            quickFillClickedItems = [];
+            let globalWordIdx = 0;
+            let wordMatches = [...initialWords];
+
+            const lines = allText.split("\n");
+            lines.forEach((line) => {
+                const trimmedLine = line.trim();
+                if (trimmedLine.length === 0) {
+                    const spacer = document.createElement("div");
+                    spacer.style.height = "12px";
+                    spacer.style.width = "100%";
+                    container.appendChild(spacer);
+                    return;
+                }
+                
+                const lineWords = trimmedLine.split(/\s+/).filter(w => w.length > 0);
+                if (lineWords.length === 0) {
+                    const spacer = document.createElement("div");
+                    spacer.style.height = "12px";
+                    spacer.style.width = "100%";
+                    container.appendChild(spacer);
+                    return;
+                }
+
+                const rowDiv = document.createElement("div");
+                rowDiv.className = "quick-fill-row";
+                rowDiv.style.display = "flex";
+                rowDiv.style.flexWrap = "wrap";
+                rowDiv.style.gap = "8px";
+                rowDiv.style.width = "100%";
+                rowDiv.style.marginBottom = "6px";
+
+                lineWords.forEach((word) => {
+                    const idx = globalWordIdx++;
+                    const btn = document.createElement("button");
+                    btn.type = "button";
+                    btn.className = "quick-fill-word-btn";
+                    btn.textContent = word;
+                    
+                    const matchIdx = wordMatches.indexOf(word);
+                    if (matchIdx !== -1) {
+                        btn.classList.add("active");
+                        quickFillClickedItems.push({ index: idx, word: word });
+                        wordMatches.splice(matchIdx, 1);
+                    }
+                    
+                    btn.addEventListener("click", () => {
+                        const itemIdx = quickFillClickedItems.findIndex(item => item.index === idx);
+                        if (itemIdx !== -1) {
+                            quickFillClickedItems.splice(itemIdx, 1);
+                            btn.classList.remove("active");
+                        } else {
+                            quickFillClickedItems.push({ index: idx, word: word });
+                            btn.classList.add("active");
+                        }
+                        
+                        const composed = quickFillClickedItems.map(item => item.word).join(" ");
+                        composedInput.value = composed;
+                        activeQuickFillTarget.value = composed;
+                        activeQuickFillTarget.dispatchEvent(new Event("input"));
+                    });
+                    
+                    rowDiv.appendChild(btn);
+                });
+                
+                container.appendChild(rowDiv);
+            });
+            
+            modal.style.display = "block";
         }
 
         function initOcrFunctionality() {
@@ -5993,26 +6356,23 @@
             });
 
             // Card functionality (Drag & Drop + Touch click)
-            const cards = ["Pan", "Ovd", "DeemedOvd"];
+            const cards = ["Pan", "Ovd", "DeemedOvd", "Misc"];
             cards.forEach(type => {
-                const cardKey = type === "Pan" ? "pan" : (type === "Ovd" ? "ovd" : "deemed");
+                const cardKey = type === "Pan" ? "pan" : (type === "Ovd" ? "ovd" : (type === "DeemedOvd" ? "deemed" : "misc"));
                 const card = document.getElementById(`ocrCard${type}`);
                 const fileInput = document.getElementById(`ocrFile${type}`);
-                const preview = card.querySelector(".ocr-card-preview");
-                const previewImg = card.querySelector(".ocr-preview-img");
-                const previewName = card.querySelector(".ocr-preview-name");
-                const removeBtn = card.querySelector(".ocr-remove-btn");
 
                 card.addEventListener("click", (e) => {
-                    if (e.target !== removeBtn) {
-                        fileInput.click();
+                    const container = card.querySelector(".ocr-previews-container");
+                    if (container && container.contains(e.target)) {
+                        return; // Clicked on preview thumbnail or remove button
                     }
+                    fileInput.click();
                 });
 
                 fileInput.addEventListener("change", (e) => {
-                    const file = e.target.files[0];
-                    if (file) {
-                        handleOcrFile(file, cardKey, card, preview, previewImg, previewName);
+                    if (e.target.files.length > 0) {
+                        handleOcrFiles(e.target.files, cardKey);
                     }
                 });
 
@@ -6035,22 +6395,9 @@
                     e.preventDefault();
                     e.stopPropagation();
                     card.classList.remove("dragover");
-                    const file = e.dataTransfer.files[0];
-                    if (file) {
-                        handleOcrFile(file, cardKey, card, preview, previewImg, previewName);
+                    if (e.dataTransfer.files.length > 0) {
+                        handleOcrFiles(e.dataTransfer.files, cardKey);
                     }
-                });
-
-                removeBtn.addEventListener("click", (e) => {
-                    e.stopPropagation();
-                    e.preventDefault();
-                    fileInput.value = "";
-                    ocrFiles[cardKey] = null;
-                    preview.style.display = "none";
-                    previewImg.src = "";
-                    previewName.textContent = "";
-                    card.style.height = "55px";
-                    updateOcrButtonVisibility();
                 });
             });
 
@@ -6077,12 +6424,9 @@
                     return;
                 }
 
-                const activeFiles = [];
-                if (ocrFiles.pan) activeFiles.push({ key: "pan", ...ocrFiles.pan });
-                if (ocrFiles.ovd) activeFiles.push({ key: "ovd", ...ocrFiles.ovd });
-                if (ocrFiles.deemed) activeFiles.push({ key: "deemed", ...ocrFiles.deemed });
-
-                if (activeFiles.length === 0) return;
+                const categories = ["pan", "ovd", "deemed", "misc"];
+                const activeCategories = categories.filter(cat => ocrFiles[cat].length > 0);
+                if (activeCategories.length === 0) return;
 
                 const statusMsg = document.getElementById("ocrStatusMsg");
                 const statusText = document.getElementById("ocrStatusText");
@@ -6093,17 +6437,20 @@
 
                 btnExtractText.disabled = true;
 
-                const ocrPromises = activeFiles.map(async (doc) => {
-                    const txtArea = document.querySelector(`#tabContent${doc.key.charAt(0).toUpperCase() + doc.key.slice(1)} textarea`);
+                const ocrPromises = activeCategories.map(async (catKey) => {
+                    const camelTabKey = catKey === "deemed" ? "Deemed" : catKey === "misc" ? "Misc" : catKey.charAt(0).toUpperCase() + catKey.slice(1);
+                    const txtArea = document.querySelector(`#tabContent${camelTabKey} textarea`);
                     txtArea.value = currentLang === "hi" ? "निकाला जा रहा है..." : "Extracting...";
+                    
                     try {
-                        const text = await performOcrCall(provider, apiKey, modelName, doc.fileData, doc.fileType);
-                        txtArea.value = text;
-                        return { key: doc.key, success: true };
+                        const filePromises = ocrFiles[catKey].map(file => {
+                            return performOcrCall(provider, apiKey, modelName, file.fileData, file.fileType);
+                        });
+                        const results = await Promise.all(filePromises);
+                        txtArea.value = results.filter(Boolean).join("\n\n\n");
                     } catch (error) {
-                        console.error(`OCR Error for ${doc.key}:`, error);
+                        console.error(`OCR Error for ${catKey}:`, error);
                         txtArea.value = (currentLang === "hi" ? "त्रुटि: " : "Error: ") + error.message;
-                        return { key: doc.key, success: false };
                     }
                 });
 
@@ -6118,13 +6465,14 @@
                 const tabPan = document.getElementById("tabBtnPan");
                 const tabOvd = document.getElementById("tabBtnOvd");
                 const tabDeemed = document.getElementById("tabBtnDeemed");
+                const tabMisc = document.getElementById("tabBtnMisc");
 
-                tabPan.style.display = ocrFiles.pan ? "block" : "none";
-                tabOvd.style.display = ocrFiles.ovd ? "block" : "none";
-                tabDeemed.style.display = ocrFiles.deemed ? "block" : "none";
+                tabPan.style.display = ocrFiles.pan.length > 0 ? "block" : "none";
+                tabOvd.style.display = ocrFiles.ovd.length > 0 ? "block" : "none";
+                tabDeemed.style.display = ocrFiles.deemed.length > 0 ? "block" : "none";
+                tabMisc.style.display = ocrFiles.misc.length > 0 ? "block" : "none";
 
-                const firstActive = activeFiles[0].key;
-                switchTab(firstActive);
+                switchTab(activeCategories[0]);
             });
 
             // Setup tab listeners
@@ -6140,7 +6488,7 @@
             });
 
             // Copy buttons listeners
-            ["Pan", "Ovd", "Deemed"].forEach(key => {
+            ["Pan", "Ovd", "Deemed", "Misc"].forEach(key => {
                 const btn = document.getElementById(`copyBtn${key}`);
                 btn.addEventListener("click", () => {
                     const textarea = document.querySelector(`#tabContent${key} textarea`);
@@ -6155,6 +6503,47 @@
                     }
                 });
             });
+
+            // --- Quick Fill Utility Event Listeners ---
+            const quickFillModal = document.getElementById("quickFillModal");
+            const closeQuickFill = () => {
+                quickFillModal.style.display = "none";
+            };
+            
+            document.getElementById("closeQuickFillModal").addEventListener("click", closeQuickFill);
+            document.getElementById("quickFillApplyBtn").addEventListener("click", closeQuickFill);
+            
+            document.getElementById("quickFillClearBtn").addEventListener("click", () => {
+                document.getElementById("quickFillComposedText").value = "";
+                document.querySelectorAll(".quick-fill-word-btn").forEach(btn => btn.classList.remove("active"));
+                quickFillClickedItems = [];
+                if (activeQuickFillTarget) {
+                    activeQuickFillTarget.value = "";
+                    activeQuickFillTarget.dispatchEvent(new Event("input"));
+                }
+            });
+            
+            document.getElementById("quickFillComposedText").addEventListener("input", (e) => {
+                if (activeQuickFillTarget) {
+                    activeQuickFillTarget.value = e.target.value;
+                    activeQuickFillTarget.dispatchEvent(new Event("input"));
+                }
+            });
+
+            window.addEventListener("click", (e) => {
+                if (e.target === quickFillModal) {
+                    closeQuickFill();
+                }
+            });
+
+            // Observe dynamic form mutations to inject 🪄 buttons on newly added inputs automatically
+            const ocrObserver = new MutationObserver(() => {
+                setupQuickFillIcons();
+            });
+            ocrObserver.observe(document.body, { childList: true, subtree: true });
+
+            // Call initial wrap
+            setupQuickFillIcons();
 
             updateOcrActiveModelLabel();
         }
