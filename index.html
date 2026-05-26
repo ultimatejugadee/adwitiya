@@ -733,10 +733,17 @@
             border-radius: 4px;
         }
 
+        .tax-fields-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
         @media (max-width: 780px) {
 
             .form,
-            .details {
+            .details,
+            .tax-fields-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -945,7 +952,7 @@
                         </label>
                     </div>
                     
-                    <div class="tax-fields-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+                    <div class="tax-fields-grid">
                         <div class="field tax-outside-field" style="display: none;">
                             <label for="kycTaxJurisdiction" id="labelKycTaxJurisdiction">ISO Country Code of Tax Residence</label>
                             <div class="custom-select-wrapper" style="position: relative;">
