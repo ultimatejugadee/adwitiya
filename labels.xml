@@ -1074,6 +1074,90 @@
       <hi>अन्य (Others)</hi>
     </label>
     
+    <label id="ocr_settings_title">
+      <en>OCR API Configuration</en>
+      <hi>ओसीआर एपीआई कॉन्फ़िगरेशन</hi>
+    </label>
+    <label id="ocr_settings_btn_title">
+      <en>OCR Settings</en>
+      <hi>ओसीआर सेटिंग्स</hi>
+    </label>
+    <label id="ocr_doc_upload_title">
+      <en>Document Upload &amp; OCR Verification</en>
+      <hi>दस्तावेज़ अपलोड और ओसीआर सत्यापन</hi>
+    </label>
+    <label id="ocr_upload_pan">
+      <en>Upload PAN Card</en>
+      <hi>पैन कार्ड अपलोड करें</hi>
+    </label>
+    <label id="ocr_upload_ovd">
+      <en>Upload OVD</en>
+      <hi>ओवीडी अपलोड करें</hi>
+    </label>
+    <label id="ocr_upload_deemed">
+      <en>Upload Deemed OVD</en>
+      <hi>डीम्ड ओवीडी अपलोड करें</hi>
+    </label>
+    <label id="ocr_drag_drop_hint">
+      <en>Drag &amp; drop image here or click</en>
+      <hi>यहाँ छवि खींचें और छोड़ें या क्लिक करें</hi>
+    </label>
+    <label id="ocr_using_model">
+      <en>Using model:</en>
+      <hi>मॉडल का उपयोग कर रहे हैं:</hi>
+    </label>
+    <label id="ocr_extract_text_btn">
+      <en>Extract Text</en>
+      <hi>पाठ निकालें</hi>
+    </label>
+    <label id="ocr_status_extracting">
+      <en>Extracting text...</en>
+      <hi>पाठ निकाला जा रहा है...</hi>
+    </label>
+    <label id="ocr_results_title">
+      <en>Extracted Text Results</en>
+      <hi>निकाला गया पाठ परिणाम</hi>
+    </label>
+    <label id="ocr_btn_copy">
+      <en>Copy</en>
+      <hi>कॉपी करें</hi>
+    </label>
+    <label id="ocr_btn_copied">
+      <en>Copied!</en>
+      <hi>कॉपी किया गया!</hi>
+    </label>
+    <label id="ocr_btn_hide">
+      <en>Hide</en>
+      <hi>छिपाएँ</hi>
+    </label>
+    <label id="ocr_btn_show">
+      <en>Show</en>
+      <hi>दिखाएँ</hi>
+    </label>
+    <label id="ocr_lbl_api_key">
+      <en>API Key</en>
+      <hi>एपीआई कुंजी</hi>
+    </label>
+    <label id="ocr_lbl_model_name">
+      <en>Model Name</en>
+      <hi>मॉडल का नाम</hi>
+    </label>
+    <label id="ocr_lbl_default_provider">
+      <en>Default OCR Provider</en>
+      <hi>डिफ़ॉल्ट ओसीआर प्रदाता</hi>
+    </label>
+    <label id="ocr_btn_save">
+      <en>Save Settings</en>
+      <hi>सेटिंग्स सहेजें</hi>
+    </label>
+    <label id="ocr_btn_cancel">
+      <en>Cancel</en>
+      <hi>रद्द करें</hi>
+    </label>
+    <label id="ocr_btn_clear">
+      <en>Clear</en>
+      <hi>साफ़ करें</hi>
+    </label>
 
   </interface>
 

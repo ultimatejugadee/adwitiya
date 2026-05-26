@@ -819,6 +819,179 @@
                 justify-self: end;
             }
         }
+
+        /* OCR Drag and Drop Upload CSS */
+        .ocr-upload-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 8px;
+        }
+        @media (max-width: 580px) {
+            .ocr-upload-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .ocr-upload-card {
+            position: relative;
+            background: var(--btn-bg);
+            border: 2.2px dashed var(--btn-border);
+            border-radius: 14px;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            height: 55px; /* Compact height */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            box-sizing: border-box;
+            transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+        .ocr-upload-card * {
+            pointer-events: none;
+        }
+        .ocr-upload-card .ocr-card-preview,
+        .ocr-upload-card .ocr-remove-btn {
+            pointer-events: auto;
+        }
+        .ocr-upload-card:hover {
+            border-color: var(--accent);
+            background: rgba(99, 102, 241, 0.03);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        [data-theme="dark"] .ocr-upload-card:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+        .ocr-upload-card.dragover {
+            height: 140px; /* Expanded height */
+            border-color: var(--accent);
+            background: rgba(99, 102, 241, 0.09) !important;
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.25);
+            border-style: solid;
+        }
+        .ocr-card-compact {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 650;
+            color: var(--text);
+        }
+        .ocr-card-expanded {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            height: 100%;
+        }
+        .ocr-upload-card.dragover .ocr-card-compact {
+            display: none;
+        }
+        .ocr-upload-card.dragover .ocr-card-expanded {
+            display: flex;
+        }
+        .ocr-card-preview {
+            display: none;
+            width: 100%;
+            height: 100%;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: var(--bg2);
+            padding: 8px;
+            box-sizing: border-box;
+            z-index: 5;
+        }
+        .ocr-preview-img {
+            max-height: 80px;
+            max-width: 90%;
+            object-fit: contain;
+            border-radius: 8px;
+            margin-bottom: 4px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+        .ocr-preview-name {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 90%;
+        }
+        .ocr-remove-btn {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            background: var(--danger);
+            border: none;
+            color: white;
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 6px rgba(220, 38, 38, 0.3);
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+        .ocr-remove-btn:hover {
+            transform: scale(1.1);
+            background: #b91c1c;
+        }
+        .ocr-spinner {
+            border: 2.5px solid rgba(255, 255, 255, 0.1);
+            border-top: 2.5px solid var(--accent);
+            border-radius: 50%;
+            width: 14px;
+            height: 14px;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        .ocr-tab-btn {
+            transition: all 0.2s ease;
+            border: 1px solid var(--btn-border);
+            background: var(--btn-bg);
+            color: var(--text);
+        }
+        .ocr-tab-btn:hover {
+            background: var(--btn-border);
+        }
+        .ocr-tab-btn.active {
+            background: var(--accent) !important;
+            color: white !important;
+            border-color: var(--accent) !important;
+            box-shadow: 0 4px 10px rgba(99, 102, 241, 0.25);
+        }
+        .ocr-tab-pane {
+            display: none;
+        }
+        .ocr-tab-pane.active {
+            display: block;
+        }
+        .ocr-provider-box {
+            transition: border-color 0.2s ease;
+        }
+        .ocr-provider-box:focus-within {
+            border-color: var(--accent) !important;
+        }
     </style>
 </head>
 
@@ -834,6 +1007,9 @@
             </select>
             <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle Theme">
                 <span id="themeIcon">☀️</span>
+            </button>
+            <button id="ocrSettingsBtn" class="theme-toggle-btn" aria-label="OCR Settings" title="OCR Settings">
+                <span style="font-size: 14px;">⚙️</span>
             </button>
         </div>
 
@@ -866,6 +1042,113 @@
                         <option value="online" id="optKycModeOnline">Online</option>
                         <option value="digilocker" id="optKycModeDigiLocker">DigiLocker</option>
                     </select>
+                </div>
+
+                <!-- Document Upload & OCR Row -->
+                <div class="field full" style="margin-top: 10px;">
+                    <label id="labelKycDocUploadTitle" style="font-weight: 700; color: var(--accent); font-size: 15px;">Document Upload & OCR Verification</label>
+                    <div class="ocr-upload-grid">
+                        <!-- PAN Card Dropzone -->
+                        <div class="ocr-upload-card" id="ocrCardPan">
+                            <input type="file" id="ocrFilePan" accept="image/*" style="display: none;" />
+                            <div class="ocr-card-compact">
+                                <span style="font-size: 16px;">💳</span>
+                                <span id="lblUploadPanCard">Upload PAN Card</span>
+                            </div>
+                            <div class="ocr-card-expanded">
+                                <span style="font-size: 24px; animation: bounce 1.5s infinite;">📥</span>
+                                <span style="font-size: 11px; color: var(--muted);" id="lblDragDropPan">Drag & drop image here or click</span>
+                            </div>
+                            <div class="ocr-card-preview">
+                                <img class="ocr-preview-img" alt="PAN Card Preview" />
+                                <div class="ocr-preview-name"></div>
+                                <button type="button" class="ocr-remove-btn">&times;</button>
+                            </div>
+                        </div>
+
+                        <!-- OVD Dropzone -->
+                        <div class="ocr-upload-card" id="ocrCardOvd">
+                            <input type="file" id="ocrFileOvd" accept="image/*" style="display: none;" />
+                            <div class="ocr-card-compact">
+                                <span style="font-size: 16px;">📄</span>
+                                <span id="lblUploadOvd">Upload OVD</span>
+                            </div>
+                            <div class="ocr-card-expanded">
+                                <span style="font-size: 24px; animation: bounce 1.5s infinite;">📥</span>
+                                <span style="font-size: 11px; color: var(--muted);" id="lblDragDropOvd">Drag & drop image here or click</span>
+                            </div>
+                            <div class="ocr-card-preview">
+                                <img class="ocr-preview-img" alt="OVD Preview" />
+                                <div class="ocr-preview-name"></div>
+                                <button type="button" class="ocr-remove-btn">&times;</button>
+                            </div>
+                        </div>
+
+                        <!-- Deemed OVD Dropzone -->
+                        <div class="ocr-upload-card" id="ocrCardDeemedOvd">
+                            <input type="file" id="ocrFileDeemedOvd" accept="image/*" style="display: none;" />
+                            <div class="ocr-card-compact">
+                                <span style="font-size: 16px;">🏢</span>
+                                <span id="lblUploadDeemedOvd">Upload Deemed OVD</span>
+                            </div>
+                            <div class="ocr-card-expanded">
+                                <span style="font-size: 24px; animation: bounce 1.5s infinite;">📥</span>
+                                <span style="font-size: 11px; color: var(--muted);" id="lblDragDropDeemed">Drag & drop image here or click</span>
+                            </div>
+                            <div class="ocr-card-preview">
+                                <img class="ocr-preview-img" alt="Deemed OVD Preview" />
+                                <div class="ocr-preview-name"></div>
+                                <button type="button" class="ocr-remove-btn">&times;</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Extract Text Button Row -->
+                    <div id="ocrActionRow" style="display: none; justify-content: space-between; align-items: center; margin-top: 14px; flex-wrap: wrap; gap: 12px;">
+                        <div style="font-size: 12px; color: var(--muted);">
+                            <span id="lblOcrActiveModel">Using model:</span>
+                            <strong id="ocrActiveModelName" style="color: var(--text);">Gemini (gemini-1.5-flash)</strong>
+                        </div>
+                        <button type="button" id="btnExtractText" class="theme-toggle-btn" style="padding: 10px 22px; font-size: 14px; font-weight: 700; border-radius: 10px; background: linear-gradient(135deg, var(--accent), var(--accent2)); color: white; border: none; box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3); display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                            <span>🔍</span>
+                            <span id="lblExtractTextBtn">Extract Text</span>
+                        </button>
+                    </div>
+
+                    <!-- Loading Status Message -->
+                    <div id="ocrStatusMsg" style="display: none; font-size: 12px; margin-top: 8px; color: var(--accent); align-items: center; gap: 8px;">
+                        <div class="ocr-spinner"></div>
+                        <span id="ocrStatusText">Extracting text...</span>
+                    </div>
+
+                    <!-- OCR Results Display -->
+                    <div id="ocrResultsContainer" style="display: none; margin-top: 16px; border: 1px solid var(--box-border); border-radius: 12px; background: var(--box-bg); padding: 16px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--box-border); padding-bottom: 8px; margin-bottom: 12px;">
+                            <h4 style="margin: 0; font-size: 14px; font-weight: 700; color: var(--accent);" id="lblExtractedText">Extracted Text Results</h4>
+                            <button type="button" class="theme-toggle-btn" id="ocrResultsCloseBtn" style="padding: 2px 8px; font-size: 12px;">Hide</button>
+                        </div>
+                        <!-- Tab views -->
+                        <div class="ocr-tabs" style="display: flex; gap: 8px; margin-bottom: 12px;">
+                            <button type="button" class="ocr-tab-btn active" data-tab="pan" id="tabBtnPan">PAN Card</button>
+                            <button type="button" class="ocr-tab-btn" data-tab="ovd" id="tabBtnOvd" style="display: none;">OVD</button>
+                            <button type="button" class="ocr-tab-btn" data-tab="deemed" id="tabBtnDeemed" style="display: none;">Deemed OVD</button>
+                        </div>
+                        <!-- Tab Contents -->
+                        <div class="ocr-tab-contents">
+                            <div class="ocr-tab-pane active" id="tabContentPan" style="position: relative;">
+                                <textarea readonly style="width: 100%; height: 120px; border-radius: 8px; font-family: monospace; font-size: 12px; padding: 10px; box-sizing: border-box; background: rgba(0,0,0,0.15); color: var(--text); border: 1px solid var(--box-border); resize: vertical; outline: none;"></textarea>
+                                <button type="button" class="theme-toggle-btn" id="copyBtnPan" style="position: absolute; bottom: 8px; right: 8px; padding: 4px 8px; font-size: 11px;">Copy</button>
+                            </div>
+                            <div class="ocr-tab-pane" id="tabContentOvd" style="position: relative;">
+                                <textarea readonly style="width: 100%; height: 120px; border-radius: 8px; font-family: monospace; font-size: 12px; padding: 10px; box-sizing: border-box; background: rgba(0,0,0,0.15); color: var(--text); border: 1px solid var(--box-border); resize: vertical; outline: none;"></textarea>
+                                <button type="button" class="theme-toggle-btn" id="copyBtnOvd" style="position: absolute; bottom: 8px; right: 8px; padding: 4px 8px; font-size: 11px;">Copy</button>
+                            </div>
+                            <div class="ocr-tab-pane" id="tabContentDeemed" style="position: relative;">
+                                <textarea readonly style="width: 100%; height: 120px; border-radius: 8px; font-family: monospace; font-size: 12px; padding: 10px; box-sizing: border-box; background: rgba(0,0,0,0.15); color: var(--text); border: 1px solid var(--box-border); resize: vertical; outline: none;"></textarea>
+                                <button type="button" class="theme-toggle-btn" id="copyBtnDeemed" style="position: absolute; bottom: 8px; right: 8px; padding: 4px 8px; font-size: 11px;">Copy</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="field full">
@@ -1780,6 +2063,81 @@
         </div>
     </div>
 
+    <div id="ocrSettingsModal" class="modal">
+        <div class="modal-content" style="max-width: 550px;">
+            <span class="close-modal" id="closeOcrSettingsModal">&times;</span>
+            <h3 id="ocrSettingsModalTitle" style="margin-top: 0; margin-bottom: 16px; font-size: 18px; font-weight: 700; color: var(--text);">OCR API Configuration</h3>
+            
+            <!-- Gemini Box -->
+            <div class="ocr-provider-box" style="margin-bottom: 16px; border: 1px solid var(--box-border); padding: 14px; border-radius: 12px; background: rgba(255,255,255,0.01);">
+                <h4 style="margin: 0 0 10px 0; display: flex; justify-content: space-between; align-items: center; color: var(--accent);">
+                    <span>Gemini</span>
+                    <button type="button" class="theme-toggle-btn" id="clearGeminiBtn" style="padding: 2px 8px; font-size: 11px;">Clear</button>
+                </h4>
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                    <div>
+                        <label style="font-size: 12px; margin-bottom: 4px; display: block;" id="lblGeminiApiKey">API Key</label>
+                        <input type="password" id="ocrGeminiKey" placeholder="Enter Gemini API Key" style="font-size: 13px;" />
+                    </div>
+                    <div>
+                        <label style="font-size: 12px; margin-bottom: 4px; display: block;" id="lblGeminiModel">Model Name</label>
+                        <input type="text" id="ocrGeminiModel" placeholder="gemini-1.5-flash" style="font-size: 13px;" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- OpenAI Box -->
+            <div class="ocr-provider-box" style="margin-bottom: 16px; border: 1px solid var(--box-border); padding: 14px; border-radius: 12px; background: rgba(255,255,255,0.01);">
+                <h4 style="margin: 0 0 10px 0; display: flex; justify-content: space-between; align-items: center; color: var(--accent);">
+                    <span>OpenAI</span>
+                    <button type="button" class="theme-toggle-btn" id="clearOpenaiBtn" style="padding: 2px 8px; font-size: 11px;">Clear</button>
+                </h4>
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                    <div>
+                        <label style="font-size: 12px; margin-bottom: 4px; display: block;" id="lblOpenaiApiKey">API Key</label>
+                        <input type="password" id="ocrOpenaiKey" placeholder="Enter OpenAI API Key" style="font-size: 13px;" />
+                    </div>
+                    <div>
+                        <label style="font-size: 12px; margin-bottom: 4px; display: block;" id="lblOpenaiModel">Model Name</label>
+                        <input type="text" id="ocrOpenaiModel" placeholder="gpt-4o-mini" style="font-size: 13px;" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Groq Box -->
+            <div class="ocr-provider-box" style="margin-bottom: 16px; border: 1px solid var(--box-border); padding: 14px; border-radius: 12px; background: rgba(255,255,255,0.01);">
+                <h4 style="margin: 0 0 10px 0; display: flex; justify-content: space-between; align-items: center; color: var(--accent);">
+                    <span>Groq</span>
+                    <button type="button" class="theme-toggle-btn" id="clearGroqBtn" style="padding: 2px 8px; font-size: 11px;">Clear</button>
+                </h4>
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                    <div>
+                        <label style="font-size: 12px; margin-bottom: 4px; display: block;" id="lblGroqApiKey">API Key</label>
+                        <input type="password" id="ocrGroqKey" placeholder="Enter Groq API Key" style="font-size: 13px;" />
+                    </div>
+                    <div>
+                        <label style="font-size: 12px; margin-bottom: 4px; display: block;" id="lblGroqModel">Model Name</label>
+                        <input type="text" id="ocrGroqModel" placeholder="llama-3.2-11b-vision-preview" style="font-size: 13px;" />
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <label style="font-size: 13px; margin-bottom: 6px; display: block; font-weight: 600;" id="lblOcrDefaultModel">Default OCR Provider</label>
+                <select id="ocrDefaultProvider" style="font-size: 13px; width: 100%;">
+                    <option value="gemini">Gemini</option>
+                    <option value="openai">OpenAI</option>
+                    <option value="groq">Groq</option>
+                </select>
+            </div>
+
+            <div style="display: flex; justify-content: flex-end; gap: 12px;">
+                <button type="button" id="closeOcrSettingsModalBtn" class="theme-toggle-btn" style="padding: 8px 16px; font-size: 13px; border-radius: 8px; cursor: pointer;">Cancel</button>
+                <button type="button" id="saveOcrSettingsBtn" class="theme-toggle-btn" style="padding: 8px 16px; font-size: 13px; border-radius: 8px; background: var(--accent); color: white; border: none; font-weight: 600; cursor: pointer;">Save Settings</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         const XML_FILE = "investor-entities.xml";
         const LABELS_FILE = "labels.xml";
@@ -2188,6 +2546,9 @@
             }
             if (typeof translateKycUI === "function") {
                 translateKycUI();
+            }
+            if (typeof translateOcrUI === "function") {
+                translateOcrUI();
             }
         }
 
@@ -5347,6 +5708,457 @@
             }
         }
 
+        // --- OCR and Document Upload Integration ---
+        const ocrFiles = {
+            pan: null,
+            ovd: null,
+            deemed: null
+        };
+
+        async function performOcrCall(provider, apiKey, modelName, base64Data, mimeType) {
+            if (provider === "gemini") {
+                const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`;
+                const response = await fetch(url, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        contents: [{
+                            parts: [
+                                { text: "Perform OCR on this document image. Return all readable text from it. Do not translate. Keep the original formatting as close as possible. Output only the extracted text and nothing else." },
+                                { inlineData: { mimeType: mimeType, data: base64Data } }
+                            ]
+                        }]
+                    })
+                });
+                if (!response.ok) {
+                    const err = await response.json().catch(() => ({}));
+                    throw new Error(err.error?.message || `HTTP ${response.status}`);
+                }
+                const json = await response.json();
+                const text = json.candidates?.[0]?.content?.parts?.[0]?.text;
+                if (!text) throw new Error("No text returned from Gemini");
+                return text;
+            } else if (provider === "openai") {
+                const url = "https://api.openai.com/v1/chat/completions";
+                const response = await fetch(url, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${apiKey}`
+                    },
+                    body: JSON.stringify({
+                        model: modelName,
+                        messages: [{
+                            role: "user",
+                            content: [
+                                { type: "text", text: "Perform OCR on this document image. Return all readable text from it. Do not translate. Keep the original formatting as close as possible. Output only the extracted text and nothing else." },
+                                { type: "image_url", image_url: { url: `data:${mimeType};base64,${base64Data}` } }
+                            ]
+                        }]
+                    })
+                });
+                if (!response.ok) {
+                    const err = await response.json().catch(() => ({}));
+                    throw new Error(err.error?.message || `HTTP ${response.status}`);
+                }
+                const json = await response.json();
+                const text = json.choices?.[0]?.message?.content;
+                if (!text) throw new Error("No text returned from OpenAI");
+                return text;
+            } else if (provider === "groq") {
+                const url = "https://api.groq.com/openai/v1/chat/completions";
+                const response = await fetch(url, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${apiKey}`
+                    },
+                    body: JSON.stringify({
+                        model: modelName,
+                        messages: [{
+                            role: "user",
+                            content: [
+                                { type: "text", text: "Perform OCR on this document image. Return all readable text from it. Do not translate. Keep the original formatting as close as possible. Output only the extracted text and nothing else." },
+                                { type: "image_url", image_url: { url: `data:${mimeType};base64,${base64Data}` } }
+                            ]
+                        }]
+                    })
+                });
+                if (!response.ok) {
+                    const err = await response.json().catch(() => ({}));
+                    throw new Error(err.error?.message || `HTTP ${response.status}`);
+                }
+                const json = await response.json();
+                const text = json.choices?.[0]?.message?.content;
+                if (!text) throw new Error("No text returned from Groq");
+                return text;
+            } else {
+                throw new Error("Invalid provider");
+            }
+        }
+
+        function updateOcrActiveModelLabel() {
+            const provider = localStorage.getItem("adwitiya_ocr_default_provider") || "gemini";
+            let modelName = "";
+            if (provider === "gemini") {
+                modelName = localStorage.getItem("adwitiya_ocr_gemini_model") || "gemini-1.5-flash";
+            } else if (provider === "openai") {
+                modelName = localStorage.getItem("adwitiya_ocr_openai_model") || "gpt-4o-mini";
+            } else if (provider === "groq") {
+                modelName = localStorage.getItem("adwitiya_ocr_groq_model") || "llama-3.2-11b-vision-preview";
+            }
+            const activeModelEl = document.getElementById("ocrActiveModelName");
+            if (activeModelEl) {
+                const capitalizedProvider = provider.charAt(0).toUpperCase() + provider.slice(1);
+                activeModelEl.textContent = `${capitalizedProvider} (${modelName})`;
+            }
+        }
+
+        function updateOcrButtonVisibility() {
+            const hasFile = ocrFiles.pan || ocrFiles.ovd || ocrFiles.deemed;
+            const actionRow = document.getElementById("ocrActionRow");
+            if (actionRow) {
+                actionRow.style.display = hasFile ? "flex" : "none";
+            }
+            if (!hasFile) {
+                const resultsContainer = document.getElementById("ocrResultsContainer");
+                if (resultsContainer) resultsContainer.style.display = "none";
+            }
+        }
+
+        function handleOcrFile(file, cardKey, card, preview, previewImg, previewName) {
+            if (!file.type.startsWith("image/")) {
+                alert(currentLang === "hi" ? "कृपया केवल एक छवि फ़ाइल चुनें!" : "Please select an image file only!");
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                previewImg.src = e.target.result;
+                const sizeKB = Math.round(file.size / 1024);
+                previewName.textContent = `${file.name} (${sizeKB} KB)`;
+                preview.style.display = "flex";
+                card.style.height = "140px";
+
+                ocrFiles[cardKey] = {
+                    fileData: e.target.result.split(",")[1],
+                    fileType: file.type,
+                    fileName: file.name
+                };
+                updateOcrButtonVisibility();
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function switchTab(tabKey) {
+            document.querySelectorAll(".ocr-tab-btn").forEach(btn => btn.classList.remove("active"));
+            const targetBtn = document.getElementById(`tabBtn${tabKey.charAt(0).toUpperCase() + tabKey.slice(1)}`);
+            if (targetBtn) targetBtn.classList.add("active");
+
+            document.querySelectorAll(".ocr-tab-pane").forEach(pane => pane.classList.remove("active"));
+            const targetPane = document.getElementById(`tabContent${tabKey.charAt(0).toUpperCase() + tabKey.slice(1)}`);
+            if (targetPane) targetPane.classList.add("active");
+        }
+
+        function translateOcrUI() {
+            const ocrMappings = {
+                "labelKycDocUploadTitle": "ocr_doc_upload_title",
+                "lblUploadPanCard": "ocr_upload_pan",
+                "lblUploadOvd": "ocr_upload_ovd",
+                "lblUploadDeemedOvd": "ocr_upload_deemed",
+                "lblDragDropPan": "ocr_drag_drop_hint",
+                "lblDragDropOvd": "ocr_drag_drop_hint",
+                "lblDragDropDeemed": "ocr_drag_drop_hint",
+                "lblOcrActiveModel": "ocr_using_model",
+                "lblExtractTextBtn": "ocr_extract_text_btn",
+                "ocrStatusText": "ocr_status_extracting",
+                "lblExtractedText": "ocr_results_title",
+                "ocrSettingsModalTitle": "ocr_settings_title",
+                "lblGeminiApiKey": "ocr_lbl_api_key",
+                "lblGeminiModel": "ocr_lbl_model_name",
+                "lblOpenaiApiKey": "ocr_lbl_api_key",
+                "lblOpenaiModel": "ocr_lbl_model_name",
+                "lblGroqApiKey": "ocr_lbl_api_key",
+                "lblGroqModel": "ocr_lbl_model_name",
+                "lblOcrDefaultModel": "ocr_lbl_default_provider",
+                "saveOcrSettingsBtn": "ocr_btn_save",
+                "closeOcrSettingsModalBtn": "ocr_btn_cancel",
+                "clearGeminiBtn": "ocr_btn_clear",
+                "clearOpenaiBtn": "ocr_btn_clear",
+                "clearGroqBtn": "ocr_btn_clear",
+                "ocrResultsCloseBtn": "ocr_btn_hide",
+                "tabBtnPan": "ocr_upload_pan",
+                "tabBtnOvd": "ocr_upload_ovd",
+                "tabBtnDeemed": "ocr_upload_deemed",
+                "copyBtnPan": "ocr_btn_copy",
+                "copyBtnOvd": "ocr_btn_copy",
+                "copyBtnDeemed": "ocr_btn_copy"
+            };
+
+            for (const [elemId, labelId] of Object.entries(ocrMappings)) {
+                const elem = document.getElementById(elemId);
+                if (elem) elem.textContent = t(labelId) || elem.textContent;
+            }
+
+            const inputs = [
+                { id: "ocrGeminiKey", placeholder: "ocr_lbl_api_key" },
+                { id: "ocrOpenaiKey", placeholder: "ocr_lbl_api_key" },
+                { id: "ocrGroqKey", placeholder: "ocr_lbl_api_key" }
+            ];
+            inputs.forEach(inp => {
+                const elem = document.getElementById(inp.id);
+                if (elem) elem.placeholder = t(inp.placeholder) || elem.placeholder;
+            });
+            updateOcrActiveModelLabel();
+        }
+
+        function initOcrFunctionality() {
+            const ocrSettingsBtn = document.getElementById("ocrSettingsBtn");
+            const ocrSettingsModal = document.getElementById("ocrSettingsModal");
+            const closeOcrSettingsModal = document.getElementById("closeOcrSettingsModal");
+            const closeOcrSettingsModalBtn = document.getElementById("closeOcrSettingsModalBtn");
+            const saveOcrSettingsBtn = document.getElementById("saveOcrSettingsBtn");
+
+            ocrSettingsBtn.addEventListener("click", () => {
+                document.getElementById("ocrGeminiKey").value = localStorage.getItem("adwitiya_ocr_gemini_key") || "";
+                document.getElementById("ocrGeminiModel").value = localStorage.getItem("adwitiya_ocr_gemini_model") || "";
+                document.getElementById("ocrOpenaiKey").value = localStorage.getItem("adwitiya_ocr_openai_key") || "";
+                document.getElementById("ocrOpenaiModel").value = localStorage.getItem("adwitiya_ocr_openai_model") || "";
+                document.getElementById("ocrGroqKey").value = localStorage.getItem("adwitiya_ocr_groq_key") || "";
+                document.getElementById("ocrGroqModel").value = localStorage.getItem("adwitiya_ocr_groq_model") || "";
+                document.getElementById("ocrDefaultProvider").value = localStorage.getItem("adwitiya_ocr_default_provider") || "gemini";
+                
+                ocrSettingsModal.style.display = "block";
+            });
+
+            const closeModal = () => { ocrSettingsModal.style.display = "none"; };
+            closeOcrSettingsModal.addEventListener("click", closeModal);
+            closeOcrSettingsModalBtn.addEventListener("click", closeModal);
+
+            window.addEventListener("click", (e) => {
+                if (e.target === ocrSettingsModal) {
+                    closeModal();
+                }
+            });
+
+            document.getElementById("clearGeminiBtn").addEventListener("click", () => {
+                document.getElementById("ocrGeminiKey").value = "";
+                document.getElementById("ocrGeminiModel").value = "";
+                localStorage.removeItem("adwitiya_ocr_gemini_key");
+                localStorage.removeItem("adwitiya_ocr_gemini_model");
+            });
+            document.getElementById("clearOpenaiBtn").addEventListener("click", () => {
+                document.getElementById("ocrOpenaiKey").value = "";
+                document.getElementById("ocrOpenaiModel").value = "";
+                localStorage.removeItem("adwitiya_ocr_openai_key");
+                localStorage.removeItem("adwitiya_ocr_openai_model");
+            });
+            document.getElementById("clearGroqBtn").addEventListener("click", () => {
+                document.getElementById("ocrGroqKey").value = "";
+                document.getElementById("ocrGroqModel").value = "";
+                localStorage.removeItem("adwitiya_ocr_groq_key");
+                localStorage.removeItem("adwitiya_ocr_groq_model");
+            });
+
+            saveOcrSettingsBtn.addEventListener("click", () => {
+                const gemKey = document.getElementById("ocrGeminiKey").value.trim();
+                const gemModel = document.getElementById("ocrGeminiModel").value.trim();
+                const oaiKey = document.getElementById("ocrOpenaiKey").value.trim();
+                const oaiModel = document.getElementById("ocrOpenaiModel").value.trim();
+                const groqKey = document.getElementById("ocrGroqKey").value.trim();
+                const groqModel = document.getElementById("ocrGroqModel").value.trim();
+                const defProvider = document.getElementById("ocrDefaultProvider").value;
+
+                if (gemKey) localStorage.setItem("adwitiya_ocr_gemini_key", gemKey);
+                else localStorage.removeItem("adwitiya_ocr_gemini_key");
+                
+                if (gemModel) localStorage.setItem("adwitiya_ocr_gemini_model", gemModel);
+                else localStorage.removeItem("adwitiya_ocr_gemini_model");
+
+                if (oaiKey) localStorage.setItem("adwitiya_ocr_openai_key", oaiKey);
+                else localStorage.removeItem("adwitiya_ocr_openai_key");
+
+                if (oaiModel) localStorage.setItem("adwitiya_ocr_openai_model", oaiModel);
+                else localStorage.removeItem("adwitiya_ocr_openai_model");
+
+                if (groqKey) localStorage.setItem("adwitiya_ocr_groq_key", groqKey);
+                else localStorage.removeItem("adwitiya_ocr_groq_key");
+
+                if (groqModel) localStorage.setItem("adwitiya_ocr_groq_model", groqModel);
+                else localStorage.removeItem("adwitiya_ocr_groq_model");
+
+                localStorage.setItem("adwitiya_ocr_default_provider", defProvider);
+
+                closeModal();
+                updateOcrActiveModelLabel();
+            });
+
+            // Card functionality (Drag & Drop + Touch click)
+            const cards = ["Pan", "Ovd", "DeemedOvd"];
+            cards.forEach(type => {
+                const cardKey = type === "Pan" ? "pan" : (type === "Ovd" ? "ovd" : "deemed");
+                const card = document.getElementById(`ocrCard${type}`);
+                const fileInput = document.getElementById(`ocrFile${type}`);
+                const preview = card.querySelector(".ocr-card-preview");
+                const previewImg = card.querySelector(".ocr-preview-img");
+                const previewName = card.querySelector(".ocr-preview-name");
+                const removeBtn = card.querySelector(".ocr-remove-btn");
+
+                card.addEventListener("click", (e) => {
+                    if (e.target !== removeBtn) {
+                        fileInput.click();
+                    }
+                });
+
+                fileInput.addEventListener("change", (e) => {
+                    const file = e.target.files[0];
+                    if (file) {
+                        handleOcrFile(file, cardKey, card, preview, previewImg, previewName);
+                    }
+                });
+
+                card.addEventListener("dragenter", (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    card.classList.add("dragover");
+                });
+                card.addEventListener("dragover", (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    card.classList.add("dragover");
+                });
+                card.addEventListener("dragleave", (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    card.classList.remove("dragover");
+                });
+                card.addEventListener("drop", (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    card.classList.remove("dragover");
+                    const file = e.dataTransfer.files[0];
+                    if (file) {
+                        handleOcrFile(file, cardKey, card, preview, previewImg, previewName);
+                    }
+                });
+
+                removeBtn.addEventListener("click", (e) => {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    fileInput.value = "";
+                    ocrFiles[cardKey] = null;
+                    preview.style.display = "none";
+                    previewImg.src = "";
+                    previewName.textContent = "";
+                    card.style.height = "55px";
+                    updateOcrButtonVisibility();
+                });
+            });
+
+            // Extract Text Trigger
+            const btnExtractText = document.getElementById("btnExtractText");
+            btnExtractText.addEventListener("click", async () => {
+                const provider = localStorage.getItem("adwitiya_ocr_default_provider") || "gemini";
+                const apiKey = localStorage.getItem(`adwitiya_ocr_${provider}_key`);
+                
+                let modelName = "";
+                if (provider === "gemini") {
+                    modelName = localStorage.getItem("adwitiya_ocr_gemini_model") || "gemini-1.5-flash";
+                } else if (provider === "openai") {
+                    modelName = localStorage.getItem("adwitiya_ocr_openai_model") || "gpt-4o-mini";
+                } else if (provider === "groq") {
+                    modelName = localStorage.getItem("adwitiya_ocr_groq_model") || "llama-3.2-11b-vision-preview";
+                }
+
+                if (!apiKey) {
+                    alert(currentLang === "hi" 
+                        ? `कृपया पहले सेटिंग्स में ${provider.toUpperCase()} एपीआई कुंजी दर्ज करें!` 
+                        : `Please configure the ${provider.toUpperCase()} API Key in the settings cogwheel at the top first!`
+                    );
+                    return;
+                }
+
+                const activeFiles = [];
+                if (ocrFiles.pan) activeFiles.push({ key: "pan", ...ocrFiles.pan });
+                if (ocrFiles.ovd) activeFiles.push({ key: "ovd", ...ocrFiles.ovd });
+                if (ocrFiles.deemed) activeFiles.push({ key: "deemed", ...ocrFiles.deemed });
+
+                if (activeFiles.length === 0) return;
+
+                const statusMsg = document.getElementById("ocrStatusMsg");
+                const statusText = document.getElementById("ocrStatusText");
+                statusMsg.style.display = "flex";
+                statusText.textContent = currentLang === "hi" 
+                    ? `${provider.toUpperCase()} (${modelName}) का उपयोग करके पाठ निकाला जा रहा है...`
+                    : `Extracting text using ${provider.toUpperCase()} (${modelName})...`;
+
+                btnExtractText.disabled = true;
+
+                const ocrPromises = activeFiles.map(async (doc) => {
+                    const txtArea = document.querySelector(`#tabContent${doc.key.charAt(0).toUpperCase() + doc.key.slice(1)} textarea`);
+                    txtArea.value = currentLang === "hi" ? "निकाला जा रहा है..." : "Extracting...";
+                    try {
+                        const text = await performOcrCall(provider, apiKey, modelName, doc.fileData, doc.fileType);
+                        txtArea.value = text;
+                        return { key: doc.key, success: true };
+                    } catch (error) {
+                        console.error(`OCR Error for ${doc.key}:`, error);
+                        txtArea.value = (currentLang === "hi" ? "त्रुटि: " : "Error: ") + error.message;
+                        return { key: doc.key, success: false };
+                    }
+                });
+
+                await Promise.all(ocrPromises);
+
+                statusMsg.style.display = "none";
+                btnExtractText.disabled = false;
+
+                const resultsContainer = document.getElementById("ocrResultsContainer");
+                resultsContainer.style.display = "block";
+
+                const tabPan = document.getElementById("tabBtnPan");
+                const tabOvd = document.getElementById("tabBtnOvd");
+                const tabDeemed = document.getElementById("tabBtnDeemed");
+
+                tabPan.style.display = ocrFiles.pan ? "block" : "none";
+                tabOvd.style.display = ocrFiles.ovd ? "block" : "none";
+                tabDeemed.style.display = ocrFiles.deemed ? "block" : "none";
+
+                const firstActive = activeFiles[0].key;
+                switchTab(firstActive);
+            });
+
+            // Setup tab listeners
+            document.querySelectorAll(".ocr-tab-btn").forEach(btn => {
+                btn.addEventListener("click", () => {
+                    switchTab(btn.dataset.tab);
+                });
+            });
+
+            // Close results panel
+            document.getElementById("ocrResultsCloseBtn").addEventListener("click", () => {
+                document.getElementById("ocrResultsContainer").style.display = "none";
+            });
+
+            // Copy buttons listeners
+            ["Pan", "Ovd", "Deemed"].forEach(key => {
+                const btn = document.getElementById(`copyBtn${key}`);
+                btn.addEventListener("click", () => {
+                    const textarea = document.querySelector(`#tabContent${key} textarea`);
+                    if (textarea && textarea.value) {
+                        navigator.clipboard.writeText(textarea.value).then(() => {
+                            const oldTxt = btn.textContent;
+                            btn.textContent = t("ocr_btn_copied") || (currentLang === "hi" ? "कॉपी किया गया!" : "Copied!");
+                            setTimeout(() => {
+                                btn.textContent = oldTxt;
+                            }, 2000);
+                        });
+                    }
+                });
+            });
+
+            updateOcrActiveModelLabel();
+        }
+
         // --- End KYC Postal Lookup and Form Logic ---
 
         updateThemeUI();
@@ -5354,6 +6166,7 @@
         setupAddressEvents(kycPincode, kycState, kycDistrict, kycCityTown, kycShowAllStates, "corr");
         setupAddressEvents(kycPermPincode, kycPermState, kycPermDistrict, kycPermCityTown, kycPermShowAllStates, "perm");
         setupKycEvents();
+        initOcrFunctionality();
 
         loadXML();
     </script>
