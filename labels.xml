@@ -614,8 +614,8 @@
     </label>
     
     <label id="kyc_corr_address_title">
-      <en>2. Residence / Correspondence Address</en>
-      <hi>2. निवास / पत्राचार का पता</hi>
+      <en>2. Residence / Current / Local / Correspondence Address</en>
+      <hi>2. निवास / वर्तमान / स्थानीय / पत्राचार का पता</hi>
     </label>
     <label id="kyc_address_line">
       <en>Address Line 1*</en>
