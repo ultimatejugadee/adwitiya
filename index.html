@@ -2104,7 +2104,8 @@
                     <input id="kycSigDate" type="date" required />
                 </div>
 
-                <div class="field full" style="text-align: right; margin-top: 15px;">
+                <div class="field full" style="text-align: right; margin-top: 15px; display: flex; justify-content: flex-end; gap: 12px; align-items: center;">
+                    <button type="button" id="exportFormBtn" class="theme-toggle-btn" style="padding: 12px 28px; font-size: 16px; font-weight: bold; border-radius: 12px; background: var(--btn-bg); color: var(--text); border: 1.5px solid var(--btn-border); cursor: pointer; transition: all 0.2s ease;">Export / Download Form</button>
                     <button type="submit" class="theme-toggle-btn" style="padding: 12px 28px; font-size: 16px; font-weight: bold; border-radius: 12px; background: linear-gradient(135deg, var(--accent), var(--accent2)); color: white; border: 0; cursor: pointer;">Submit KYC Form</button>
                 </div>
             </form>
@@ -2781,7 +2782,8 @@
                 "labelKycDivision": "kyc_division",
                 "labelKycOfficeType": "kyc_office_type",
                 "labelKycDeliveryStatus": "kyc_delivery_status",
-                "labelKycCoordinates": "kyc_coordinates"
+                "labelKycCoordinates": "kyc_coordinates",
+                "exportFormBtn": "kyc_export_btn"
             };
 
             for (const [elemId, labelId] of Object.entries(textMappings)) {
@@ -5817,6 +5819,350 @@
                     createContactRow();
                 });
             }
+
+            // Bind Export Button click event
+            const exportFormBtn = document.getElementById("exportFormBtn");
+            if (exportFormBtn) {
+                exportFormBtn.addEventListener("click", () => {
+                    exportKycFormAsJson();
+                });
+            }
+        }
+
+        // --- Export KYC Form as JSON (with .txt extension) ---
+        function exportKycFormAsJson() {
+            const form = document.getElementById("kycForm");
+            if (!form) return;
+
+            const allElements = form.querySelectorAll("input, select, textarea");
+            const fields = [];
+            const values = {};
+
+            let totalFields = 0;
+            let filledFields = 0;
+            let visibleFields = 0;
+            let invisibleFields = 0;
+
+            function getFieldLabel(elem) {
+                const dynamicRow = elem.closest('.dynamic-contact-row');
+                if (dynamicRow) {
+                    const index = Array.from(document.querySelectorAll("#dynamicContactsContainer .dynamic-contact-row")).indexOf(dynamicRow) + 1;
+                    if (elem.classList.contains('contact-type-select')) {
+                        return `Alternative Contact ${index} - Type`;
+                    } else if (elem.classList.contains('contact-value-input')) {
+                        const select = dynamicRow.querySelector(".contact-type-select");
+                        const typeVal = select ? select.value : "";
+                        const typeLabel = select && select.selectedIndex >= 0 ? select.options[select.selectedIndex].text : typeVal;
+                        return `Alternative Contact ${index} - Value (${typeLabel})`;
+                    }
+                }
+
+                if (elem.id) {
+                    const capId = elem.id.charAt(0).toUpperCase() + elem.id.slice(1);
+                    const possibleLabelIds = [
+                        `label${capId}`,
+                        `lbl${capId}`,
+                        `label_${elem.id}`,
+                        `${elem.id}_label`
+                    ];
+                    for (const possibleId of possibleLabelIds) {
+                        const lbl = document.getElementById(possibleId);
+                        if (lbl) {
+                            return lbl.innerText.replace(/\s+/g, ' ').trim();
+                        }
+                    }
+
+                    const labelFor = document.querySelector(`label[for="${elem.id}"]`);
+                    if (labelFor) {
+                        const clone = labelFor.cloneNode(true);
+                        clone.querySelectorAll('input, select, textarea, button, label, script, style').forEach(c => c.remove());
+                        return clone.innerText.replace(/\s+/g, ' ').trim();
+                    }
+                }
+
+                const labelWrap = elem.closest('label');
+                if (labelWrap) {
+                    const clone = labelWrap.cloneNode(true);
+                    clone.querySelectorAll('input, select, textarea, button, label, script, style').forEach(c => c.remove());
+                    return clone.innerText.replace(/\s+/g, ' ').trim();
+                }
+
+                const container = elem.closest('.field');
+                if (container) {
+                    const lbl = container.querySelector('label');
+                    if (lbl) {
+                        const clone = lbl.cloneNode(true);
+                        clone.querySelectorAll('input, select, textarea, button, label, script, style').forEach(c => c.remove());
+                        return clone.innerText.replace(/\s+/g, ' ').trim();
+                    }
+                }
+
+                return elem.placeholder || elem.name || elem.id || "Unnamed Field";
+            }
+
+            function isElementVisible(elem) {
+                if (elem.type === 'hidden') return false;
+                let current = elem;
+                while (current && current !== document.body) {
+                    const style = window.getComputedStyle(current);
+                    if (style.display === 'none' || style.visibility === 'hidden' || style.opacity === '0') {
+                        return false;
+                    }
+                    current = current.parentElement;
+                }
+                return true;
+            }
+
+            function getElementKey(elem, index) {
+                if (elem.id) return elem.id;
+
+                const dynamicRow = elem.closest('.dynamic-contact-row');
+                if (dynamicRow) {
+                    const rowIndex = Array.from(document.querySelectorAll("#dynamicContactsContainer .dynamic-contact-row")).indexOf(dynamicRow);
+                    const isSelect = elem.tagName.toLowerCase() === 'select';
+                    return `dynamicContact_${rowIndex + 1}_${isSelect ? 'type' : 'value'}`;
+                }
+
+                return `${elem.tagName.toLowerCase()}_${index}`;
+            }
+
+            Array.from(allElements).forEach((elem, index) => {
+                const tagName = elem.tagName.toLowerCase();
+                const type = elem.type ? elem.type.toLowerCase() : "";
+
+                if (tagName === "input" && (type === "button" || type === "submit" || type === "reset" || type === "image")) {
+                    return;
+                }
+
+                totalFields++;
+                const key = getElementKey(elem, index);
+                const label = getFieldLabel(elem);
+                const visible = isElementVisible(elem);
+                const disabled = elem.disabled || false;
+
+                if (visible) {
+                    visibleFields++;
+                } else {
+                    invisibleFields++;
+                }
+
+                let value = "";
+                let selectedText = undefined;
+                let checked = undefined;
+                let uploadedFiles = undefined;
+
+                if (type === "checkbox" || type === "radio") {
+                    checked = elem.checked;
+                    value = elem.checked;
+                    if (elem.checked) filledFields++;
+                } else if (type === "file") {
+                    const docKey = elem.id === "ocrFilePan" ? "pan" :
+                                   elem.id === "ocrFileOvd" ? "ovd" :
+                                   elem.id === "ocrFileDeemedOvd" ? "deemed" :
+                                   elem.id === "ocrFileMisc" ? "misc" : null;
+
+                    if (docKey && typeof ocrFiles !== "undefined" && ocrFiles[docKey] && ocrFiles[docKey].length > 0) {
+                        value = ocrFiles[docKey].map(f => f.fileName).join(", ");
+                        filledFields++;
+                        uploadedFiles = ocrFiles[docKey].map(f => ({
+                            fileName: f.fileName,
+                            fileType: f.fileType,
+                            base64: f.fileData,
+                            dataUrl: `data:${f.fileType};base64,${f.fileData}`
+                        }));
+                    } else if (elem.files && elem.files.length > 0) {
+                        value = Array.from(elem.files).map(f => `${f.name} (${f.size} bytes)`).join(", ");
+                        filledFields++;
+                    } else {
+                        value = "";
+                    }
+                } else if (tagName === "select") {
+                    value = elem.value;
+                    if (elem.selectedIndex >= 0) {
+                        selectedText = elem.options[elem.selectedIndex].text;
+                    }
+                    if (elem.value !== "") filledFields++;
+                } else {
+                    value = elem.value;
+                    if (elem.value.trim() !== "") filledFields++;
+                }
+
+                const fieldObj = {
+                    id: key,
+                    label: label,
+                    value: value,
+                    type: tagName === "input" ? type : tagName,
+                    visible: visible,
+                    disabled: disabled
+                };
+
+                if (elem.id === "kycPhotoFile") {
+                    const photoImg = document.getElementById("photoImg");
+                    if (photoImg && photoImg.src && photoImg.src.startsWith("data:")) {
+                        const base64Data = photoImg.src;
+                        const commaIdx = base64Data.indexOf(",");
+                        const rawBase64 = commaIdx !== -1 ? base64Data.substring(commaIdx + 1) : base64Data;
+                        
+                        const photoFile = elem.files && elem.files[0];
+                        const fileName = photoFile ? photoFile.name : "client_photograph.png";
+                        const fileType = photoFile ? photoFile.type : "image/png";
+
+                        fieldObj.value = base64Data;
+                        fieldObj.base64 = rawBase64;
+                        uploadedFiles = [{
+                            fileName: fileName,
+                            fileType: fileType,
+                            base64: rawBase64,
+                            dataUrl: base64Data
+                        }];
+                        value = base64Data;
+                    }
+                }
+
+                if (selectedText !== undefined) {
+                    fieldObj.selectedText = selectedText;
+                }
+                if (checked !== undefined) {
+                    fieldObj.checked = checked;
+                }
+                if (uploadedFiles !== undefined) {
+                    fieldObj.uploaded_files = uploadedFiles;
+                    values[key + "_files"] = uploadedFiles;
+                }
+
+                fields.push(fieldObj);
+                values[key] = value;
+            });
+
+            // Structured data construction
+            const firstName = (document.getElementById("kycFirstmiddle")?.value || "").trim();
+            const lastName = (document.getElementById("kycLastname")?.value || "").trim();
+            const fullName = [firstName, lastName].filter(Boolean).join(" ");
+
+            const structuredAddress = {
+                address_lines: {
+                    line1: (document.getElementById("kycAddressLine")?.value || "").trim(),
+                    line2: (document.getElementById("kycAddressLine2")?.value || "").trim(),
+                    line3: (document.getElementById("kycAddressLine3")?.value || "").trim(),
+                    line4: (document.getElementById("kycAddressLine4")?.value || "").trim()
+                },
+                city: (document.getElementById("kycCityVillage")?.value || "").trim(),
+                post_office: (document.getElementById("kycCityTown")?.value || "").trim(),
+                district: (document.getElementById("kycDistrict")?.value || "").trim(),
+                state: (document.getElementById("kycState")?.value || "").trim(),
+                zip_code: (document.getElementById("kycPincode")?.value || "").trim(),
+                country: (document.getElementById("kycCountry")?.value || "").trim()
+            };
+
+            const structuredPermAddress = {
+                address_lines: {
+                    line1: (document.getElementById("kycPermAddressLine")?.value || "").trim(),
+                    line2: (document.getElementById("kycPermAddressLine2")?.value || "").trim(),
+                    line3: (document.getElementById("kycPermAddressLine3")?.value || "").trim(),
+                    line4: (document.getElementById("kycPermAddressLine4")?.value || "").trim()
+                },
+                city: (document.getElementById("kycPermCityVillage")?.value || "").trim(),
+                post_office: (document.getElementById("kycPermCityTown")?.value || "").trim(),
+                district: (document.getElementById("kycPermDistrict")?.value || "").trim(),
+                state: (document.getElementById("kycPermState")?.value || "").trim(),
+                zip_code: (document.getElementById("kycPermPincode")?.value || "").trim(),
+                country: (document.getElementById("kycPermCountry")?.value || "").trim()
+            };
+
+            // Construct structured uploaded documents object
+            const uploadedDocuments = {
+                photograph: [],
+                pan: [],
+                ovd: [],
+                deemed: [],
+                misc: []
+            };
+
+            const photoImg = document.getElementById("photoImg");
+            if (photoImg && photoImg.src && photoImg.src.startsWith("data:")) {
+                const base64Data = photoImg.src;
+                const commaIdx = base64Data.indexOf(",");
+                const rawBase64 = commaIdx !== -1 ? base64Data.substring(commaIdx + 1) : base64Data;
+                const photoFile = document.getElementById("kycPhotoFile")?.files?.[0];
+                uploadedDocuments.photograph.push({
+                    fileName: photoFile ? photoFile.name : "client_photograph.png",
+                    fileType: photoFile ? photoFile.type : "image/png",
+                    base64: rawBase64,
+                    dataUrl: base64Data
+                });
+            }
+
+            if (typeof ocrFiles !== "undefined") {
+                ["pan", "ovd", "deemed", "misc"].forEach(key => {
+                    if (ocrFiles[key] && ocrFiles[key].length > 0) {
+                        uploadedDocuments[key] = ocrFiles[key].map(f => ({
+                            fileName: f.fileName,
+                            fileType: f.fileType,
+                            base64: f.fileData,
+                            dataUrl: `data:${f.fileType};base64,${f.fileData}`
+                        }));
+                    }
+                });
+            }
+
+            // Inject structured keys into values map for convenience
+            values.name = fullName;
+            values.address = structuredAddress;
+            values.permanent_address = structuredPermAddress;
+            values.uploaded_documents = uploadedDocuments;
+
+            const exportData = {
+                exportDate: new Date().toISOString(),
+                metadata: {
+                    totalFields: totalFields,
+                    filledFields: filledFields,
+                    visibleFields: visibleFields,
+                    invisibleFields: invisibleFields,
+                    language: typeof currentLang !== "undefined" ? currentLang : "en",
+                    theme: typeof currentTheme !== "undefined" ? currentTheme : "light"
+                },
+                name: fullName,
+                address: structuredAddress,
+                permanent_address: structuredPermAddress,
+                uploaded_documents: uploadedDocuments,
+                fields: fields,
+                values: values
+            };
+
+            const jsonString = JSON.stringify(exportData, null, 2);
+
+            let clientName = "";
+            const lastNameElem = document.getElementById("kycLastname");
+            const firstMiddleElem = document.getElementById("kycFirstmiddle");
+            if (lastNameElem && lastNameElem.value) {
+                clientName += lastNameElem.value.trim();
+            }
+            if (firstMiddleElem && firstMiddleElem.value) {
+                if (clientName) clientName += "_";
+                clientName += firstMiddleElem.value.trim();
+            }
+            clientName = clientName.replace(/[^a-zA-Z0-9_]/g, "");
+            const nameSuffix = clientName ? `_${clientName}` : "";
+
+            const now = new Date();
+            const pad = (n) => String(n).padStart(2, '0');
+            const dateStr = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
+            const timeStr = `${pad(now.getHours())}-${pad(now.getMinutes())}-${pad(now.getSeconds())}`;
+            const filename = `kyc_form_export${nameSuffix}_${dateStr}_${timeStr}.txt`;
+
+            downloadTxtFile(jsonString, filename);
+        }
+
+        function downloadTxtFile(content, filename) {
+            const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
         }
 
         // --- OCR and Document Upload Integration ---

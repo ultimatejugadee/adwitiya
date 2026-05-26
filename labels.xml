@@ -1183,6 +1183,10 @@
       <en>Upload Miscellaneous</en>
       <hi>विविध दस्तावेज़ अपलोड करें</hi>
     </label>
+    <label id="kyc_export_btn">
+      <en>Export / Download Form</en>
+      <hi>फॉर्म निर्यात / डाउनलोड करें</hi>
+    </label>
 
   </interface>
 
