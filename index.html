@@ -1203,6 +1203,14 @@
                     </label>
                     <input id="kycPincode" placeholder="Enter 6-digit PIN" maxlength="6" required />
                     <div id="pincodeStatusMsg" style="font-size: 11px; margin-top: 4px; color: var(--muted);"></div>
+                    <button type="button" id="kycProvideRefDocBtn" class="theme-toggle-btn" style="display: none; padding: 6px 12px; font-size: 11px; font-weight: 600; border-radius: 8px; background: var(--btn-bg); color: var(--text); border: 1px solid var(--btn-border); cursor: pointer; align-items: center; justify-content: center; gap: 6px; margin-top: 6px; width: fit-content; transition: all 0.2s ease;">
+                        <img src="res/mobile_14817362.png" style="width: 14px; height: 14px; object-fit: contain;" />
+                        <span class="btn-text" id="kycProvideRefDocBtnText">Provide Reference Document</span>
+                    </button>
+                    <div id="kycPincodeLinkedDocBadge" style="display: none; align-items: center; gap: 6px; margin-top: 6px; font-size: 11px; color: var(--success); font-weight: 600;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        <span id="kycPincodeLinkedDocText"></span>
+                    </div>
                 </div>
 
                 <div class="field">
@@ -1217,6 +1225,16 @@
                     <select id="kycDistrict" required>
                         <option value="">Enter PIN first</option>
                     </select>
+                    <input id="kycDistrictManual" placeholder="Enter District" style="display: none;" />
+                    <span id="kycDistrictManualToggle" style="font-size: 11px; color: var(--accent); cursor: pointer; text-decoration: underline; margin-top: 4px; display: inline-block;">District not listed? Enter manually</span>
+                    <button type="button" id="kycDistrictProvideRefDocBtn" class="theme-toggle-btn" style="display: none; padding: 6px 12px; font-size: 11px; font-weight: 600; border-radius: 8px; background: var(--btn-bg); color: var(--text); border: 1px solid var(--btn-border); cursor: pointer; align-items: center; justify-content: center; gap: 6px; margin-top: 6px; width: fit-content; transition: all 0.2s ease;">
+                        <img src="res/mobile_14817362.png" style="width: 14px; height: 14px; object-fit: contain;" />
+                        <span class="btn-text" id="kycDistrictProvideRefDocBtnText">Provide District Reference Document</span>
+                    </button>
+                    <div id="kycDistrictLinkedDocBadge" style="display: none; align-items: center; gap: 6px; margin-top: 6px; font-size: 11px; color: var(--success); font-weight: 600;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        <span id="kycDistrictLinkedDocText"></span>
+                    </div>
                 </div>
 
                 <div class="field">
@@ -1359,6 +1377,14 @@
                     </label>
                     <input id="kycPermPincode" placeholder="Enter 6-digit PIN" maxlength="6" required />
                     <div id="permPincodeStatusMsg" style="font-size: 11px; margin-top: 4px; color: var(--muted);"></div>
+                    <button type="button" id="kycPermProvideRefDocBtn" class="theme-toggle-btn" style="display: none; padding: 6px 12px; font-size: 11px; font-weight: 600; border-radius: 8px; background: var(--btn-bg); color: var(--text); border: 1px solid var(--btn-border); cursor: pointer; align-items: center; justify-content: center; gap: 6px; margin-top: 6px; width: fit-content; transition: all 0.2s ease;">
+                        <img src="res/mobile_14817362.png" style="width: 14px; height: 14px; object-fit: contain;" />
+                        <span class="btn-text" id="kycPermProvideRefDocBtnText">Provide Reference Document</span>
+                    </button>
+                    <div id="kycPermPincodeLinkedDocBadge" style="display: none; align-items: center; gap: 6px; margin-top: 6px; font-size: 11px; color: var(--success); font-weight: 600;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        <span id="kycPermPincodeLinkedDocText"></span>
+                    </div>
                 </div>
 
                 <div class="field perm-field">
@@ -1373,6 +1399,16 @@
                     <select id="kycPermDistrict" required>
                         <option value="">Enter PIN first</option>
                     </select>
+                    <input id="kycPermDistrictManual" placeholder="Enter District" style="display: none;" />
+                    <span id="kycPermDistrictManualToggle" style="font-size: 11px; color: var(--accent); cursor: pointer; text-decoration: underline; margin-top: 4px; display: inline-block;">District not listed? Enter manually</span>
+                    <button type="button" id="kycPermDistrictProvideRefDocBtn" class="theme-toggle-btn" style="display: none; padding: 6px 12px; font-size: 11px; font-weight: 600; border-radius: 8px; background: var(--btn-bg); color: var(--text); border: 1px solid var(--btn-border); cursor: pointer; align-items: center; justify-content: center; gap: 6px; margin-top: 6px; width: fit-content; transition: all 0.2s ease;">
+                        <img src="res/mobile_14817362.png" style="width: 14px; height: 14px; object-fit: contain;" />
+                        <span class="btn-text" id="kycPermDistrictProvideRefDocBtnText">Provide District Reference Document</span>
+                    </button>
+                    <div id="kycPermDistrictLinkedDocBadge" style="display: none; align-items: center; gap: 6px; margin-top: 6px; font-size: 11px; color: var(--success); font-weight: 600;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        <span id="kycPermDistrictLinkedDocText"></span>
+                    </div>
                 </div>
 
                 <div class="field perm-field">
@@ -1730,6 +1766,20 @@
         </div>
     </div>
 
+    <div id="refDocModal" class="modal">
+        <div class="modal-content" style="max-width: 550px;">
+            <span class="close-modal" id="closeRefDocModal">&times;</span>
+            <h3 id="refDocModalTitle" style="margin-top: 0; margin-bottom: 12px; font-size: 18px; font-weight: 700; color: var(--text);">Provide Reference Document</h3>
+            <p id="refDocModalDesc" style="margin-top: 0; margin-bottom: 16px; font-size: 14px; color: var(--muted); line-height: 1.5;">Select the Officially Valid Document (OVD) that verifies the PIN code:</p>
+            
+            <div id="refDocListContainer" style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px;"></div>
+            
+            <div style="display: flex; justify-content: flex-end; gap: 10px;">
+                <button type="button" id="closeRefDocModalBtn" class="theme-toggle-btn" style="padding: 8px 16px; font-size: 13px; border-radius: 8px; background: var(--btn-bg); color: var(--text); border: 1px solid var(--btn-border); cursor: pointer;">Cancel</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         const XML_FILE = "investor-entities.xml";
         const LABELS_FILE = "labels.xml";
@@ -1836,6 +1886,10 @@
         const allStates = new Set();
         const stateDistrictsMap = new Map();
         let pincodeDbLoaded = false;
+        let linkedRefDocCorr = null; // { type: 'ovd'|'deemed', name: string, number: string }
+        let linkedRefDocPerm = null; // { type: 'ovd'|'deemed', name: string, number: string }
+        let linkedRefDocDistrictCorr = null;
+        let linkedRefDocDistrictPerm = null;
 
         let panCategories = {};
         let entityTypes = [];
@@ -2507,6 +2561,40 @@
             }
             if (typeof updatePermPoaOptions === "function") {
                 updatePermPoaOptions();
+            }
+            if (typeof updateRefDocUI === "function") {
+                updateRefDocUI("corr");
+                updateRefDocUI("perm");
+            }
+
+            // Translate district manual inputs, placeholders and toggles
+            const corrDistManual = document.getElementById("kycDistrictManual");
+            if (corrDistManual) {
+                corrDistManual.placeholder = currentLang === "hi" ? "जिला दर्ज करें" : "Enter District";
+                const toggle = document.getElementById("kycDistrictManualToggle");
+                if (toggle) {
+                    const isManual = corrDistManual.style.display === "block";
+                    toggle.textContent = isManual 
+                        ? (t("kyc_district_select_toggle") || "Select district from list")
+                        : (t("kyc_district_manual_toggle") || "District not listed? Enter manually");
+                }
+            }
+
+            const permDistManual = document.getElementById("kycPermDistrictManual");
+            if (permDistManual) {
+                permDistManual.placeholder = currentLang === "hi" ? "जिला दर्ज करें" : "Enter District";
+                const toggle = document.getElementById("kycPermDistrictManualToggle");
+                if (toggle) {
+                    const isManual = permDistManual.style.display === "block";
+                    toggle.textContent = isManual 
+                        ? (t("kyc_district_select_toggle") || "Select district from list")
+                        : (t("kyc_district_manual_toggle") || "District not listed? Enter manually");
+                }
+            }
+
+            if (typeof updateDistrictRefDocUI === "function") {
+                updateDistrictRefDocUI("corr");
+                updateDistrictRefDocUI("perm");
             }
         }
 
@@ -3650,6 +3738,45 @@
                 kycPermPoaSubmitted.disabled = wasDisabled;
             }
 
+            // Sync PIN code reference document
+            if (linkedRefDocCorr) {
+                linkedRefDocPerm = { ...linkedRefDocCorr };
+            } else {
+                linkedRefDocPerm = null;
+            }
+            
+            // Sync status messages and ref doc UIs
+            if (permPincodeStatusMsg && pincodeStatusMsg) {
+                permPincodeStatusMsg.textContent = pincodeStatusMsg.textContent;
+                permPincodeStatusMsg.style.color = pincodeStatusMsg.style.color;
+            }
+            if (typeof updateRefDocUI === "function") {
+                updateRefDocUI("perm");
+            }
+
+            // Sync district manual mode and values
+            const corrManualDist = document.getElementById("kycDistrictManual");
+            const permManualDist = document.getElementById("kycPermDistrictManual");
+            if (corrManualDist && permManualDist) {
+                const isCorrManual = corrManualDist.style.display === "block";
+                if (typeof setDistrictInputMode === "function") {
+                    setDistrictInputMode("perm", isCorrManual);
+                }
+                if (isCorrManual) {
+                    permManualDist.value = corrManualDist.value;
+                }
+            }
+
+            // Sync district reference document
+            if (linkedRefDocDistrictCorr) {
+                linkedRefDocDistrictPerm = { ...linkedRefDocDistrictCorr };
+            } else {
+                linkedRefDocDistrictPerm = null;
+            }
+            if (typeof updateDistrictRefDocUI === "function") {
+                updateDistrictRefDocUI("perm");
+            }
+
             syncAddressLines();
         }
 
@@ -3763,10 +3890,12 @@
                             }
                             showAllToggle.checked = false;
                             updateAddressDropdowns(pincodeInput, stateSelect, districtSelect, citySelect, showAllToggle, type);
+                            if (type === "corr") linkedRefDocCorr = null;
+                            else linkedRefDocPerm = null;
                         } else {
                             if (statusMsg) {
-                                statusMsg.textContent = currentLang === "hi" ? "निर्देशिका में पिन नहीं मिला। मैन्युअल इनपुट सक्षम।" : "PIN not found. Manual entry enabled.";
-                                statusMsg.style.color = "var(--warning)";
+                                statusMsg.textContent = t("kyc_pin_not_found_msg") || (currentLang === "hi" ? "निर्देशिका में पिन नहीं मिला। मैन्युअल इनपुट सक्षम।" : "PIN not found in PIN code master. Manual entry enabled.");
+                                statusMsg.style.color = "var(--danger)";
                             }
                             showAllToggle.checked = true;
                             updateAddressDropdowns(pincodeInput, stateSelect, districtSelect, citySelect, showAllToggle, type);
@@ -3775,8 +3904,12 @@
                 } else {
                     if (statusMsg) statusMsg.textContent = "";
                     updateAddressDropdowns(pincodeInput, stateSelect, districtSelect, citySelect, showAllToggle, type);
+                    if (type === "corr") linkedRefDocCorr = null;
+                    else linkedRefDocPerm = null;
                 }
                 
+                updateRefDocUI(type);
+
                 if (type === "corr" && kycSameAddress && kycSameAddress.checked) {
                     syncCorrespondenceToPermanent();
                 }
@@ -3839,7 +3972,341 @@
                     }
                 }
             });
+
+            const refBtn = document.getElementById(type === "corr" ? "kycProvideRefDocBtn" : "kycPermProvideRefDocBtn");
+            if (refBtn) {
+                refBtn.addEventListener("click", () => {
+                    openRefDocModal(type);
+                });
+            }
+
+            // District manual toggler
+            const distToggle = document.getElementById(type === "corr" ? "kycDistrictManualToggle" : "kycPermDistrictManualToggle");
+            if (distToggle) {
+                distToggle.addEventListener("click", () => {
+                    const manualElem = document.getElementById(type === "corr" ? "kycDistrictManual" : "kycPermDistrictManual");
+                    const isCurrentlySelect = manualElem.style.display === "none";
+                    setDistrictInputMode(type, isCurrentlySelect);
+                    
+                    if (type === "corr" && kycSameAddress && kycSameAddress.checked) {
+                        syncCorrespondenceToPermanent();
+                    }
+                });
+            }
+
+            // District manual input listener
+            const distManual = document.getElementById(type === "corr" ? "kycDistrictManual" : "kycPermDistrictManual");
+            if (distManual) {
+                distManual.addEventListener("input", () => {
+                    updateDistrictRefDocUI(type);
+                    if (type === "corr" && kycSameAddress && kycSameAddress.checked) {
+                        syncCorrespondenceToPermanent();
+                    }
+                });
+            }
+
+            // District ref btn click
+            const distRefBtn = document.getElementById(type === "corr" ? "kycDistrictProvideRefDocBtn" : "kycPermDistrictProvideRefDocBtn");
+            if (distRefBtn) {
+                distRefBtn.addEventListener("click", () => {
+                    openRefDocModal(type === "corr" ? "district_corr" : "district_perm");
+                });
+            }
+
+            // Initial UI update
+            updateRefDocUI(type);
+            updateDistrictRefDocUI(type);
         }
+
+        // --- PIN Code & District Reference Document Modal & Link Logic ---
+        let activeRefDocType = null; // "corr", "perm", "district_corr", "district_perm"
+
+        function setDistrictInputMode(type, isManual) {
+            const selectId = type === "corr" ? "kycDistrict" : "kycPermDistrict";
+            const manualId = type === "corr" ? "kycDistrictManual" : "kycPermDistrictManual";
+            const toggleId = type === "corr" ? "kycDistrictManualToggle" : "kycPermDistrictManualToggle";
+            
+            const selectElem = document.getElementById(selectId);
+            const manualElem = document.getElementById(manualId);
+            const toggleElem = document.getElementById(toggleId);
+
+            if (!selectElem || !manualElem) return;
+
+            if (isManual) {
+                selectElem.style.display = "none";
+                selectElem.required = false;
+                manualElem.style.display = "block";
+                manualElem.required = true;
+                if (toggleElem) {
+                    toggleElem.textContent = t("kyc_district_select_toggle") || "Select district from list";
+                }
+            } else {
+                selectElem.style.display = "block";
+                selectElem.required = true;
+                manualElem.style.display = "none";
+                manualElem.required = false;
+                manualElem.value = "";
+                if (toggleElem) {
+                    toggleElem.textContent = t("kyc_district_manual_toggle") || "District not listed? Enter manually";
+                }
+                
+                if (type === "corr") linkedRefDocDistrictCorr = null;
+                else linkedRefDocDistrictPerm = null;
+            }
+
+            updateDistrictRefDocUI(type);
+        }
+
+        function updateDistrictRefDocUI(type) {
+            const manualId = type === "corr" ? "kycDistrictManual" : "kycPermDistrictManual";
+            const manualElem = document.getElementById(manualId);
+            const btn = document.getElementById(type === "corr" ? "kycDistrictProvideRefDocBtn" : "kycPermDistrictProvideRefDocBtn");
+            const badge = document.getElementById(type === "corr" ? "kycDistrictLinkedDocBadge" : "kycPermDistrictLinkedDocBadge");
+            const badgeText = document.getElementById(type === "corr" ? "kycDistrictLinkedDocText" : "kycPermDistrictLinkedDocText");
+
+            if (!manualElem || !btn || !badge || !badgeText) return;
+
+            const isManualMode = manualElem.style.display === "block";
+            const districtVal = manualElem.value.trim();
+            const linkedDoc = type === "corr" ? linkedRefDocDistrictCorr : linkedRefDocDistrictPerm;
+
+            if (isManualMode && districtVal.length > 0) {
+                if (linkedDoc) {
+                    btn.style.display = "none";
+                    badge.style.display = "inline-flex";
+                    const template = t("kyc_ref_doc_linked_badge") || "Verified via reference document: {docName} (No. {docNum})";
+                    badgeText.textContent = template.replace("{docName}", linkedDoc.name).replace("{docNum}", linkedDoc.number);
+                } else {
+                    btn.style.display = "inline-flex";
+                    badge.style.display = "none";
+                    const btnTextSpan = btn.querySelector(".btn-text");
+                    if (btnTextSpan) {
+                        btnTextSpan.textContent = t("kyc_district_ref_btn") || "Provide District Reference Document";
+                    }
+                }
+            } else {
+                btn.style.display = "none";
+                badge.style.display = "none";
+            }
+        }
+
+        function updateRefDocUI(type) {
+            const pincodeInput = type === "corr" ? kycPincode : kycPermPincode;
+            const pincode = pincodeInput.value.trim();
+            const btn = document.getElementById(type === "corr" ? "kycProvideRefDocBtn" : "kycPermProvideRefDocBtn");
+            const badge = document.getElementById(type === "corr" ? "kycPincodeLinkedDocBadge" : "kycPermPincodeLinkedDocBadge");
+            const badgeText = document.getElementById(type === "corr" ? "kycPincodeLinkedDocText" : "kycPermPincodeLinkedDocText");
+            const statusMsg = type === "corr" ? pincodeStatusMsg : permPincodeStatusMsg;
+
+            if (!btn || !badge || !badgeText) return;
+
+            const linkedDoc = type === "corr" ? linkedRefDocCorr : linkedRefDocPerm;
+
+            if (pincode.length === 6) {
+                if (pincodeDbLoaded) {
+                    const offices = pincodeMap.get(pincode) || [];
+                    if (offices.length > 0) {
+                        btn.style.display = "none";
+                        badge.style.display = "none";
+                    } else {
+                        if (statusMsg) {
+                            statusMsg.textContent = t("kyc_pin_not_found_msg") || (currentLang === "hi" ? "निर्देशिका में पिन नहीं मिला। मैन्युअल इनपुट सक्षम।" : "PIN not found in PIN code master. Manual entry enabled.");
+                            statusMsg.style.color = "var(--danger)";
+                        }
+
+                        if (linkedDoc) {
+                            btn.style.display = "none";
+                            badge.style.display = "inline-flex";
+                            const template = t("kyc_ref_doc_linked_badge") || "Verified via reference document: {docName} (No. {docNum})";
+                            badgeText.textContent = template.replace("{docName}", linkedDoc.name).replace("{docNum}", linkedDoc.number);
+                        } else {
+                            btn.style.display = "inline-flex";
+                            badge.style.display = "none";
+                            const btnTextSpan = btn.querySelector(".btn-text");
+                            if (btnTextSpan) {
+                                btnTextSpan.textContent = t("kyc_pin_not_found_btn") || "Provide Reference Document";
+                            }
+                        }
+                    }
+                }
+            } else {
+                btn.style.display = "none";
+                badge.style.display = "none";
+            }
+        }
+
+        function openRefDocModal(type) {
+            activeRefDocType = type;
+            const pincodeInput = (type === "corr" || type === "district_corr") ? kycPincode : kycPermPincode;
+            const pincode = pincodeInput.value.trim();
+
+            const modal = document.getElementById("refDocModal");
+            const title = document.getElementById("refDocModalTitle");
+            const desc = document.getElementById("refDocModalDesc");
+            const container = document.getElementById("refDocListContainer");
+
+            if (!modal || !container) return;
+
+            // Translate title & description
+            if (title) title.textContent = t("kyc_ref_doc_modal_title") || "Provide Reference Document";
+            if (desc) {
+                if (type === "district_corr" || type === "district_perm") {
+                    const districtInput = type === "district_corr" ? document.getElementById("kycDistrictManual") : document.getElementById("kycPermDistrictManual");
+                    const districtName = districtInput ? districtInput.value.trim() : "";
+                    const descTemplate = t("kyc_district_ref_doc_desc") || "Select the Officially Valid Document (OVD) that verifies the district {district}:";
+                    desc.textContent = descTemplate.replace("{district}", districtName);
+                } else {
+                    const descTemplate = t("kyc_ref_doc_modal_desc") || "Select the Officially Valid Document (OVD) that verifies the PIN code {pincode}:";
+                    desc.textContent = descTemplate.replace("{pincode}", pincode);
+                }
+            }
+
+            container.innerHTML = "";
+
+            // Collect entered OVDs from Section A
+            const documents = [];
+
+            // Primary OVD
+            if (kycOvdSubmitted && kycOvdSubmitted.value) {
+                const ovdVal = kycOvdSubmitted.value;
+                const ovdName = kycOvdSubmitted.options[kycOvdSubmitted.selectedIndex]?.textContent || ovdVal;
+                const ovdNum = kycOvdNumber ? kycOvdNumber.value.trim() : "";
+                if (ovdNum) {
+                    documents.push({
+                        type: "ovd",
+                        name: ovdName,
+                        number: ovdNum,
+                        expiry: (kycOvdExpiry && (ovdVal === "passport" || ovdVal === "driving_licence")) ? kycOvdExpiry.value : null
+                    });
+                }
+            }
+
+            // Deemed OVD
+            if (kycDeemedOvdSubmitted && kycDeemedOvdSubmitted.value) {
+                const deemedVal = kycDeemedOvdSubmitted.value;
+                const deemedName = kycDeemedOvdSubmitted.options[kycDeemedOvdSubmitted.selectedIndex]?.textContent || deemedVal;
+                const deemedNum = kycDeemedOvdNumber ? kycDeemedOvdNumber.value.trim() : "";
+                if (deemedNum) {
+                    documents.push({
+                        type: "deemed",
+                        name: deemedName,
+                        number: deemedNum,
+                        issuance: kycDeemedOvdIssuance ? kycDeemedOvdIssuance.value : null
+                    });
+                }
+            }
+
+            if (documents.length === 0) {
+                // Show empty warning
+                const emptyDiv = document.createElement("div");
+                emptyDiv.style.cssText = "padding: 16px; border: 1px dashed var(--danger); border-radius: 12px; background: rgba(225, 29, 72, 0.05); display: flex; flex-direction: column; gap: 10px; text-align: center; align-items: center;";
+                
+                const warnIcon = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--danger)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity: 0.8;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>`;
+                const warningMsg = t("kyc_ref_doc_modal_no_docs") || "No Officially Valid Document (OVD) or Deemed OVD details were found in Section A (Identity Details). Please enter OVD details in Section A first so they can be referenced here.";
+                const buttonText = t("kyc_ref_doc_modal_btn_go_sec_a") || "Go to Section A (Identity Details)";
+
+                emptyDiv.innerHTML = `
+                    ${warnIcon}
+                    <span style="font-size: 13px; color: var(--text); font-weight: 500; line-height: 1.4;">${warningMsg}</span>
+                    <button type="button" id="refDocGoToSecABtn" class="theme-toggle-btn" style="padding: 6px 12px; font-size: 12px; font-weight: 600; border-radius: 8px; background: var(--danger); color: white; border: none; cursor: pointer; margin-top: 4px;">
+                        ${buttonText}
+                    </button>
+                `;
+
+                container.appendChild(emptyDiv);
+
+                const goBtn = emptyDiv.querySelector("#refDocGoToSecABtn");
+                if (goBtn) {
+                    goBtn.addEventListener("click", () => {
+                        modal.style.display = "none";
+                        const targetElem = document.getElementById("kycSecATitle") || kycOvdSubmitted;
+                        if (targetElem) {
+                            targetElem.scrollIntoView({ behavior: "smooth" });
+                            setTimeout(() => {
+                                kycOvdSubmitted.focus();
+                            }, 500);
+                        }
+                    });
+                }
+            } else {
+                // Populate documents
+                documents.forEach(doc => {
+                    const card = document.createElement("div");
+                    card.style.cssText = "padding: 14px; border: 1px solid var(--card-border); border-radius: 12px; background: rgba(255,255,255,0.02); display: flex; align-items: center; justify-content: space-between; gap: 12px; transition: all 0.2s ease;";
+
+                    let dateInfo = "";
+                    if (doc.expiry) {
+                        dateInfo = `<span style="font-size: 11px; color: var(--muted);">${t("kyc_poa_detail_expiry") || "Expiry Date:"} ${doc.expiry}</span>`;
+                    } else if (doc.issuance) {
+                        dateInfo = `<span style="font-size: 11px; color: var(--muted);">${t("kyc_poa_detail_issuance") || "Date of Issuance:"} ${doc.issuance}</span>`;
+                    }
+
+                    const cardText = `
+                        <div style="display: flex; flex-direction: column; gap: 4px;">
+                            <span style="font-weight: 600; font-size: 14px; color: var(--text);">${doc.name}</span>
+                            <span style="font-size: 12px; color: var(--muted);">No. ${doc.number}</span>
+                            ${dateInfo}
+                        </div>
+                        <button type="button" class="theme-toggle-btn select-ref-doc-btn" style="padding: 6px 12px; font-size: 12px; font-weight: 600; border-radius: 8px; background: var(--accent); color: white; border: none; cursor: pointer;">
+                            ${t("kyc_ref_doc_modal_btn_link") || "Use as Reference"}
+                        </button>
+                    `;
+                    card.innerHTML = cardText;
+                    container.appendChild(card);
+
+                    const selectBtn = card.querySelector(".select-ref-doc-btn");
+                    if (selectBtn) {
+                        selectBtn.addEventListener("click", () => {
+                            if (activeRefDocType === "corr") {
+                                linkedRefDocCorr = { type: doc.type, name: doc.name, number: doc.number };
+                                updateRefDocUI("corr");
+                                if (kycSameAddress && kycSameAddress.checked) {
+                                    syncCorrespondenceToPermanent();
+                                }
+                            } else if (activeRefDocType === "perm") {
+                                linkedRefDocPerm = { type: doc.type, name: doc.name, number: doc.number };
+                                updateRefDocUI("perm");
+                            } else if (activeRefDocType === "district_corr") {
+                                linkedRefDocDistrictCorr = { type: doc.type, name: doc.name, number: doc.number };
+                                updateDistrictRefDocUI("corr");
+                                if (kycSameAddress && kycSameAddress.checked) {
+                                    syncCorrespondenceToPermanent();
+                                }
+                            } else if (activeRefDocType === "district_perm") {
+                                linkedRefDocDistrictPerm = { type: doc.type, name: doc.name, number: doc.number };
+                                updateDistrictRefDocUI("perm");
+                            }
+                            modal.style.display = "none";
+                        });
+                    }
+                });
+            }
+
+            modal.style.display = "block";
+        }
+
+        // Close modal handlers
+        document.addEventListener("DOMContentLoaded", () => {
+            const refDocModal = document.getElementById("refDocModal");
+            const closeRefDocModal = document.getElementById("closeRefDocModal");
+            const closeRefDocModalBtn = document.getElementById("closeRefDocModalBtn");
+
+            if (closeRefDocModal) {
+                closeRefDocModal.addEventListener("click", () => {
+                    refDocModal.style.display = "none";
+                });
+            }
+            if (closeRefDocModalBtn) {
+                closeRefDocModalBtn.addEventListener("click", () => {
+                    refDocModal.style.display = "none";
+                });
+            }
+            window.addEventListener("click", e => {
+                if (e.target === refDocModal) {
+                    refDocModal.style.display = "none";
+                }
+            });
+        });
 
         function updateRowPlaceholder(row) {
             const select = row.querySelector(".contact-type-select");

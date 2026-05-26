@@ -770,6 +770,52 @@
       <hi>सभी राज्य दिखाएं</hi>
     </label>
     
+    <label id="kyc_pin_not_found_btn">
+      <en>Provide Reference Document</en>
+      <hi>संदर्भ दस्तावेज़ प्रदान करें</hi>
+    </label>
+    <label id="kyc_ref_doc_modal_title">
+      <en>Provide Reference Document</en>
+      <hi>संदर्भ दस्तावेज़ प्रदान करें</hi>
+    </label>
+    <label id="kyc_ref_doc_modal_desc">
+      <en>Select the Officially Valid Document (OVD) that verifies the PIN code {pincode}:</en>
+      <hi>पिन कोड {pincode} को सत्यापित करने वाले आधिकारिक तौर पर मान्य दस्तावेज़ (OVD) का चयन करें:</hi>
+    </label>
+    <label id="kyc_ref_doc_modal_no_docs">
+      <en>No Officially Valid Document (OVD) or Deemed OVD details were found in Section A (Identity Details). Please enter OVD details in Section A first so they can be referenced here.</en>
+      <hi>धारा ए (पहचान विवरण) में कोई आधिकारिक तौर पर मान्य दस्तावेज़ (OVD) या डीम्ड OVD विवरण नहीं मिला। कृपया पहले धारा ए में OVD विवरण दर्ज करें ताकि उन्हें यहां संदर्भित किया जा सके।</hi>
+    </label>
+    <label id="kyc_ref_doc_modal_btn_link">
+      <en>Use as Reference</en>
+      <hi>संदर्भ के रूप में उपयोग करें</hi>
+    </label>
+    <label id="kyc_ref_doc_modal_btn_go_sec_a">
+      <en>Go to Section A (Identity Details)</en>
+      <hi>धारा ए (पहचान विवरण) पर जाएँ</hi>
+    </label>
+    <label id="kyc_ref_doc_linked_badge">
+      <en>Verified via reference document: {docName} (No. {docNum})</en>
+      <hi>संदर्भ दस्तावेज़ द्वारा सत्यापित: {docName} (सं. {docNum})</hi>
+    </label>
+    
+    <label id="kyc_district_manual_toggle">
+      <en>District not listed? Enter manually</en>
+      <hi>जिला सूची में नहीं है? मैन्युअल रूप से दर्ज करें</hi>
+    </label>
+    <label id="kyc_district_select_toggle">
+      <en>Select district from list</en>
+      <hi>सूची से जिला चुनें</hi>
+    </label>
+    <label id="kyc_district_ref_doc_desc">
+      <en>Select the Officially Valid Document (OVD) that verifies the district {district}:</en>
+      <hi>जिला {district} को सत्यापित करने वाले आधिकारिक तौर पर मान्य दस्तावेज़ (OVD) का चयन करें:</hi>
+    </label>
+    <label id="kyc_district_ref_btn">
+      <en>Provide District Reference Document</en>
+      <hi>जिला संदर्भ दस्तावेज़ प्रदान करें</hi>
+    </label>
+    
     <!-- Section C -->
     <label id="kyc_sec_c_title">
       <en>C. Declaration</en>
