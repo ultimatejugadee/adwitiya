@@ -1083,8 +1083,20 @@
       <hi>ओसीआर सेटिंग्स</hi>
     </label>
     <label id="ocr_doc_upload_title">
-      <en>Document Upload &amp; OCR Verification</en>
-      <hi>दस्तावेज़ अपलोड और ओसीआर सत्यापन</hi>
+      <en>Document Upload &amp; Text Extraction</en>
+      <hi>दस्तावेज़ अपलोड और पाठ निष्कर्षण</hi>
+    </label>
+    <label id="ocr_success_modal_title">
+      <en>Text Extracted Successfully!</en>
+      <hi>निष्कर्षण सफलतापूर्वक पूरा हुआ!</hi>
+    </label>
+    <label id="ocr_success_modal_body">
+      <en>You can click the magic wand icon (🪄) placed at the end of each input field to quick fill the extracted text instead of typing it.</en>
+      <hi>लिखने या टाइप करने के बजाय निकाले गए पाठ को शीघ्रता से भरने के लिए आप प्रत्येक इनपुट फ़ील्ड के अंत में दिए गए जादू की छड़ी (🪄) आइकन पर क्लिक कर सकते हैं।</hi>
+    </label>
+    <label id="ocr_success_modal_ok">
+      <en>Got it!</en>
+      <hi>समझ गया!</hi>
     </label>
     <label id="ocr_upload_pan">
       <en>Upload PAN Card</en>
@@ -1114,10 +1126,6 @@
       <en>Extracting text...</en>
       <hi>पाठ निकाला जा रहा है...</hi>
     </label>
-    <label id="ocr_results_title">
-      <en>Extracted Text Results</en>
-      <hi>निकाला गया पाठ परिणाम</hi>
-    </label>
     <label id="ocr_btn_copy">
       <en>Copy</en>
       <hi>कॉपी करें</hi>
@@ -1125,14 +1133,6 @@
     <label id="ocr_btn_copied">
       <en>Copied!</en>
       <hi>कॉपी किया गया!</hi>
-    </label>
-    <label id="ocr_btn_hide">
-      <en>Hide</en>
-      <hi>छिपाएँ</hi>
-    </label>
-    <label id="ocr_btn_show">
-      <en>Show</en>
-      <hi>दिखाएँ</hi>
     </label>
     <label id="ocr_lbl_api_key">
       <en>API Key</en>
