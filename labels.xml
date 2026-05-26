@@ -629,6 +629,14 @@
       <en>Address Line 3</en>
       <hi>पता पंक्ति 3</hi>
     </label>
+    <label id="kyc_address_line_4">
+      <en>Address Line 4</en>
+      <hi>पता पंक्ति 4</hi>
+    </label>
+    <label id="kyc_click_to_add_row">
+      <en>Click here to add row</en>
+      <hi>पंक्ति जोड़ने के लिए यहाँ क्लिक करें</hi>
+    </label>
     <label id="kyc_pincode">
       <en>Pin Code*</en>
       <hi>पिन कोड (Pin Code)*</hi>
