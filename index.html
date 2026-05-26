@@ -4268,25 +4268,30 @@
                 placeholderOpt.textContent = "-- " + (t("kyc_poa_submitted_placeholder") || "Select Proof of Address") + " --";
                 pSelect.appendChild(placeholderOpt);
 
-                const hasOvd = kycOvdSubmitted && kycOvdSubmitted.value !== "";
-                const hasDeemed = kycDeemedOvdSubmitted && kycDeemedOvdSubmitted.value !== "";
-
-                if (hasOvd) {
+                // Clone OVD options from kycOvdSubmitted
+                const ovdSelect = document.getElementById("kycOvdSubmitted");
+                if (ovdSelect) {
                     const ovdGroup = document.createElement("optgroup");
                     ovdGroup.id = "grpKycPermPoaOvd";
                     ovdGroup.label = t("kyc_poa_ovd_group") || "Officially Valid Documents (OVD)";
                     
-                    const ovdVal = kycOvdSubmitted.value;
-                    const ovdLabelKey = ovdLabelKeys[ovdVal] || "kyc_ovd_placeholder";
-                    const ovdOpt = document.createElement("option");
-                    ovdOpt.value = ovdVal;
-                    ovdOpt.textContent = t(ovdLabelKey) || (kycOvdSubmitted.options[kycOvdSubmitted.selectedIndex] ? kycOvdSubmitted.options[kycOvdSubmitted.selectedIndex].textContent : "");
-                    ovdGroup.appendChild(ovdOpt);
+                    Array.from(ovdSelect.options).forEach(opt => {
+                        // Skip the placeholder option
+                        if (opt.value !== "") {
+                            const clone = opt.cloneNode(true);
+                            if (clone.id) {
+                                clone.id = clone.id.replace("optKycOvd", "optKycPermPoaOvd");
+                            }
+                            ovdGroup.appendChild(clone);
+                        }
+                    });
 
+                    // Add self declaration option if applicable
                     const checkbox = document.getElementById("kycAadhaarAddressDifferent");
-                    if (ovdVal === "aadhaar" && checkbox && checkbox.checked) {
+                    if (checkbox && checkbox.checked) {
                         const selfDeclOpt = document.createElement("option");
                         selfDeclOpt.value = "self_declaration";
+                        selfDeclOpt.id = "optKycPermPoaSelfDeclaration";
                         selfDeclOpt.textContent = t("kyc_as_per_self_declaration") || "As per the self declaration";
                         ovdGroup.appendChild(selfDeclOpt);
                     }
@@ -4294,17 +4299,23 @@
                     pSelect.appendChild(ovdGroup);
                 }
 
-                if (hasDeemed) {
+                // Clone Deemed OVD options from kycDeemedOvdSubmitted
+                const deemedSelect = document.getElementById("kycDeemedOvdSubmitted");
+                if (deemedSelect) {
                     const deemedGroup = document.createElement("optgroup");
                     deemedGroup.id = "grpKycPermPoaDeemed";
                     deemedGroup.label = t("kyc_poa_deemed_group") || "Deemed Officially Valid Documents (Deemed OVD)";
                     
-                    const deemedVal = kycDeemedOvdSubmitted.value;
-                    const deemedLabelKey = deemedOvdLabelKeys[deemedVal] || "kyc_deemed_ovd_placeholder";
-                    const deemedOpt = document.createElement("option");
-                    deemedOpt.value = deemedVal;
-                    deemedOpt.textContent = t(deemedLabelKey) || (kycDeemedOvdSubmitted.options[kycDeemedOvdSubmitted.selectedIndex] ? kycDeemedOvdSubmitted.options[kycDeemedOvdSubmitted.selectedIndex].textContent : "");
-                    deemedGroup.appendChild(deemedOpt);
+                    Array.from(deemedSelect.options).forEach(opt => {
+                        // Skip the placeholder option
+                        if (opt.value !== "") {
+                            const clone = opt.cloneNode(true);
+                            if (clone.id) {
+                                clone.id = clone.id.replace("optKycDeemed", "optKycPermPoaDeemed");
+                            }
+                            deemedGroup.appendChild(clone);
+                        }
+                    });
 
                     pSelect.appendChild(deemedGroup);
                 }
