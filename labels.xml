@@ -665,6 +665,30 @@
       <en>Specify Proof of Address Submitted*</en>
       <hi>प्रस्तुत पते के प्रमाण को निर्दिष्ट करें*</hi>
     </label>
+    <label id="kyc_aadhaar_address_different">
+      <en>My address is different from the Aadhaar, (A self declaration will be required from the applicant for this)</en>
+      <hi>मेरा पता आधार से भिन्न है, (इसके लिए आवेदक से स्व-घोषणा पत्र की आवश्यकता होगी)</hi>
+    </label>
+    <label id="kyc_as_per_self_declaration">
+      <en>As per the self declaration</en>
+      <hi>स्व-घोषणा के अनुसार</hi>
+    </label>
+    <label id="kyc_poa_details_title">
+      <en>Proof of Address Document Details</en>
+      <hi>पते के प्रमाण दस्तावेज़ का विवरण</hi>
+    </label>
+    <label id="kyc_poa_detail_number">
+      <en>Document Number:</en>
+      <hi>दस्तावेज़ संख्या:</hi>
+    </label>
+    <label id="kyc_poa_detail_expiry">
+      <en>Expiry Date:</en>
+      <hi>समाप्ति तिथि:</hi>
+    </label>
+    <label id="kyc_poa_detail_issuance">
+      <en>Date of Issuance:</en>
+      <hi>जारी करने की तिथि:</hi>
+    </label>
     <label id="kyc_poa_submitted_placeholder">
       <en>Select Proof of Address</en>
       <hi>पते का प्रमाण चुनें</hi>
@@ -687,8 +711,16 @@
       <hi>3. स्थायी पता</hi>
     </label>
     <label id="kyc_same_address">
-      <en>Same as Correspondence Address</en>
-      <hi>पत्राचार पते के समान</hi>
+      <en>Same as Residence / Current / Local / Correspondence Address</en>
+      <hi>निवास / वर्तमान / स्थानीय / पत्राचार पते के समान</hi>
+    </label>
+    <label id="kyc_perm_poa_submitted">
+      <en>Specify Proof of Address Submitted*</en>
+      <hi>प्रस्तुत पते के प्रमाण को निर्दिष्ट करें*</hi>
+    </label>
+    <label id="kyc_perm_poa_details_title">
+      <en>Permanent Address Proof of Address Document Details</en>
+      <hi>स्थायी पते के प्रमाण दस्तावेज़ का विवरण</hi>
     </label>
     
     <label id="kyc_foreign_address_title">

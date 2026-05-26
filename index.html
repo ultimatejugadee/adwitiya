@@ -1107,6 +1107,11 @@
                     </div>
                 </div>
 
+                <div class="field" id="kycAadhaarAddressDifferentWrapper" style="display: none; align-items: center; gap: 8px; color: var(--text); margin-top: 10px;">
+                    <input type="checkbox" id="kycAadhaarAddressDifferent" style="width: 16px; height: 16px; margin: 0; cursor: pointer; vertical-align: middle;" />
+                    <label for="kycAadhaarAddressDifferent" id="labelKycAadhaarAddressDifferent" style="cursor: pointer; margin: 0; font-weight: 500; font-size: 13px; line-height: 1.2; vertical-align: middle; justify-content: flex-start; text-transform: none; display: inline-flex;">My address is different from the Aadhaar, (A self declaration will be required from the applicant for this)</label>
+                </div>
+
                 <div class="field" id="kycOvdNumberWrapper">
                     <label for="kycOvdNumber" id="labelKycOvdNumber">Document Number / Identification Number*</label>
                     <input id="kycOvdNumber" placeholder="Enter Document/ID Number" />
@@ -1276,28 +1281,23 @@
                     <label for="kycPoaSubmitted" id="labelKycPoaSubmitted">Specify Proof of Address Submitted*</label>
                     <select id="kycPoaSubmitted" required>
                         <option value="" id="optKycPoaPlaceholder">-- Select Proof of Address --</option>
-                        <optgroup label="Officially Valid Documents (OVD)" id="grpKycPoaOvd">
-                            <option value="passport" id="optKycPoaPassport">Passport</option>
-                            <option value="driving_licence" id="optKycPoaDriving">Driving Licence</option>
-                            <option value="aadhaar" id="optKycPoaAadhaar">Proof of possession of Aadhaar number</option>
-                            <option value="voter_id" id="optKycPoaVoter">Voter's Identity Card (issued by ECI)</option>
-                            <option value="nrega" id="optKycPoaNrega">Job Card issued by NREGA</option>
-                            <option value="npr_letter" id="optKycPoaNpr">Letter issued by National Population Register</option>
-                            <option value="other_govt" id="optKycPoaOtherGovt">Any other document notified by Central Govt</option>
-                        </optgroup>
-                        <optgroup label="Deemed Officially Valid Documents (Deemed OVD)" id="grpKycPoaDeemed">
-                            <option value="utility_bill" id="optKycPoaDeemedUtility">Utility Bill - not more than 2 months old</option>
-                            <option value="property_tax" id="optKycPoaDeemedProperty">Property or Municipal Tax Receipt</option>
-                            <option value="ppo" id="optKycPoaDeemedPpo">Pension or Family Pension Payment Order (PPO)</option>
-                            <option value="employer_letter" id="optKycPoaDeemedEmployer">Employer Letter of Allotment/Accommodation</option>
-                        </optgroup>
                     </select>
                 </div>
 
-                <div class="field">
-                    <label for="kycPoaIdNumber" id="labelKycPoaIdNumber">Document Number / ID Number*</label>
-                    <input id="kycPoaIdNumber" placeholder="Enter document/ID number" required />
+                <div class="field" id="kycPoaDetailsContainer" style="display: none;">
+                    <label style="font-size: 13px; color: var(--muted); font-weight: 500;" id="labelKycPoaDetails">Proof of Address Document Details</label>
+                    <div style="padding: 12px 16px; background: rgba(255,255,255,0.02); border: 1px solid var(--card-border); border-radius: 12px; font-size: 13px; display: flex; flex-direction: column; gap: 8px;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span style="color: var(--muted);" id="labelPoaDetailNumber">Document Number:</span>
+                            <span style="font-weight: 600; color: var(--text);" id="valPoaDetailNumber">-</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;" id="rowPoaDetailDate">
+                            <span style="color: var(--muted);" id="labelPoaDetailDate">Expiry/Issuance Date:</span>
+                            <span style="font-weight: 600; color: var(--text);" id="valPoaDetailDate">-</span>
+                        </div>
+                    </div>
                 </div>
+                <input type="hidden" id="kycPoaIdNumber" value="" />
 
 
                 <!-- Permanent Address -->
@@ -1305,7 +1305,7 @@
                     <h3 class="subsection-title" id="kycPermanentAddressTitle" style="margin: 0;">3. Permanent Address</h3>
                     <span style="display: inline-flex; align-items: center; gap: 6px; font-weight: 500; font-size: 13px; cursor: pointer; user-select: none; color: var(--text);">
                         <input type="checkbox" id="kycSameAddress" style="width: 16px; height: 16px; margin: 0; cursor: pointer;" />
-                        <label for="kycSameAddress" id="labelKycSameAddress" style="cursor: pointer; margin: 0; font-weight: 500; font-size: 13px;">Same as Correspondence Address</label>
+                        <label for="kycSameAddress" id="labelKycSameAddress" style="cursor: pointer; margin: 0; font-weight: 500; font-size: 13px;">Same as Residence / Current / Local / Correspondence Address</label>
                     </span>
                 </div>
                 
@@ -1392,6 +1392,28 @@
                     <label for="kycPermCountry" id="labelKycPermCountry">Country / ISO Code</label>
                     <input id="kycPermCountry" value="India / IN" readonly style="background: rgba(15,23,42,0.04); cursor: not-allowed;" />
                 </div>
+
+                <div class="field perm-field">
+                    <label for="kycPermPoaSubmitted" id="labelKycPermPoaSubmitted">Specify Proof of Address Submitted*</label>
+                    <select id="kycPermPoaSubmitted" required>
+                        <option value="" id="optKycPermPoaPlaceholder">-- Select Proof of Address --</option>
+                    </select>
+                </div>
+
+                <div class="field perm-field" id="kycPermPoaDetailsContainer" style="display: none;">
+                    <label style="font-size: 13px; color: var(--muted); font-weight: 500;" id="labelKycPermPoaDetails">Permanent Address Proof of Address Document Details</label>
+                    <div style="padding: 12px 16px; background: rgba(255,255,255,0.02); border: 1px solid var(--card-border); border-radius: 12px; font-size: 13px; display: flex; flex-direction: column; gap: 8px;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span style="color: var(--muted);" id="labelPermPoaDetailNumber">Document Number:</span>
+                            <span style="font-weight: 600; color: var(--text);" id="valPermPoaDetailNumber">-</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;" id="rowPermPoaDetailDate">
+                            <span style="color: var(--muted);" id="labelPermPoaDetailDate">Expiry/Issuance Date:</span>
+                            <span style="font-weight: 600; color: var(--text);" id="valPermPoaDetailDate">-</span>
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" id="kycPermPoaIdNumber" value="" />
 
 
                 <!-- Section D: Related Person -->
@@ -2086,7 +2108,12 @@
                 "labelKycAddressLine3": "kyc_address_line_3",
                 "labelKycCountry": "kyc_country",
                 "labelKycPoaSubmitted": "kyc_poa_submitted",
-                "labelKycPoaIdNumber": "kyc_poa_id_number",
+                "labelKycAadhaarAddressDifferent": "kyc_aadhaar_address_different",
+                "labelKycPoaDetails": "kyc_poa_details_title",
+                "labelPoaDetailNumber": "kyc_poa_detail_number",
+                "labelKycPermPoaSubmitted": "kyc_perm_poa_submitted",
+                "labelKycPermPoaDetails": "kyc_perm_poa_details_title",
+                "labelPermPoaDetailNumber": "kyc_poa_detail_number",
                 "kycPermanentAddressTitle": "kyc_permanent_address_title",
                 "labelKycSameAddress": "kyc_same_address",
                 "labelKycPermPincode": "kyc_pincode",
@@ -2388,6 +2415,13 @@
                     updateRowPlaceholder(row);
                 }
             });
+
+            if (typeof updatePoaOptions === "function") {
+                updatePoaOptions();
+            }
+            if (typeof updatePermPoaOptions === "function") {
+                updatePermPoaOptions();
+            }
         }
 
         function updatePANMessage() {
@@ -3517,6 +3551,19 @@
             }
 
             document.getElementById("kycPermAddressLine").value = document.getElementById("kycAddressLine").value;
+
+            // Sync Proof of Address fields
+            const kycPermPoaSubmitted = document.getElementById("kycPermPoaSubmitted");
+            const kycPoaSubmitted = document.getElementById("kycPoaSubmitted");
+            if (kycPermPoaSubmitted && kycPoaSubmitted) {
+                const wasDisabled = kycPermPoaSubmitted.disabled;
+                kycPermPoaSubmitted.disabled = false;
+                updatePermPoaOptions();
+                kycPermPoaSubmitted.value = kycPoaSubmitted.value;
+                updatePermPoaDetails();
+                kycPermPoaSubmitted.disabled = wasDisabled;
+            }
+
             syncAddressLines();
         }
 
@@ -3991,6 +4038,8 @@
                     !kycDeemedOvdNumber || !kycDeemedOvdNumberWrapper || !kycDeemedOvdIssuance || !kycDeemedOvdIssuanceWrapper) return;
 
                 const hasOvd = kycOvdSubmitted.value !== "";
+                const aadhaarWrapper = document.getElementById("kycAadhaarAddressDifferentWrapper");
+                const aadhaarCheckbox = document.getElementById("kycAadhaarAddressDifferent");
 
                 if (hasOvd) {
                     kycDeemedOvdSubmitted.disabled = false;
@@ -4008,6 +4057,14 @@
                         kycOvdExpiry.required = false;
                         kycOvdExpiry.value = "";
                     }
+
+                    // Aadhaar address different checkbox handling
+                    if (kycOvdSubmitted.value === "aadhaar") {
+                        if (aadhaarWrapper) aadhaarWrapper.style.display = "flex";
+                    } else {
+                        if (aadhaarWrapper) aadhaarWrapper.style.display = "none";
+                        if (aadhaarCheckbox) aadhaarCheckbox.checked = false;
+                    }
                 } else {
                     kycDeemedOvdSubmitted.disabled = true;
                     kycDeemedOvdSubmitted.style.background = "rgba(15,23,42,0.04)";
@@ -4021,6 +4078,10 @@
                     kycOvdExpiryWrapper.style.display = "none";
                     kycOvdExpiry.required = false;
                     kycOvdExpiry.value = "";
+
+                    // Aadhaar address different checkbox handling
+                    if (aadhaarWrapper) aadhaarWrapper.style.display = "none";
+                    if (aadhaarCheckbox) aadhaarCheckbox.checked = false;
                 }
 
                 const hasDeemedOvd = kycDeemedOvdSubmitted.value !== "";
@@ -4042,7 +4103,296 @@
 
                 // Standard OVD dropdown is required in Section A
                 kycOvdSubmitted.required = true;
+
+                // Update POA options whenever OVD state changes
+                updatePoaOptions();
+                updatePermPoaOptions();
             }
+
+            const ovdLabelKeys = {
+                "passport": "kyc_ovd_passport",
+                "driving_licence": "kyc_ovd_driving",
+                "aadhaar": "kyc_ovd_aadhaar",
+                "voter_id": "kyc_ovd_voter",
+                "nrega": "kyc_ovd_nrega",
+                "npr_letter": "kyc_ovd_npr",
+                "other_govt": "kyc_ovd_other_govt"
+            };
+
+            const deemedOvdLabelKeys = {
+                "utility_bill": "kyc_deemed_utility",
+                "property_tax": "kyc_deemed_property",
+                "ppo": "kyc_deemed_ppo",
+                "employer_letter": "kyc_deemed_employer"
+            };
+
+            function updatePoaOptions() {
+                const pSelect = document.getElementById("kycPoaSubmitted");
+                if (!pSelect) return;
+
+                const prevValue = pSelect.value;
+                pSelect.innerHTML = "";
+
+                // Add placeholder option
+                const placeholderOpt = document.createElement("option");
+                placeholderOpt.value = "";
+                placeholderOpt.id = "optKycPoaPlaceholder";
+                placeholderOpt.textContent = "-- " + (t("kyc_poa_submitted_placeholder") || "Select Proof of Address") + " --";
+                pSelect.appendChild(placeholderOpt);
+
+                const hasOvd = kycOvdSubmitted && kycOvdSubmitted.value !== "";
+                const hasDeemed = kycDeemedOvdSubmitted && kycDeemedOvdSubmitted.value !== "";
+
+                if (hasOvd) {
+                    const ovdGroup = document.createElement("optgroup");
+                    ovdGroup.id = "grpKycPoaOvd";
+                    ovdGroup.label = t("kyc_poa_ovd_group") || "Officially Valid Documents (OVD)";
+                    
+                    const ovdVal = kycOvdSubmitted.value;
+                    const ovdLabelKey = ovdLabelKeys[ovdVal] || "kyc_ovd_placeholder";
+                    const ovdOpt = document.createElement("option");
+                    ovdOpt.value = ovdVal;
+                    ovdOpt.textContent = t(ovdLabelKey) || (kycOvdSubmitted.options[kycOvdSubmitted.selectedIndex] ? kycOvdSubmitted.options[kycOvdSubmitted.selectedIndex].textContent : "");
+                    ovdGroup.appendChild(ovdOpt);
+
+                    const checkbox = document.getElementById("kycAadhaarAddressDifferent");
+                    if (ovdVal === "aadhaar" && checkbox && checkbox.checked) {
+                        const selfDeclOpt = document.createElement("option");
+                        selfDeclOpt.value = "self_declaration";
+                        selfDeclOpt.textContent = t("kyc_as_per_self_declaration") || "As per the self declaration";
+                        ovdGroup.appendChild(selfDeclOpt);
+                    }
+
+                    pSelect.appendChild(ovdGroup);
+                }
+
+                if (hasDeemed) {
+                    const deemedGroup = document.createElement("optgroup");
+                    deemedGroup.id = "grpKycPoaDeemed";
+                    deemedGroup.label = t("kyc_poa_deemed_group") || "Deemed Officially Valid Documents (Deemed OVD)";
+                    
+                    const deemedVal = kycDeemedOvdSubmitted.value;
+                    const deemedLabelKey = deemedOvdLabelKeys[deemedVal] || "kyc_deemed_ovd_placeholder";
+                    const deemedOpt = document.createElement("option");
+                    deemedOpt.value = deemedVal;
+                    deemedOpt.textContent = t(deemedLabelKey) || (kycDeemedOvdSubmitted.options[kycDeemedOvdSubmitted.selectedIndex] ? kycDeemedOvdSubmitted.options[kycDeemedOvdSubmitted.selectedIndex].textContent : "");
+                    deemedGroup.appendChild(deemedOpt);
+
+                    pSelect.appendChild(deemedGroup);
+                }
+
+                // Try to restore previous selection
+                let exists = false;
+                for (let i = 0; i < pSelect.options.length; i++) {
+                    if (pSelect.options[i].value === prevValue) {
+                        pSelect.value = prevValue;
+                        exists = true;
+                        break;
+                    }
+                }
+                if (!exists) {
+                    pSelect.value = "";
+                }
+
+                updatePoaDetails();
+            }
+
+            function updatePoaDetails() {
+                const pSelect = document.getElementById("kycPoaSubmitted");
+                const container = document.getElementById("kycPoaDetailsContainer");
+                const valNum = document.getElementById("valPoaDetailNumber");
+                const valDate = document.getElementById("valPoaDetailDate");
+                const rowDate = document.getElementById("rowPoaDetailDate");
+                const lblDate = document.getElementById("labelPoaDetailDate");
+                const hiddenInput = document.getElementById("kycPoaIdNumber");
+
+                if (!pSelect || !container || !valNum || !valDate || !rowDate || !lblDate || !hiddenInput) return;
+
+                const val = pSelect.value;
+
+                if (!val) {
+                    container.style.display = "none";
+                    hiddenInput.value = "";
+                    return;
+                }
+
+                container.style.display = "block";
+
+                if (kycOvdSubmitted && val === kycOvdSubmitted.value) {
+                    const num = kycOvdNumber ? kycOvdNumber.value : "";
+                    valNum.textContent = num || "-";
+                    hiddenInput.value = num;
+
+                    if (val === "passport" || val === "driving_licence") {
+                        rowDate.style.display = "flex";
+                        lblDate.textContent = t("kyc_poa_detail_expiry") || "Expiry Date:";
+                        valDate.textContent = (kycOvdExpiry ? kycOvdExpiry.value : "") || "-";
+                    } else {
+                        rowDate.style.display = "none";
+                        valDate.textContent = "";
+                    }
+                } else if (val === "self_declaration") {
+                    const text = t("kyc_as_per_self_declaration") || "As per the self declaration";
+                    valNum.textContent = text;
+                    hiddenInput.value = "Self Declaration";
+                    rowDate.style.display = "none";
+                    valDate.textContent = "";
+                } else if (kycDeemedOvdSubmitted && val === kycDeemedOvdSubmitted.value) {
+                    const num = kycDeemedOvdNumber ? kycDeemedOvdNumber.value : "";
+                    valNum.textContent = num || "-";
+                    hiddenInput.value = num;
+
+                    rowDate.style.display = "flex";
+                    lblDate.textContent = t("kyc_poa_detail_issuance") || "Date of Issuance:";
+                    valDate.textContent = (kycDeemedOvdIssuance ? kycDeemedOvdIssuance.value : "") || "-";
+                } else {
+                    container.style.display = "none";
+                    hiddenInput.value = "";
+                }
+            }
+
+            function updatePermPoaOptions() {
+                const pSelect = document.getElementById("kycPermPoaSubmitted");
+                if (!pSelect) return;
+
+                const wasDisabled = pSelect.disabled;
+                pSelect.disabled = false;
+
+                const prevValue = pSelect.value;
+                pSelect.innerHTML = "";
+
+                // Add placeholder option
+                const placeholderOpt = document.createElement("option");
+                placeholderOpt.value = "";
+                placeholderOpt.id = "optKycPermPoaPlaceholder";
+                placeholderOpt.textContent = "-- " + (t("kyc_poa_submitted_placeholder") || "Select Proof of Address") + " --";
+                pSelect.appendChild(placeholderOpt);
+
+                const hasOvd = kycOvdSubmitted && kycOvdSubmitted.value !== "";
+                const hasDeemed = kycDeemedOvdSubmitted && kycDeemedOvdSubmitted.value !== "";
+
+                if (hasOvd) {
+                    const ovdGroup = document.createElement("optgroup");
+                    ovdGroup.id = "grpKycPermPoaOvd";
+                    ovdGroup.label = t("kyc_poa_ovd_group") || "Officially Valid Documents (OVD)";
+                    
+                    const ovdVal = kycOvdSubmitted.value;
+                    const ovdLabelKey = ovdLabelKeys[ovdVal] || "kyc_ovd_placeholder";
+                    const ovdOpt = document.createElement("option");
+                    ovdOpt.value = ovdVal;
+                    ovdOpt.textContent = t(ovdLabelKey) || (kycOvdSubmitted.options[kycOvdSubmitted.selectedIndex] ? kycOvdSubmitted.options[kycOvdSubmitted.selectedIndex].textContent : "");
+                    ovdGroup.appendChild(ovdOpt);
+
+                    const checkbox = document.getElementById("kycAadhaarAddressDifferent");
+                    if (ovdVal === "aadhaar" && checkbox && checkbox.checked) {
+                        const selfDeclOpt = document.createElement("option");
+                        selfDeclOpt.value = "self_declaration";
+                        selfDeclOpt.textContent = t("kyc_as_per_self_declaration") || "As per the self declaration";
+                        ovdGroup.appendChild(selfDeclOpt);
+                    }
+
+                    pSelect.appendChild(ovdGroup);
+                }
+
+                if (hasDeemed) {
+                    const deemedGroup = document.createElement("optgroup");
+                    deemedGroup.id = "grpKycPermPoaDeemed";
+                    deemedGroup.label = t("kyc_poa_deemed_group") || "Deemed Officially Valid Documents (Deemed OVD)";
+                    
+                    const deemedVal = kycDeemedOvdSubmitted.value;
+                    const deemedLabelKey = deemedOvdLabelKeys[deemedVal] || "kyc_deemed_ovd_placeholder";
+                    const deemedOpt = document.createElement("option");
+                    deemedOpt.value = deemedVal;
+                    deemedOpt.textContent = t(deemedLabelKey) || (kycDeemedOvdSubmitted.options[kycDeemedOvdSubmitted.selectedIndex] ? kycDeemedOvdSubmitted.options[kycDeemedOvdSubmitted.selectedIndex].textContent : "");
+                    deemedGroup.appendChild(deemedOpt);
+
+                    pSelect.appendChild(deemedGroup);
+                }
+
+                // Try to restore previous selection or sync from correspondence if same address is checked
+                const sameAddressCheckbox = document.getElementById("kycSameAddress");
+                const kycPoaSubmitted = document.getElementById("kycPoaSubmitted");
+                
+                if (sameAddressCheckbox && sameAddressCheckbox.checked && kycPoaSubmitted) {
+                    pSelect.value = kycPoaSubmitted.value;
+                } else {
+                    let exists = false;
+                    for (let i = 0; i < pSelect.options.length; i++) {
+                        if (pSelect.options[i].value === prevValue) {
+                            pSelect.value = prevValue;
+                            exists = true;
+                            break;
+                        }
+                    }
+                    if (!exists) {
+                        pSelect.value = "";
+                    }
+                }
+
+                pSelect.disabled = wasDisabled;
+
+                updatePermPoaDetails();
+            }
+
+            function updatePermPoaDetails() {
+                const pSelect = document.getElementById("kycPermPoaSubmitted");
+                const container = document.getElementById("kycPermPoaDetailsContainer");
+                const valNum = document.getElementById("valPermPoaDetailNumber");
+                const valDate = document.getElementById("valPermPoaDetailDate");
+                const rowDate = document.getElementById("rowPermPoaDetailDate");
+                const lblDate = document.getElementById("labelPermPoaDetailDate");
+                const hiddenInput = document.getElementById("kycPermPoaIdNumber");
+
+                if (!pSelect || !container || !valNum || !valDate || !rowDate || !lblDate || !hiddenInput) return;
+
+                const val = pSelect.value;
+
+                if (!val) {
+                    container.style.display = "none";
+                    hiddenInput.value = "";
+                    return;
+                }
+
+                container.style.display = "block";
+
+                if (kycOvdSubmitted && val === kycOvdSubmitted.value) {
+                    const num = kycOvdNumber ? kycOvdNumber.value : "";
+                    valNum.textContent = num || "-";
+                    hiddenInput.value = num;
+
+                    if (val === "passport" || val === "driving_licence") {
+                        rowDate.style.display = "flex";
+                        lblDate.textContent = t("kyc_poa_detail_expiry") || "Expiry Date:";
+                        valDate.textContent = (kycOvdExpiry ? kycOvdExpiry.value : "") || "-";
+                    } else {
+                        rowDate.style.display = "none";
+                        valDate.textContent = "";
+                    }
+                } else if (val === "self_declaration") {
+                    const text = t("kyc_as_per_self_declaration") || "As per the self declaration";
+                    valNum.textContent = text;
+                    hiddenInput.value = "Self Declaration";
+                    rowDate.style.display = "none";
+                    valDate.textContent = "";
+                } else if (kycDeemedOvdSubmitted && val === kycDeemedOvdSubmitted.value) {
+                    const num = kycDeemedOvdNumber ? kycDeemedOvdNumber.value : "";
+                    valNum.textContent = num || "-";
+                    hiddenInput.value = num;
+
+                    rowDate.style.display = "flex";
+                    lblDate.textContent = t("kyc_poa_detail_issuance") || "Date of Issuance:";
+                    valDate.textContent = (kycDeemedOvdIssuance ? kycDeemedOvdIssuance.value : "") || "-";
+                } else {
+                    container.style.display = "none";
+                    hiddenInput.value = "";
+                }
+            }
+
+            window.updateOvdState = updateOvdState;
+            window.updatePoaOptions = updatePoaOptions;
+            window.updatePoaDetails = updatePoaDetails;
+            window.updatePermPoaOptions = updatePermPoaOptions;
+            window.updatePermPoaDetails = updatePermPoaDetails;
 
             if (kycOvdSubmitted) {
                 kycOvdSubmitted.addEventListener("change", () => {
@@ -4054,13 +4404,35 @@
                     updateOvdState();
                 });
             }
-
-            // Custom input and change validation on Section A Document Number (when Aadhaar is selected)
+            const aadhaarAddressDiffCheckbox = document.getElementById("kycAadhaarAddressDifferent");
+            if (aadhaarAddressDiffCheckbox) {
+                aadhaarAddressDiffCheckbox.addEventListener("change", () => {
+                    updatePoaOptions();
+                    updatePermPoaOptions();
+                });
+            }
+            const kycPoaSubmittedSelect = document.getElementById("kycPoaSubmitted");
+            if (kycPoaSubmittedSelect) {
+                kycPoaSubmittedSelect.addEventListener("change", () => {
+                    updatePoaDetails();
+                    if (kycSameAddress && kycSameAddress.checked) {
+                        syncCorrespondenceToPermanent();
+                    }
+                });
+            }
+            const kycPermPoaSubmittedSelect = document.getElementById("kycPermPoaSubmitted");
+            if (kycPermPoaSubmittedSelect) {
+                kycPermPoaSubmittedSelect.addEventListener("change", () => {
+                    updatePermPoaDetails();
+                });
+            }
             if (kycOvdNumber) {
                 kycOvdNumber.addEventListener("input", () => {
                     if (kycOvdSubmitted && kycOvdSubmitted.value === "aadhaar") {
                         kycOvdNumber.value = kycOvdNumber.value.replace(/[^0-9]/g, "").slice(0, 12);
                     }
+                    updatePoaDetails();
+                    updatePermPoaDetails();
                 });
                 kycOvdNumber.addEventListener("change", () => {
                     if (kycOvdSubmitted && kycOvdSubmitted.value === "aadhaar") {
@@ -4070,6 +4442,26 @@
                             kycOvdNumber.focus();
                         }
                     }
+                    updatePoaDetails();
+                    updatePermPoaDetails();
+                });
+            }
+            if (kycOvdExpiry) {
+                kycOvdExpiry.addEventListener("change", () => {
+                    updatePoaDetails();
+                    updatePermPoaDetails();
+                });
+            }
+            if (kycDeemedOvdNumber) {
+                kycDeemedOvdNumber.addEventListener("input", () => {
+                    updatePoaDetails();
+                    updatePermPoaDetails();
+                });
+            }
+            if (kycDeemedOvdIssuance) {
+                kycDeemedOvdIssuance.addEventListener("change", () => {
+                    updatePoaDetails();
+                    updatePermPoaDetails();
                 });
             }
 
