@@ -835,6 +835,10 @@
       <en>D. Details of Related Person</en>
       <hi>घ. संबंधित व्यक्ति का विवरण</hi>
     </label>
+    <label id="kyc_related_person_note">
+      <en>Note: Related Person details are required when the applicant is a minor, assignee, or represented by an authorized person. You can add or delete details of the Guardian of Minor, Assignee, or Authorized Representative here.</en>
+      <hi>नोट: संबंधित व्यक्ति का विवरण तब आवश्यक होता है जब आवेदक नाबालिग, समनुदेशिती हो या किसी अधिकृत व्यक्ति द्वारा प्रतिनिधित्व किया गया हो। आप यहाँ नाबालिग के अभिभावक, समनुदेशिती, या अधिकृत प्रतिनिधि का विवरण जोड़ या हटा सकते हैं।</hi>
+    </label>
     <label id="kyc_rel_action">
       <en>Do you want to make any changes with respect to Related Person?</en>
       <hi>क्या आप संबंधित व्यक्ति के संबंध में कोई बदलाव करना चाहते हैं?</hi>
@@ -894,8 +898,8 @@
     
     <!-- Trading Details -->
     <label id="kyc_trading_details_title">
-      <en>Trading Account Related Details</en>
-      <hi>ट्रेडिंग खाते से संबंधित विवरण</hi>
+      <en>Other Profile Details</en>
+      <hi>अन्य प्रोफ़ाइल विवरण</hi>
     </label>
     <label id="kyc_bank_title">
       <en>A. Bank Account Details</en>
@@ -941,8 +945,8 @@
     
     <!-- Other details -->
     <label id="kyc_other_title">
-      <en>B. Other Details</en>
-      <hi>ख. अन्य विवरण</hi>
+      <en>B. Background and Financial Details</en>
+      <hi>ख. पृष्ठभूमि और वित्तीय विवरण</hi>
     </label>
     <label id="kyc_income_range">
       <en>Gross Annual Income Details*</en>
@@ -1097,6 +1101,10 @@
     <label id="ocr_success_modal_ok">
       <en>Got it!</en>
       <hi>समझ गया!</hi>
+    </label>
+    <label id="ocr_upload_photo">
+      <en>Upload Photograph</en>
+      <hi>फोटोग्राफ अपलोड करें</hi>
     </label>
     <label id="ocr_upload_pan">
       <en>Upload PAN Card</en>

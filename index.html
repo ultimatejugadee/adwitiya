@@ -1029,6 +1029,13 @@
         .quick-fill-input {
             padding-right: 38px !important;
         }
+        .quick-fill-input[type="date"] {
+            padding-right: 58px !important;
+        }
+        .quick-fill-input[type="date"]::-webkit-calendar-picker-indicator {
+            margin-right: 24px;
+            cursor: pointer;
+        }
         .quick-fill-btn {
             position: absolute;
             right: 8px;
@@ -1139,6 +1146,20 @@
 
                     <div id="ocrSectionContent" style="transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease; max-height: 1000px; overflow: hidden; opacity: 1;">
                         <div class="ocr-upload-grid">
+                            <!-- Photograph Dropzone -->
+                            <div class="ocr-upload-card" id="ocrCardPhoto">
+                                <input type="file" id="ocrFilePhoto" accept="image/*" style="display: none;" />
+                                <div class="ocr-card-compact">
+                                    <span style="font-size: 16px;">📷</span>
+                                    <span id="lblUploadPhoto">Upload Photograph</span>
+                                </div>
+                                <div class="ocr-card-expanded">
+                                    <span style="font-size: 24px; animation: bounce 1.5s infinite;">📥</span>
+                                    <span style="font-size: 11px; color: var(--muted);" id="lblDragDropPhoto">Drag & drop image here or click</span>
+                                </div>
+                                <div class="ocr-previews-container"></div>
+                            </div>
+
                             <!-- PAN Card Dropzone -->
                             <div class="ocr-upload-card" id="ocrCardPan">
                                 <input type="file" id="ocrFilePan" accept="image/*" style="display: none;" multiple />
@@ -1355,6 +1376,10 @@
         <!-- KYC Form Section -->
         <section class="app-card kyc-card" style="margin-top: 30px;" id="kycCardSection">
             <form id="kycForm" class="form" onsubmit="event.preventDefault(); alert('KYC Form Submitted Successfully!');">
+                <div style="display: none;">
+                    <input type="file" id="kycPhotoFile" accept="image/*" />
+                    <img id="photoImg" />
+                </div>
                 <!-- Section A: Identity Details -->
                 <h2 class="section-title full" id="kycSecATitle">A. Identity Details</h2>
                 
@@ -1433,17 +1458,7 @@
                 
 
 
-                <!-- Photograph Box -->
-                <div class="field photo-field" style="grid-row: span 3; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 2px dashed var(--input-border); border-radius: 16px; padding: 16px; background: rgba(255,255,255,0.02); text-align: center;">
-                    <label id="labelKycPhotograph" style="margin-bottom: 8px;">Affix Passport Size Photo*</label>
-                    <div id="photoPreviewContainer" style="width: 120px; height: 150px; border: 1px solid var(--box-border); display: flex; align-items: center; justify-content: center; background: var(--box-bg); border-radius: 8px; margin-bottom: 8px; overflow: hidden; position: relative;">
-                        <span id="photoPlaceholder" style="font-size: 11px; color: var(--muted); text-align: center; padding: 4px;">[F1] Photo Preview</span>
-                        <img id="photoImg" style="display: none; width: 100%; height: 100%; object-fit: cover;" />
-                    </div>
-                    <input type="file" id="kycPhotoFile" accept="image/*" style="display: none;" />
-                    <button type="button" id="kycPhotoBtn" class="theme-toggle-btn" style="padding: 6px 12px; font-size: 13px;">Upload Photograph</button>
-                </div>
-                
+
 
                 <!-- Identification Numbers -->
                 <div class="field" id="kycOvdSubmittedWrapper">
@@ -1889,6 +1904,7 @@
 
                 <!-- Section D: Related Person -->
                 <h2 class="section-title full" id="kycSecDTitle" style="margin-top: 20px; border-top: 1px solid var(--card-border); padding-top: 20px;">D. Details of Related Person</h2>
+                <div id="noteKycRelatedPerson" class="full" style="font-size: 12px; color: var(--muted); margin-top: 8px; margin-bottom: 12px; line-height: 1.45;"></div>
                 
                 <div class="field">
                     <label for="kycRelAction" id="labelKycRelAction">Do you want to make any changes with respect to Related Person?</label>
@@ -1968,8 +1984,8 @@
                     <input id="kycRelSmaCode" placeholder="Enter type code" />
                 </div>
 
-                <!-- Trading Account Related Details -->
-                <h2 class="section-title full" id="kycTradingDetailsTitle" style="margin-top: 20px; border-top: 1px solid var(--card-border); padding-top: 20px;">Trading Account Related Details</h2>
+                <!-- Other Profile Details -->
+                <h2 class="section-title full" id="kycTradingDetailsTitle" style="margin-top: 20px; border-top: 1px solid var(--card-border); padding-top: 20px;">Other Profile Details</h2>
                 
                 <!-- Bank Account Details -->
                 <h3 class="subsection-title full" id="kycBankTitle">A. Bank Account Details</h3>
@@ -2002,8 +2018,8 @@
                 </div>
                 
 
-                <!-- Other Details -->
-                <h3 class="subsection-title full" id="kycOtherTitle" style="margin-top: 15px;">B. Other Details</h3>
+                <!-- Background & Financial Details -->
+                <h3 class="subsection-title full" id="kycOtherTitle" style="margin-top: 15px;">B. Background and Financial Details</h3>
                 
                 <div class="field">
                     <label for="kycIncomeRange" id="labelKycIncomeRange">Gross Annual Income Details*</label>
@@ -2745,6 +2761,7 @@
                 "labelKycForeignDistrict": "kyc_district",
                 "labelKycForeignPincode": "kyc_pincode",
                 "kycSecDTitle": "kyc_sec_d_title",
+                "noteKycRelatedPerson": "kyc_related_person_note",
                 "labelKycRelAction": "kyc_rel_action",
                 "labelKycRelNumber": "kyc_rel_number",
                 "labelKycRelType": "kyc_rel_type",
@@ -6004,8 +6021,8 @@
                         const rawBase64 = commaIdx !== -1 ? base64Data.substring(commaIdx + 1) : base64Data;
                         
                         const photoFile = elem.files && elem.files[0];
-                        const fileName = photoFile ? photoFile.name : "client_photograph.png";
-                        const fileType = photoFile ? photoFile.type : "image/png";
+                        const fileName = photoFile ? photoFile.name : (ocrFiles.photo?.[0]?.fileName || "client_photograph.png");
+                        const fileType = photoFile ? photoFile.type : (ocrFiles.photo?.[0]?.fileType || "image/png");
 
                         fieldObj.value = base64Data;
                         fieldObj.base64 = rawBase64;
@@ -6085,8 +6102,8 @@
                 const rawBase64 = commaIdx !== -1 ? base64Data.substring(commaIdx + 1) : base64Data;
                 const photoFile = document.getElementById("kycPhotoFile")?.files?.[0];
                 uploadedDocuments.photograph.push({
-                    fileName: photoFile ? photoFile.name : "client_photograph.png",
-                    fileType: photoFile ? photoFile.type : "image/png",
+                    fileName: photoFile ? photoFile.name : (ocrFiles.photo?.[0]?.fileName || "client_photograph.png"),
+                    fileType: photoFile ? photoFile.type : (ocrFiles.photo?.[0]?.fileType || "image/png"),
                     base64: rawBase64,
                     dataUrl: base64Data
                 });
@@ -6167,6 +6184,7 @@
 
         // --- OCR and Document Upload Integration ---
         const ocrFiles = {
+            photo: [],
             pan: [],
             ovd: [],
             deemed: [],
@@ -6174,6 +6192,7 @@
         };
 
         const ocrTexts = {
+            photo: "",
             pan: "",
             ovd: "",
             deemed: "",
@@ -6300,7 +6319,7 @@ CRITICAL INSTRUCTIONS:
         }
 
         function handleOcrFiles(files, cardKey) {
-            const camelKey = cardKey === "deemed" ? "DeemedOvd" : cardKey === "misc" ? "Misc" : cardKey.charAt(0).toUpperCase() + cardKey.slice(1);
+            const camelKey = cardKey === "deemed" ? "DeemedOvd" : cardKey === "misc" ? "Misc" : cardKey === "photo" ? "Photo" : cardKey.charAt(0).toUpperCase() + cardKey.slice(1);
             const card = document.getElementById(`ocrCard${camelKey}`);
             if (!card) return;
 
@@ -6311,11 +6330,24 @@ CRITICAL INSTRUCTIONS:
                 }
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    ocrFiles[cardKey].push({
-                        fileData: e.target.result.split(",")[1],
-                        fileType: file.type,
-                        fileName: file.name
-                    });
+                    if (cardKey === "photo") {
+                        ocrFiles.photo = [{
+                            fileData: e.target.result.split(",")[1],
+                            fileType: file.type,
+                            fileName: file.name
+                        }];
+                        const photoImg = document.getElementById("photoImg");
+                        if (photoImg) {
+                            photoImg.src = e.target.result;
+                            photoImg.style.display = "block";
+                        }
+                    } else {
+                        ocrFiles[cardKey].push({
+                            fileData: e.target.result.split(",")[1],
+                            fileType: file.type,
+                            fileName: file.name
+                        });
+                    }
                     renderOcrPreviews(cardKey);
                     updateOcrButtonVisibility();
                 };
@@ -6324,7 +6356,7 @@ CRITICAL INSTRUCTIONS:
         }
 
         function renderOcrPreviews(cardKey) {
-            const camelKey = cardKey === "deemed" ? "DeemedOvd" : cardKey === "misc" ? "Misc" : cardKey.charAt(0).toUpperCase() + cardKey.slice(1);
+            const camelKey = cardKey === "deemed" ? "DeemedOvd" : cardKey === "misc" ? "Misc" : cardKey === "photo" ? "Photo" : cardKey.charAt(0).toUpperCase() + cardKey.slice(1);
             const card = document.getElementById(`ocrCard${camelKey}`);
             if (!card) return;
             const container = card.querySelector(".ocr-previews-container");
@@ -6352,6 +6384,13 @@ CRITICAL INSTRUCTIONS:
                         e.stopPropagation();
                         e.preventDefault();
                         ocrFiles[cardKey].splice(index, 1);
+                        if (cardKey === "photo") {
+                            const photoImg = document.getElementById("photoImg");
+                            if (photoImg) {
+                                photoImg.removeAttribute("src");
+                                photoImg.style.display = "none";
+                            }
+                        }
                         renderOcrPreviews(cardKey);
                         updateOcrButtonVisibility();
                     });
@@ -6369,6 +6408,8 @@ CRITICAL INSTRUCTIONS:
         function translateOcrUI() {
             const ocrMappings = {
                 "labelKycDocUploadTitle": "ocr_doc_upload_title",
+                "lblUploadPhoto": "ocr_upload_photo",
+                "lblDragDropPhoto": "ocr_drag_drop_hint",
                 "lblUploadPanCard": "ocr_upload_pan",
                 "lblUploadOvd": "ocr_upload_ovd",
                 "lblUploadDeemedOvd": "ocr_upload_deemed",
@@ -6476,7 +6517,7 @@ CRITICAL INSTRUCTIONS:
         }
 
         function setupQuickFillIcons() {
-            const selectors = 'input[type="text"], input[type="email"], input[type="tel"], input:not([type])';
+            const selectors = 'input[type="text"], input[type="email"], input[type="tel"], input[type="date"], input:not([type])';
             const inputs = document.querySelectorAll(selectors);
             
             inputs.forEach(input => {
@@ -6484,9 +6525,8 @@ CRITICAL INSTRUCTIONS:
                 const isAutocomplete = input.id === "entityInput" || input.id === "kycTaxJurisdiction" || input.id === "kycBirthCountry" || input.id === "kycCitizenCountry";
                 const isReadonly = input.readOnly;
                 const isPhoto = input.type === "file";
-                const isDate = input.type === "date";
                 
-                if (isOcrSetting || isAutocomplete || isReadonly || isPhoto || isDate) return;
+                if (isOcrSetting || isAutocomplete || isReadonly || isPhoto) return;
                 if (input.parentNode && input.parentNode.classList.contains("quick-fill-wrapper")) return;
                 
                 const wrapper = document.createElement("div");
@@ -6502,6 +6542,7 @@ CRITICAL INSTRUCTIONS:
                 btn.className = "quick-fill-btn";
                 btn.title = t("ocr_quick_fill_btn_title") || "Quick Fill from OCR";
                 btn.innerHTML = "🪄";
+
                 
                 btn.addEventListener("click", (e) => {
                     e.preventDefault();
@@ -6522,14 +6563,20 @@ CRITICAL INSTRUCTIONS:
             
             activeQuickFillTarget = input;
             
-            const currentVal = input.value.trim();
+            let currentVal = input.value.trim();
+            if (input.type === "date" && currentVal) {
+                const parts = currentVal.split("-");
+                if (parts.length === 3) {
+                    currentVal = `${parts[2]}-${parts[1]}-${parts[0]}`;
+                }
+            }
             const initialWords = currentVal ? currentVal.split(/\s+/) : [];
             
             const modal = document.getElementById("quickFillModal");
             const composedInput = document.getElementById("quickFillComposedText");
             const container = document.getElementById("quickFillWordsContainer");
             
-            composedInput.value = input.value;
+            composedInput.value = currentVal;
             container.innerHTML = "";
             
             quickFillClickedItems = [];
@@ -6590,8 +6637,10 @@ CRITICAL INSTRUCTIONS:
                         
                         const composed = quickFillClickedItems.map(item => item.word).join(" ");
                         composedInput.value = composed;
-                        activeQuickFillTarget.value = composed;
-                        activeQuickFillTarget.dispatchEvent(new Event("input"));
+                        if (activeQuickFillTarget.type !== "date") {
+                            activeQuickFillTarget.value = composed;
+                            activeQuickFillTarget.dispatchEvent(new Event("input"));
+                        }
                     });
                     
                     rowDiv.appendChild(btn);
@@ -6715,9 +6764,9 @@ CRITICAL INSTRUCTIONS:
             });
 
             // Card functionality (Drag & Drop + Touch click)
-            const cards = ["Pan", "Ovd", "DeemedOvd", "Misc"];
+            const cards = ["Photo", "Pan", "Ovd", "DeemedOvd", "Misc"];
             cards.forEach(type => {
-                const cardKey = type === "Pan" ? "pan" : (type === "Ovd" ? "ovd" : (type === "DeemedOvd" ? "deemed" : "misc"));
+                const cardKey = type === "Photo" ? "photo" : (type === "Pan" ? "pan" : (type === "Ovd" ? "ovd" : (type === "DeemedOvd" ? "deemed" : "misc")));
                 const card = document.getElementById(`ocrCard${type}`);
                 const fileInput = document.getElementById(`ocrFile${type}`);
 
@@ -6865,7 +6914,32 @@ CRITICAL INSTRUCTIONS:
             };
             
             document.getElementById("closeQuickFillModal").addEventListener("click", closeQuickFill);
-            document.getElementById("quickFillApplyBtn").addEventListener("click", closeQuickFill);
+            document.getElementById("quickFillApplyBtn").addEventListener("click", () => {
+                if (activeQuickFillTarget && activeQuickFillTarget.type === "date") {
+                    const dateStr = document.getElementById("quickFillComposedText").value.trim();
+                    const matchSlash = dateStr.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
+                    const matchDash = dateStr.match(/^(\d{2})-(\d{2})-(\d{4})$/);
+                    let match = matchSlash || matchDash;
+                    
+                    if (match) {
+                        const day = match[1];
+                        const month = match[2];
+                        const year = match[3];
+                        activeQuickFillTarget.value = `${year}-${month}-${day}`;
+                        activeQuickFillTarget.dispatchEvent(new Event("input"));
+                        activeQuickFillTarget.dispatchEvent(new Event("change"));
+                        closeQuickFill();
+                    } else {
+                        const errorMsg = currentLang === "hi" 
+                            ? "दिनांक को आवश्यक प्रारूप (dd/mm/yyyy या dd-mm-yyyy) में परिवर्तित नहीं किया जा सका। आपको मैन्युअल रूप से तिथि भरनी होगी।" 
+                            : "The date could not be converted to the required format (dd/mm/yyyy or dd-mm-yyyy). You will have to manually fill the date.";
+                        alert(errorMsg);
+                        closeQuickFill();
+                    }
+                } else {
+                    closeQuickFill();
+                }
+            });
 
             // --- Success Alert Modal Event Listeners ---
             const ocrSuccessModal = document.getElementById("ocrSuccessModal");
@@ -6882,11 +6956,12 @@ CRITICAL INSTRUCTIONS:
                 if (activeQuickFillTarget) {
                     activeQuickFillTarget.value = "";
                     activeQuickFillTarget.dispatchEvent(new Event("input"));
+                    activeQuickFillTarget.dispatchEvent(new Event("change"));
                 }
             });
             
             document.getElementById("quickFillComposedText").addEventListener("input", (e) => {
-                if (activeQuickFillTarget) {
+                if (activeQuickFillTarget && activeQuickFillTarget.type !== "date") {
                     activeQuickFillTarget.value = e.target.value;
                     activeQuickFillTarget.dispatchEvent(new Event("input"));
                 }
