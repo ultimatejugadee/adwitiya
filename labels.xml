@@ -1113,7 +1113,7 @@
     <label id="ocr_upload_photo">
       <en>Upload Photograph</en>
       <hi>फोटोग्राफ अपलोड करें</hi>
-    </label>
+5    </label>
     <label id="ocr_upload_pan">
       <en>Upload PAN Card</en>
       <hi>पैन कार्ड अपलोड करें</hi>
@@ -1202,6 +1202,58 @@
     <label id="kyc_export_btn">
       <en>Export / Download Form</en>
       <hi>फॉर्म निर्यात / डाउनलोड करें</hi>
+    </label>
+    <label id="kyc_import_btn">
+      <en>Import Form</en>
+      <hi>फॉर्म आयात करें</hi>
+    </label>
+    <label id="export_success_title">
+      <en>Form Exported Successfully!</en>
+      <hi>फॉर्म सफलतापूर्वक निर्यात किया गया!</hi>
+    </label>
+    <label id="export_success_body">
+      <en>The file has been downloaded. Below are the unique security values generated for this form.</en>
+      <hi>फ़ाइल डाउनलोड हो गई है। इस फॉर्म के लिए उत्पन्न अद्वितीय सुरक्षा मान नीचे दिए गए हैं।</hi>
+    </label>
+    <label id="lbl_export_hash">
+      <en>SHA-256 Integrity Hash</en>
+      <hi>SHA-256 अखंडता हैश (Integrity Hash)</hi>
+    </label>
+    <label id="lbl_export_timestamp">
+      <en>Timestamp of Generation</en>
+      <hi>पीढ़ी का टाइमस्टैम्प (Timestamp of Generation)</hi>
+    </label>
+    <label id="lbl_export_code">
+      <en>Unique Code of Generation</en>
+      <hi>अद्वितीय पीढ़ी कोड (Unique Code of Generation)</hi>
+    </label>
+    <label id="btn_copy">
+      <en>Copy</en>
+      <hi>कॉपी करें</hi>
+    </label>
+    <label id="btn_copy_both">
+      <en>Copy All Values</en>
+      <hi>सभी मान कॉपी करें</hi>
+    </label>
+    <label id="btn_close">
+      <en>Close</en>
+      <hi>बंद करें</hi>
+    </label>
+    <label id="msg_copied">
+      <en>Copied!</en>
+      <hi>कॉपी किया गया!</hi>
+    </label>
+    <label id="msg_import_success">
+      <en>Form data imported successfully!</en>
+      <hi>फॉर्म डेटा सफलतापूर्वक आयात किया गया!</hi>
+    </label>
+    <label id="msg_import_invalid">
+      <en>Invalid file or incorrect form export format.</en>
+      <hi>अमान्य फ़ाइल या गलत फॉर्म निर्यात प्रारूप।</hi>
+    </label>
+    <label id="msg_import_error">
+      <en>Error reading or parsing import file: {error}</en>
+      <hi>आयात फ़ाइल को पढ़ने या पार्स करने में त्रुटि: {error}</hi>
     </label>
 
   </interface>

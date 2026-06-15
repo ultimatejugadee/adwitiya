@@ -1402,7 +1402,7 @@
                     </select>
                 </div>
                 
-                <div class="field" id="kycMaidennameWrapper" style="display: none;">
+                <div class="field" id="kycMaidennameWrapper">
                     <label for="kycMaidenname" id="labelKycMaidenname">Maiden Name (If any)</label>
                     <input id="kycMaidenname" placeholder="Enter Maiden Name" />
                 </div>
@@ -2124,7 +2124,9 @@
                     <input id="kycSigDate" type="date" required />
                 </div>
 
-                <div class="field full" style="text-align: right; margin-top: 15px; display: flex; justify-content: flex-end; gap: 12px; align-items: center;">
+                <div class="field full" style="text-align: right; margin-top: 15px; display: flex; justify-content: flex-end; gap: 12px; align-items: center; flex-wrap: wrap;">
+                    <input type="file" id="importFormFile" style="display: none;" accept=".txt,.json" />
+                    <button type="button" id="importFormBtn" class="theme-toggle-btn" style="padding: 12px 28px; font-size: 16px; font-weight: bold; border-radius: 12px; background: var(--btn-bg); color: var(--text); border: 1.5px solid var(--btn-border); cursor: pointer; transition: all 0.2s ease;">Import Form</button>
                     <button type="button" id="exportFormBtn" class="theme-toggle-btn" style="padding: 12px 28px; font-size: 16px; font-weight: bold; border-radius: 12px; background: var(--btn-bg); color: var(--text); border: 1.5px solid var(--btn-border); cursor: pointer; transition: all 0.2s ease;">Export / Download Form</button>
                     <button type="submit" class="theme-toggle-btn" style="padding: 12px 28px; font-size: 16px; font-weight: bold; border-radius: 12px; background: linear-gradient(135deg, var(--accent), var(--accent2)); color: white; border: 0; cursor: pointer;">Submit KYC Form</button>
                 </div>
@@ -2270,6 +2272,38 @@
         </div>
     </div>
 
+    <!-- Export Success Info Modal -->
+    <div id="exportSuccessModal" class="modal" style="z-index: 200;">
+        <div class="modal-content" style="max-width: 500px; padding: 24px; border-radius: 16px; border: 1px solid var(--box-border); background: var(--bg2); color: var(--text);">
+            <span class="close-modal" id="closeExportSuccessModal">&times;</span>
+            <div style="font-size: 40px; text-align: center; margin-bottom: 16px;">📄</div>
+            <h3 id="exportSuccessModalTitle" style="margin-top: 0; margin-bottom: 12px; font-size: 18px; font-weight: 700; color: var(--accent); text-align: center;">Form Exported Successfully!</h3>
+            <p id="exportSuccessModalBody" style="font-size: 14px; color: var(--muted); line-height: 1.5; margin-bottom: 20px; text-align: center;">
+                The file has been downloaded. Below are the unique security values generated for this form.
+            </p>
+            
+            <div style="margin-bottom: 16px;">
+                <label style="font-weight: 600; font-size: 13px; color: var(--text); display: block; margin-bottom: 6px;" id="lblExportHash">SHA-256 Integrity Hash</label>
+                <input type="text" id="exportHashVal" readonly style="width: 100%; box-sizing: border-box; padding: 8px 12px; font-size: 12px; font-family: monospace; border-radius: 8px; border: 1px solid var(--btn-border); background: var(--bg); color: var(--text);" />
+            </div>
+
+            <div style="margin-bottom: 16px;">
+                <label style="font-weight: 600; font-size: 13px; color: var(--text); display: block; margin-bottom: 6px;" id="lblExportTimestamp">Timestamp of Generation</label>
+                <input type="text" id="exportTimestampVal" readonly style="width: 100%; box-sizing: border-box; padding: 8px 12px; font-size: 12px; font-family: monospace; border-radius: 8px; border: 1px solid var(--btn-border); background: var(--bg); color: var(--text);" />
+            </div>
+
+            <div style="margin-bottom: 24px;">
+                <label style="font-weight: 600; font-size: 13px; color: var(--text); display: block; margin-bottom: 6px;" id="lblExportCode">Unique Code of Generation</label>
+                <input type="text" id="exportCodeVal" readonly style="width: 100%; box-sizing: border-box; padding: 8px 12px; font-size: 12px; font-family: monospace; border-radius: 8px; border: 1px solid var(--btn-border); background: var(--bg); color: var(--text);" />
+            </div>
+
+            <div style="display: flex; justify-content: center; gap: 12px;">
+                <button type="button" id="copyAllBtn" class="theme-toggle-btn" style="padding: 10px 24px; font-size: 13px; border-radius: 8px; background: linear-gradient(135deg, var(--accent), var(--accent2)); color: white; border: none; font-weight: 600; cursor: pointer; box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);">Copy All Values</button>
+                <button type="button" id="exportSuccessModalOkBtn" class="theme-toggle-btn" style="padding: 10px 24px; font-size: 13px; border-radius: 8px; background: var(--btn-bg); color: var(--text); border: 1.5px solid var(--btn-border); font-weight: 600; cursor: pointer;">Close</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         const XML_FILE = "investor-entities.xml";
         const LABELS_FILE = "labels.xml";
@@ -2304,7 +2338,7 @@
         const kycLastname = document.getElementById("kycLastname");
         const kycFirstmiddle = document.getElementById("kycFirstmiddle");
         const kycGender = document.getElementById("kycGender");
-        const kycMaidennameWrapper = document.getElementById("kycMaidennameWrapper");
+
         const kycFatherSpouseType = document.getElementById("kycFatherSpouseType");
         const labelKycFatherSpouse = document.getElementById("labelKycFatherSpouse");
         const kycFatherSpouse = document.getElementById("kycFatherSpouse");
@@ -2805,7 +2839,15 @@
                 "labelKycOfficeType": "kyc_office_type",
                 "labelKycDeliveryStatus": "kyc_delivery_status",
                 "labelKycCoordinates": "kyc_coordinates",
-                "exportFormBtn": "kyc_export_btn"
+                "exportFormBtn": "kyc_export_btn",
+                "importFormBtn": "kyc_import_btn",
+                "exportSuccessModalTitle": "export_success_title",
+                "exportSuccessModalBody": "export_success_body",
+                "lblExportHash": "lbl_export_hash",
+                "lblExportTimestamp": "lbl_export_timestamp",
+                "lblExportCode": "lbl_export_code",
+                "copyAllBtn": "btn_copy_both",
+                "exportSuccessModalOkBtn": "btn_close"
             };
 
             for (const [elemId, labelId] of Object.entries(textMappings)) {
@@ -2983,9 +3025,7 @@
             if (typeof updateFatherSpouseLabel === "function") {
                 updateFatherSpouseLabel();
             }
-            if (typeof updateMaidenNameVisibility === "function") {
-                updateMaidenNameVisibility();
-            }
+
 
             // Translate dynamic contacts add button and WhatsApp consent checkbox
             const addContactBtnLbl = document.getElementById("lblAddContactField");
@@ -3677,17 +3717,7 @@
             }
         }
 
-        function updateMaidenNameVisibility() {
-            if (kycGender && kycMaidennameWrapper) {
-                if (kycGender.value === "female") {
-                    kycMaidennameWrapper.style.display = "block";
-                } else {
-                    kycMaidennameWrapper.style.display = "none";
-                    const input = kycMaidennameWrapper.querySelector("input");
-                    if (input) input.value = "";
-                }
-            }
-        }
+
 
         function updateFatherSpouseLabel() {
             if (!kycFatherSpouseType || !labelKycFatherSpouse) return;
@@ -5122,12 +5152,7 @@
                 });
             }
 
-            // Gender toggle for Maiden Name
-            if (kycGender) {
-                kycGender.addEventListener("change", () => {
-                    updateMaidenNameVisibility();
-                });
-            }
+
 
             // Relationship selection toggle for Father/Spouse name label
             if (kycFatherSpouseType) {
@@ -5850,10 +5875,92 @@
                     exportKycFormAsJson();
                 });
             }
+
+            // Bind Import Button click event
+            const importFormBtn = document.getElementById("importFormBtn");
+            const importFormFile = document.getElementById("importFormFile");
+            if (importFormBtn && importFormFile) {
+                importFormBtn.addEventListener("click", () => {
+                    importFormFile.click();
+                });
+                importFormFile.addEventListener("change", (event) => {
+                    const file = event.target.files[0];
+                    if (!file) return;
+                    
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        try {
+                            const data = JSON.parse(e.target.result);
+                            importKycFormFromJson(data);
+                        } catch (err) {
+                            showToast((t("msg_import_error") || "Error reading or parsing import file: {error}").replace("{error}", err.message));
+                        }
+                        importFormFile.value = "";
+                    };
+                    reader.readAsText(file);
+                });
+            }
+
+            // Bind Export Success Modal controls
+            const exportSuccessModal = document.getElementById("exportSuccessModal");
+            const closeExportSuccessModal = document.getElementById("closeExportSuccessModal");
+            const exportSuccessModalOkBtn = document.getElementById("exportSuccessModalOkBtn");
+            if (closeExportSuccessModal && exportSuccessModal) {
+                closeExportSuccessModal.onclick = () => {
+                    exportSuccessModal.style.display = "none";
+                };
+            }
+            if (exportSuccessModalOkBtn && exportSuccessModal) {
+                exportSuccessModalOkBtn.onclick = () => {
+                    exportSuccessModal.style.display = "none";
+                };
+            }
+        }
+
+        // --- Security and Clipboard Helpers ---
+        async function calculateSha256(text) {
+            const msgUint8 = new TextEncoder().encode(text);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            return hashHex;
+        }
+
+        function copyToClipboard(text, buttonEl) {
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = buttonEl.textContent;
+                buttonEl.textContent = t("msg_copied") || "Copied!";
+                buttonEl.style.background = "#10b981";
+                setTimeout(() => {
+                    buttonEl.textContent = originalText;
+                    buttonEl.style.background = "";
+                }, 2000);
+            }).catch(err => {
+                console.error("Could not copy text: ", err);
+                const textArea = document.createElement("textarea");
+                textArea.value = text;
+                textArea.style.position = "fixed";
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    const originalText = buttonEl.textContent;
+                    buttonEl.textContent = t("msg_copied") || "Copied!";
+                    buttonEl.style.background = "#10b981";
+                    setTimeout(() => {
+                        buttonEl.textContent = originalText;
+                        buttonEl.style.background = "";
+                    }, 2000);
+                } catch (e) {
+                    alert("Copy failed. Please manually select and copy the text.");
+                }
+                document.body.removeChild(textArea);
+            });
         }
 
         // --- Export KYC Form as JSON (with .txt extension) ---
-        function exportKycFormAsJson() {
+        async function exportKycFormAsJson() {
             const form = document.getElementById("kycForm");
             if (!form) return;
 
@@ -6135,7 +6242,6 @@
             values.uploaded_documents = uploadedDocuments;
 
             const exportData = {
-                exportDate: new Date().toISOString(),
                 metadata: {
                     totalFields: totalFields,
                     filledFields: filledFields,
@@ -6153,6 +6259,31 @@
             };
 
             const jsonString = JSON.stringify(exportData, null, 2);
+
+            let hashVal = "";
+            try {
+                hashVal = await calculateSha256(jsonString);
+            } catch (err) {
+                console.error("SHA-256 calculation failed", err);
+                hashVal = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+            }
+
+            const timestampVal = new Date().toISOString();
+            let uniqueCodeVal = "";
+            try {
+                uniqueCodeVal = await calculateSha256(hashVal + timestampVal);
+            } catch (err) {
+                console.error("SHA-256 calculation for unique code failed", err);
+                uniqueCodeVal = hashVal;
+            }
+
+            // Inject security metadata
+            exportData.exportDate = timestampVal;
+            exportData.sha256 = hashVal;
+            exportData.uniqueGenerationCode = uniqueCodeVal;
+            exportData.generationTimestamp = timestampVal;
+
+            const finalJsonString = JSON.stringify(exportData, null, 2);
 
             let clientName = "";
             const lastNameElem = document.getElementById("kycLastname");
@@ -6173,7 +6304,29 @@
             const timeStr = `${pad(now.getHours())}-${pad(now.getMinutes())}-${pad(now.getSeconds())}`;
             const filename = `kyc_form_export${nameSuffix}_${dateStr}_${timeStr}.txt`;
 
-            downloadTxtFile(jsonString, filename);
+            downloadTxtFile(finalJsonString, filename);
+
+            // Display values in the modal
+            const exportSuccessModal = document.getElementById("exportSuccessModal");
+            const exportHashVal = document.getElementById("exportHashVal");
+            const exportTimestampVal = document.getElementById("exportTimestampVal");
+            const exportCodeVal = document.getElementById("exportCodeVal");
+            if (exportHashVal) exportHashVal.value = hashVal;
+            if (exportTimestampVal) exportTimestampVal.value = timestampVal;
+            if (exportCodeVal) exportCodeVal.value = uniqueCodeVal;
+
+            const copyAllBtn = document.getElementById("copyAllBtn");
+            if (copyAllBtn) {
+                copyAllBtn.onclick = () => {
+                    const labelHash = t("lbl_export_hash") || "SHA-256 Integrity Hash";
+                    const labelTime = t("lbl_export_timestamp") || "Timestamp of Generation";
+                    const labelCode = t("lbl_export_code") || "Unique Code of Generation";
+                    const textToCopy = `${labelHash}: ${hashVal}\n${labelTime}: ${timestampVal}\n${labelCode}: ${uniqueCodeVal}`;
+                    copyToClipboard(textToCopy, copyAllBtn);
+                };
+            }
+
+            if (exportSuccessModal) exportSuccessModal.style.display = "block";
         }
 
         function downloadTxtFile(content, filename) {
@@ -6186,6 +6339,243 @@
             a.click();
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
+        }
+
+        function importKycFormFromJson(importedData) {
+            if (!importedData || !importedData.values) {
+                showToast(t("msg_import_invalid") || "Invalid file or incorrect form export format.");
+                return;
+            }
+
+            // 1. Clear dynamic alternative contacts first
+            const container = document.getElementById("dynamicContactsContainer");
+            if (container) {
+                container.innerHTML = "";
+            }
+
+            // 2. Identify and restore dynamic contacts
+            const dynamicContacts = {};
+            for (const key in importedData.values) {
+                if (key.startsWith("dynamicContact_")) {
+                    const parts = key.split("_");
+                    const index = parseInt(parts[1], 10);
+                    const type = parts[2]; // 'type' or 'value'
+                    if (!dynamicContacts[index]) {
+                        dynamicContacts[index] = {};
+                    }
+                    dynamicContacts[index][type] = importedData.values[key];
+                }
+            }
+
+            // Sort dynamic contact indexes and create rows
+            const sortedIndices = Object.keys(dynamicContacts).map(Number).sort((a, b) => a - b);
+            sortedIndices.forEach(index => {
+                const contact = dynamicContacts[index];
+                if (typeof createContactRow === "function") {
+                    createContactRow();
+                    const rows = container.querySelectorAll(".dynamic-contact-row");
+                    const lastRow = rows[rows.length - 1];
+                    if (lastRow) {
+                        const selectEl = lastRow.querySelector(".contact-type-select");
+                        const inputEl = lastRow.querySelector(".contact-value-input");
+                        if (selectEl && contact.type !== undefined) {
+                            selectEl.value = contact.type;
+                            selectEl.dispatchEvent(new Event("change"));
+                        }
+                        if (inputEl && contact.value !== undefined) {
+                            inputEl.value = contact.value;
+                            inputEl.dispatchEvent(new Event("input"));
+                            inputEl.dispatchEvent(new Event("change"));
+                        }
+                    }
+                }
+            });
+
+            // 3. Clear permanent fields sync state temporarily so we can write to them
+            const kycSameAddress = document.getElementById("kycSameAddress");
+            if (kycSameAddress) {
+                kycSameAddress.checked = false;
+                kycSameAddress.dispatchEvent(new Event("change"));
+            }
+
+            // 4. Dependent address population sequence helper
+            function importAddressBlock(type, prefix) {
+                const pincodeEl = document.getElementById(`${prefix}Pincode`);
+                const showAllEl = document.getElementById(type === "corr" ? "kycShowAllStates" : "kycPermShowAllStates");
+                const stateEl = document.getElementById(`${prefix}State`);
+                const districtEl = document.getElementById(`${prefix}District`);
+                const cityEl = document.getElementById(`${prefix}CityVillage`);
+                const postOfficeEl = document.getElementById(`${prefix}CityTown`);
+
+                if (pincodeEl && `${prefix}Pincode` in importedData.values) {
+                    pincodeEl.value = importedData.values[`${prefix}Pincode`];
+                }
+                if (showAllEl && (type === "corr" ? "kycShowAllStates" : "kycPermShowAllStates") in importedData.values) {
+                    showAllEl.checked = (importedData.values[showAllEl.id] === true || importedData.values[showAllEl.id] === "true");
+                }
+                
+                // Trigger pincode input event to load options in dropdowns
+                if (pincodeEl) pincodeEl.dispatchEvent(new Event("input"));
+                
+                // Now set State and trigger change to load District options
+                if (stateEl && `${prefix}State` in importedData.values) {
+                    stateEl.value = importedData.values[`${prefix}State`];
+                    stateEl.dispatchEvent(new Event("change"));
+                }
+                
+                // Now set District and trigger change to load City/PostOffice options
+                if (districtEl && `${prefix}District` in importedData.values) {
+                    districtEl.value = importedData.values[`${prefix}District`];
+                    districtEl.dispatchEvent(new Event("change"));
+                }
+                
+                // Now set City and PostOffice
+                if (cityEl && `${prefix}CityVillage` in importedData.values) {
+                    cityEl.value = importedData.values[`${prefix}CityVillage`];
+                    cityEl.dispatchEvent(new Event("change"));
+                }
+                if (postOfficeEl && `${prefix}CityTown` in importedData.values) {
+                    postOfficeEl.value = importedData.values[`${prefix}CityTown`];
+                    postOfficeEl.dispatchEvent(new Event("change"));
+                }
+            }
+
+            // Populate both blocks
+            importAddressBlock("corr", "kyc");
+            importAddressBlock("perm", "kycPerm");
+
+            // 5. Populate all other standard elements in the form
+            for (const key in importedData.values) {
+                // Skip special keys we already handled, or structured keys
+                if (["dynamicContact_", "uploaded_documents", "address", "permanent_address", "name", "kycSameAddress"].some(s => key.startsWith(s))) {
+                    continue;
+                }
+                // Skip address dropdown elements we manually handled in sequence
+                if (["kycPincode", "kycShowAllStates", "kycState", "kycDistrict", "kycCityVillage", "kycCityTown",
+                     "kycPermPincode", "kycPermShowAllStates", "kycPermState", "kycPermDistrict", "kycPermCityVillage", "kycPermCityTown"].includes(key)) {
+                    continue;
+                }
+
+                const elem = document.getElementById(key);
+                if (elem) {
+                    const type = elem.type ? elem.type.toLowerCase() : "";
+
+                    if (type === "checkbox" || type === "radio") {
+                        elem.checked = (importedData.values[key] === true || importedData.values[key] === "true");
+                        elem.dispatchEvent(new Event("change"));
+                    } else if (type === "file") {
+                        // Skip raw file inputs
+                    } else {
+                        elem.value = importedData.values[key];
+                        elem.dispatchEvent(new Event("input"));
+                        elem.dispatchEvent(new Event("change"));
+                    }
+                }
+            }
+
+            // 6. Restore uploaded documents and file lists
+            if (typeof ocrFiles !== "undefined") {
+                ocrFiles.photo = [];
+                ocrFiles.pan = [];
+                ocrFiles.ovd = [];
+                ocrFiles.deemed = [];
+                ocrFiles.misc = [];
+
+                const photoImg = document.getElementById("photoImg");
+                if (photoImg) {
+                    photoImg.removeAttribute("src");
+                    photoImg.style.display = "none";
+                }
+
+                if (importedData.uploaded_documents) {
+                    const docs = importedData.uploaded_documents;
+                    
+                    // Photograph
+                    if (docs.photograph && docs.photograph.length > 0) {
+                        const p = docs.photograph[0];
+                        ocrFiles.photo = [{
+                            fileData: p.base64,
+                            fileType: p.fileType,
+                            fileName: p.fileName
+                        }];
+                        if (photoImg) {
+                            photoImg.src = p.dataUrl || `data:${p.fileType};base64,${p.base64}`;
+                            photoImg.style.display = "block";
+                        }
+                    }
+
+                    // OCR Files (pan, ovd, deemed, misc)
+                    ["pan", "ovd", "deemed", "misc"].forEach(category => {
+                        if (docs[category] && docs[category].length > 0) {
+                            ocrFiles[category] = docs[category].map(f => ({
+                                fileData: f.base64,
+                                fileType: f.fileType,
+                                fileName: f.fileName
+                            }));
+                        }
+                        if (typeof renderOcrPreviews === "function") {
+                            renderOcrPreviews(category);
+                        }
+                    });
+                }
+                if (typeof updateOcrButtonVisibility === "function") {
+                    updateOcrButtonVisibility();
+                }
+            }
+
+            // 7. Restore Address Line Visibility Wrappers
+            ["corr", "perm"].forEach(type => {
+                const prefix = type === "corr" ? "kyc" : "kycPerm";
+                const val2 = document.getElementById(`${prefix}AddressLine2`)?.value;
+                const val3 = document.getElementById(`${prefix}AddressLine3`)?.value;
+                const val4 = document.getElementById(`${prefix}AddressLine4`)?.value;
+
+                const wrap2 = document.getElementById(`${prefix}AddressLine2Wrapper`);
+                const wrap3 = document.getElementById(`${prefix}AddressLine3Wrapper`);
+                const wrap4 = document.getElementById(`${prefix}AddressLine4Wrapper`);
+
+                if (wrap2) wrap2.style.display = val2 ? "block" : "none";
+                if (wrap3) wrap3.style.display = val3 ? "block" : "none";
+                if (wrap4) wrap4.style.display = val4 ? "block" : "none";
+                
+                if (typeof updateAddressLineFields === "function") {
+                    updateAddressLineFields(type);
+                }
+            });
+
+            // 8. Re-evaluate sameAddress state
+            if (kycSameAddress && "kycSameAddress" in importedData.values) {
+                kycSameAddress.checked = (importedData.values["kycSameAddress"] === true || importedData.values["kycSameAddress"] === "true");
+                kycSameAddress.dispatchEvent(new Event("change"));
+            }
+
+            // 9. Re-initialize dependent layout & validation triggers
+            if (typeof updateOvdState === "function") updateOvdState();
+            if (typeof updatePoaDetails === "function") updatePoaDetails();
+            if (typeof updatePermPoaDetails === "function") updatePermPoaDetails();
+            
+            const kycRelOvdSubmitted = document.getElementById("kycRelOvdSubmitted");
+            if (kycRelOvdSubmitted) kycRelOvdSubmitted.dispatchEvent(new Event("change"));
+            
+            const kycFatherSpouseType = document.getElementById("kycFatherSpouseType");
+            if (kycFatherSpouseType) kycFatherSpouseType.dispatchEvent(new Event("change"));
+
+            const kycTaxOutsideCheckbox = document.getElementById("kycTaxOutsideCheckbox");
+            if (kycTaxOutsideCheckbox) kycTaxOutsideCheckbox.dispatchEvent(new Event("change"));
+
+            if (typeof updatePostalMetadata === "function") {
+                updatePostalMetadata("corr");
+                updatePostalMetadata("perm");
+            }
+
+            if (typeof updatePANOutline === "function") updatePANOutline();
+            if (typeof updatePANMessage === "function") updatePANMessage();
+
+            // Run model default state classifications
+            if (typeof updateTaxResidencyVisibility === "function") updateTaxResidencyVisibility();
+            if (typeof updateFatherSpouseLabel === "function") updateFatherSpouseLabel();
+
+            showToast(t("msg_import_success") || "Form data imported successfully!", "success");
         }
 
         // --- OCR and Document Upload Integration ---
@@ -6979,6 +7369,10 @@ CRITICAL INSTRUCTIONS:
                 }
                 if (e.target === ocrSuccessModal) {
                     closeOcrSuccess();
+                }
+                const exportSuccessModal = document.getElementById("exportSuccessModal");
+                if (exportSuccessModal && e.target === exportSuccessModal) {
+                    exportSuccessModal.style.display = "none";
                 }
             });
 
