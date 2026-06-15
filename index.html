@@ -2068,6 +2068,9 @@
                         <option value="yes" id="optKycPepYes">Politically Exposed Person (PEP)</option>
                         <option value="related" id="optKycPepRelated">Related to a Politically Exposed Person (PEP)</option>
                     </select>
+                    <div id="noteKycPep" style="font-size: 12px; color: var(--muted); margin-top: 8px; line-height: 1.45;">
+                        Note: Politically Exposed Persons (PEPs) are individuals who are or have been entrusted with prominent public functions by a foreign country or domestically, such as Heads of State/Governments, senior politicians, senior government/judicial/military officers, senior executives of state-owned corporations, and important political party officials. This status also applies to their immediate family members and close associates.
+                    </div>
                 </div>
                 
                 <div class="field">
@@ -2082,6 +2085,7 @@
                     <label for="kycCommodityCapacity" id="labelKycCommodityCapacity">In what capacity do you trade commodities?</label>
                     <select id="kycCommodityCapacity">
                         <option value="" id="optKycCommodityPlaceholder">-- Select Capacity (if applicable) --</option>
+                        <option value="not_trading" id="optKycCommNotTrading">Not Applicable / Do not trade in commodities</option>
                         <option value="farmer" id="optKycCommFarmer">Farmer / Farmer Producer Organisation</option>
                         <option value="vcp" id="optKycCommVcp">Value Chain Participant</option>
                         <option value="others" id="optKycCommOthers">Others</option>
@@ -2783,6 +2787,7 @@
                 "labelKycNetworth": "kyc_networth",
                 "labelKycOccupation": "kyc_occupation",
                 "labelKycPep": "kyc_pep",
+                "noteKycPep": "kyc_pep_note",
                 "labelKycRddMode": "kyc_rdd_mode",
                 "labelKycCommodityCapacity": "kyc_commodity_capacity",
                 "kycSecCTitle": "kyc_sec_c_title",
@@ -2878,6 +2883,7 @@
                 "optKycPepRelated": "kyc_pep_related",
                 "optKycRddElectronic": "kyc_rdd_electronic",
                 "optKycRddPhysical": "kyc_rdd_physical",
+                "optKycCommNotTrading": "kyc_comm_not_trading",
                 "optKycCommFarmer": "kyc_comm_farmer",
                 "optKycCommVcp": "kyc_comm_vcp",
                 "optKycCommOthers": "kyc_comm_others",

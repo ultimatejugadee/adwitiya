@@ -1047,6 +1047,10 @@
       <en>Not Applicable / Neither</en>
       <hi>लागू नहीं / दोनों में से कोई नहीं</hi>
     </label>
+    <label id="kyc_pep_note">
+      <en>Note: Politically Exposed Persons (PEPs) are individuals who are or have been entrusted with prominent public functions by a foreign country or domestically, such as Heads of State/Governments, senior politicians, senior government/judicial/military officers, senior executives of state-owned corporations, and important political party officials. This status also applies to their immediate family members and close associates.</en>
+      <hi>नोट: राजनीतिक रूप से उजागर व्यक्ति (PEP) वे व्यक्ति हैं जिन्हें किसी विदेशी देश या घरेलू स्तर पर प्रमुख सार्वजनिक कार्य सौंपे गए हैं या सौंपे गए थे, जैसे कि राज्य/सरकार के प्रमुख, वरिष्ठ राजनीतिज्ञ, वरिष्ठ सरकारी/न्यायिक/सैन्य अधिकारी, राज्य के स्वामित्व वाले निगमों के वरिष्ठ कार्यकारी और महत्वपूर्ण राजनीतिक दल के पदाधिकारी। यह स्थिति उनके करीबी पारिवारिक सदस्यों और करीबी सहयोगियों पर भी लागू होती है।</hi>
+    </label>
     
     <label id="kyc_rdd_mode">
       <en>Mode to receive RDD &amp; Documents*</en>
@@ -1064,6 +1068,10 @@
     <label id="kyc_commodity_capacity">
       <en>In what capacity do you trade commodities?</en>
       <hi>आप किस क्षमता में कमोडिटीज का व्यापार करते हैं?</hi>
+    </label>
+    <label id="kyc_comm_not_trading">
+      <en>Not Applicable / Do not trade in commodities</en>
+      <hi>लागू नहीं / कमोडिटीज में व्यापार नहीं करते</hi>
     </label>
     <label id="kyc_comm_farmer">
       <en>Farmer / Farmer Producer Organisation</en>
