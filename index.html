@@ -1309,11 +1309,13 @@
                     <div class="info-box">
                         <h3 id="headingEntityDescription">Entity Type Description</h3>
                         <p id="entityDescription">Select an entity type to see its classification meaning.</p>
+                        <div id="entityDetails" class="registration" style="margin-top: 12px; display: none;"></div>
                     </div>
 
                     <div class="info-box">
                         <h3 id="headingSubtypeDescription">Subtype Description</h3>
                         <p id="subtypeDescription">Select a subcategory to see details.</p>
+                        <div id="registration" class="registration" style="margin-top: 12px; display: none;"></div>
                     </div>
                 </div>
 
@@ -2329,6 +2331,7 @@
         const autocomplete = document.getElementById("autocomplete");
         const subtypeSelect = document.getElementById("subtypeSelect");
         const entityDescription = document.getElementById("entityDescription");
+        const entityDetails = document.getElementById("entityDetails");
         const subtypeDescription = document.getElementById("subtypeDescription");
         const registration = document.getElementById("registration");
         const dataStatus = document.getElementById("dataStatus");
@@ -2416,6 +2419,7 @@
         let linkedRefDocDistrictPerm = null;
 
         let panCategories = {};
+        let ckycCategories = {};
         let entityTypes = [];
         let selectedEntity = null;
         let selectedSubtype = null;
@@ -2426,6 +2430,7 @@
         let translations = {
             interface: {},
             panCategories: {},
+            ckycCategories: {},
             groups: {},
             entityTypes: {},
             subtypes: {}
@@ -2528,6 +2533,25 @@
             }
             const localCat = panCategories[code];
             return localCat ? localCat.description : "";
+        }
+
+        function getCkycCategoryLabel(code) {
+            const cleanCode = (code || "").trim();
+            const translation = translations.ckycCategories[cleanCode];
+            if (translation && translation.label[currentLang]) {
+                return translation.label[currentLang];
+            }
+            const localCat = ckycCategories[cleanCode];
+            return localCat ? localCat.label : cleanCode;
+        }
+
+        function formatCkycCodes(codes) {
+            if (!codes || !codes.length) return "";
+            return codes.map(c => {
+                const code = c.trim();
+                const label = getCkycCategoryLabel(code);
+                return label && label !== code ? `${code} (${label})` : code;
+            }).join(", ");
         }
 
         function getGroupName(id, fallbackName) {
@@ -3247,6 +3271,20 @@
                     };
                 });
 
+                xml.querySelectorAll("ckycCategories > ckycCategory").forEach(node => {
+                    const code = attr(node, "code");
+                    translations.ckycCategories[code] = {
+                        label: {
+                            en: queryText(node, "label > en"),
+                            hi: queryText(node, "label > hi")
+                        },
+                        description: {
+                            en: queryText(node, "description > en"),
+                            hi: queryText(node, "description > hi")
+                        }
+                    };
+                });
+
                 xml.querySelectorAll("groups > group").forEach(node => {
                     const id = attr(node, "id");
                     translations.groups[id] = {
@@ -3424,6 +3462,13 @@
                     };
                 });
 
+                xml.querySelectorAll("ckycCategory").forEach(node => {
+                    ckycCategories[attr(node, "code")] = {
+                        label: attr(node, "label"),
+                        description: node.textContent.trim()
+                    };
+                });
+
                 entityTypes = [];
 
                 xml.querySelectorAll("group").forEach(group => {
@@ -3438,6 +3483,7 @@
                             name: attr(entityNode, "name"),
                             legalStatus: attr(entityNode, "legalStatus"),
                             panChars: parseCSV(attr(entityNode, "panChars")),
+                            ckycCodes: parseCSV(attr(entityNode, "ckycCode")),
                             aliases: parseCSV(txt(entityNode, "aliases")),
                             description: txt(entityNode, "description"),
                             subtypes: []
@@ -3448,6 +3494,7 @@
                                 id: attr(subNode, "id"),
                                 name: attr(subNode, "name"),
                                 panChars: parseCSV(attr(subNode, "panChars")) || entity.panChars,
+                                ckycCodes: parseCSV(attr(subNode, "ckycCode")) || entity.ckycCodes,
                                 registration: attr(subNode, "registration"),
                                 description: txt(subNode, "description"),
                                 keywords: parseCSV(txt(subNode, "keywords"))
@@ -3488,6 +3535,8 @@
                     const rawStatusHi = getEntityLegalStatus(entity.id, "");
                     const rawDescEn = entity.description;
                     const rawDescHi = getEntityDescription(entity.id, "");
+                    const ckycCodesStr = (entity.ckycCodes || []).join(" ");
+                    const ckycLabelsStr = (entity.ckycCodes || []).map(c => getCkycCategoryLabel(c)).join(" ");
 
                     rows.push({
                         entity,
@@ -3498,6 +3547,9 @@
                             rawNameEn, rawNameHi,
                             rawStatusEn, rawStatusHi,
                             rawDescEn, rawDescHi,
+                            entity.id,
+                            ckycCodesStr,
+                            ckycLabelsStr,
                             entity.aliases.join(" ")
                         ].join(" ").toLowerCase()
                     });
@@ -3513,6 +3565,8 @@
                         const rawDescHi = getSubtypeDescription(subtype.id, "");
                         const rawRegEn = subtype.registration;
                         const rawRegHi = getSubtypeRegistration(subtype.id, "");
+                        const subCkycCodesStr = (subtype.ckycCodes || []).join(" ");
+                        const subCkycLabelsStr = (subtype.ckycCodes || []).map(c => getCkycCategoryLabel(c)).join(" ");
 
                         rows.push({
                             entity,
@@ -3522,6 +3576,9 @@
                                 rawNameEn, rawNameHi,
                                 rawDescEn, rawDescHi,
                                 rawRegEn, rawRegHi,
+                                subtype.id,
+                                subCkycCodesStr,
+                                subCkycLabelsStr,
                                 subtype.keywords.join(" ")
                             ].join(" ").toLowerCase()
                         });
@@ -3580,13 +3637,17 @@
                 const descText = highlight(rawDesc, highlightQuery);
                 const descStyle = descMatches ? ' style="max-height: 200px; opacity: 1; margin-top: 5px;"' : '';
 
+                const ckycBadges = row.isParent 
+                    ? (row.entity.ckycCodes && row.entity.ckycCodes.length ? ` <span style="font-size: 11px; opacity: 0.8; font-weight: normal; margin-left: 6px; padding: 2px 6px; border-radius: 6px; background: var(--btn-bg); border: 1px solid var(--btn-border);">CKYC: ${row.entity.ckycCodes.join(", ")}</span>` : "")
+                    : (row.subtype.ckycCodes && row.subtype.ckycCodes.length ? ` <span style="font-size: 11px; opacity: 0.8; font-weight: normal; margin-left: 6px; padding: 2px 6px; border-radius: 6px; background: var(--btn-bg); border: 1px solid var(--btn-border);">CKYC: ${row.subtype.ckycCodes.join(", ")}</span>` : "");
+
                 if (row.isParent) {
                     div.innerHTML = `
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <div class="path">
                           ${highlight(rawGroup, highlightQuery)}
                           <span>▸</span>
-                          ${highlight(rawName, highlightQuery)}
+                          ${highlight(rawName, highlightQuery)}${ckycBadges}
                         </div>
                         <div class="info-icon" title="${t("view_desc_tooltip")}">i</div>
                     </div>
@@ -3596,7 +3657,7 @@
                     div.innerHTML = `
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <div class="path">
-                          ${highlight(rawName, highlightQuery)}
+                          ${highlight(rawName, highlightQuery)}${ckycBadges}
                         </div>
                         <div class="info-icon" title="${t("view_desc_tooltip")}">i</div>
                     </div>
@@ -3609,7 +3670,20 @@
                     e.preventDefault();
                     e.stopPropagation();
                     const modal = document.getElementById("descModal");
-                    document.getElementById("modalDescText").textContent = rawDesc || "No description available.";
+                    const modalUniqueId = row.isParent ? row.entity.id : row.subtype.id;
+                    const modalCkycCodes = row.isParent ? row.entity.ckycCodes : row.subtype.ckycCodes;
+                    const modalCkycFormatted = formatCkycCodes(modalCkycCodes);
+                    const catCodeLabel = t("lbl_category_code") || "Unique Category Code";
+                    const ckycCodeLabel = t("lbl_ckyc_code") || "CKYC Constitution Code";
+
+                    document.getElementById("modalDescText").innerHTML = `
+                        <div style="margin-bottom: 12px; font-weight: 600; font-size: 16px; color: var(--accent);">${row.isParent ? rawName : rawName}</div>
+                        <div style="margin-bottom: 14px; font-size: 14px; line-height: 1.6;">${rawDesc || "No description available."}</div>
+                        <div style="padding-top: 10px; border-top: 1px solid var(--box-border); font-size: 13px; color: var(--muted); line-height: 1.6;">
+                            <div><strong>${catCodeLabel}:</strong> <code>${modalUniqueId}</code></div>
+                            ${modalCkycFormatted ? `<div><strong>${ckycCodeLabel}:</strong> ${modalCkycFormatted}</div>` : ""}
+                        </div>
+                    `;
                     modal.style.display = "block";
                 });
 
@@ -3743,17 +3817,39 @@
         function updateDescriptions() {
             if (!selectedEntity) {
                 entityDescription.textContent = t("desc_entity_default");
+                if (entityDetails) {
+                    entityDetails.innerHTML = "";
+                    entityDetails.style.display = "none";
+                }
                 subtypeDescription.textContent = t("desc_subtype_default");
-                if (registration) registration.innerHTML = "";
+                if (registration) {
+                    registration.innerHTML = "";
+                    registration.style.display = "none";
+                }
                 updateTaxResidencyVisibility();
                 return;
             }
 
             entityDescription.textContent = getEntityDescription(selectedEntity.id, selectedEntity.description);
 
+            if (entityDetails) {
+                const catCodeLabel = t("lbl_category_code") || "Unique Category Code";
+                const ckycCodeLabel = t("lbl_ckyc_code") || "CKYC Constitution Code";
+                const ckycFormatted = formatCkycCodes(selectedEntity.ckycCodes);
+
+                entityDetails.innerHTML = `
+                    <strong>${catCodeLabel}:</strong> <code>${selectedEntity.id}</code>
+                    ${ckycFormatted ? `<br><strong>${ckycCodeLabel}:</strong> ${ckycFormatted}` : ""}
+                `;
+                entityDetails.style.display = "block";
+            }
+
             if (!selectedSubtype) {
                 subtypeDescription.textContent = t("desc_subtype_default");
-                if (registration) registration.innerHTML = "";
+                if (registration) {
+                    registration.innerHTML = "";
+                    registration.style.display = "none";
+                }
                 updateTaxResidencyVisibility();
                 return;
             }
@@ -3761,15 +3857,21 @@
             subtypeDescription.textContent = getSubtypeDescription(selectedSubtype.id, selectedSubtype.description);
             
             if (registration) {
-                const regLabel = t("reg_identifier");
-                const panLabel = t("reg_pan_mapping");
+                const catCodeLabel = t("lbl_category_code") || "Unique Category Code";
+                const ckycCodeLabel = t("lbl_ckyc_code") || "CKYC Constitution Code";
+                const regLabel = t("reg_identifier") || "Usual identifier / registration";
+                const panLabel = t("reg_pan_mapping") || "PAN Category Mapping";
                 const regVal = getSubtypeRegistration(selectedSubtype.id, selectedSubtype.registration) || "PAN / relevant registration";
                 const panVal = selectedSubtype.panChars.join(" / ");
+                const ckycFormatted = formatCkycCodes(selectedSubtype.ckycCodes);
                 
                 registration.innerHTML = `
-                    <strong>${regLabel}:</strong> ${regVal}
+                    <strong>${catCodeLabel}:</strong> <code>${selectedSubtype.id}</code>
+                    ${ckycFormatted ? `<br><strong>${ckycCodeLabel}:</strong> ${ckycFormatted}` : ""}
+                    <br><strong>${regLabel}:</strong> ${regVal}
                     <br><strong>${panLabel}:</strong> ${panVal}
                 `;
+                registration.style.display = "block";
             }
             updateTaxResidencyVisibility();
         }

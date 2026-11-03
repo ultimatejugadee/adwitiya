@@ -14,10 +14,40 @@
     <panCategory code="J" label="Artificial Juridical Person">Used for artificial juridical persons and statutory bodies not otherwise covered.</panCategory>
   </panCategories>
 
+  <ckycCategories>
+    <ckycCategory code="01" label="Individual">Used for individual investors / natural persons (Resident Individual, NRI, Foreign National, PIO/OCI, Sole Proprietorship in individual capacity).</ckycCategory>
+    <ckycCategory code="A" label="Sole Proprietorship">Used for Sole Proprietorship entities and businesses.</ckycCategory>
+    <ckycCategory code="B" label="Partnership Firm">Used for Partnership Firms registered or unregistered under the Indian Partnership Act, 1932.</ckycCategory>
+    <ckycCategory code="C" label="HUF (Hindu Undivided Family)">Used for Hindu Undivided Families.</ckycCategory>
+    <ckycCategory code="D" label="Private Limited Company">Used for Private Limited Companies incorporated under the Companies Act.</ckycCategory>
+    <ckycCategory code="E" label="Public Limited Company">Used for Public Limited Companies and listed corporate bodies.</ckycCategory>
+    <ckycCategory code="F" label="Society">Used for Societies registered under the Societies Registration Act or State Acts.</ckycCategory>
+    <ckycCategory code="G" label="Association of Persons (AOP) / Body of Individuals (BOI)">Used for Association of Persons and Body of Individuals.</ckycCategory>
+    <ckycCategory code="H" label="Trust">Used for Public, Private, Religious, Charitable, or Investment Trusts.</ckycCategory>
+    <ckycCategory code="I" label="Liquidator">Used for Liquidators appointed by court or statutory authorities.</ckycCategory>
+    <ckycCategory code="J" label="Limited Liability Partnership (LLP)">Used for Limited Liability Partnerships registered under the LLP Act, 2008.</ckycCategory>
+    <ckycCategory code="K" label="Artificial Juridical Person">Used for Artificial Juridical Persons and statutory corporations.</ckycCategory>
+    <ckycCategory code="L" label="Public Sector Bank / Financial Institution">Used for Public Sector Banks, Commercial Banks, and Financial Institutions.</ckycCategory>
+    <ckycCategory code="M" label="Section 8 Company">Used for Not-for-Profit / Section 8 Companies licensed under Companies Act.</ckycCategory>
+    <ckycCategory code="N" label="Central / State Government Department or Agency">Used for Central/State Government departments, ministries, and statutory bodies.</ckycCategory>
+    <ckycCategory code="O" label="Mutual Fund">Used for SEBI-registered Mutual Funds and Schemes.</ckycCategory>
+    <ckycCategory code="P" label="Foreign Portfolio Investor (FPI)">Used for SEBI-registered Foreign Portfolio Investors (Category I &amp; II).</ckycCategory>
+    <ckycCategory code="Q" label="Foreign Venture Capital Investor (FVCI)">Used for SEBI-registered Foreign Venture Capital Investors.</ckycCategory>
+    <ckycCategory code="R" label="Non-Banking Financial Company (NBFC)">Used for Non-Banking Financial Companies registered with RBI.</ckycCategory>
+    <ckycCategory code="S" label="Insurance Company">Used for Insurance and Reinsurance Companies regulated by IRDAI.</ckycCategory>
+    <ckycCategory code="T" label="Asset Reconstruction Company (ARC)">Used for Asset Reconstruction Companies registered with RBI.</ckycCategory>
+    <ckycCategory code="U" label="Sovereign Wealth Fund (SWF)">Used for Sovereign Wealth Funds and government-backed foreign funds.</ckycCategory>
+    <ckycCategory code="V" label="University / Educational Institution / Endowment">Used for Universities, Educational Institutions, and University-related endowments.</ckycCategory>
+    <ckycCategory code="W" label="Unincorporated Association / Body of Individuals">Used for Unincorporated associations and informal bodies.</ckycCategory>
+    <ckycCategory code="X" label="International Organisation / Foreign Embassy / Consular">Used for Multilateral Organizations, UN agencies, Foreign Embassies, and Consulates.</ckycCategory>
+    <ckycCategory code="Y" label="Local Authority">Used for Local Authorities, Municipal Corporations, Municipalities, and Panchayats.</ckycCategory>
+    <ckycCategory code="Z" label="Others">Used for other legal entities and foreign offices (Branch, Liaison, Project Offices).</ckycCategory>
+  </ckycCategories>
+
   <groups>
 
     <group id="individuals" name="Individuals and Personal Statuses">
-      <entityType id="individual" name="Individual" legalStatus="Natural Person" panChars="P">
+      <entityType id="individual" name="Individual" legalStatus="Natural Person" panChars="P" ckycCode="01">
         <aliases>person,natural person,individual,human,resident,non resident,NRI,OCI,sole proprietor,proprietorship</aliases>
         <description>An individual is a natural person. Tax residence, citizenship status, and sole proprietorship status do not create a separate PAN category; the PAN category remains P. An account in the name of a sole proprietorship cannot be opened because it is not a separate legal entity and can be opened only in the name of the proprietor’s individual name.
 
@@ -27,31 +57,31 @@ You can link the sole proprietorship’s bank account to this individual account
 
 </description>
         <subtypes>
-          <subtype id="rnor" name="Resident but Not Ordinarily Resident (RNOR)" panChars="P" registration="Aadhaar / PAN / Passport">
+          <subtype id="rnor" name="Resident but Not Ordinarily Resident (RNOR)" panChars="P" ckycCode="01" registration="Aadhaar / PAN / Passport">
             <description>Individual tax residential status for a person who is resident but not ordinarily resident in India.</description>
             <keywords>RNOR,not ordinarily resident,resident individual,person</keywords>
           </subtype>
-          <subtype id="nr" name="Non-Resident Individual (NR) / Non Resident Indian (NRI)" panChars="P" registration="Passport / Visa / OCI Card / Tax Residency Certificate (TRC)">
+          <subtype id="nr" name="Non-Resident Individual (NR) / Non Resident Indian (NRI)" panChars="P" ckycCode="01" registration="Passport / Visa / OCI Card / Tax Residency Certificate (TRC)">
             <description>A person of Indian origin or Indian citizen residing outside India who is non-resident for Indian tax purposes. Only income earned or received in India is taxable. Differs from residents (ROR/RNOR) as foreign-sourced income is tax-exempt in India. Unique Identifier: Passport (Indian or Foreign), Visa, OCI Card, or Tax Residency Certificate (TRC).</description>
             <keywords>non resident,NRI,foreign individual,passport,TRC,non resident indian,foreign resident,individual</keywords>
           </subtype>
-          <subtype id="ftr" name="Foreign Tax Resident" panChars="P" registration="Tax Identification Number (TIN) / Tax Residency Certificate (TRC)">
+          <subtype id="ftr" name="Foreign Tax Resident" panChars="P" ckycCode="01" registration="Tax Identification Number (TIN) / Tax Residency Certificate (TRC)">
             <description>An individual who is a resident of a foreign country for tax purposes under FATCA/CRS regulations.</description>
             <keywords>foreign tax resident,tax resident outside India,FATCA,CRS,TRC,TIN</keywords>
           </subtype>
-          <subtype id="sole-proprietorship" name="Sole Proprietorship" panChars="P" registration="GSTIN / Udyam / Shop and Establishment Registration">
-            <description>A business carried on by an individual proprietor. PAN is generally the individual's PAN and therefore category P.</description>
+          <subtype id="sole-proprietorship" name="Sole Proprietorship" panChars="P" ckycCode="01, A" registration="GSTIN / Udyam / Shop and Establishment Registration">
+            <description>A business carried on by an individual proprietor. PAN is generally the individual's PAN and therefore category P. For CKYC, Individual accounts use code 01 while Legal Entity / business registrations use code A.</description>
             <keywords>sole prop,proprietor,proprietorship,individual business,shop,udyam,GSTIN</keywords>
           </subtype>
-          <subtype id="oci" name="Overseas Citizen of India (OCI) / Person of Indian Origin (PIO)" panChars="P" registration="OCI Card / PIO Card Number">
+          <subtype id="oci" name="Overseas Citizen of India (OCI) / Person of Indian Origin (PIO)" panChars="P" ckycCode="01" registration="OCI Card / PIO Card Number">
             <description>A foreign citizen of Indian origin (except Pakistan/Bangladesh) holding OCI/PIO status. Differs from other foreign nationals as they enjoy lifetime entry/stay rights and broad economic/investment privileges in India. Unique Identifier: OCI Card Number or PIO Card Number.</description>
             <keywords>OCI,overseas citizen,person,individual,foreign citizen,PIO,person of indian origin,card</keywords>
           </subtype>
-          <subtype id="resident-individual" name="Resident Individual / Resident and Ordinarily Resident (ROR)" panChars="P" registration="Aadhaar / PAN / Passport">
+          <subtype id="resident-individual" name="Resident Individual / Resident and Ordinarily Resident (ROR)" panChars="P" ckycCode="01" registration="Aadhaar / PAN / Passport">
             <description>A natural person residing in India, who meets the tax residency criteria of being resident and ordinarily resident in India (ROR). Unlike RNOR and NR, they are taxable in India on all worldwide income. Unique Identifier: Aadhaar, PAN, or Indian Passport.</description>
             <keywords>resident individual,resident,individual,person,resident ordinarily resident,ROR,tax resident</keywords>
           </subtype>
-          <subtype id="foreign-national" name="Foreign National" panChars="P" registration="Passport / Visa / Tax Residency Certificate">
+          <subtype id="foreign-national" name="Foreign National" panChars="P" ckycCode="01" registration="Passport / Visa / Tax Residency Certificate">
             <description>A foreign citizen who is not an OCI or PIO holder.</description>
             <keywords>foreign national,foreigner,foreign citizen,passport,visa</keywords>
           </subtype>
@@ -60,11 +90,11 @@ You can link the sole proprietorship’s bank account to this individual account
     </group>
 
     <group id="huf" name="Family and Traditional Legal Forms">
-      <entityType id="huf" name="Hindu Undivided Family" legalStatus="HUF" panChars="H">
+      <entityType id="huf" name="Hindu Undivided Family" legalStatus="HUF" panChars="H" ckycCode="C">
         <aliases>HUF,hindu undivided family,karta,family entity</aliases>
         <description>A Hindu Undivided Family is a separate taxable unit recognized under Indian tax law and identified by PAN category H.</description>
         <subtypes>
-          <subtype id="huf-standard" name="Hindu Undivided Family (HUF)" panChars="H" registration="HUF Deed / PAN">
+          <subtype id="huf-standard" name="Hindu Undivided Family (HUF)" panChars="H" ckycCode="C" registration="HUF Deed / PAN">
             <description>Family unit consisting of lineal descendants and managed by the karta.</description>
             <keywords>HUF,karta,coparcenary,family,deed</keywords>
           </subtype>
@@ -73,31 +103,31 @@ You can link the sole proprietorship’s bank account to this individual account
     </group>
 
     <group id="companies" name="Companies and Corporate Bodies">
-      <entityType id="company" name="Company" legalStatus="Company / Corporate Body" panChars="C">
+      <entityType id="company" name="Company" legalStatus="Company / Corporate Body" panChars="C" ckycCode="D, E">
         <aliases>company,corporate,body corporate,limited company,private limited,public limited,corporation,CIN,foreign company</aliases>
         <description>A company is a corporate legal person. In PAN classification, companies are generally mapped to fourth character C, including many regulated corporate investors.</description>
         <subtypes>
-          <subtype id="domestic-company" name="Domestic Ordinary Company" panChars="C" registration="Corporate Identity Number (CIN)">
-            <description>An Indian company incorporated under the Companies Act.</description>
+          <subtype id="domestic-company" name="Domestic Ordinary Company" panChars="C" ckycCode="D, E" registration="Corporate Identity Number (CIN)">
+            <description>An Indian company incorporated under the Companies Act (Private Limited uses CKYC code D, Public Limited uses CKYC code E).</description>
             <keywords>domestic company,private limited,public limited,CIN,corporate</keywords>
           </subtype>
-          <subtype id="opc" name="Domestic One Person Company (OPC)" panChars="C" registration="Corporate Identity Number (CIN)">
+          <subtype id="opc" name="Domestic One Person Company (OPC)" panChars="C" ckycCode="D" registration="Corporate Identity Number (CIN)">
             <description>A one person company incorporated under Indian company law.</description>
             <keywords>OPC,one person company,CIN,company</keywords>
           </subtype>
-          <subtype id="producer-company" name="Producer Company" panChars="C" registration="Corporate Identity Number (CIN)">
+          <subtype id="producer-company" name="Producer Company" panChars="C" ckycCode="D, E" registration="Corporate Identity Number (CIN)">
             <description>A company formed by producers, farmers, or producer institutions under the Companies Act framework.</description>
             <keywords>producer company,farmers,agriculture,CIN</keywords>
           </subtype>
-          <subtype id="nidhi" name="Nidhi Company" panChars="C" registration="Corporate Identity Number (CIN)">
+          <subtype id="nidhi" name="Nidhi Company" panChars="C" ckycCode="E" registration="Corporate Identity Number (CIN)">
             <description>A Nidhi company is incorporated to cultivate thrift and savings among its members.</description>
             <keywords>nidhi,mutual benefit,company,CIN</keywords>
           </subtype>
-          <subtype id="section8-company" name="Section 8 Company" panChars="C" registration="CIN / Section 8 License">
-            <description>A not-for-profit company licensed under Section 8 of the Companies Act.</description>
+          <subtype id="section8-company" name="Section 8 Company" panChars="C" ckycCode="M" registration="CIN / Section 8 License">
+            <description>A not-for-profit company licensed under Section 8 of the Companies Act (mapped to CKYC Constitution Code M).</description>
             <keywords>section 8,not for profit,non profit,NPO,company,charity</keywords>
           </subtype>
-          <subtype id="foreign-company" name="Foreign Company / Overseas Corporate Body (OCB)" panChars="C" registration="RBI FCRN / MCA FCRN / RBI Approval">
+          <subtype id="foreign-company" name="Foreign Company / Overseas Corporate Body (OCB)" panChars="C" ckycCode="Z" registration="RBI FCRN / MCA FCRN / RBI Approval">
             <description>A foreign company or overseas corporate body recognized for Indian regulatory or investment purposes.</description>
             <keywords>foreign company,OCB,overseas corporate body,FCRN,RBI,MCA</keywords>
           </subtype>
@@ -106,19 +136,19 @@ You can link the sole proprietorship’s bank account to this individual account
     </group>
 
     <group id="firms" name="Partnerships, Firms and LLPs">
-      <entityType id="firm-llp" name="Firm / LLP" legalStatus="Partnership Firm / Limited Liability Partnership" panChars="F">
+      <entityType id="firm-llp" name="Firm / LLP" legalStatus="Partnership Firm / Limited Liability Partnership" panChars="F" ckycCode="B, J">
         <aliases>firm,partnership,partnership firm,LLP,limited liability partnership,limited partnership,LP</aliases>
         <description>Partnership firms and LLPs are generally mapped to PAN fourth character F. The registration differs depending on whether the structure is an ordinary partnership or LLP.</description>
         <subtypes>
-          <subtype id="partnership-firm" name="Unlimited Liability Firm / Partnership Firm" panChars="F" registration="Partnership Deed / Registrar of Firms Registration Number">
+          <subtype id="partnership-firm" name="Unlimited Liability Firm / Partnership Firm" panChars="F" ckycCode="B" registration="Partnership Deed / Registrar of Firms Registration Number">
             <description>An ordinary partnership firm formed by partners under a partnership deed.</description>
             <keywords>partnership,firm,unlimited liability,partners,RoF</keywords>
           </subtype>
-          <subtype id="llp" name="Limited Liability Partnership (LLP)" panChars="F" registration="LLPIN issued by MCA">
+          <subtype id="llp" name="Limited Liability Partnership (LLP)" panChars="F" ckycCode="J" registration="LLPIN issued by MCA">
             <description>A limited liability partnership registered under the LLP Act.</description>
             <keywords>LLP,limited liability partnership,LLPIN,MCA</keywords>
           </subtype>
-          <subtype id="joint-venture-firm" name="Joint Venture structured as Firm / LLP" panChars="F" registration="Partnership Deed / LLPIN">
+          <subtype id="joint-venture-firm" name="Joint Venture structured as Firm / LLP" panChars="F" ckycCode="B, J" registration="Partnership Deed / LLPIN">
             <description>A joint venture is an arrangement and may be legally structured as a partnership firm or LLP.</description>
             <keywords>joint venture,JV,firm,LLP,collaboration</keywords>
           </subtype>
@@ -127,27 +157,27 @@ You can link the sole proprietorship’s bank account to this individual account
     </group>
 
     <group id="trusts" name="Trusts, Funds and Fiduciary Structures">
-      <entityType id="trust" name="Trust" legalStatus="Trust" panChars="T">
+      <entityType id="trust" name="Trust" legalStatus="Trust" panChars="T" ckycCode="H">
         <aliases>trust,public trust,private trust,charitable trust,mutual fund,AIF,NPS,pension trust,endowment</aliases>
         <description>A trust is a fiduciary structure and is generally mapped to PAN category T. Many pooled investment structures such as mutual funds, AIFs, and pension funds may use trust form.</description>
         <subtypes>
-          <subtype id="registered-trust" name="Trust" panChars="T" registration="Trust Deed / Trust Registration">
+          <subtype id="registered-trust" name="Trust" panChars="T" ckycCode="H" registration="Trust Deed / Trust Registration">
             <description>A private, public, religious, or charitable trust formed under a trust deed or relevant public trust law.</description>
             <keywords>trust deed,public trust,private trust,charity,religious trust</keywords>
           </subtype>
-          <subtype id="mutual-fund" name="Mutual Fund (MF)" panChars="T" registration="SEBI Mutual Fund Registration Number">
-            <description>Indian mutual funds are commonly organized as trusts and regulated by SEBI.</description>
+          <subtype id="mutual-fund" name="Mutual Fund (MF)" panChars="T" ckycCode="O" registration="SEBI Mutual Fund Registration Number">
+            <description>Indian mutual funds are commonly organized as trusts and regulated by SEBI (mapped to CKYC Constitution Code O).</description>
             <keywords>MF,mutual fund,SEBI,AMC,scheme</keywords>
           </subtype>
-          <subtype id="aif-trust" name="Alternative Investment Fund as Trust" panChars="T" registration="SEBI AIF Registration Number">
+          <subtype id="aif-trust" name="Alternative Investment Fund as Trust" panChars="T" ckycCode="H" registration="SEBI AIF Registration Number">
             <description>An AIF may be constituted as a trust, company, or LLP. This subtype represents the trust form.</description>
             <keywords>AIF,alternative investment fund,trust,SEBI fund</keywords>
           </subtype>
-          <subtype id="nps-trust" name="Local Pension Fund - NPS Trust" panChars="T" registration="PFRDA Registration Number">
+          <subtype id="nps-trust" name="Local Pension Fund - NPS Trust" panChars="T" ckycCode="H" registration="PFRDA Registration Number">
             <description>NPS-related trust or pension structure regulated by PFRDA.</description>
             <keywords>NPS,pension fund,PFRDA,trust,retirement</keywords>
           </subtype>
-          <subtype id="charitable-trust" name="Charitable Organisation as Trust" panChars="T" registration="Trust Deed / Charity Commissioner / Relevant Registration">
+          <subtype id="charitable-trust" name="Charitable Organisation as Trust" panChars="T" ckycCode="H" registration="Trust Deed / Charity Commissioner / Relevant Registration">
             <description>A charitable organization legally constituted as a trust.</description>
             <keywords>charitable organisation,charity,foundation,NGO,trust</keywords>
           </subtype>
@@ -156,35 +186,35 @@ You can link the sole proprietorship’s bank account to this individual account
     </group>
 
     <group id="associations" name="Associations, Societies, Cooperatives and BOI">
-      <entityType id="aop-boi" name="AOP / BOI / Society" legalStatus="Association of Persons / Body of Individuals" panChars="A">
+      <entityType id="aop-boi" name="AOP / BOI / Society" legalStatus="Association of Persons / Body of Individuals" panChars="A" ckycCode="F, G">
         <aliases>AOP,association of persons,BOI,body of individuals,society,cooperative,co-op,RWA,association,club</aliases>
         <description>Associations, societies, cooperative bodies, and bodies of individuals are generally mapped to PAN categories A or B depending on legal constitution.</description>
         <subtypes>
-          <subtype id="aop" name="Association of Persons (AOP)" panChars="A" registration="AOP Deed / PAN">
+          <subtype id="aop" name="Association of Persons (AOP)" panChars="A" ckycCode="G" registration="AOP Deed / PAN">
             <description>A group of persons joining for a common purpose, often assessed as an AOP.</description>
             <keywords>AOP,association,persons,club,collective body</keywords>
           </subtype>
-          <subtype id="boi" name="Body of Individuals (BOI)" panChars="B" registration="BOI Deed / PAN">
+          <subtype id="boi" name="Body of Individuals (BOI)" panChars="B" ckycCode="G, W" registration="BOI Deed / PAN">
             <description>A body consisting of individuals, generally mapped to PAN category B.</description>
             <keywords>BOI,body of individuals,individual group</keywords>
           </subtype>
-          <subtype id="society" name="Society" panChars="A" registration="Society Registration Number">
+          <subtype id="society" name="Society" panChars="A" ckycCode="F" registration="Society Registration Number">
             <description>A society registered under applicable societies registration law.</description>
             <keywords>society,registered society,association,NGO</keywords>
           </subtype>
-          <subtype id="cooperative-society" name="Cooperative Society" panChars="A" registration="Cooperative Society Registration Number">
+          <subtype id="cooperative-society" name="Cooperative Society" panChars="A" ckycCode="F, G" registration="Cooperative Society Registration Number">
             <description>A cooperative society registered under state cooperative law.</description>
             <keywords>cooperative,co-op,society,members</keywords>
           </subtype>
-          <subtype id="multi-state-cooperative" name="Multi-State Cooperative Society" panChars="A" registration="MSCS Registration Number">
+          <subtype id="multi-state-cooperative" name="Multi-State Cooperative Society" panChars="A" ckycCode="F, G" registration="MSCS Registration Number">
             <description>A cooperative society operating in more than one state and registered under the Multi-State Cooperative Societies law.</description>
             <keywords>multi state cooperative,MSCS,cooperative society</keywords>
           </subtype>
-          <subtype id="housing-society" name="Corporate Housing Society" panChars="A" registration="Cooperative Society Registration Number">
+          <subtype id="housing-society" name="Corporate Housing Society" panChars="A" ckycCode="F, G" registration="Cooperative Society Registration Number">
             <description>A housing society commonly formed as a cooperative body.</description>
             <keywords>housing society,apartment society,cooperative housing</keywords>
           </subtype>
-          <subtype id="rwa" name="Residents Welfare Association (RWA)" panChars="A" registration="Society Registration Number">
+          <subtype id="rwa" name="Residents Welfare Association (RWA)" panChars="A" ckycCode="F, G" registration="Society Registration Number">
             <description>An association representing residents of a locality, complex, or housing community.</description>
             <keywords>RWA,residents welfare association,apartment association,society</keywords>
           </subtype>
@@ -193,38 +223,38 @@ You can link the sole proprietorship’s bank account to this individual account
     </group>
 
     <group id="government" name="Government, Statutory and Juridical Bodies">
-      <entityType id="government" name="Government / Juridical Person" legalStatus="Government / Artificial Juridical Person" panChars="G">
+      <entityType id="government" name="Government / Juridical Person" legalStatus="Government / Artificial Juridical Person" panChars="G" ckycCode="N, K">
         <aliases>government,govt,central government,state government,statutory body,juridical person,EPFO,sovereign</aliases>
         <description>Government bodies are generally mapped to PAN category G. Certain statutory or artificial juridical persons may be mapped to J.</description>
         <subtypes>
-          <subtype id="central-govt" name="Government - Central" panChars="G" registration="Ministry / Department Notification">
+          <subtype id="central-govt" name="Government - Central" panChars="G" ckycCode="N" registration="Ministry / Department Notification">
             <description>A department, ministry, or body of the Central Government.</description>
             <keywords>central government,union government,ministry,department</keywords>
           </subtype>
-          <subtype id="state-govt" name="Government - State" panChars="G" registration="State Government Notification">
+          <subtype id="state-govt" name="Government - State" panChars="G" ckycCode="N" registration="State Government Notification">
             <description>A department, ministry, or body of a State Government.</description>
             <keywords>state government,department,ministry</keywords>
           </subtype>
-          <subtype id="govt-others" name="Government - Others" panChars="G" registration="Statutory Notification / Enabling Law">
+          <subtype id="govt-others" name="Government - Others" panChars="G" ckycCode="N, K" registration="Statutory Notification / Enabling Law">
             <description>Other government, statutory, juridical, or local public bodies depending on constitution.</description>
             <keywords>statutory body,juridical,public authority,government authority</keywords>
           </subtype>
-          <subtype id="epfo" name="Local Pension Fund - EPFO" panChars="G" registration="Statutory Act Registration / EPFO Establishment Details">
+          <subtype id="epfo" name="Local Pension Fund - EPFO" panChars="G" ckycCode="N, K" registration="Statutory Act Registration / EPFO Establishment Details">
             <description>EPFO or similar statutory pension institution categorized as government or juridical depending on the specific holder.</description>
             <keywords>EPFO,pension,statutory fund,provident fund,juridical</keywords>
           </subtype>
         </subtypes>
       </entityType>
 
-      <entityType id="local-authority" name="Local Authority" legalStatus="Local Authority" panChars="L">
+      <entityType id="local-authority" name="Local Authority" legalStatus="Local Authority" panChars="L" ckycCode="Y">
         <aliases>local authority,municipal corporation,municipality,panchayat,local body</aliases>
         <description>Local authorities such as municipal corporations and panchayats are generally mapped to PAN category L.</description>
         <subtypes>
-          <subtype id="municipal-corporation" name="Government - Local Authority - Municipal Corporation" panChars="L" registration="State / Central Statute">
+          <subtype id="municipal-corporation" name="Government - Local Authority - Municipal Corporation" panChars="L" ckycCode="Y" registration="State / Central Statute">
             <description>A municipal corporation or municipality established under applicable law.</description>
             <keywords>municipal corporation,municipality,local authority,urban local body</keywords>
           </subtype>
-          <subtype id="panchayat" name="Government - Local Authority - Panchayats" panChars="L" registration="State / Central Statute">
+          <subtype id="panchayat" name="Government - Local Authority - Panchayats" panChars="L" ckycCode="Y" registration="State / Central Statute">
             <description>A panchayat or rural local authority established under applicable law.</description>
             <keywords>panchayat,gram panchayat,local authority,rural body</keywords>
           </subtype>
@@ -233,31 +263,31 @@ You can link the sole proprietorship’s bank account to this individual account
     </group>
 
     <group id="regulated-finance" name="Regulated Financial Institutions and Intermediaries">
-      <entityType id="regulated-financial-entity" name="Regulated Financial Entity" legalStatus="Usually Company / Trust / LLP depending on constitution" panChars="C">
+      <entityType id="regulated-financial-entity" name="Regulated Financial Entity" legalStatus="Usually Company / Trust / LLP depending on constitution" panChars="C" ckycCode="L, R, S, T">
         <aliases>bank,NBFC,insurance,ARC,portfolio manager,asset manager,investment manager,financial institution,SEBI,RBI,IRDAI</aliases>
         <description>Regulated financial institutions are categorized according to their legal constitution, usually as companies, trusts, or LLPs.</description>
         <subtypes>
-          <subtype id="bank" name="Bank" panChars="C" registration="RBI Banking License">
+          <subtype id="bank" name="Bank" panChars="C" ckycCode="L, D, E" registration="RBI Banking License">
             <description>A banking company or banking institution regulated by RBI.</description>
             <keywords>bank,RBI,banking license,scheduled bank</keywords>
           </subtype>
-          <subtype id="nbfc" name="Non-Banking Financial Company (NBFC)" panChars="C" registration="RBI NBFC Certificate of Registration">
+          <subtype id="nbfc" name="Non-Banking Financial Company (NBFC)" panChars="C" ckycCode="R" registration="RBI NBFC Certificate of Registration">
             <description>A non-banking financial company registered with RBI.</description>
             <keywords>NBFC,RBI,CoR,finance company</keywords>
           </subtype>
-          <subtype id="insurance-company" name="Insurance Company" panChars="C" registration="IRDAI Registration Number / CIN">
+          <subtype id="insurance-company" name="Insurance Company" panChars="C" ckycCode="S" registration="IRDAI Registration Number / CIN">
             <description>An insurance or reinsurance company regulated by IRDAI.</description>
             <keywords>insurance,reinsurance,IRDAI,insurer</keywords>
           </subtype>
-          <subtype id="arc" name="Asset Reconstruction Company" panChars="C" registration="RBI ARC Registration Number">
+          <subtype id="arc" name="Asset Reconstruction Company" panChars="C" ckycCode="T" registration="RBI ARC Registration Number">
             <description>An asset reconstruction company registered with RBI.</description>
             <keywords>ARC,asset reconstruction,RBI,bad loans</keywords>
           </subtype>
-          <subtype id="portfolio-manager" name="Portfolio Manager" panChars="C" registration="SEBI Portfolio Manager Registration Number">
+          <subtype id="portfolio-manager" name="Portfolio Manager" panChars="C" ckycCode="D, E, J" registration="SEBI Portfolio Manager Registration Number">
             <description>A portfolio manager regulated by SEBI and structured as a company or LLP.</description>
             <keywords>portfolio manager,PMS,SEBI,investment manager,LLP,company</keywords>
           </subtype>
-          <subtype id="aif-company-llp" name="Alternative Investment Fund as Company / LLP" panChars="C" registration="SEBI AIF Registration Number">
+          <subtype id="aif-company-llp" name="Alternative Investment Fund as Company / LLP" panChars="C" ckycCode="D, E, J" registration="SEBI AIF Registration Number">
             <description>An AIF constituted as a company or LLP instead of a trust.</description>
             <keywords>AIF,alternative investment fund,company,LLP,SEBI</keywords>
           </subtype>
@@ -266,166 +296,166 @@ You can link the sole proprietorship’s bank account to this individual account
     </group>
 
     <group id="foreign" name="Foreign Investors, FPIs, FVCIs and Overseas Offices">
-      <entityType id="fpi" name="Foreign Portfolio Investor (FPI)" legalStatus="Foreign Investor - Legal status depends on constitution" panChars="C">
+      <entityType id="fpi" name="Foreign Portfolio Investor (FPI)" legalStatus="Foreign Investor - Legal status depends on constitution" panChars="C" ckycCode="P">
         <aliases>FPI,foreign portfolio investor,foreign fund,offshore fund,sovereign wealth fund,pension fund,endowment,foundation,SEBI FPI</aliases>
         <description>FPI is a regulatory investor category under SEBI. The PAN category depends on the legal nature of the FPI, such as company, trust, AOP, firm, government, juridical person, or individual.</description>
         <subtypes>
-          <subtype id="fpi-cat1-central-bank" name="FPI Category I - Central Bank" panChars="G" registration="SEBI FPI Registration Number plus home regulator details">
+          <subtype id="fpi-cat1-central-bank" name="FPI Category I - Central Bank" panChars="G" ckycCode="P, N, K" registration="SEBI FPI Registration Number plus home regulator details">
             <description>A central bank or similar monetary authority registered as Category I FPI.</description>
             <keywords>FPI category I,central bank,monetary authority,government,juridical</keywords>
           </subtype>
-          <subtype id="fpi-cat1-swf" name="FPI Category I - Sovereign Wealth Fund" panChars="G" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat1-swf" name="FPI Category I - Sovereign Wealth Fund" panChars="G" ckycCode="P, U" registration="SEBI FPI Registration Number">
             <description>A sovereign wealth fund eligible as Category I FPI.</description>
             <keywords>sovereign wealth fund,SWF,FPI category I,government fund</keywords>
           </subtype>
-          <subtype id="fpi-cat1-multilateral" name="FPI Category I - International / Multilateral Organization / Agency" panChars="J" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat1-multilateral" name="FPI Category I - International / Multilateral Organization / Agency" panChars="J" ckycCode="P, X" registration="SEBI FPI Registration Number">
             <description>An international or multilateral agency registered as Category I FPI.</description>
             <keywords>multilateral,international organization,agency,FPI category I</keywords>
           </subtype>
-          <subtype id="fpi-cat1-govt-owned" name="FPI Category I - Entity at least 75% Government owned or controlled" panChars="C" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat1-govt-owned" name="FPI Category I - Entity at least 75% Government owned or controlled" panChars="C" ckycCode="P, D, E" registration="SEBI FPI Registration Number">
             <description>An entity controlled or at least 75% owned by government and eligible as Category I FPI.</description>
             <keywords>government owned,75 percent,controlled entity,FPI category I</keywords>
           </subtype>
-          <subtype id="fpi-cat1-pension-fund" name="FPI Category I - Pension Fund" panChars="T" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat1-pension-fund" name="FPI Category I - Pension Fund" panChars="T" ckycCode="P, H" registration="SEBI FPI Registration Number">
             <description>A pension fund eligible for Category I FPI registration.</description>
             <keywords>pension fund,retirement fund,FPI category I</keywords>
           </subtype>
-          <subtype id="fpi-cat1-university-fund" name="FPI Category I - University Fund" panChars="T" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat1-university-fund" name="FPI Category I - University Fund" panChars="T" ckycCode="P, H, V" registration="SEBI FPI Registration Number">
             <description>A university fund eligible for Category I FPI registration.</description>
             <keywords>university fund,FPI category I,education fund</keywords>
           </subtype>
-          <subtype id="fpi-cat1-insurance" name="FPI Category I - Appropriately Regulated Insurance / Reinsurance Entity" panChars="C" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat1-insurance" name="FPI Category I - Appropriately Regulated Insurance / Reinsurance Entity" panChars="C" ckycCode="P, S" registration="SEBI FPI Registration Number">
             <description>An appropriately regulated insurance or reinsurance entity registered as FPI.</description>
             <keywords>insurance,reinsurance,regulated,FPI category I</keywords>
           </subtype>
-          <subtype id="fpi-cat1-bank" name="FPI Category I - Appropriately Regulated Bank" panChars="C" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat1-bank" name="FPI Category I - Appropriately Regulated Bank" panChars="C" ckycCode="P, L, D, E" registration="SEBI FPI Registration Number">
             <description>An appropriately regulated bank registered as Category I FPI.</description>
             <keywords>bank,regulated bank,FPI category I</keywords>
           </subtype>
-          <subtype id="fpi-cat1-amc" name="FPI Category I - Appropriately Regulated Asset Management Company" panChars="C" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat1-amc" name="FPI Category I - Appropriately Regulated Asset Management Company" panChars="C" ckycCode="P, D, E" registration="SEBI FPI Registration Number">
             <description>An appropriately regulated asset management company eligible as Category I FPI.</description>
             <keywords>AMC,asset management company,FPI category I</keywords>
           </subtype>
-          <subtype id="fpi-cat1-investment-manager" name="FPI Category I - Appropriately Regulated Investment Manager" panChars="C" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat1-investment-manager" name="FPI Category I - Appropriately Regulated Investment Manager" panChars="C" ckycCode="P, D, E, B, J" registration="SEBI FPI Registration Number">
             <description>An appropriately regulated investment manager structured as company or firm.</description>
             <keywords>investment manager,regulated manager,FPI category I</keywords>
           </subtype>
-          <subtype id="fpi-cat1-investment-advisor" name="FPI Category I - Appropriately Regulated Investment Advisor" panChars="C" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat1-investment-advisor" name="FPI Category I - Appropriately Regulated Investment Advisor" panChars="C" ckycCode="P, D, E, B, J" registration="SEBI FPI Registration Number">
             <description>An appropriately regulated investment adviser or advisor.</description>
             <keywords>investment advisor,investment adviser,FPI category I</keywords>
           </subtype>
-          <subtype id="fpi-cat1-portfolio-manager" name="FPI Category I - Appropriately Regulated Portfolio Manager" panChars="C" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat1-portfolio-manager" name="FPI Category I - Appropriately Regulated Portfolio Manager" panChars="C" ckycCode="P, D, E, B, J" registration="SEBI FPI Registration Number">
             <description>An appropriately regulated portfolio manager registered as FPI.</description>
             <keywords>portfolio manager,PMS,FPI category I</keywords>
           </subtype>
-          <subtype id="fpi-cat1-broker-dealer" name="FPI Category I - Appropriately Regulated Broker Dealer" panChars="C" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat1-broker-dealer" name="FPI Category I - Appropriately Regulated Broker Dealer" panChars="C" ckycCode="P, D, E" registration="SEBI FPI Registration Number">
             <description>An appropriately regulated broker dealer registered as FPI.</description>
             <keywords>broker dealer,broker,FPI category I</keywords>
           </subtype>
-          <subtype id="fpi-cat1-swap-dealer" name="FPI Category I - Appropriately Regulated Swap Dealer" panChars="C" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat1-swap-dealer" name="FPI Category I - Appropriately Regulated Swap Dealer" panChars="C" ckycCode="P, D, E" registration="SEBI FPI Registration Number">
             <description>An appropriately regulated swap dealer registered as FPI.</description>
             <keywords>swap dealer,derivatives,FPI category I</keywords>
           </subtype>
-          <subtype id="fpi-cat1-regulated-fund" name="FPI Category I - Appropriately Regulated Fund" panChars="C" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat1-regulated-fund" name="FPI Category I - Appropriately Regulated Fund" panChars="C" ckycCode="P, D, E, H, G" registration="SEBI FPI Registration Number">
             <description>An appropriately regulated fund eligible for Category I FPI.</description>
             <keywords>regulated fund,FPI category I,foreign fund</keywords>
           </subtype>
-          <subtype id="fpi-cat1-unregulated-fund-cat1-manager" name="FPI Category I - Unregulated Fund whose Investment Manager is Category I FPI" panChars="C" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat1-unregulated-fund-cat1-manager" name="FPI Category I - Unregulated Fund whose Investment Manager is Category I FPI" panChars="C" ckycCode="P, D, E, H, G" registration="SEBI FPI Registration Number">
             <description>An unregulated fund eligible due to its investment manager being Category I FPI.</description>
             <keywords>unregulated fund,category I manager,FPI</keywords>
           </subtype>
-          <subtype id="fpi-cat1-university-endowment" name="FPI Category I - University Related Endowment" panChars="T" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat1-university-endowment" name="FPI Category I - University Related Endowment" panChars="T" ckycCode="P, H, V" registration="SEBI FPI Registration Number">
             <description>A university-related endowment eligible as Category I FPI.</description>
             <keywords>university endowment,endowment,FPI category I</keywords>
           </subtype>
-          <subtype id="fpi-cat1-fatf-manager" name="FPI Category I - Entity whose Investment Manager is Category I FPI from FATF jurisdiction" panChars="C" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat1-fatf-manager" name="FPI Category I - Entity whose Investment Manager is Category I FPI from FATF jurisdiction" panChars="C" ckycCode="P, D, E, H" registration="SEBI FPI Registration Number">
             <description>An entity eligible due to its investment manager being an eligible Category I FPI from a FATF member jurisdiction.</description>
             <keywords>FATF,investment manager,category I FPI,foreign entity</keywords>
           </subtype>
-          <subtype id="fpi-cat1-owned-by-pension" name="FPI Category I - Entity at least 75% owned by Pension Fund" panChars="C" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat1-owned-by-pension" name="FPI Category I - Entity at least 75% owned by Pension Fund" panChars="C" ckycCode="P, D, E, H, B" registration="SEBI FPI Registration Number">
             <description>An entity substantially owned by an eligible pension fund.</description>
             <keywords>75 percent,pension fund owned,FPI category I</keywords>
           </subtype>
-          <subtype id="fpi-cat1-owned-by-university" name="FPI Category I - Entity at least 75% owned by University Fund" panChars="C" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat1-owned-by-university" name="FPI Category I - Entity at least 75% owned by University Fund" panChars="C" ckycCode="P, D, E, H, V" registration="SEBI FPI Registration Number">
             <description>An entity substantially owned by an eligible university fund.</description>
             <keywords>75 percent,university fund owned,FPI category I</keywords>
           </subtype>
-          <subtype id="fpi-cat1-owned-by-regulated" name="FPI Category I - Entity at least 75% owned by Appropriately Regulated Entity" panChars="C" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat1-owned-by-regulated" name="FPI Category I - Entity at least 75% owned by Appropriately Regulated Entity" panChars="C" ckycCode="P, D, E, H" registration="SEBI FPI Registration Number">
             <description>An entity substantially owned by an appropriately regulated entity.</description>
             <keywords>regulated owner,75 percent,FPI category I</keywords>
           </subtype>
-          <subtype id="fpi-cat1-owned-by-endowment" name="FPI Category I - Entity at least 75% owned by University Related Endowment" panChars="C" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat1-owned-by-endowment" name="FPI Category I - Entity at least 75% owned by University Related Endowment" panChars="C" ckycCode="P, D, E, H, V" registration="SEBI FPI Registration Number">
             <description>An entity substantially owned by a university-related endowment.</description>
             <keywords>endowment owned,75 percent,FPI category I</keywords>
           </subtype>
-          <subtype id="fpi-cat1-stock-exchange" name="FPI Category I - Appropriately Regulated Stock Exchange" panChars="C" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat1-stock-exchange" name="FPI Category I - Appropriately Regulated Stock Exchange" panChars="C" ckycCode="P, D, E" registration="SEBI FPI Registration Number">
             <description>An appropriately regulated stock exchange registered as FPI.</description>
             <keywords>stock exchange,regulated exchange,FPI category I</keywords>
           </subtype>
-          <subtype id="fpi-cat1-clearing-corp" name="FPI Category I - Appropriately Regulated Clearing Corporation" panChars="C" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat1-clearing-corp" name="FPI Category I - Appropriately Regulated Clearing Corporation" panChars="C" ckycCode="P, D, E" registration="SEBI FPI Registration Number">
             <description>An appropriately regulated clearing corporation registered as FPI.</description>
             <keywords>clearing corporation,FPI category I</keywords>
           </subtype>
-          <subtype id="fpi-cat1-csd" name="FPI Category I - Appropriately Regulated Central Securities Depository" panChars="C" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat1-csd" name="FPI Category I - Appropriately Regulated Central Securities Depository" panChars="C" ckycCode="P, D, E" registration="SEBI FPI Registration Number">
             <description>An appropriately regulated central securities depository registered as FPI.</description>
             <keywords>CSD,central securities depository,FPI category I</keywords>
           </subtype>
-          <subtype id="fpi-cat2-regulated-fund" name="FPI Category II - Appropriately Regulated Fund not eligible as Category I FPI" panChars="C" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat2-regulated-fund" name="FPI Category II - Appropriately Regulated Fund not eligible as Category I FPI" panChars="C" ckycCode="P, D, E, H, G" registration="SEBI FPI Registration Number">
             <description>An appropriately regulated fund registered as Category II FPI.</description>
             <keywords>FPI category II,regulated fund,foreign fund</keywords>
           </subtype>
-          <subtype id="fpi-cat2-endowment-foundation" name="FPI Category II - Endowment / Foundation" panChars="T" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat2-endowment-foundation" name="FPI Category II - Endowment / Foundation" panChars="T" ckycCode="P, H, V" registration="SEBI FPI Registration Number">
             <description>An endowment or foundation registered as Category II FPI.</description>
             <keywords>endowment,foundation,FPI category II</keywords>
           </subtype>
-          <subtype id="fpi-cat2-charitable" name="FPI Category II - Charitable Organisation" panChars="T" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat2-charitable" name="FPI Category II - Charitable Organisation" panChars="T" ckycCode="P, H, M" registration="SEBI FPI Registration Number">
             <description>A charitable organization registered as Category II FPI.</description>
             <keywords>charitable organisation,charity,FPI category II</keywords>
           </subtype>
-          <subtype id="fpi-cat2-corporate-body" name="FPI Category II - Corporate Body" panChars="C" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat2-corporate-body" name="FPI Category II - Corporate Body" panChars="C" ckycCode="P, D, E" registration="SEBI FPI Registration Number">
             <description>A foreign corporate body registered as Category II FPI.</description>
             <keywords>corporate body,company,FPI category II</keywords>
           </subtype>
-          <subtype id="fpi-cat2-family-office" name="FPI Category II - Family Office" panChars="C" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat2-family-office" name="FPI Category II - Family Office" panChars="C" ckycCode="P, D, E, H, B" registration="SEBI FPI Registration Number">
             <description>A family office registered as Category II FPI depending on its constitution.</description>
             <keywords>family office,FPI category II,trust,company,firm</keywords>
           </subtype>
-          <subtype id="fpi-cat2-individual" name="FPI Category II - Individual FPI" panChars="P" registration="SEBI FPI Registration Number plus Passport">
+          <subtype id="fpi-cat2-individual" name="FPI Category II - Individual FPI" panChars="P" ckycCode="01, P" registration="SEBI FPI Registration Number plus Passport">
             <description>An individual foreign investor registered as Category II FPI.</description>
             <keywords>individual FPI,person,foreign individual,passport</keywords>
           </subtype>
-          <subtype id="fpi-cat2-client-entity" name="FPI Category II - Regulated Entity investing on behalf of Client" panChars="C" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat2-client-entity" name="FPI Category II - Regulated Entity investing on behalf of Client" panChars="C" ckycCode="P, D, E, G" registration="SEBI FPI Registration Number">
             <description>An appropriately regulated entity investing on behalf of clients.</description>
             <keywords>client investment,regulated entity,FPI category II</keywords>
           </subtype>
-          <subtype id="fpi-cat2-unregulated-lp-trust" name="FPI Category II - Unregulated Fund - Limited Partnership / Trust" panChars="T" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat2-unregulated-lp-trust" name="FPI Category II - Unregulated Fund - Limited Partnership / Trust" panChars="T" ckycCode="P, H, J, B" registration="SEBI FPI Registration Number">
             <description>An unregulated fund structured as a limited partnership or trust.</description>
             <keywords>unregulated fund,limited partnership,LP,trust,FPI category II</keywords>
           </subtype>
-          <subtype id="fpi-cat2-others" name="FPI Category II - Others" panChars="C" registration="SEBI FPI Registration Number">
+          <subtype id="fpi-cat2-others" name="FPI Category II - Others" panChars="C" ckycCode="P, Z" registration="SEBI FPI Registration Number">
             <description>Other eligible Category II FPI applicants depending on their legal constitution.</description>
             <keywords>others,FPI category II,miscellaneous foreign investor</keywords>
           </subtype>
         </subtypes>
       </entityType>
 
-      <entityType id="fvci-office" name="Foreign Venture Capital Investor / Foreign Office" legalStatus="Foreign Entity / Foreign Company" panChars="C">
+      <entityType id="fvci-office" name="Foreign Venture Capital Investor / Foreign Office" legalStatus="Foreign Entity / Foreign Company" panChars="C" ckycCode="Q, Z">
         <aliases>FVCI,foreign venture capital investor,branch office,liaison office,liason office,project office,foreign office,RBI approval</aliases>
         <description>Foreign venture capital investors and Indian offices of foreign entities are classified according to their legal constitution. Branch, liaison, and project offices generally relate to a foreign company.</description>
         <subtypes>
-          <subtype id="fvci" name="Foreign Venture Capital Investor (FVCI)" panChars="C" registration="SEBI FVCI Registration Number">
-            <description>A foreign venture capital investor registered with SEBI.</description>
+          <subtype id="fvci" name="Foreign Venture Capital Investor (FVCI)" panChars="C" ckycCode="Q" registration="SEBI FVCI Registration Number">
+            <description>A foreign venture capital investor registered with SEBI (mapped to CKYC Constitution Code Q).</description>
             <keywords>FVCI,foreign venture capital,SEBI,foreign investor</keywords>
           </subtype>
-          <subtype id="branch-office" name="Branch Office" panChars="C" registration="RBI Approval / MCA FCRN">
+          <subtype id="branch-office" name="Branch Office" panChars="C" ckycCode="Z" registration="RBI Approval / MCA FCRN">
             <description>An Indian branch office of a foreign company. It is an office type, not a separate legal entity category.</description>
             <keywords>branch office,foreign company,RBI approval,FCRN</keywords>
           </subtype>
-          <subtype id="liaison-office" name="Liaison Office" panChars="C" registration="RBI Approval / MCA FCRN">
+          <subtype id="liaison-office" name="Liaison Office" panChars="C" ckycCode="Z" registration="RBI Approval / MCA FCRN">
             <description>An Indian liaison office of a foreign company. Also commonly misspelled as liason office.</description>
             <keywords>liaison office,liason office,foreign company,RBI approval,FCRN</keywords>
           </subtype>
-          <subtype id="project-office" name="Project Office" panChars="C" registration="RBI Approval / MCA FCRN">
+          <subtype id="project-office" name="Project Office" panChars="C" ckycCode="Z" registration="RBI Approval / MCA FCRN">
             <description>An Indian project office of a foreign company set up for a specific project.</description>
             <keywords>project office,foreign company,RBI approval,FCRN</keywords>
           </subtype>
@@ -434,23 +464,23 @@ You can link the sole proprietorship’s bank account to this individual account
     </group>
 
     <group id="routes" name="Investment Routes, Instruments and Arrangements">
-      <entityType id="investment-route" name="Investment Route / Instrument" legalStatus="Route or Instrument, not standalone legal entity" panChars="C">
+      <entityType id="investment-route" name="Investment Route / Instrument" legalStatus="Route or Instrument, not standalone legal entity" panChars="C" ckycCode="D, E, Z">
         <aliases>FDI,FCCB,depository receipt,DR,GDR,ADR,investment route,instrument,issuer,underlying company</aliases>
         <description>FDI, FCCB, and Depository Receipts are investment routes or instruments. PAN is normally based on the underlying investor, issuer, or company rather than the instrument itself.</description>
         <subtypes>
-          <subtype id="fdi" name="Foreign Direct Investment (FDI)" panChars="C" registration="RBI UIN / FC-GPR / FDI Reporting">
+          <subtype id="fdi" name="Foreign Direct Investment (FDI)" panChars="C" ckycCode="D, E, Z" registration="RBI UIN / FC-GPR / FDI Reporting">
             <description>FDI is an investment route, usually involving a foreign investor and an Indian investee company.</description>
             <keywords>FDI,foreign direct investment,RBI,UIN,FC-GPR,route</keywords>
           </subtype>
-          <subtype id="depository-receipts" name="Depository Receipts" panChars="C" registration="SEBI / RBI Custodian Approval">
+          <subtype id="depository-receipts" name="Depository Receipts" panChars="C" ckycCode="D, E, Z" registration="SEBI / RBI Custodian Approval">
             <description>Depository receipts are instruments linked to an underlying issuer company.</description>
             <keywords>depository receipt,DR,GDR,ADR,custodian,issuer</keywords>
           </subtype>
-          <subtype id="fccb" name="Foreign Currency Convertible Bond (FCCB)" panChars="C" registration="RBI Loan Registration Number (LRN)">
+          <subtype id="fccb" name="Foreign Currency Convertible Bond (FCCB)" panChars="C" ckycCode="D, E, Z" registration="RBI Loan Registration Number (LRN)">
             <description>FCCB is a debt or convertible instrument issued by a company, not a separate legal entity.</description>
             <keywords>FCCB,foreign currency convertible bond,RBI LRN,issuer,bond</keywords>
           </subtype>
-          <subtype id="joint-venture-company" name="Joint Venture structured as Company" panChars="C" registration="CIN / Shareholders Agreement">
+          <subtype id="joint-venture-company" name="Joint Venture structured as Company" panChars="C" ckycCode="D, E" registration="CIN / Shareholders Agreement">
             <description>A joint venture is a business arrangement and may be structured as a company.</description>
             <keywords>joint venture,JV,company,CIN,shareholders agreement</keywords>
           </subtype>
