@@ -276,6 +276,11 @@
             position: relative;
         }
 
+        .field:hover,
+        .field:focus-within {
+            z-index: 40;
+        }
+
         label {
             display: flex;
             align-items: center;
@@ -531,7 +536,7 @@
             left: 0;
             right: 0;
             top: calc(100% + 8px);
-            z-index: 20;
+            z-index: 120;
             max-height: 360px;
             overflow: auto;
             background: var(--autocomplete-bg);
@@ -574,13 +579,6 @@
             opacity: 0;
             overflow: hidden;
             margin-top: 0;
-            transition: max-height 0s 1s, opacity 0s 1s, margin-top 0s 1s;
-        }
-
-        .option:hover .opt-desc {
-            max-height: 200px;
-            opacity: 1;
-            margin-top: 5px;
         }
 
         .info-icon {
@@ -608,7 +606,7 @@
         .modal {
             display: none;
             position: fixed;
-            z-index: 100;
+            z-index: 10000;
             left: 0;
             top: 0;
             width: 100%;
@@ -683,7 +681,7 @@
 
         .details {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr;
             gap: 18px;
         }
 
@@ -692,7 +690,7 @@
             padding: 18px;
             border: 1px solid var(--box-border);
             background: var(--box-bg);
-            min-height: 132px;
+            min-height: 96px;
         }
 
         .info-box h3 {
@@ -706,6 +704,224 @@
             color: var(--muted);
             line-height: 1.6;
             font-size: 14px;
+        }
+
+        .guidance-note-box {
+            color: var(--muted);
+            line-height: 1.65;
+            font-size: 14px;
+        }
+
+        .guidance-note-box h1,
+        .guidance-note-box h2,
+        .guidance-note-box h3,
+        .guidance-note-box h4 {
+            color: var(--text);
+            margin: 12px 0 6px 0;
+            font-size: 15px;
+            line-height: 1.4;
+        }
+
+        .guidance-note-box h1:first-child,
+        .guidance-note-box h2:first-child,
+        .guidance-note-box h3:first-child,
+        .guidance-note-box p:first-child {
+            margin-top: 0;
+        }
+
+        .guidance-note-box p {
+            margin: 0 0 10px 0;
+        }
+
+        .guidance-note-box ul,
+        .guidance-note-box ol {
+            margin: 6px 0 12px 20px;
+            padding: 0;
+        }
+
+        .guidance-note-box li {
+            margin-bottom: 4px;
+        }
+
+        .guidance-note-box table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+            font-size: 13px;
+        }
+
+        .guidance-note-box th,
+        .guidance-note-box td {
+            border: 1px solid var(--box-border);
+            padding: 8px 10px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .guidance-note-box th {
+            background: rgba(125, 211, 252, 0.1);
+            color: var(--text);
+            font-weight: 700;
+        }
+
+        #descModal .modal-content {
+            max-width: 740px;
+            width: 90%;
+            max-height: 84vh;
+            overflow-y: auto;
+            margin: 5vh auto;
+        }
+
+        .classification-codes-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .code-display-input {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-weight: 800;
+            letter-spacing: 0.06em;
+            background: var(--box-bg) !important;
+            color: var(--accent) !important;
+            cursor: default;
+        }
+
+        .option.child.level-2 {
+            padding-left: 52px;
+        }
+
+        .option.child.level-3 {
+            padding-left: 68px;
+        }
+
+        .info-icon-wrapper {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .info-hover-tooltip {
+            display: none !important;
+        }
+
+        #globalInfoHoverTooltip {
+            display: none;
+            position: fixed;
+            width: 340px;
+            max-width: calc(100vw - 24px);
+            padding: 11px 14px;
+            border-radius: 12px;
+            background: var(--bg2);
+            color: var(--text);
+            border: 1.5px solid var(--accent);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+            font-size: 13px;
+            font-weight: 500;
+            font-style: normal;
+            line-height: 1.55;
+            z-index: 99999;
+            pointer-events: none;
+            text-align: left;
+        }
+
+        .work-groups-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 16px;
+            margin-top: 12px;
+        }
+
+        .work-group-card {
+            border-radius: 16px;
+            padding: 16px;
+            border: 1px solid var(--box-border);
+            background: var(--box-bg);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .work-group-title {
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--accent);
+            border-bottom: 1px solid var(--box-border);
+            padding-bottom: 8px;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .work-checkbox-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .work-checkbox-item {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 8px 10px;
+            border-radius: 10px;
+            border: 1px solid transparent;
+            background: rgba(255, 255, 255, 0.02);
+            transition: background 0.15s ease, border-color 0.15s ease, opacity 0.15s ease;
+        }
+
+        [data-theme="light"] .work-checkbox-item {
+            background: rgba(15, 23, 42, 0.02);
+        }
+
+        .work-checkbox-item:hover:not(.disabled) {
+            background: var(--autocomplete-hover);
+            border-color: var(--box-border);
+        }
+
+        .work-checkbox-item.checked {
+            border-color: var(--accent);
+            background: rgba(125, 211, 252, 0.1);
+        }
+
+        .work-checkbox-item.disabled {
+            opacity: 0.42;
+            cursor: not-allowed;
+            background: rgba(128, 128, 128, 0.08);
+        }
+
+        .work-checkbox-label {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            cursor: pointer;
+            font-size: 13.5px;
+            font-weight: 600;
+            color: var(--text);
+            line-height: 1.4;
+            margin: 0;
+            flex: 1;
+        }
+
+        .work-checkbox-item.disabled .work-checkbox-label {
+            cursor: not-allowed;
+            text-decoration: line-through;
+            color: var(--muted);
+        }
+
+        .work-code-badge {
+            font-size: 11px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            padding: 2px 6px;
+            border-radius: 6px;
+            background: var(--btn-bg);
+            border: 1px solid var(--btn-border);
+            color: var(--muted);
+            font-weight: 700;
+            white-space: nowrap;
         }
 
         .registration {
@@ -743,7 +959,9 @@
 
             .form,
             .details,
-            .tax-fields-grid {
+            .tax-fields-grid,
+            .classification-codes-grid,
+            .work-groups-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -1287,7 +1505,13 @@
 
                 <div class="field">
                     <label for="entityInput">
-                        <span id="labelEntity">Entity Type</span>
+                        <span style="display: inline-flex; align-items: center; gap: 6px;">
+                            <span id="labelEntity">Entity Type</span>
+                            <span id="entityInfoWrapper" class="info-icon-wrapper" style="display: none;">
+                                <span id="entityInfoBtn" class="info-icon" style="margin-left: 2px;">i</span>
+                                <span id="entityInfoTooltip" class="info-hover-tooltip"></span>
+                            </span>
+                        </span>
                         <span id="labelEntityHint" class="hint">Search by name, alias, or keyword</span>
                     </label>
                     <input id="entityInput" placeholder="Type entity type, e.g. individual, trust, FPI"
@@ -1297,7 +1521,13 @@
 
                 <div class="field">
                     <label for="subtypeSelect">
-                        <span id="labelSubtype">Additional Subcategory</span>
+                        <span style="display: inline-flex; align-items: center; gap: 6px;">
+                            <span id="labelSubtype">Additional Subcategory</span>
+                            <span id="subtypeInfoWrapper" class="info-icon-wrapper" style="display: none;">
+                                <span id="subtypeInfoBtn" class="info-icon" style="margin-left: 2px;">i</span>
+                                <span id="subtypeInfoTooltip" class="info-hover-tooltip"></span>
+                            </span>
+                        </span>
                         <span id="labelSubtypeHint" class="hint">Based on selected entity type</span>
                     </label>
                     <select id="subtypeSelect" disabled>
@@ -1305,17 +1535,79 @@
                     </select>
                 </div>
 
+                <!-- Level 2 Classification Dropdown (e.g., for FRNFPIBLPO) -->
+                <div id="level2SubtypeWrapper" class="field full" style="display: none;">
+                    <label for="level2SubtypeSelect">
+                        <span style="display: inline-flex; align-items: center; gap: 6px;">
+                            <span id="labelLevel2Subtype">Choose Level 2 Classification</span>
+                            <span id="level2InfoWrapper" class="info-icon-wrapper" style="display: none;">
+                                <span id="level2InfoBtn" class="info-icon" style="margin-left: 2px;">i</span>
+                                <span id="level2InfoTooltip" class="info-hover-tooltip"></span>
+                            </span>
+                        </span>
+                        <span id="labelLevel2SubtypeHint" class="hint">Select specific Level 2 classification</span>
+                    </label>
+                    <select id="level2SubtypeSelect">
+                        <option value="">Select Level 2 classification</option>
+                    </select>
+                </div>
+
+                <!-- Level 3 Classification Dropdown (e.g., for FRNFPI) -->
+                <div id="level3SubtypeWrapper" class="field full" style="display: none;">
+                    <label for="level3SubtypeSelect">
+                        <span style="display: inline-flex; align-items: center; gap: 6px;">
+                            <span id="labelLevel3Subtype">Chose suitable Foreign Portfolio Investors (FPI)</span>
+                            <span id="level3InfoWrapper" class="info-icon-wrapper" style="display: none;">
+                                <span id="level3InfoBtn" class="info-icon" style="margin-left: 2px;">i</span>
+                                <span id="level3InfoTooltip" class="info-hover-tooltip"></span>
+                            </span>
+                        </span>
+                        <span id="labelLevel3SubtypeHint" class="hint">Select specific Level 3 classification</span>
+                    </label>
+                    <select id="level3SubtypeSelect">
+                        <option value="">Select Level 3 classification</option>
+                    </select>
+                </div>
+
+                <!-- Programmatic Toggle for CKYCR = "D, E" (Public Listed Company) -->
+                <div id="publicListedCompanyWrapper" class="field full" style="display: none;">
+                    <div class="toggle-row" style="display: flex; justify-content: space-between; align-items: center;">
+                        <div class="toggle-copy" style="display: flex; align-items: center; gap: 10px;">
+                            <label for="isPublicListedCompany" id="labelIsPublicListed" style="margin-bottom: 0; cursor: pointer; font-weight: 700; color: var(--text);">Is a Public Listed Company</label>
+                            <span id="publicListedStatusBadge" class="work-code-badge" style="font-size: 12px;">No (CKYC: D)</span>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="isPublicListedCompany" />
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+
                 <div class="full details">
                     <div class="info-box">
                         <h3 id="headingEntityDescription">Entity Type Description</h3>
                         <p id="entityDescription">Select an entity type to see its classification meaning.</p>
-                        <div id="entityDetails" class="registration" style="margin-top: 12px; display: none;"></div>
                     </div>
 
                     <div class="info-box">
-                        <h3 id="headingSubtypeDescription">Subtype Description</h3>
-                        <p id="subtypeDescription">Select a subcategory to see details.</p>
-                        <div id="registration" class="registration" style="margin-top: 12px; display: none;"></div>
+                        <h3 id="headingSubtypeDescription">Guidance Note</h3>
+                        <div id="subtypeDescription" class="guidance-note-box">Select a subcategory to see its guidance note.</div>
+                    </div>
+                </div>
+
+                <!-- 3 Classification Code Fields (Populated only after final leaf selection) -->
+                <div id="classificationCodesWrapper" class="full classification-codes-grid" style="display: none;">
+                    <div class="field">
+                        <label for="primaryCodeInput" id="labelPrimaryCode">Primary Code</label>
+                        <input id="primaryCodeInput" class="code-display-input" readonly placeholder="-" />
+                    </div>
+                    <div class="field">
+                        <label for="secondaryCodeInput" id="labelSecondaryCode">Secondary Code</label>
+                        <input id="secondaryCodeInput" class="code-display-input" readonly placeholder="-" />
+                    </div>
+                    <div class="field">
+                        <label for="ckycCodeInput" id="labelCkycClassificationCode">CKYC Classification Code</label>
+                        <input id="ckycCodeInput" class="code-display-input" readonly placeholder="-" />
                     </div>
                 </div>
 
@@ -1369,6 +1661,24 @@
                         <div class="field tax-outside-field" style="display: none;">
                             <label for="kycBirthPlace" id="labelKycBirthPlace">Place of Birth</label>
                             <input id="kycBirthPlace" placeholder="Enter Place of Birth" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Work Type / Occupation Classification Section (from Classification_wrk.csv) -->
+                <div id="workOccupationWrapper" class="field full" style="display: none; border-top: 1px solid var(--card-border); padding-top: 20px; margin-top: 12px;">
+                    <div style="display: flex; flex-direction: column; gap: 4px; margin-bottom: 10px;">
+                        <h3 id="headingWorkOccupation" style="margin: 0; font-size: 18px; font-weight: 800; color: var(--accent);">Work Type / Occupation Classification</h3>
+                        <p id="hintWorkOccupation" style="margin: 0; font-size: 13px; color: var(--muted);">Select all applicable work types or occupations below. Selecting certain options may disable mutually exclusive options.</p>
+                    </div>
+
+                    <div id="workOccupationGroupsContainer" class="work-groups-grid"></div>
+
+                    <div id="selectedOccupationCodesWrapper" style="margin-top: 18px; display: none;">
+                        <div class="field">
+                            <label for="selectedOccupationCodesInput" id="labelSelectedOccupationCodes">Selected Occupation Code(s)</label>
+                            <input id="selectedOccupationCodesInput" class="code-display-input" readonly placeholder="None selected" />
+                            <div id="selectedOccupationPills" class="pill-row" style="margin-top: 8px;"></div>
                         </div>
                     </div>
                 </div>
@@ -2041,27 +2351,7 @@
                     <input id="kycNetworth" placeholder="e.g. Rs 5,00,000 as of 31-Mar-2026" />
                 </div>
                 
-                <div class="field">
-                    <label for="kycOccupation" id="labelKycOccupation">Occupation*</label>
-                    <select id="kycOccupation" required>
-                        <option value="" id="optKycOccupationPlaceholder">-- Select Occupation --</option>
-                        <option value="private" id="optKycOccPrivate">Private Sector</option>
-                        <option value="public" id="optKycOccPublic">Public Sector</option>
-                        <option value="govt" id="optKycOccGovt">Government Service</option>
-                        <option value="business" id="optKycOccBusiness">Business</option>
-                        <option value="professional" id="optKycOccProfessional">Professional</option>
-                        <option value="agri" id="optKycOccAgri">Agriculturist</option>
-                        <option value="retired" id="optKycOccRetired">Retired</option>
-                        <option value="housewife" id="optKycOccHousewife">Housewife</option>
-                        <option value="student" id="optKycOccStudent">Student</option>
-                        <option value="self" id="optKycOccSelf">Self Employed</option>
-                        <option value="others" id="optKycOccOthers">Others (please specify)</option>
-                    </select>
-                </div>
-                <div class="field" id="kycOccupationOthersWrapper" style="display: none;">
-                    <label for="kycOccupationOthers" id="labelKycOccupationOthers">Specify Occupation</label>
-                    <input id="kycOccupationOthers" placeholder="Specify occupation" />
-                </div>
+
 
                 <div class="field">
                     <label for="kycPep" id="labelKycPep">Politically Exposed Person (PEP) Status*</label>
@@ -2140,10 +2430,12 @@
         </section>
     </main>
 
+    <div id="globalInfoHoverTooltip"></div>
+
     <div id="descModal" class="modal">
         <div class="modal-content">
             <span class="close-modal" id="closeModal">&times;</span>
-            <p id="modalDescText" style="margin-top: 0; font-size: 15px;"></p>
+            <div id="modalDescText" class="guidance-note-box" style="margin-top: 0; font-size: 15px;"></div>
         </div>
     </div>
 
@@ -2307,7 +2599,8 @@
     </div>
 
     <script>
-        const XML_FILE = "investor-entities.xml";
+        const REG_CSV_FILE = "res/Classification_reg.csv";
+        const WRK_CSV_FILE = "res/Classification_wrk.csv";
         const LABELS_FILE = "labels.xml";
         const COUNTRIES_FILE = "countries.xml";
         let countries = [];
@@ -2330,10 +2623,29 @@
         const entityInput = document.getElementById("entityInput");
         const autocomplete = document.getElementById("autocomplete");
         const subtypeSelect = document.getElementById("subtypeSelect");
+        const level2SubtypeWrapper = document.getElementById("level2SubtypeWrapper");
+        const level2SubtypeSelect = document.getElementById("level2SubtypeSelect");
+        const level3SubtypeWrapper = document.getElementById("level3SubtypeWrapper");
+        const level3SubtypeSelect = document.getElementById("level3SubtypeSelect");
+        const labelLevel3Subtype = document.getElementById("labelLevel3Subtype");
+        const publicListedCompanyWrapper = document.getElementById("publicListedCompanyWrapper");
+        const isPublicListedCompanyToggle = document.getElementById("isPublicListedCompany");
+        const publicListedStatusBadge = document.getElementById("publicListedStatusBadge");
+        const classificationCodesWrapper = document.getElementById("classificationCodesWrapper");
+        const primaryCodeInput = document.getElementById("primaryCodeInput");
+        const secondaryCodeInput = document.getElementById("secondaryCodeInput");
+        const ckycCodeInput = document.getElementById("ckycCodeInput");
+        const entityInfoWrapper = document.getElementById("entityInfoWrapper");
+        const subtypeInfoWrapper = document.getElementById("subtypeInfoWrapper");
+        const level2InfoWrapper = document.getElementById("level2InfoWrapper");
+        const level3InfoWrapper = document.getElementById("level3InfoWrapper");
+        const workOccupationWrapper = document.getElementById("workOccupationWrapper");
+        const workOccupationGroupsContainer = document.getElementById("workOccupationGroupsContainer");
+        const selectedOccupationCodesWrapper = document.getElementById("selectedOccupationCodesWrapper");
+        const selectedOccupationCodesInput = document.getElementById("selectedOccupationCodesInput");
+        const selectedOccupationPills = document.getElementById("selectedOccupationPills");
         const entityDescription = document.getElementById("entityDescription");
-        const entityDetails = document.getElementById("entityDetails");
         const subtypeDescription = document.getElementById("subtypeDescription");
-        const registration = document.getElementById("registration");
         const dataStatus = document.getElementById("dataStatus");
 
         // KYC Form DOM References
@@ -2395,9 +2707,6 @@
         const permPincodeStatusMsg = document.getElementById("permPincodeStatusMsg");
         
         // Other KYC inputs
-        const kycOccupation = document.getElementById("kycOccupation");
-        const kycOccupationOthersWrapper = document.getElementById("kycOccupationOthersWrapper");
-        const kycOccupationOthers = document.getElementById("kycOccupationOthers");
         const kycPhotoFile = document.getElementById("kycPhotoFile");
         const kycPhotoBtn = document.getElementById("kycPhotoBtn");
         const photoImg = document.getElementById("photoImg");
@@ -2420,9 +2729,17 @@
 
         let panCategories = {};
         let ckycCategories = {};
-        let entityTypes = [];
-        let selectedEntity = null;
-        let selectedSubtype = null;
+        let entityTypes = []; // Primary registration groups from Classification_reg.csv (Level 1)
+        let regRecords = [];  // All records from Classification_reg.csv
+        let regByCode = new Map();
+        let regChildrenByParent = new Map();
+        let wrkRecords = [];  // All records from Classification_wrk.csv
+        let wrkByCode = new Map();
+        let selectedEntity = null;   // Selected Primary Classification object
+        let selectedSubtype = null;  // Selected Level 1 record
+        let selectedLevel2 = null;   // Selected Level 2 record (if applicable, e.g. FRNFPI)
+        let selectedLevel3 = null;   // Selected Level 3 record (if applicable, e.g. FPI1CB)
+        let selectedOccupationCodes = new Set(); // Uppercase Occupation Codes selected by user
 
         let currentLang = localStorage.getItem("adwitiya_lang") || "en";
         let currentTheme = localStorage.getItem("adwitiya_theme") || "light";
@@ -2725,7 +3042,31 @@
             if (headingEntityDescription) headingEntityDescription.textContent = t("desc_entity_title");
             
             const headingSubtypeDescription = document.getElementById("headingSubtypeDescription");
-            if (headingSubtypeDescription) headingSubtypeDescription.textContent = t("desc_subtype_title");
+            if (headingSubtypeDescription) headingSubtypeDescription.textContent = t("desc_subtype_title") || "Guidance Note";
+
+            const labelLevel2SubtypeEl = document.getElementById("labelLevel2Subtype");
+            if (labelLevel2SubtypeEl) labelLevel2SubtypeEl.textContent = t("lbl_level2_subtype") || "Choose Level 2 Classification";
+
+            const labelIsPublicListedEl = document.getElementById("labelIsPublicListed");
+            if (labelIsPublicListedEl) labelIsPublicListedEl.textContent = t("lbl_is_public_listed") || "Is a Public Listed Company";
+
+            const labelPrimaryCodeEl = document.getElementById("labelPrimaryCode");
+            if (labelPrimaryCodeEl) labelPrimaryCodeEl.textContent = t("lbl_primary_code") || "Primary Code";
+
+            const labelSecondaryCodeEl = document.getElementById("labelSecondaryCode");
+            if (labelSecondaryCodeEl) labelSecondaryCodeEl.textContent = t("lbl_secondary_code") || "Secondary Code";
+
+            const labelCkycClassificationCodeEl = document.getElementById("labelCkycClassificationCode");
+            if (labelCkycClassificationCodeEl) labelCkycClassificationCodeEl.textContent = t("lbl_ckyc_classification_code") || "CKYC Classification Code";
+
+            const headingWorkOccupationEl = document.getElementById("headingWorkOccupation");
+            if (headingWorkOccupationEl) headingWorkOccupationEl.textContent = t("lbl_work_occupation_title") || "Work Type / Occupation Classification";
+
+            const hintWorkOccupationEl = document.getElementById("hintWorkOccupation");
+            if (hintWorkOccupationEl) hintWorkOccupationEl.textContent = t("lbl_work_occupation_hint") || "Select all applicable work types or occupations below. Selecting certain options may disable mutually exclusive options.";
+
+            const labelSelectedOccupationCodesEl = document.getElementById("labelSelectedOccupationCodes");
+            if (labelSelectedOccupationCodesEl) labelSelectedOccupationCodesEl.textContent = t("lbl_selected_occupation_codes") || "Selected Occupation Code(s)";
 
             if (labelPanExempted) labelPanExempted.textContent = t("pan_exempted_label");
             if (labelExemptionCategory) labelExemptionCategory.textContent = t("exemption_category_label");
@@ -2843,7 +3184,6 @@
                 "kycOtherTitle": "kyc_other_title",
                 "labelKycIncomeRange": "kyc_income_range",
                 "labelKycNetworth": "kyc_networth",
-                "labelKycOccupation": "kyc_occupation",
                 "labelKycPep": "kyc_pep",
                 "noteKycPep": "kyc_pep_note",
                 "labelKycRddMode": "kyc_rdd_mode",
@@ -2933,17 +3273,6 @@
                 "optKycInc10_25l": "kyc_inc_10_25l",
                 "optKycInc25_1c": "kyc_inc_25_1c",
                 "optKycIncAbove1c": "kyc_inc_above_1c",
-                "optKycOccPrivate": "kyc_occ_private",
-                "optKycOccPublic": "kyc_occ_public",
-                "optKycOccGovt": "kyc_occ_govt",
-                "optKycOccBusiness": "kyc_occ_business",
-                "optKycOccProfessional": "kyc_occ_professional",
-                "optKycOccAgri": "kyc_occ_agri",
-                "optKycOccRetired": "kyc_occ_retired",
-                "optKycOccHousewife": "kyc_occ_housewife",
-                "optKycOccStudent": "kyc_occ_student",
-                "optKycOccSelf": "kyc_occ_self",
-                "optKycOccOthers": "kyc_occ_others",
                 "optKycPepNo": "kyc_pep_no",
                 "optKycPepYes": "kyc_pep_yes",
                 "optKycPepRelated": "kyc_pep_related",
@@ -3035,7 +3364,6 @@
                 "kycBankAcNum": "kyc_bank_ac_num",
                 "kycBankIfsc": "kyc_bank_ifsc",
                 "kycNetworth": "kyc_networth",
-                "kycOccupationOthers": "kyc_occ_others",
                 "kycClientSig": "kyc_client_sig"
             };
 
@@ -3440,172 +3768,428 @@
             setupCountryAutocomplete(kycCitizenCountry, citizenCountryDropdown, false);
         }
 
+        // --- RFC-4180 Multi-line CSV Parser (handles quoted HTML and escaped "" quotes) ---
+        function parseFullCSV(csvText) {
+            const rows = [];
+            let currentRow = [];
+            let currentField = "";
+            let inQuotes = false;
+            const text = csvText.replace(/^\uFEFF/, "");
+
+            for (let i = 0; i < text.length; i++) {
+                const ch = text[i];
+                const nextCh = text[i + 1];
+
+                if (inQuotes) {
+                    if (ch === '"' && nextCh === '"') {
+                        currentField += '"';
+                        i++;
+                    } else if (ch === '"') {
+                        inQuotes = false;
+                    } else {
+                        currentField += ch;
+                    }
+                } else {
+                    if (ch === '"') {
+                        inQuotes = true;
+                    } else if (ch === ',') {
+                        currentRow.push(currentField);
+                        currentField = "";
+                    } else if (ch === '\r' && nextCh === '\n') {
+                        currentRow.push(currentField);
+                        rows.push(currentRow);
+                        currentRow = [];
+                        currentField = "";
+                        i++;
+                    } else if (ch === '\n' || ch === '\r') {
+                        currentRow.push(currentField);
+                        rows.push(currentRow);
+                        currentRow = [];
+                        currentField = "";
+                    } else {
+                        currentField += ch;
+                    }
+                }
+            }
+
+            if (currentField.length > 0 || currentRow.length > 0) {
+                currentRow.push(currentField);
+                rows.push(currentRow);
+            }
+
+            if (rows.length === 0) return [];
+            const headers = rows[0].map(h => h.trim());
+            const objects = [];
+            for (let r = 1; r < rows.length; r++) {
+                const row = rows[r];
+                if (row.length === 1 && row[0].trim() === "") continue;
+                const obj = {};
+                headers.forEach((h, idx) => {
+                    obj[h] = (row[idx] !== undefined ? row[idx] : "").trim();
+                });
+                objects.push(obj);
+            }
+            return objects;
+        }
+
+        function stripHtmlTags(htmlStr) {
+            if (!htmlStr) return "";
+            const tmp = document.createElement("div");
+            tmp.innerHTML = htmlStr;
+            return (tmp.textContent || tmp.innerText || "").replace(/\s+/g, " ").trim();
+        }
+
+        function escapeHtml(str) {
+            return String(str || "")
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;");
+        }
+
         async function loadXML() {
             try {
                 await loadLabelsXML();
                 translateUI();
                 await loadCountriesXML();
 
-                const res = await fetch(XML_FILE);
-                if (!res.ok) throw new Error("XML file not found");
-                const text = await res.text();
-                const xml = new DOMParser().parseFromString(text, "application/xml");
+                const [regRes, wrkRes] = await Promise.all([
+                    fetch(REG_CSV_FILE),
+                    fetch(WRK_CSV_FILE)
+                ]);
 
-                if (xml.querySelector("parsererror")) {
-                    throw new Error("Invalid XML format");
-                }
+                if (!regRes.ok) throw new Error("Classification_reg.csv not found");
+                if (!wrkRes.ok) throw new Error("Classification_wrk.csv not found");
 
-                xml.querySelectorAll("panCategory").forEach(node => {
-                    panCategories[attr(node, "code")] = {
-                        label: attr(node, "label"),
-                        description: node.textContent.trim()
-                    };
-                });
+                const [regText, wrkText] = await Promise.all([
+                    regRes.text(),
+                    wrkRes.text()
+                ]);
 
-                xml.querySelectorAll("ckycCategory").forEach(node => {
-                    ckycCategories[attr(node, "code")] = {
-                        label: attr(node, "label"),
-                        description: node.textContent.trim()
-                    };
-                });
+                const rawRegRows = parseFullCSV(regText);
+                const rawWrkRows = parseFullCSV(wrkText);
 
+                regRecords = [];
+                regByCode.clear();
+                regChildrenByParent.clear();
                 entityTypes = [];
+                const primaryGroupMap = new Map();
 
-                xml.querySelectorAll("group").forEach(group => {
-                    const groupId = attr(group, "id");
-                    const groupName = attr(group, "name");
+                rawRegRows.forEach(r => {
+                    const level = String(r["Level"] || "1").trim();
+                    const parentCode = String(r["Parent"] || "").trim().toUpperCase();
+                    const panChars = parseCSV(r["PAN"]).map(p => p.toUpperCase());
+                    const primaryName = (r["Regiatration (Primary)"] || r["Registration (Primary)"] || "").trim();
+                    const secondaryType = (r["Secondary Type"] || "").trim();
+                    const code = (r["Code"] || "").trim().toUpperCase();
+                    const ckycrRaw = (r["CKYCR"] || "").trim();
+                    const ckycCodes = parseCSV(ckycrRaw).map(c => c.toUpperCase());
+                    const fatca = (r["FATCA"] || "").trim();
+                    const description = (r["Description"] || "").trim();
+                    const guidanceNote = (r["Guidance Note"] || "").trim();
+                    const guidancePlain = stripHtmlTags(guidanceNote);
 
-                    group.querySelectorAll(":scope > entityType").forEach(entityNode => {
-                        const entity = {
-                            groupId: groupId,
-                            group: groupName,
-                            id: attr(entityNode, "id"),
-                            name: attr(entityNode, "name"),
-                            legalStatus: attr(entityNode, "legalStatus"),
-                            panChars: parseCSV(attr(entityNode, "panChars")),
-                            ckycCodes: parseCSV(attr(entityNode, "ckycCode")),
-                            aliases: parseCSV(txt(entityNode, "aliases")),
-                            description: txt(entityNode, "description"),
-                            subtypes: []
-                        };
+                    if (!code) return;
 
-                        entityNode.querySelectorAll(":scope > subtypes > subtype").forEach(subNode => {
-                            entity.subtypes.push({
-                                id: attr(subNode, "id"),
-                                name: attr(subNode, "name"),
-                                panChars: parseCSV(attr(subNode, "panChars")) || entity.panChars,
-                                ckycCodes: parseCSV(attr(subNode, "ckycCode")) || entity.ckycCodes,
-                                registration: attr(subNode, "registration"),
-                                description: txt(subNode, "description"),
-                                keywords: parseCSV(txt(subNode, "keywords"))
+                    const record = {
+                        id: code,
+                        code: code,
+                        primaryCode: code.slice(0, 3),
+                        level: level,
+                        parent: parentCode,
+                        panChars: panChars,
+                        primaryName: primaryName,
+                        name: secondaryType,
+                        secondaryType: secondaryType,
+                        ckycrRaw: ckycrRaw,
+                        ckycCodes: ckycCodes,
+                        fatca: fatca,
+                        description: description,
+                        guidanceNote: guidanceNote,
+                        guidancePlain: guidancePlain
+                    };
+
+                    regRecords.push(record);
+                    regByCode.set(code, record);
+
+                    if (parentCode) {
+                        if (!regChildrenByParent.has(parentCode)) {
+                            regChildrenByParent.set(parentCode, []);
+                        }
+                        regChildrenByParent.get(parentCode).push(record);
+                    }
+
+                    if (level === "1" && primaryName) {
+                        if (!primaryGroupMap.has(primaryName)) {
+                            const entityObj = {
+                                id: primaryName,
+                                name: primaryName,
+                                primaryCode: code.slice(0, 3),
+                                panChars: [],
+                                ckycCodes: [],
+                                description: description,
+                                guidanceNote: guidanceNote,
+                                guidancePlain: guidancePlain,
+                                subtypes: [],
+                                allDescendants: []
+                            };
+                            primaryGroupMap.set(primaryName, entityObj);
+                            entityTypes.push(entityObj);
+                        }
+                        const entityObj = primaryGroupMap.get(primaryName);
+                        record.rootEntityId = entityObj.id;
+                        entityObj.subtypes.push(record);
+                        entityObj.allDescendants.push(record);
+                    }
+                });
+
+                // Link Level 2 and Level 3 records to their root Primary Classification (e.g., Foreign)
+                // in depth-first tree order (Level 1 -> Level 2 -> Level 3 under each Level 2)
+                entityTypes.forEach(entity => {
+                    entity.allDescendants = [];
+                    entity.subtypes.forEach(lvl1 => {
+                        entity.allDescendants.push(lvl1);
+                        const lvl2List = regChildrenByParent.get(lvl1.code) || [];
+                        lvl2List.forEach(lvl2 => {
+                            lvl2.rootEntityId = entity.id;
+                            if (!lvl2.primaryName) lvl2.primaryName = entity.name;
+                            entity.allDescendants.push(lvl2);
+                            const lvl3List = regChildrenByParent.get(lvl2.code) || [];
+                            lvl3List.forEach(lvl3 => {
+                                lvl3.rootEntityId = entity.id;
+                                if (!lvl3.primaryName) lvl3.primaryName = entity.name;
+                                entity.allDescendants.push(lvl3);
                             });
                         });
-
-                        entityTypes.push(entity);
                     });
                 });
 
+                // Propagate PAN chars and CKYC codes bottom-up (Level 3 -> Level 2 -> Level 1)
+                ["3", "2"].forEach(lvl => {
+                    regRecords.forEach(rec => {
+                        if (rec.level === lvl && rec.parent && regByCode.has(rec.parent)) {
+                            const parentRec = regByCode.get(rec.parent);
+                            rec.panChars.forEach(p => {
+                                if (!parentRec.panChars.includes(p)) parentRec.panChars.push(p);
+                            });
+                            rec.ckycCodes.forEach(c => {
+                                if (!parentRec.ckycCodes.includes(c)) parentRec.ckycCodes.push(c);
+                            });
+                        }
+                    });
+                });
+
+                // Compute aggregate PAN chars, CKYC codes, and summary description for each Primary Classification
+                entityTypes.forEach(entity => {
+                    const panSet = new Set();
+                    const ckycSet = new Set();
+                    entity.allDescendants.forEach(rec => {
+                        rec.panChars.forEach(p => panSet.add(p));
+                        rec.ckycCodes.forEach(c => ckycSet.add(c));
+                    });
+                    entity.panChars = Array.from(panSet);
+                    entity.ckycCodes = Array.from(ckycSet);
+                });
+
+                // Parse Classification_wrk.csv
+                wrkRecords = [];
+                wrkByCode.clear();
+                rawWrkRows.forEach(r => {
+                    const groupCode = (r["Group"] || "").trim();
+                    const groupName = (r["Group Name"] || "").trim();
+                    const workType = (r["Work Type / Occupation"] || "").trim();
+                    const occCode = (r["Occupation Code"] || "").trim().toUpperCase();
+                    const eligibleCodes = parseCSV(r["Eligible Registration Codes"]).map(c => c.toUpperCase());
+                    const mutexCodes = parseCSV(r["Mutually Exclusive Occupation Codes"]).map(c => c.toUpperCase());
+                    const description = (r["Description"] || "").trim();
+                    const guidanceNote = (r["Guidance Note"] || "").trim();
+
+                    if (!occCode) return;
+
+                    const wrkObj = {
+                        group: groupCode,
+                        groupName: groupName,
+                        workType: workType,
+                        code: occCode,
+                        eligibleCodes: eligibleCodes,
+                        mutexCodes: mutexCodes,
+                        description: description,
+                        guidanceNote: guidanceNote
+                    };
+                    wrkRecords.push(wrkObj);
+                    wrkByCode.set(occCode, wrkObj);
+                });
+
                 if (dataStatus) {
-                    dataStatus.textContent = t("status_loaded", { count: entityTypes.length });
+                    dataStatus.textContent = t("status_loaded", { count: regRecords.length });
                     dataStatus.style.color = "#bbf7d0";
                 }
                 refreshUI();
                 loadPincodeDatabase();
             } catch (err) {
                 if (dataStatus) {
-                    dataStatus.textContent = t("status_error", { file: XML_FILE });
+                    dataStatus.textContent = t("status_error", { file: REG_CSV_FILE });
                     dataStatus.style.color = "#fecdd3";
                 }
                 console.error(err);
             }
         }
 
-        function getSuggestionRecords() {
-            const rows = [];
+        function openClassificationInfoModal(title, description, guidanceNoteHtml, code, ckycStr) {
+            const modal = document.getElementById("descModal");
+            if (!modal) return;
+            const catCodeLabel = t("lbl_category_code") || "Code";
+            const ckycCodeLabel = t("lbl_ckyc_classification_code") || "CKYC Classification Code";
+            const descTitle = t("desc_entity_title") || "Description";
+            const guidanceTitle = t("desc_subtype_title") || "Guidance Note";
 
-            entityTypes.forEach(entity => {
-                const entityAllowed = canShowForPAN(entity.panChars);
+            document.getElementById("modalDescText").innerHTML = `
+                <div style="margin-bottom: 12px; font-weight: 800; font-size: 17px; color: var(--accent); display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;">
+                    <span>${escapeHtml(title)}</span>
+                    ${code ? `<span class="work-code-badge">${escapeHtml(code)}${ckycStr ? ` | CKYC: ${escapeHtml(ckycStr)}` : ""}</span>` : ""}
+                </div>
+                <div style="margin-bottom: 14px; padding: 12px 14px; border-radius: 12px; background: var(--box-bg); border: 1px solid var(--box-border);">
+                    <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 4px;">${escapeHtml(descTitle)}</div>
+                    <div style="font-size: 14px; color: var(--text); line-height: 1.6;">${escapeHtml(description || "No description available.")}</div>
+                </div>
+                <div style="padding-top: 8px; border-top: 1px solid var(--box-border);">
+                    <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 8px;">${escapeHtml(guidanceTitle)}</div>
+                    <div class="guidance-note-box">${guidanceNoteHtml || "<p>No guidance note available.</p>"}</div>
+                </div>
+            `;
+            modal.style.display = "block";
+        }
 
-                if (entityAllowed) {
-                    const rawGroupEn = entity.group;
-                    const rawGroupHi = getGroupName(entity.groupId, "");
-                    const rawNameEn = entity.name;
-                    const rawNameHi = getEntityName(entity.id, "");
-                    const rawStatusEn = entity.legalStatus;
-                    const rawStatusHi = getEntityLegalStatus(entity.id, "");
-                    const rawDescEn = entity.description;
-                    const rawDescHi = getEntityDescription(entity.id, "");
-                    const ckycCodesStr = (entity.ckycCodes || []).join(" ");
-                    const ckycLabelsStr = (entity.ckycCodes || []).map(c => getCkycCategoryLabel(c)).join(" ");
-
-                    rows.push({
-                        entity,
-                        subtype: null,
-                        isParent: true,
-                        searchable: [
-                            rawGroupEn, rawGroupHi,
-                            rawNameEn, rawNameHi,
-                            rawStatusEn, rawStatusHi,
-                            rawDescEn, rawDescHi,
-                            entity.id,
-                            ckycCodesStr,
-                            ckycLabelsStr,
-                            entity.aliases.join(" ")
-                        ].join(" ").toLowerCase()
-                    });
-                }
-
-                entity.subtypes.forEach(subtype => {
-                    const subtypeAllowed = canShowForPAN(subtype.panChars);
-
-                    if (entityAllowed || subtypeAllowed) {
-                        const rawNameEn = subtype.name;
-                        const rawNameHi = getSubtypeName(subtype.id, "");
-                        const rawDescEn = subtype.description;
-                        const rawDescHi = getSubtypeDescription(subtype.id, "");
-                        const rawRegEn = subtype.registration;
-                        const rawRegHi = getSubtypeRegistration(subtype.id, "");
-                        const subCkycCodesStr = (subtype.ckycCodes || []).join(" ");
-                        const subCkycLabelsStr = (subtype.ckycCodes || []).map(c => getCkycCategoryLabel(c)).join(" ");
-
-                        rows.push({
-                            entity,
-                            subtype,
-                            isParent: false,
-                            searchable: [
-                                rawNameEn, rawNameHi,
-                                rawDescEn, rawDescHi,
-                                rawRegEn, rawRegHi,
-                                subtype.id,
-                                subCkycCodesStr,
-                                subCkycLabelsStr,
-                                subtype.keywords.join(" ")
-                            ].join(" ").toLowerCase()
-                        });
-                    }
-                });
-            });
-
-            return rows;
+        function updateFieldInfoButton(wrapperEl, recordOrEntity) {
+            if (!wrapperEl) return;
+            if (!recordOrEntity) {
+                wrapperEl.style.display = "none";
+                return;
+            }
+            wrapperEl.style.display = "inline-flex";
+            const tooltip = wrapperEl.querySelector(".info-hover-tooltip");
+            const btn = wrapperEl.querySelector(".info-icon");
+            const desc = recordOrEntity.description || "";
+            if (tooltip) {
+                tooltip.textContent = desc;
+            }
+            if (btn) {
+                btn.removeAttribute("title");
+                btn.onclick = (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    openClassificationInfoModal(
+                        recordOrEntity.secondaryType || recordOrEntity.name,
+                        recordOrEntity.description,
+                        recordOrEntity.guidanceNote,
+                        recordOrEntity.code || recordOrEntity.primaryCode || "",
+                        recordOrEntity.ckycrRaw || (recordOrEntity.ckycCodes || []).join(", ")
+                    );
+                };
+            }
         }
 
         function highlight(text, query) {
-            if (!query) return text;
+            if (!query) return escapeHtml(text);
+            const safeText = escapeHtml(text);
             const safe = query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-            return text.replace(new RegExp(`(${safe})`, "ig"), "<mark>$1</mark>");
+            return safeText.replace(new RegExp(`(${safe})`, "ig"), "<mark>$1</mark>");
         }
 
         function renderSuggestions() {
             const query = entityInput.value.trim().toLowerCase();
-            const doFilter = query.length > 2;
+            // Do not filter when input matches the currently selected primary entity name on focus
+            const isExactSelectedEntity = selectedEntity && query === selectedEntity.name.toLowerCase();
+            const doFilter = query.length > 0 && !isExactSelectedEntity;
             const highlightQuery = doFilter ? query : "";
-            const records = getSuggestionRecords()
-                .filter(row => !doFilter || row.searchable.includes(query))
-                .slice(0, 100);
 
             autocomplete.innerHTML = "";
+            const rowsToRender = [];
 
-            if (!records.length) {
+            entityTypes.forEach(entity => {
+                const entityAllowed = canShowForPAN(entity.panChars);
+                const parentSearchable = [
+                    entity.name,
+                    entity.primaryCode,
+                    entity.description,
+                    entity.guidancePlain,
+                    entity.panChars.join(" "),
+                    entity.ckycCodes.join(" ")
+                ].join(" ").toLowerCase();
+
+                const parentMatches = !doFilter || parentSearchable.includes(query);
+
+                // First pass: determine which descendants directly match the query
+                const directMatchedCodes = new Set();
+                const matchedLevel1Codes = new Set();
+
+                entity.allDescendants.forEach(rec => {
+                    const recAllowed = canShowForPAN(rec.panChars);
+                    if (!entityAllowed && !recAllowed) return;
+
+                    const childSearchable = [
+                        entity.name,
+                        rec.secondaryType,
+                        rec.code,
+                        rec.primaryCode,
+                        rec.panChars.join(" "),
+                        rec.ckycrRaw,
+                        rec.fatca,
+                        rec.description,
+                        rec.guidancePlain
+                    ].join(" ").toLowerCase();
+
+                    if (!doFilter || parentMatches || childSearchable.includes(query)) {
+                        directMatchedCodes.add(rec.code);
+                        if (rec.level === "1") {
+                            matchedLevel1Codes.add(rec.code);
+                        } else if (rec.level === "2" && rec.parent) {
+                            matchedLevel1Codes.add(rec.parent);
+                        } else if (rec.level === "3" && rec.parent) {
+                            const lvl2Parent = regByCode.get(rec.parent);
+                            if (lvl2Parent && lvl2Parent.parent) {
+                                matchedLevel1Codes.add(lvl2Parent.parent);
+                            }
+                        }
+                    }
+                });
+
+                // Second pass: if a Level 1 record (like FRNFPIBLPO) matched or any of its children matched,
+                // include the Level 1 record AND all of its Level 2 children (e.g. FRNFPI, FRNFDI, FRNBLPO, FRNBDCR)
+                // so sibling Level 2 options like FRNBLPO always appear alongside FDI and FPIs.
+                const matchingChildren = [];
+                entity.allDescendants.forEach(rec => {
+                    const recAllowed = canShowForPAN(rec.panChars);
+                    if (!entityAllowed && !recAllowed) return;
+
+                    const isDirect = directMatchedCodes.has(rec.code);
+                    const isMatchedLvl1 = rec.level === "1" && matchedLevel1Codes.has(rec.code);
+                    const isSiblingLvl2OfMatchedLvl1 = rec.level === "2" && rec.parent && matchedLevel1Codes.has(rec.parent);
+
+                    if (isDirect || isMatchedLvl1 || isSiblingLvl2OfMatchedLvl1) {
+                        matchingChildren.push(rec);
+                    }
+                });
+
+                if ((entityAllowed && parentMatches) || matchingChildren.length > 0) {
+                    // Always show Registration (Primary) first
+                    rowsToRender.push({
+                        isParent: true,
+                        entity: entity,
+                        record: null
+                    });
+                    // Followed by all matching child records indented to the right
+                    matchingChildren.forEach(childRec => {
+                        rowsToRender.push({
+                            isParent: false,
+                            entity: entity,
+                            record: childRec
+                        });
+                    });
+                }
+            });
+
+            if (!rowsToRender.length) {
                 autocomplete.innerHTML = `
                   <div class="option">
                     <div class="path">${t("no_category_found")}</div>
@@ -3616,101 +4200,128 @@
                 return;
             }
 
-            records.forEach(row => {
+            rowsToRender.forEach(row => {
                 const div = document.createElement("div");
-                div.className = "option" + (row.isParent ? " parent" : " child");
+                if (row.isParent) {
+                    div.className = "option parent";
+                } else {
+                    const lvlClass = row.record.level === "2" ? " level-2" : (row.record.level === "3" ? " level-3" : "");
+                    div.className = "option child" + lvlClass;
+                }
 
-                const rawName = row.isParent 
-                    ? getEntityName(row.entity.id, row.entity.name) 
-                    : getSubtypeName(row.subtype.id, row.subtype.name);
-                
-                const rawGroup = row.isParent 
-                    ? getGroupName(row.entity.groupId, row.entity.group) 
+                const rawName = row.isParent ? row.entity.name : row.record.secondaryType;
+                const rawDesc = row.isParent ? row.entity.description : row.record.description;
+                const codeBadge = row.isParent
+                    ? `<span class="work-code-badge" style="margin-left: 6px;">${escapeHtml(row.entity.primaryCode)}</span>`
+                    : `<span class="work-code-badge" style="margin-left: 6px;">${escapeHtml(row.record.code)}</span>`;
+                const ckycBadge = !row.isParent && row.record.ckycrRaw
+                    ? `<span class="work-code-badge" style="margin-left: 4px;">CKYC: ${escapeHtml(row.record.ckycrRaw)}</span>`
                     : "";
 
-                const rawDesc = row.isParent 
-                    ? getEntityDescription(row.entity.id, row.entity.description) 
-                    : (getSubtypeDescription(row.subtype.id, row.subtype.description) || getEntityDescription(row.entity.id, row.entity.description));
-
-                const descMatches = doFilter && rawDesc.toLowerCase().includes(query);
-                
+                const descMatches = doFilter && (rawDesc.toLowerCase().includes(query) || (!row.isParent && row.record.guidancePlain.toLowerCase().includes(query)));
                 const descText = highlight(rawDesc, highlightQuery);
                 const descStyle = descMatches ? ' style="max-height: 200px; opacity: 1; margin-top: 5px;"' : '';
 
-                const ckycBadges = row.isParent 
-                    ? (row.entity.ckycCodes && row.entity.ckycCodes.length ? ` <span style="font-size: 11px; opacity: 0.8; font-weight: normal; margin-left: 6px; padding: 2px 6px; border-radius: 6px; background: var(--btn-bg); border: 1px solid var(--btn-border);">CKYC: ${row.entity.ckycCodes.join(", ")}</span>` : "")
-                    : (row.subtype.ckycCodes && row.subtype.ckycCodes.length ? ` <span style="font-size: 11px; opacity: 0.8; font-weight: normal; margin-left: 6px; padding: 2px 6px; border-radius: 6px; background: var(--btn-bg); border: 1px solid var(--btn-border);">CKYC: ${row.subtype.ckycCodes.join(", ")}</span>` : "");
+                const levelPrefix = !row.isParent && row.record.level === "2" ? "↳ " : (!row.isParent && row.record.level === "3" ? "↳↳ " : "");
 
-                if (row.isParent) {
-                    div.innerHTML = `
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                div.innerHTML = `
+                    <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px;">
                         <div class="path">
-                          ${highlight(rawGroup, highlightQuery)}
-                          <span>▸</span>
-                          ${highlight(rawName, highlightQuery)}${ckycBadges}
+                            ${levelPrefix}${highlight(rawName, highlightQuery)}${codeBadge}${ckycBadge}
                         </div>
-                        <div class="info-icon" title="${t("view_desc_tooltip")}">i</div>
+                        <div class="info-icon-wrapper">
+                            <div class="info-icon">i</div>
+                            <div class="info-hover-tooltip">${escapeHtml(rawDesc)}</div>
+                        </div>
                     </div>
                     <div class="opt-desc"${descStyle}>${descText}</div>
-                  `;
-                } else {
-                    div.innerHTML = `
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <div class="path">
-                          ${highlight(rawName, highlightQuery)}${ckycBadges}
-                        </div>
-                        <div class="info-icon" title="${t("view_desc_tooltip")}">i</div>
-                    </div>
-                    <div class="opt-desc"${descStyle}>${descText}</div>
-                  `;
-                }
+                `;
 
                 const infoIcon = div.querySelector(".info-icon");
                 infoIcon.addEventListener("mousedown", e => {
                     e.preventDefault();
                     e.stopPropagation();
-                    const modal = document.getElementById("descModal");
-                    const modalUniqueId = row.isParent ? row.entity.id : row.subtype.id;
-                    const modalCkycCodes = row.isParent ? row.entity.ckycCodes : row.subtype.ckycCodes;
-                    const modalCkycFormatted = formatCkycCodes(modalCkycCodes);
-                    const catCodeLabel = t("lbl_category_code") || "Unique Category Code";
-                    const ckycCodeLabel = t("lbl_ckyc_code") || "CKYC Constitution Code";
-
-                    document.getElementById("modalDescText").innerHTML = `
-                        <div style="margin-bottom: 12px; font-weight: 600; font-size: 16px; color: var(--accent);">${row.isParent ? rawName : rawName}</div>
-                        <div style="margin-bottom: 14px; font-size: 14px; line-height: 1.6;">${rawDesc || "No description available."}</div>
-                        <div style="padding-top: 10px; border-top: 1px solid var(--box-border); font-size: 13px; color: var(--muted); line-height: 1.6;">
-                            <div><strong>${catCodeLabel}:</strong> <code>${modalUniqueId}</code></div>
-                            ${modalCkycFormatted ? `<div><strong>${ckycCodeLabel}:</strong> ${modalCkycFormatted}</div>` : ""}
-                        </div>
-                    `;
-                    modal.style.display = "block";
+                    if (row.isParent) {
+                        openClassificationInfoModal(
+                            row.entity.name,
+                            row.entity.description,
+                            row.entity.guidanceNote,
+                            row.entity.primaryCode,
+                            row.entity.ckycCodes.join(", ")
+                        );
+                    } else {
+                        openClassificationInfoModal(
+                            row.record.secondaryType,
+                            row.record.description,
+                            row.record.guidanceNote,
+                            row.record.code,
+                            row.record.ckycrRaw
+                        );
+                    }
                 });
 
                 div.addEventListener("mousedown", e => {
                     e.preventDefault();
-                    selectEntityAndSubtype(row.entity.id, row.subtype ? row.subtype.id : null);
+                    selectEntityAndSubtype(row.entity.id, row.record ? row.record.code : null);
                     autocomplete.classList.remove("show");
                 });
+
                 autocomplete.appendChild(div);
             });
 
             autocomplete.classList.add("show");
         }
 
-        function selectEntityAndSubtype(entityId, subtypeId) {
+        function selectEntityAndSubtype(entityId, recordCode) {
             selectedEntity = entityTypes.find(e => e.id === entityId) || null;
-            if (!selectedEntity) return;
+            selectedSubtype = null;
+            selectedLevel2 = null;
+            selectedLevel3 = null;
+            if (isPublicListedCompanyToggle) isPublicListedCompanyToggle.checked = false;
 
-            selectedSubtype = selectedEntity.subtypes.find(s => s.id === subtypeId) || null;
-
-            entityInput.value = getEntityName(selectedEntity.id, selectedEntity.name);
-            populateSubtypeSelect();
-
-            if (selectedSubtype) {
-                subtypeSelect.value = selectedSubtype.id;
+            if (!selectedEntity) {
+                populateSubtypeSelect();
+                populateLevel2Select();
+                populateLevel3Select();
+                updateTaxResidencyDefault();
+                updateDescriptions();
+                return;
             }
 
+            entityInput.value = selectedEntity.name;
+
+            if (recordCode) {
+                const targetRec = regByCode.get(recordCode.toUpperCase());
+                if (targetRec) {
+                    if (targetRec.level === "1") {
+                        selectedSubtype = targetRec;
+                    } else if (targetRec.level === "2") {
+                        selectedLevel2 = targetRec;
+                        selectedSubtype = regByCode.get(targetRec.parent) || null;
+                    } else if (targetRec.level === "3") {
+                        selectedLevel3 = targetRec;
+                        selectedLevel2 = regByCode.get(targetRec.parent) || null;
+                        selectedSubtype = selectedLevel2 ? (regByCode.get(selectedLevel2.parent) || null) : null;
+                    }
+                }
+            } else {
+                const compatibleSubtypes = selectedEntity.subtypes.filter(sub =>
+                    showAllToggle.checked || canShowForPAN(sub.panChars)
+                );
+                if (selectedEntity.subtypes.length === 1) {
+                    // Auto-select single Level 1 subcategory (e.g., FRNFPIBLPO under Foreign, or HUFHUF under HUF)
+                    // so Level 2 options (FRNFPI, FRNFDI, FRNBLPO, FRNBDCR) immediately appear for Foreign.
+                    selectedSubtype = selectedEntity.subtypes[0];
+                } else if (compatibleSubtypes.length === 1) {
+                    selectedSubtype = compatibleSubtypes[0];
+                }
+            }
+
+            populateSubtypeSelect();
+            populateLevel2Select();
+            populateLevel3Select();
+
+            selectedOccupationCodes.clear();
             updateTaxResidencyDefault();
             updateDescriptions();
         }
@@ -3720,37 +4331,174 @@
 
             if (!selectedEntity) {
                 subtypeSelect.disabled = true;
-                subtypeSelect.innerHTML = `<option value="">${t("subtype_placeholder")}</option>`;
+                subtypeSelect.innerHTML = `<option value="">${t("subtype_placeholder") || "Select entity type first"}</option>`;
                 return;
             }
 
-            const visibleSubtypes = selectedEntity.subtypes.filter(sub =>
-                showAllToggle.checked || canShowForPAN(sub.panChars)
+            let visibleSubtypes = selectedEntity.subtypes.filter(sub =>
+                showAllToggle.checked || canShowForPAN(sub.panChars) || (selectedSubtype && sub.code === selectedSubtype.code)
             );
+            if (!visibleSubtypes.length && selectedEntity.subtypes.length === 1) {
+                visibleSubtypes = selectedEntity.subtypes.slice();
+            }
 
             subtypeSelect.disabled = false;
 
             if (!visibleSubtypes.length) {
-                subtypeSelect.innerHTML = `<option value="">${t("subtype_no_compatible")}</option>`;
+                subtypeSelect.innerHTML = `<option value="">${t("subtype_no_compatible") || "No compatible subcategory"}</option>`;
                 return;
             }
 
-            subtypeSelect.innerHTML = `<option value="">${t("subtype_choose")}</option>`;
+            subtypeSelect.innerHTML = `<option value="">${t("subtype_choose") || "Choose subcategory"}</option>`;
 
             visibleSubtypes.forEach(sub => {
                 const option = document.createElement("option");
-                option.value = sub.id;
-                option.textContent = getSubtypeName(sub.id, sub.name);
+                option.value = sub.code;
+                option.textContent = sub.secondaryType;
+                if (selectedSubtype && sub.code === selectedSubtype.code) {
+                    option.selected = true;
+                }
                 subtypeSelect.appendChild(option);
             });
+
+            if (selectedSubtype) {
+                subtypeSelect.value = selectedSubtype.code;
+            }
+        }
+
+        function populateLevel2Select() {
+            if (!level2SubtypeWrapper || !level2SubtypeSelect) return;
+            level2SubtypeSelect.innerHTML = "";
+
+            if (!selectedSubtype) {
+                level2SubtypeWrapper.style.display = "none";
+                selectedLevel2 = null;
+                return;
+            }
+
+            // Show all Level 2 classifications under the selected Level 1 subcategory (e.g. FRNFPI, FRNFDI, FRNBLPO, FRNBDCR under FRNFPIBLPO)
+            const allLevel2 = (regChildrenByParent.get(selectedSubtype.code) || []).filter(rec =>
+                rec.level === "2"
+            );
+            let level2Children = allLevel2.filter(rec =>
+                showAllToggle.checked || canShowForPAN(rec.panChars) || (selectedLevel2 && rec.code === selectedLevel2.code)
+            );
+            if (!level2Children.length) {
+                level2Children = allLevel2;
+            }
+
+            if (!level2Children.length) {
+                level2SubtypeWrapper.style.display = "none";
+                selectedLevel2 = null;
+                return;
+            }
+
+            level2SubtypeWrapper.style.display = "block";
+            const placeholderText = t("lbl_level2_placeholder") || "Select Level 2 classification";
+            level2SubtypeSelect.innerHTML = `<option value="">-- ${placeholderText} --</option>`;
+
+            level2Children.forEach(rec => {
+                const opt = document.createElement("option");
+                opt.value = rec.code;
+                opt.textContent = rec.secondaryType;
+                if (selectedLevel2 && rec.code === selectedLevel2.code) {
+                    opt.selected = true;
+                }
+                level2SubtypeSelect.appendChild(opt);
+            });
+
+            if (selectedLevel2) {
+                level2SubtypeSelect.value = selectedLevel2.code;
+            }
+        }
+
+        function populateLevel3Select() {
+            if (!level3SubtypeWrapper || !level3SubtypeSelect) return;
+            level3SubtypeSelect.innerHTML = "";
+
+            if (!selectedLevel2) {
+                level3SubtypeWrapper.style.display = "none";
+                selectedLevel3 = null;
+                return;
+            }
+
+            const allLevel3 = (regChildrenByParent.get(selectedLevel2.code) || []).filter(rec => rec.level === "3");
+            let level3Children = allLevel3.filter(rec =>
+                showAllToggle.checked || canShowForPAN(rec.panChars) || (selectedLevel3 && rec.code === selectedLevel3.code)
+            );
+            if (!level3Children.length) {
+                level3Children = allLevel3;
+            }
+
+            if (!level3Children.length) {
+                level3SubtypeWrapper.style.display = "none";
+                selectedLevel3 = null;
+                return;
+            }
+
+            level3SubtypeWrapper.style.display = "block";
+            const prefixTitle = t("lbl_choose_suitable") || "Chose suitable";
+            if (labelLevel3Subtype) {
+                labelLevel3Subtype.textContent = `${prefixTitle} ${selectedLevel2.secondaryType}`;
+            }
+
+            const placeholderText = t("lbl_level3_placeholder") || "Select Level 3 classification";
+            level3SubtypeSelect.innerHTML = `<option value="">-- ${placeholderText} --</option>`;
+
+            level3Children.forEach(rec => {
+                const opt = document.createElement("option");
+                opt.value = rec.code;
+                opt.textContent = rec.secondaryType;
+                if (selectedLevel3 && rec.code === selectedLevel3.code) {
+                    opt.selected = true;
+                }
+                level3SubtypeSelect.appendChild(opt);
+            });
+
+            if (selectedLevel3) {
+                level3SubtypeSelect.value = selectedLevel3.code;
+            }
+        }
+
+        // Returns the deepest currently active record (even if non-leaf) for displaying Description & Guidance Note
+        function getActiveSelectedRecord() {
+            if (selectedLevel3) return selectedLevel3;
+            if (selectedLevel2) return selectedLevel2;
+            if (selectedSubtype) return selectedSubtype;
+            return null;
+        }
+
+        // Returns the record ONLY if the user has completed the final leaf selection
+        function getFinalLeafRecord() {
+            const active = getActiveSelectedRecord();
+            if (!active) return null;
+            const children = regChildrenByParent.get(active.code) || [];
+            if (children.length > 0) {
+                return null; // Still has deeper level(s) to choose
+            }
+            return active;
+        }
+
+        function hasDualDEInCkycr(record) {
+            if (!record || !record.ckycCodes) return false;
+            return record.ckycCodes.includes("D") && record.ckycCodes.includes("E");
+        }
+
+        function resolveCkycCode(leafRecord) {
+            if (!leafRecord) return "";
+            if (hasDualDEInCkycr(leafRecord)) {
+                return (isPublicListedCompanyToggle && isPublicListedCompanyToggle.checked) ? "E" : "D";
+            }
+            return leafRecord.ckycrRaw || "";
         }
 
         function updateTaxResidencyDefault() {
             const kycTaxOutside = document.getElementById("kycTaxOutside");
             if (!kycTaxOutside) return;
-            const foreignTaxSubtypes = ["ftr", "nr", "oci", "foreign-national"];
-            if (selectedEntity && selectedEntity.id === "individual" && selectedSubtype) {
-                kycTaxOutside.checked = foreignTaxSubtypes.includes(selectedSubtype.id);
+            const foreignTaxCodes = ["INDFTR", "INDNR", "INDOCI", "FPI2IND"];
+            const activeRec = getActiveSelectedRecord();
+            if (selectedEntity && selectedEntity.id === "Individual / Person" && activeRec) {
+                kycTaxOutside.checked = foreignTaxCodes.includes(activeRec.code);
             } else {
                 kycTaxOutside.checked = false;
             }
@@ -3763,7 +4511,7 @@
 
             if (!taxResidencyWrapper || !kycTaxOutside) return;
 
-            if (selectedEntity && selectedEntity.id === "individual") {
+            if (selectedEntity && selectedEntity.id === "Individual / Person") {
                 taxResidencyWrapper.style.display = "block";
                 
                 const showFields = kycTaxOutside.checked;
@@ -3814,65 +4562,233 @@
             }
         }
 
+        function renderWorkOccupations(leafRecord) {
+            if (!workOccupationWrapper || !workOccupationGroupsContainer) return;
+
+            if (!leafRecord) {
+                workOccupationWrapper.style.display = "none";
+                workOccupationGroupsContainer.innerHTML = "";
+                if (selectedOccupationCodesWrapper) selectedOccupationCodesWrapper.style.display = "none";
+                if (selectedOccupationCodesInput) selectedOccupationCodesInput.value = "";
+                if (selectedOccupationPills) selectedOccupationPills.innerHTML = "";
+                return;
+            }
+
+            const finalCode = leafRecord.code.toUpperCase();
+            const eligibleItems = wrkRecords.filter(w => w.eligibleCodes.includes(finalCode));
+
+            // Remove any previously selected occupation codes that are no longer eligible
+            Array.from(selectedOccupationCodes).forEach(code => {
+                if (!eligibleItems.some(w => w.code === code)) {
+                    selectedOccupationCodes.delete(code);
+                }
+            });
+
+            if (eligibleItems.length === 0) {
+                workOccupationWrapper.style.display = "none";
+                workOccupationGroupsContainer.innerHTML = "";
+                if (selectedOccupationCodesWrapper) selectedOccupationCodesWrapper.style.display = "none";
+                if (selectedOccupationCodesInput) selectedOccupationCodesInput.value = "";
+                if (selectedOccupationPills) selectedOccupationPills.innerHTML = "";
+                return;
+            }
+
+            workOccupationWrapper.style.display = "block";
+            workOccupationGroupsContainer.innerHTML = "";
+
+            // Group eligible items by Group
+            const groupsMap = new Map();
+            eligibleItems.forEach(item => {
+                const grpKey = item.group || "Other";
+                if (!groupsMap.has(grpKey)) {
+                    groupsMap.set(grpKey, {
+                        group: item.group,
+                        groupName: item.groupName,
+                        items: []
+                    });
+                }
+                groupsMap.get(grpKey).items.push(item);
+            });
+
+            groupsMap.forEach((grpObj) => {
+                const card = document.createElement("div");
+                card.className = "work-group-card";
+
+                const titleEl = document.createElement("h4");
+                titleEl.className = "work-group-title";
+                const titleText = grpObj.groupName && grpObj.groupName !== grpObj.group
+                    ? `${grpObj.group} — ${grpObj.groupName}`
+                    : grpObj.group;
+                titleEl.innerHTML = `<span>${escapeHtml(titleText)}</span>`;
+                card.appendChild(titleEl);
+
+                const listEl = document.createElement("div");
+                listEl.className = "work-checkbox-list";
+
+                grpObj.items.forEach(item => {
+                    const row = document.createElement("div");
+                    row.className = "work-checkbox-item";
+                    row.dataset.occCode = item.code;
+
+                    const checkboxId = `occ_chk_${item.code}`;
+                    row.innerHTML = `
+                        <label class="work-checkbox-label" for="${checkboxId}">
+                            <input type="checkbox" id="${checkboxId}" class="work-occ-checkbox" data-occ-code="${escapeHtml(item.code)}" style="margin-top: 2px;" />
+                            <span>${escapeHtml(item.workType)}</span>
+                        </label>
+                        <div style="display: inline-flex; align-items: center; gap: 6px; flex-shrink: 0;">
+                            <span class="work-code-badge">${escapeHtml(item.code)}</span>
+                            <span class="info-icon-wrapper">
+                                <span class="info-icon" style="margin-left: 0;">i</span>
+                                <span class="info-hover-tooltip">${escapeHtml(item.description)}</span>
+                            </span>
+                        </div>
+                    `;
+
+                    const chk = row.querySelector("input.work-occ-checkbox");
+                    chk.checked = selectedOccupationCodes.has(item.code);
+                    chk.addEventListener("change", () => {
+                        if (chk.checked) {
+                            selectedOccupationCodes.add(item.code);
+                        } else {
+                            selectedOccupationCodes.delete(item.code);
+                        }
+                        updateWorkOccupationState();
+                    });
+
+                    const infoBtn = row.querySelector(".info-icon");
+                    infoBtn.addEventListener("click", (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        openClassificationInfoModal(
+                            `${item.group} — ${item.workType}`,
+                            item.description,
+                            item.guidanceNote,
+                            item.code,
+                            ""
+                        );
+                    });
+
+                    listEl.appendChild(row);
+                });
+
+                card.appendChild(listEl);
+                workOccupationGroupsContainer.appendChild(card);
+            });
+
+            updateWorkOccupationState();
+        }
+
+        function updateWorkOccupationState() {
+            // Compute all mutually excluded occupation codes based on currently selected codes
+            const excludedCodes = new Set();
+            selectedOccupationCodes.forEach(selCode => {
+                const selObj = wrkByCode.get(selCode);
+                if (selObj && selObj.mutexCodes) {
+                    selObj.mutexCodes.forEach(m => excludedCodes.add(m.toUpperCase()));
+                }
+            });
+
+            // Also check reverse mutual exclusion (if candidate item lists a selected code in its mutexCodes)
+            wrkRecords.forEach(candidate => {
+                if (!selectedOccupationCodes.has(candidate.code)) {
+                    const conflictsWithSelected = candidate.mutexCodes.some(m => selectedOccupationCodes.has(m.toUpperCase()));
+                    if (conflictsWithSelected) {
+                        excludedCodes.add(candidate.code);
+                    }
+                }
+            });
+
+            if (workOccupationGroupsContainer) {
+                workOccupationGroupsContainer.querySelectorAll(".work-checkbox-item").forEach(row => {
+                    const code = row.dataset.occCode;
+                    const chk = row.querySelector("input.work-occ-checkbox");
+                    if (!chk) return;
+
+                    const isSelected = selectedOccupationCodes.has(code);
+                    const isExcluded = !isSelected && excludedCodes.has(code);
+
+                    chk.checked = isSelected;
+                    chk.disabled = isExcluded;
+                    row.classList.toggle("checked", isSelected);
+                    row.classList.toggle("disabled", isExcluded);
+                });
+            }
+
+            if (selectedOccupationCodesWrapper && selectedOccupationCodesInput && selectedOccupationPills) {
+                const selectedArray = Array.from(selectedOccupationCodes);
+                selectedOccupationCodesWrapper.style.display = "block";
+                selectedOccupationCodesInput.value = selectedArray.join(", ");
+                selectedOccupationPills.innerHTML = "";
+                selectedArray.forEach(code => {
+                    const wrkObj = wrkByCode.get(code);
+                    const pill = document.createElement("span");
+                    pill.className = "pill";
+                    pill.innerHTML = `<strong>${escapeHtml(code)}</strong>${wrkObj ? ` — ${escapeHtml(wrkObj.workType)}` : ""}`;
+                    selectedOccupationPills.appendChild(pill);
+                });
+            }
+        }
+
         function updateDescriptions() {
+            updateFieldInfoButton(entityInfoWrapper, selectedEntity);
+            updateFieldInfoButton(subtypeInfoWrapper, selectedSubtype);
+            updateFieldInfoButton(level2InfoWrapper, selectedLevel2);
+            updateFieldInfoButton(level3InfoWrapper, selectedLevel3);
+
+            const activeRec = getActiveSelectedRecord();
+            const leafRec = getFinalLeafRecord();
+
             if (!selectedEntity) {
-                entityDescription.textContent = t("desc_entity_default");
-                if (entityDetails) {
-                    entityDetails.innerHTML = "";
-                    entityDetails.style.display = "none";
-                }
-                subtypeDescription.textContent = t("desc_subtype_default");
-                if (registration) {
-                    registration.innerHTML = "";
-                    registration.style.display = "none";
-                }
+                entityDescription.textContent = t("desc_entity_default") || "Select an entity type to see its classification meaning.";
+                subtypeDescription.innerHTML = t("desc_subtype_default") || "Select a subcategory to see its guidance note.";
+                if (publicListedCompanyWrapper) publicListedCompanyWrapper.style.display = "none";
+                if (classificationCodesWrapper) classificationCodesWrapper.style.display = "none";
+                if (primaryCodeInput) primaryCodeInput.value = "";
+                if (secondaryCodeInput) secondaryCodeInput.value = "";
+                if (ckycCodeInput) ckycCodeInput.value = "";
+                renderWorkOccupations(null);
                 updateTaxResidencyVisibility();
                 return;
             }
 
-            entityDescription.textContent = getEntityDescription(selectedEntity.id, selectedEntity.description);
+            // Box 1: Description of active record (or Primary Entity if no subtype selected yet)
+            entityDescription.textContent = activeRec ? activeRec.description : selectedEntity.description;
 
-            if (entityDetails) {
-                const catCodeLabel = t("lbl_category_code") || "Unique Category Code";
-                const ckycCodeLabel = t("lbl_ckyc_code") || "CKYC Constitution Code";
-                const ckycFormatted = formatCkycCodes(selectedEntity.ckycCodes);
-
-                entityDetails.innerHTML = `
-                    <strong>${catCodeLabel}:</strong> <code>${selectedEntity.id}</code>
-                    ${ckycFormatted ? `<br><strong>${ckycCodeLabel}:</strong> ${ckycFormatted}` : ""}
-                `;
-                entityDetails.style.display = "block";
+            // Box 2: Guidance Note (HTML) of active record
+            if (activeRec) {
+                subtypeDescription.innerHTML = activeRec.guidanceNote || (t("desc_subtype_default") || "No guidance note available.");
+            } else {
+                subtypeDescription.innerHTML = t("desc_subtype_default") || "Select a subcategory to see its guidance note.";
             }
 
-            if (!selectedSubtype) {
-                subtypeDescription.textContent = t("desc_subtype_default");
-                if (registration) {
-                    registration.innerHTML = "";
-                    registration.style.display = "none";
+            // Only show Public Listed Company toggle & 3 Classification Code fields once final leaf selection is made
+            if (leafRec) {
+                if (hasDualDEInCkycr(leafRec)) {
+                    if (publicListedCompanyWrapper) publicListedCompanyWrapper.style.display = "block";
+                    const isListed = isPublicListedCompanyToggle && isPublicListedCompanyToggle.checked;
+                    if (publicListedStatusBadge) {
+                        publicListedStatusBadge.textContent = isListed ? "Yes (CKYC: E)" : "No (CKYC: D)";
+                    }
+                } else {
+                    if (publicListedCompanyWrapper) publicListedCompanyWrapper.style.display = "none";
+                    if (isPublicListedCompanyToggle) isPublicListedCompanyToggle.checked = false;
                 }
-                updateTaxResidencyVisibility();
-                return;
+
+                const resolvedCkyc = resolveCkycCode(leafRec);
+                if (classificationCodesWrapper) classificationCodesWrapper.style.display = "grid";
+                if (primaryCodeInput) primaryCodeInput.value = leafRec.primaryCode;
+                if (secondaryCodeInput) secondaryCodeInput.value = leafRec.code;
+                if (ckycCodeInput) ckycCodeInput.value = resolvedCkyc;
+            } else {
+                if (publicListedCompanyWrapper) publicListedCompanyWrapper.style.display = "none";
+                if (classificationCodesWrapper) classificationCodesWrapper.style.display = "none";
+                if (primaryCodeInput) primaryCodeInput.value = "";
+                if (secondaryCodeInput) secondaryCodeInput.value = "";
+                if (ckycCodeInput) ckycCodeInput.value = "";
             }
 
-            subtypeDescription.textContent = getSubtypeDescription(selectedSubtype.id, selectedSubtype.description);
-            
-            if (registration) {
-                const catCodeLabel = t("lbl_category_code") || "Unique Category Code";
-                const ckycCodeLabel = t("lbl_ckyc_code") || "CKYC Constitution Code";
-                const regLabel = t("reg_identifier") || "Usual identifier / registration";
-                const panLabel = t("reg_pan_mapping") || "PAN Category Mapping";
-                const regVal = getSubtypeRegistration(selectedSubtype.id, selectedSubtype.registration) || "PAN / relevant registration";
-                const panVal = selectedSubtype.panChars.join(" / ");
-                const ckycFormatted = formatCkycCodes(selectedSubtype.ckycCodes);
-                
-                registration.innerHTML = `
-                    <strong>${catCodeLabel}:</strong> <code>${selectedSubtype.id}</code>
-                    ${ckycFormatted ? `<br><strong>${ckycCodeLabel}:</strong> ${ckycFormatted}` : ""}
-                    <br><strong>${regLabel}:</strong> ${regVal}
-                    <br><strong>${panLabel}:</strong> ${panVal}
-                `;
-                registration.style.display = "block";
-            }
+            renderWorkOccupations(leafRec);
             updateTaxResidencyVisibility();
         }
 
@@ -3884,15 +4800,45 @@
                 if (!stillVisible) {
                     selectedEntity = null;
                     selectedSubtype = null;
+                    selectedLevel2 = null;
+                    selectedLevel3 = null;
+                    selectedOccupationCodes.clear();
                     entityInput.value = "";
+                    updateTaxResidencyDefault();
+                } else {
+                    if (selectedSubtype && !showAllToggle.checked && !canShowForPAN(selectedSubtype.panChars)) {
+                        selectedSubtype = null;
+                        selectedLevel2 = null;
+                        selectedLevel3 = null;
+                        selectedOccupationCodes.clear();
+                    }
+                    if (!selectedSubtype) {
+                        const compatibleSubtypes = selectedEntity.subtypes.filter(sub =>
+                            showAllToggle.checked || canShowForPAN(sub.panChars)
+                        );
+                        if (selectedEntity.subtypes.length === 1) {
+                            selectedSubtype = selectedEntity.subtypes[0];
+                        } else if (compatibleSubtypes.length === 1) {
+                            selectedSubtype = compatibleSubtypes[0];
+                        }
+                    }
+                    if (selectedLevel2 && !showAllToggle.checked && !canShowForPAN(selectedLevel2.panChars)) {
+                        selectedLevel2 = null;
+                        selectedLevel3 = null;
+                        selectedOccupationCodes.clear();
+                    }
+                    if (selectedLevel3 && !showAllToggle.checked && !canShowForPAN(selectedLevel3.panChars)) {
+                        selectedLevel3 = null;
+                        selectedOccupationCodes.clear();
+                    }
                     updateTaxResidencyDefault();
                 }
             }
 
             populateSubtypeSelect();
+            populateLevel2Select();
+            populateLevel3Select();
             updateDescriptions();
-
-
         }
 
         if (applicationType) {
@@ -3954,8 +4900,13 @@
         entityInput.addEventListener("input", () => {
             selectedEntity = null;
             selectedSubtype = null;
+            selectedLevel2 = null;
+            selectedLevel3 = null;
+            selectedOccupationCodes.clear();
             updateTaxResidencyDefault();
             populateSubtypeSelect();
+            populateLevel2Select();
+            populateLevel3Select();
             updateDescriptions();
             renderSuggestions();
         });
@@ -3976,12 +4927,127 @@
             document.getElementById('descModal').style.display = "none";
         });
 
+        // Global fixed-position hover tooltip for all .info-icon-wrapper elements (prevents clipping/z-index overlap)
+        const globalInfoHoverTooltip = document.getElementById("globalInfoHoverTooltip");
+        let activeInfoWrapper = null;
+
+        function positionGlobalInfoTooltip(wrapper) {
+            if (!globalInfoHoverTooltip || !wrapper) return;
+            const tipCarrier = wrapper.querySelector(".info-hover-tooltip");
+            const text = tipCarrier ? tipCarrier.textContent.trim() : "";
+            if (!text) {
+                globalInfoHoverTooltip.style.display = "none";
+                return;
+            }
+            globalInfoHoverTooltip.textContent = text;
+            globalInfoHoverTooltip.style.display = "block";
+
+            const iconEl = wrapper.querySelector(".info-icon") || wrapper;
+            const iconRect = iconEl.getBoundingClientRect();
+            const tipRect = globalInfoHoverTooltip.getBoundingClientRect();
+
+            const margin = 12;
+            let top = iconRect.top - tipRect.height - 10;
+            if (top < margin) {
+                top = iconRect.bottom + 10;
+            }
+            if (top + tipRect.height > window.innerHeight - margin) {
+                top = Math.max(margin, window.innerHeight - tipRect.height - margin);
+            }
+
+            let left = iconRect.right - tipRect.width;
+            if (left < margin) {
+                left = iconRect.left;
+            }
+            if (left + tipRect.width > window.innerWidth - margin) {
+                left = Math.max(margin, window.innerWidth - tipRect.width - margin);
+            }
+
+            globalInfoHoverTooltip.style.top = `${Math.round(top)}px`;
+            globalInfoHoverTooltip.style.left = `${Math.round(left)}px`;
+        }
+
+        function hideGlobalInfoTooltip() {
+            activeInfoWrapper = null;
+            if (globalInfoHoverTooltip) {
+                globalInfoHoverTooltip.style.display = "none";
+            }
+        }
+
+        document.addEventListener("mouseover", (e) => {
+            const wrapper = e.target.closest ? e.target.closest(".info-icon-wrapper") : null;
+            if (wrapper) {
+                activeInfoWrapper = wrapper;
+                positionGlobalInfoTooltip(wrapper);
+            } else if (activeInfoWrapper) {
+                hideGlobalInfoTooltip();
+            }
+        });
+
+        document.addEventListener("mouseout", (e) => {
+            if (!activeInfoWrapper) return;
+            const related = e.relatedTarget;
+            if (!related || !activeInfoWrapper.contains(related)) {
+                hideGlobalInfoTooltip();
+            }
+        });
+
+        document.addEventListener("mousedown", () => {
+            hideGlobalInfoTooltip();
+        });
+
+        window.addEventListener("scroll", () => {
+            if (activeInfoWrapper) {
+                hideGlobalInfoTooltip();
+            }
+        }, true);
+
+        window.addEventListener("resize", () => {
+            if (activeInfoWrapper) {
+                positionGlobalInfoTooltip(activeInfoWrapper);
+            }
+        });
+
         subtypeSelect.addEventListener("change", () => {
             if (!selectedEntity) return;
-            selectedSubtype = selectedEntity.subtypes.find(s => s.id === subtypeSelect.value) || null;
+            selectedSubtype = selectedEntity.subtypes.find(s => s.code === subtypeSelect.value) || null;
+            selectedLevel2 = null;
+            selectedLevel3 = null;
+            selectedOccupationCodes.clear();
+            if (isPublicListedCompanyToggle) isPublicListedCompanyToggle.checked = false;
+            populateLevel2Select();
+            populateLevel3Select();
             updateTaxResidencyDefault();
             updateDescriptions();
         });
+
+        if (level2SubtypeSelect) {
+            level2SubtypeSelect.addEventListener("change", () => {
+                selectedLevel2 = regByCode.get(level2SubtypeSelect.value) || null;
+                selectedLevel3 = null;
+                selectedOccupationCodes.clear();
+                if (isPublicListedCompanyToggle) isPublicListedCompanyToggle.checked = false;
+                populateLevel3Select();
+                updateTaxResidencyDefault();
+                updateDescriptions();
+            });
+        }
+
+        if (level3SubtypeSelect) {
+            level3SubtypeSelect.addEventListener("change", () => {
+                selectedLevel3 = regByCode.get(level3SubtypeSelect.value) || null;
+                selectedOccupationCodes.clear();
+                if (isPublicListedCompanyToggle) isPublicListedCompanyToggle.checked = false;
+                updateTaxResidencyDefault();
+                updateDescriptions();
+            });
+        }
+
+        if (isPublicListedCompanyToggle) {
+            isPublicListedCompanyToggle.addEventListener("change", () => {
+                updateDescriptions();
+            });
+        }
 
         const langSelect = document.getElementById("langSelect");
         if (langSelect) {
@@ -5272,19 +6338,7 @@
 
 
 
-            // Occupation Specifier toggle
-            if (kycOccupation) {
-                kycOccupation.addEventListener("change", () => {
-                    if (kycOccupation.value === "others") {
-                        kycOccupationOthersWrapper.style.display = "block";
-                        kycOccupationOthers.required = true;
-                    } else {
-                        kycOccupationOthersWrapper.style.display = "none";
-                        kycOccupationOthers.required = false;
-                        kycOccupationOthers.value = "";
-                    }
-                });
-            }
+
 
             // Photo Upload
             if (kycPhotoBtn && kycPhotoFile) {
@@ -6066,7 +7120,9 @@
             const form = document.getElementById("kycForm");
             if (!form) return;
 
-            const allElements = form.querySelectorAll("input, select, textarea");
+            const topCardElements = document.querySelectorAll("main > section.app-card:not(.kyc-card) input:not(.work-occ-checkbox), main > section.app-card:not(.kyc-card) select, main > section.app-card:not(.kyc-card) textarea");
+            const kycFormElements = form.querySelectorAll("input, select, textarea");
+            const allElements = [...Array.from(topCardElements), ...Array.from(kycFormElements)];
             const fields = [];
             const values = {};
 
@@ -6337,8 +7393,37 @@
                 });
             }
 
+            const leafRec = getFinalLeafRecord();
+            const selectedOccDetails = Array.from(selectedOccupationCodes).map(code => {
+                const w = wrkByCode.get(code);
+                return {
+                    code: code,
+                    group: w ? w.group : "",
+                    groupName: w ? w.groupName : "",
+                    workType: w ? w.workType : ""
+                };
+            });
+
+            const structuredClassification = {
+                primaryEntityType: selectedEntity ? selectedEntity.name : "",
+                level1Code: selectedSubtype ? selectedSubtype.code : "",
+                level1Name: selectedSubtype ? selectedSubtype.secondaryType : "",
+                level2Code: selectedLevel2 ? selectedLevel2.code : "",
+                level2Name: selectedLevel2 ? selectedLevel2.secondaryType : "",
+                level3Code: selectedLevel3 ? selectedLevel3.code : "",
+                level3Name: selectedLevel3 ? selectedLevel3.secondaryType : "",
+                isPublicListedCompany: Boolean(isPublicListedCompanyToggle && isPublicListedCompanyToggle.checked),
+                primaryCode: leafRec ? leafRec.primaryCode : "",
+                secondaryCode: leafRec ? leafRec.code : "",
+                ckycCode: leafRec ? resolveCkycCode(leafRec) : "",
+                selectedOccupationCodes: Array.from(selectedOccupationCodes),
+                selectedOccupations: selectedOccDetails
+            };
+
             // Inject structured keys into values map for convenience
             values.name = fullName;
+            values.classification = structuredClassification;
+            values.selectedOccupationCodes = Array.from(selectedOccupationCodes);
             values.address = structuredAddress;
             values.permanent_address = structuredPermAddress;
             values.uploaded_documents = uploadedDocuments;
@@ -6353,6 +7438,7 @@
                     theme: typeof currentTheme !== "undefined" ? currentTheme : "light"
                 },
                 name: fullName,
+                classification: structuredClassification,
                 address: structuredAddress,
                 permanent_address: structuredPermAddress,
                 uploaded_documents: uploadedDocuments,
@@ -6546,14 +7632,73 @@
             importAddressBlock("corr", "kyc");
             importAddressBlock("perm", "kycPerm");
 
+            // 4b. Restore PAN, Exemption, Classification (Levels 1-3), Public Listed Toggle, and Work Occupation Codes in sequence
+            if ("panExempted" in importedData.values && panExemptedToggle) {
+                panExemptedToggle.checked = (importedData.values.panExempted === true || importedData.values.panExempted === "true");
+                panExemptedToggle.dispatchEvent(new Event("change"));
+            }
+            if ("exemptionCategorySelect" in importedData.values && exemptionCategorySelect) {
+                exemptionCategorySelect.value = importedData.values.exemptionCategorySelect || "";
+                exemptionCategorySelect.dispatchEvent(new Event("change"));
+            }
+            if ("exemptionSubcategorySelect" in importedData.values && exemptionSubcategorySelect) {
+                exemptionSubcategorySelect.value = importedData.values.exemptionSubcategorySelect || "";
+                exemptionSubcategorySelect.dispatchEvent(new Event("change"));
+            }
+            if ("pan" in importedData.values && panInput) {
+                panInput.value = cleanPAN(String(importedData.values.pan || ""));
+                refreshUI();
+            }
+            if ("showAll" in importedData.values && showAllToggle) {
+                showAllToggle.checked = (importedData.values.showAll === true || importedData.values.showAll === "true");
+                refreshUI();
+            }
+
+            const clsData = importedData.classification || importedData.values.classification || {};
+            const targetLeafCode = clsData.secondaryCode || clsData.level3Code || clsData.level2Code || clsData.level1Code ||
+                                   importedData.values.secondaryCodeInput || importedData.values.level3SubtypeSelect ||
+                                   importedData.values.level2SubtypeSelect || importedData.values.subtypeSelect || "";
+            const targetPrimaryName = clsData.primaryEntityType || importedData.values.entityInput || "";
+
+            if (targetLeafCode && regByCode.has(String(targetLeafCode).toUpperCase())) {
+                const rec = regByCode.get(String(targetLeafCode).toUpperCase());
+                selectEntityAndSubtype(rec.rootEntityId, rec.code);
+            } else if (targetPrimaryName) {
+                const ent = entityTypes.find(e => e.name.toLowerCase() === String(targetPrimaryName).toLowerCase());
+                if (ent) {
+                    selectEntityAndSubtype(ent.id, null);
+                }
+            }
+
+            const isPublicListedVal = clsData.isPublicListedCompany !== undefined
+                ? clsData.isPublicListedCompany
+                : importedData.values.isPublicListedCompany;
+            if (isPublicListedCompanyToggle && isPublicListedVal !== undefined) {
+                isPublicListedCompanyToggle.checked = (isPublicListedVal === true || isPublicListedVal === "true");
+            }
+
+            const occCodesToRestore = clsData.selectedOccupationCodes || importedData.values.selectedOccupationCodes ||
+                (importedData.values.selectedOccupationCodesInput ? parseCSV(importedData.values.selectedOccupationCodesInput) : []);
+            selectedOccupationCodes.clear();
+            if (Array.isArray(occCodesToRestore)) {
+                occCodesToRestore.forEach(c => {
+                    const cleanCode = String(c || "").trim().toUpperCase();
+                    if (cleanCode) selectedOccupationCodes.add(cleanCode);
+                });
+            }
+            updateDescriptions();
+
             // 5. Populate all other standard elements in the form
             for (const key in importedData.values) {
                 // Skip special keys we already handled, or structured keys
-                if (["dynamicContact_", "uploaded_documents", "address", "permanent_address", "name", "kycSameAddress"].some(s => key.startsWith(s))) {
+                if (["dynamicContact_", "uploaded_documents", "address", "permanent_address", "name", "kycSameAddress", "classification", "selectedOccupationCodes"].some(s => key.startsWith(s))) {
                     continue;
                 }
-                // Skip address dropdown elements we manually handled in sequence
-                if (["kycPincode", "kycShowAllStates", "kycState", "kycDistrict", "kycCityVillage", "kycCityTown",
+                // Skip top-card classification and address dropdown elements we manually handled in sequence
+                if (["pan", "panExempted", "exemptionCategorySelect", "exemptionSubcategorySelect", "showAll",
+                     "entityInput", "subtypeSelect", "level2SubtypeSelect", "level3SubtypeSelect",
+                     "isPublicListedCompany", "primaryCodeInput", "secondaryCodeInput", "ckycCodeInput", "selectedOccupationCodesInput",
+                     "kycPincode", "kycShowAllStates", "kycState", "kycDistrict", "kycCityVillage", "kycCityTown",
                      "kycPermPincode", "kycPermShowAllStates", "kycPermState", "kycPermDistrict", "kycPermCityVillage", "kycPermCityTown"].includes(key)) {
                     continue;
                 }

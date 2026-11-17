@@ -1,4 +1,4 @@
-﻿Level,if_Multi_or_Sing,Parent,SR,Regiatration (Primary),Secondary Type,Code,Description,PAN,CKYCR,Guidance Note
+Level,if_Multi_or_Sing,Parent,SR,Regiatration (Primary),Secondary Type,Code,Description,PAN,CKYCR,Guidance Note
 1,S,0,1,Individual / Person,Foreign National (Non-Indian Lineage / Expat),INDFTR,"A foreign citizen holding a foreign passport who has no Indian lineage or ancestry (ineligible for OCI/PIO status), investing or earning in India and taxed based on applicable residential status (ROR, RNOR, or NR) or DTAA provisions.",P,1,"<p data-path-to-node=""7,2,0"" style=""font-family: &quot;Google Sans Text&quot;, sans-serif !important; line-height: 1.15 !important;"">
   <b data-path-to-node=""7,2,0"" data-index-in-node=""0"" style=""line-height: 1.15 !important;"">
   </b>
@@ -867,7 +867,7 @@
           </li>
         </ul>
       </div>"
-1,S,0,8,Company,Producer Company,CORPC,"A company formed by producers, farmers, or producer institutions under the Companies Act framework.",C,D,"<ul>
+1,S,0,8,Company,Producer Company,CORPC,"A company formed by producers, farmers, or producer institutions under the Companies Act framework.",C,"D, E","<ul>
 <li>
   <p data-path-to-node=""1,0,0"">
     <b data-path-to-node=""1,0,0"" data-index-in-node=""0"">Description:</b> An Indian company incorporated exclusively under Chapter XXIA of the Companies Act, 2013 (or Part IXA of the Companies Act, 1956) whose membership and business activities are strictly limited to primary producers, primary produce, and related collective activities.</p>
@@ -909,7 +909,7 @@
                   <b data-path-to-node=""16,2,0"" data-index-in-node=""0"">Exclusions &amp; Guidance:</b> Do not select this option if the entity deals with or accepts deposits from the general public (non-members), or operates as an RBI-registered commercial NBFC (which must select <b>CORCOMP</b> and enable the <b>NBFC</b> regulatory flag separately). This option takes precedence over Other Domestic Company (<b>CORCOMP</b>).</p>
                 </li>
 </ul>"
-1,S,0,11,Company,Asset Reconstruction Company,CORAR,An asset reconstruction company registered with RBI.,C,D,"<ul>
+1,S,0,11,Company,Asset Reconstruction Company,CORAR,An asset reconstruction company registered with RBI.,C,"D, E","<ul>
 <li>
               <p data-path-to-node=""19,0,0"">
                 <b data-path-to-node=""19,0,0"" data-index-in-node=""0"">Description:</b> A specialized financial entity registered with the Reserve Bank of India under Section 3 of the Securitisation and Reconstruction of Financial Assets and Enforcement of Security Interest (SARFAESI) Act, 2002 for the specific purpose of carrying on the business of asset reconstruction, debt resolution, or securitization of non-performing assets (NPAs).</p>
@@ -937,7 +937,7 @@
                         <b data-path-to-node=""25,2,0"" data-index-in-node=""0"">Exclusions &amp; Guidance:</b> Do not select this option if the entity has more than one shareholder or is a standard private limited company. Do not select this option if the company carries on non-banking financial investment activities or is a Section 8 company (as OPCs are legally prohibited from such conversions).</p>
                       </li>
 </ul>"
-1,S,0,13,Company,Other Domestic Company,CORCOMP,An Indian company incorporated under the Companies Act.,C,D,"<ul>
+1,S,0,13,Company,Other Domestic Company,CORCOMP,An Indian company incorporated under the Companies Act.,C,"D, E","<ul>
   <li>
     <p data-path-to-node=""28,0,0"">
       <b data-path-to-node=""28,0,0"" data-index-in-node=""0"">Description:</b> A standard private limited company or public limited company incorporated in India under the Companies Act, 2013 (or previous Indian company acts) engaged in commercial, manufacturing, service, trading, banking, non-banking financial (NBFC), insurance, or asset management operations, as well as statutory banking corporations / Public Sector Banks (such as State Bank of India and Nationalised Banks) assessed as Indian companies under the Income-tax Act, 1961 (PAN 4th character <b>C</b>).</p>

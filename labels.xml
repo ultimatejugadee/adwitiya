@@ -99,12 +99,56 @@
       <hi>वर्गीकरण का अर्थ देखने के लिए एक संस्था प्रकार चुनें।</hi>
     </label>
     <label id="desc_subtype_title">
-      <en>Subtype Description</en>
-      <hi>उपश्रेणी विवरण</hi>
+      <en>Guidance Note</en>
+      <hi>मार्गदर्शन नोट (Guidance Note)</hi>
     </label>
     <label id="desc_subtype_default">
-      <en>Select a subcategory to see registration and details.</en>
-      <hi>पंजीकरण और विवरण देखने के लिए एक उपश्रेणी चुनें।</hi>
+      <en>Select a subcategory to see its guidance note.</en>
+      <hi>मार्गदर्शन नोट देखने के लिए एक उपश्रेणी चुनें।</hi>
+    </label>
+    <label id="lbl_level2_subtype">
+      <en>Choose Level 2 Classification</en>
+      <hi>स्तर 2 वर्गीकरण चुनें (Choose Level 2 Classification)</hi>
+    </label>
+    <label id="lbl_level2_placeholder">
+      <en>Select Level 2 classification</en>
+      <hi>स्तर 2 वर्गीकरण चुनें</hi>
+    </label>
+    <label id="lbl_choose_suitable">
+      <en>Chose suitable</en>
+      <hi>उपयुक्त चुनें (Chose suitable)</hi>
+    </label>
+    <label id="lbl_level3_placeholder">
+      <en>Select Level 3 classification</en>
+      <hi>स्तर 3 वर्गीकरण चुनें</hi>
+    </label>
+    <label id="lbl_is_public_listed">
+      <en>Is a Public Listed Company</en>
+      <hi>क्या यह एक सार्वजनिक सूचीबद्ध कंपनी (Public Listed Company) है?</hi>
+    </label>
+    <label id="lbl_primary_code">
+      <en>Primary Code</en>
+      <hi>प्राथमिक कोड (Primary Code)</hi>
+    </label>
+    <label id="lbl_secondary_code">
+      <en>Secondary Code</en>
+      <hi>द्वितीयक कोड (Secondary Code)</hi>
+    </label>
+    <label id="lbl_ckyc_classification_code">
+      <en>CKYC Classification Code</en>
+      <hi>सीकेवाईसी वर्गीकरण कोड (CKYC Classification Code)</hi>
+    </label>
+    <label id="lbl_work_occupation_title">
+      <en>Work Type / Occupation Classification</en>
+      <hi>कार्य प्रकार / व्यवसाय वर्गीकरण (Work Type / Occupation)</hi>
+    </label>
+    <label id="lbl_work_occupation_hint">
+      <en>Select all applicable work types or occupations below. Selecting certain options may disable mutually exclusive options.</en>
+      <hi>नीचे सभी लागू कार्य प्रकार या व्यवसाय चुनें। कुछ विकल्पों को चुनने पर परस्पर अनन्य विकल्प निष्क्रिय हो सकते हैं।</hi>
+    </label>
+    <label id="lbl_selected_occupation_codes">
+      <en>Selected Occupation Code(s)</en>
+      <hi>चयनित व्यवसाय कोड (Selected Occupation Codes)</hi>
     </label>
     
     <label id="reg_identifier">
@@ -992,55 +1036,6 @@
     <label id="kyc_networth">
       <en>OR Net-worth as on date</en>
       <hi>या किसी विशिष्ट तिथि पर नेट-वर्थ</hi>
-    </label>
-    
-    <label id="kyc_occupation">
-      <en>Occupation*</en>
-      <hi>व्यवसाय*</hi>
-    </label>
-    <label id="kyc_occ_private">
-      <en>Private Sector</en>
-      <hi>निजी क्षेत्र</hi>
-    </label>
-    <label id="kyc_occ_public">
-      <en>Public Sector</en>
-      <hi>सार्वजनिक क्षेत्र</hi>
-    </label>
-    <label id="kyc_occ_govt">
-      <en>Government Service</en>
-      <hi>सरकारी सेवा</hi>
-    </label>
-    <label id="kyc_occ_business">
-      <en>Business</en>
-      <hi>व्यापार</hi>
-    </label>
-    <label id="kyc_occ_professional">
-      <en>Professional</en>
-      <hi>पेशेवर</hi>
-    </label>
-    <label id="kyc_occ_agri">
-      <en>Agriculturist</en>
-      <hi>कृषक</hi>
-    </label>
-    <label id="kyc_occ_retired">
-      <en>Retired</en>
-      <hi>सेवानिवृत्त</hi>
-    </label>
-    <label id="kyc_occ_housewife">
-      <en>Housewife</en>
-      <hi>गृहणी</hi>
-    </label>
-    <label id="kyc_occ_student">
-      <en>Student</en>
-      <hi>छात्र</hi>
-    </label>
-    <label id="kyc_occ_self">
-      <en>Self Employed</en>
-      <hi>स्व-नियोजित</hi>
-    </label>
-    <label id="kyc_occ_others">
-      <en>Others (please specify)</en>
-      <hi>अन्य (कृपया विवरण दें)</hi>
     </label>
     
     <label id="kyc_pep">
